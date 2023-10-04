@@ -1,0 +1,77 @@
+---
+import "../assets/base.css";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;0,800;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap"
+      rel="stylesheet"
+    />
+    <meta name="generator" content={Astro.generator} /><title>
+      cs 465 Introduction to Security and Privacy
+    </title></head
+  >
+
+  <body>
+    <header>
+      <div class="bg-white text-byu pl-2 md:pl-7 pr-0 py-2 flex items-center">
+        <img
+          class="h-8 md:h-10 pt-1"
+          alt="BYU logo"
+          src="/images/BYU-monogram-navy.svg"
+        />
+        <span
+          class="text-xl md:text-2xl font-bold border-l border-byu mt-1 pl-4"
+          >Computer Science</span
+        >
+      </div>
+      <div
+        class="bg-bluey text-white flex-grow pl-5 md:pl-10 pr-20 md:py-5 text-xl md:text-3xl"
+      >
+        CS 465 Introduction to Security and Privacy
+      </div>
+    </header>
+  </body>
+
+  <slot />
+
+  <style>
+    html {
+      font-size: var(--font-size-base);
+      color: var(--color-text);
+      background-color: var(--color-bg);
+    }
+
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      line-height: 24px;
+      padding: 0px;
+      text-size-adjust: 100%;
+      font-size: 16px;
+      font-weight: 400;
+      color: #1a202c;
+    }
+  </style>
+</html>

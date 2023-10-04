@@ -1,0 +1,17 @@
+---
+import Layout from "./Layout.astro";
+---
+
+<Layout>
+  <div class="sm:bg-slate-200 min-h-screen pt-0 lg:pt-5 pb-5">
+    <div
+      class="bg-white ml-5 mr-5 sm:px-[75px] sm:ml-auto sm:mr-auto py-3 max-w-5xl rounded-lg"
+    >
+      <article
+        class="prose prose-blockquote:not-italic prose-blockquote:font-normal prose-blockquote:text-base prose-blockquote:bg-blue-200 prose-blockquote:border-l-0 prose-blockquote:px-4 prose-blockquote:py-1 prose-blockquote:rounded-lg pb-8 text-lg"
+      >
+        <slot />
+      </article>
+    </div>
+  </div>
+</Layout>
