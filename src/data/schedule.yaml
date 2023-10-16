@@ -1,0 +1,138 @@
+units:
+  - title: Security concepts and principles
+    days:
+      - day: Mon
+        date: Jan 8
+        lectures:
+          - title: Course overview
+            link: /syllabus
+          - title: Containers and VS Code
+      - day: Wed
+        date: Jan 10
+        lectures:
+          - title: Goals, policies, attacks, risk, DREAD
+        reading: 1.0 - 1.4 (10 pages)
+      - day: Fri
+        date: Jan 12
+        lectures:
+          - title: Threat modeling
+        reading: 1.5 - 1.8 (16 pages)
+
+  - title: Cryptographic building blocks
+    days:
+      - day: Mon
+        date: Jan 15
+        holiday: MLK Jr Day
+      - day: Wed
+        date: Jan 17
+        lectures:
+          - title: Symmetric encryption, entity authentication
+        reading: 2.0 - 2.2 (8 pages), 4.1 (5 pages)
+      - day: Fri
+        date: Jan 19
+        lectures:
+          - title: Asymmetric encryption, key agreement
+        reading: 2.3 - 2.4 (4 pages), 4.2 - 4.4 (9 pages)
+      - day: Mon
+        date: Jan 22
+        lectures:
+          - title: Hashing and message authentication
+        reading: 2.5 - 2.6 (6 pages)
+
+  - title: User Authentication
+    days:
+      - day: Wed
+        date: Jan 24
+        lectures:
+          - title: Password authentication
+        reading: 3.0 - 3.2 (9 pages), 3.8 (5 pages)
+      - day: Fri
+        date: Jan 26
+        lectures:
+          - title: Account recovery, CAPTCHAs, SSO
+        reading: 3.3 (2 pages), 3.7 (2 pages), 4.7 (2 pages)
+      - day: Mon
+        date: Jan 29
+        lectures:
+          - title: Multi-factor authentication
+        reading: 3.4 - 3.5 (10 pages)
+
+  - title: Access Control
+    days:
+      - day: Wed
+        date: Jan 31
+        lectures:
+          - title: Reference monitors, memory access control
+        reading: 5.0 - 5.2 (8 pages)
+      - day: Fri
+        date: Feb 2
+        lectures:
+          - title: Basic file access control
+        reading: 5.3 - 5.4 (5 pages)
+      - day: Mon
+        date: Feb 5
+        lectures:
+          - title: Advanced file access control, RBAC
+        reading: 5.5 - 5.7 (8 pages)
+
+  - title: Software Security
+    days:
+      - day: Wed
+        date: Feb 7
+        lectures:
+          - title: Race conditions, integer vulnerabilities
+        reading: 6.0 - 6.2 (11 pages)
+      - day: Fri
+        date: Feb 9
+        lectures:
+          - title: Stack overflows, heap overflow
+        readings: 6.3 - 6.4 (5 pages)
+      - day: Mon
+        date: Feb 12
+        lectures:
+          - title: Defenses, privilege escalation
+        reading: 6.6 - 6.8 (6 pages)
+
+  - title: Malicious software
+    days:
+      - day: Wed
+        date: Feb 14
+        lectures:
+          - title: Malware, viruses, and worms
+        reading: 7.0 - 7.2 (7 pages)
+      - day: Fri
+        date: Feb 16
+        lectures:
+          - title: Trojan horses, backdoors, keyloggers, rootkits
+        reading: 7.3 - 7.5 (10 pages)
+      - day: Mon
+        date: Feb 19
+        holiday: Presidents Day
+      - day: Tue
+        date: Feb 20
+        lectures:
+          - title: Ransomware, social engineering
+        reading: 7.6 - 7.8 (7 pages)
+
+  - title: Exam
+    days:
+      - day: Wed
+        date: Feb 21
+        lectures:
+          - title: Exam prep
+      - day: Fri
+        date: Feb 23
+        exam: Exam
+
+  - title: Certificate management and use cases
+    days:
+      - day: Mon
+        date: Feb 26
+        lectures:
+          - title: Certificates
+        reading: 8.0 - 8.2 (4 pages), 8.4 (5 pages)
+      - day: Wed
+        date: Feb 28
+        lectures:
+          - title: TLS and secure email
+        reading: 8.5 - 8.6 (9 pages)
