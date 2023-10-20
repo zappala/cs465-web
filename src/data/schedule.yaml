@@ -136,3 +136,73 @@ units:
         lectures:
           - title: TLS and secure email
         reading: 8.5 - 8.6 (9 pages)
+
+  - title: Web and browser security
+    days:
+      - day: Fri
+        date: Mar 1
+        lectures:
+          - title: Domains, URLs, HTML, HTTP, scripts
+        reading: 9.0 - 9.1 (7 pages)
+      - day: Mon
+        date: Mar 4
+        lectures:
+          - title: TLS, HTTPS, HTTP cookies, DOM objects
+        reading: 9.2 - 9.3 (5 pages)
+      - day: Wed
+        date: Mar 6
+        lectures:
+          - title: DOM SOP, auth cookies, malicious scripts, CSRF
+        reading: 9.4 - 9.5 (5 pages)
+      - day: Fri
+        date: Mar 8
+        lectures:
+          - title: XSS, SQWL injection
+        reading: 9.6 - 9.7 (7 pages)
+
+  - title: Firewalls and tunnels
+    days:
+      - day: Mon
+        date: Mar 11
+        lectures:
+          - title: Networking and TCP/IP, IPSec
+        readings: 10.6 (3 pages), 10.5 (3 pages)
+      - day: Wed
+        date: Mar 13
+        lectures:
+          - title: Packet firewalls, proxy firewalls
+        reading: 10.0 - 10.2 (11 pages)
+      - day: Fri
+        date: Mar 15
+        holiday: Spring Break
+      - day: Mon
+        date: Mar 18
+        lectures:
+          - title: SSH, VPNs
+        reaading: 10.3 - 10.4 (8 pages)
+
+  - title: Intrusion detection and network-based attacks
+    days:
+      - day: Wed
+        date: Mar 20
+        lectures:
+          - title: Intrusion detection, sniffers
+        reading: 11.0 - 11.3 (10 pages)
+      - day: Fri
+        date: Mar 22
+        lectures:
+          - title: DOS, address resolution attacks
+        reading: 11.4 - 11.5 (9 pages)
+
+  - title: Wireless LAN security
+    days:
+      - day: Mon
+        date: Mar 25
+        lectures:
+          - title: WLAN, WLAN threats
+        reading: 12.0 - 12.2 (7 pages)
+      - day: Wed
+        date: Mar 27
+        lectures:
+          - title: EAP, Radius, WPA3
+        reading: 12.3, 12.8 (9 pages)
