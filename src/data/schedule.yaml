@@ -17,6 +17,10 @@ units:
         lectures:
           - title: Threat modeling
         reading: 1.5 - 1.8 (16 pages)
+        project:
+          title: Threat modeling
+          link: /projects/threat-modeling
+          due: Jan 27
 
   - title: Cryptographic building blocks
     days:
@@ -56,6 +60,10 @@ units:
         lectures:
           - title: Multi-factor authentication
         reading: 3.4 - 3.5 (10 pages)
+        project:
+          title: Encryption
+          link: /projects/encryption
+          due: Feb 3
 
   - title: Access Control
     days:
@@ -103,7 +111,7 @@ units:
       - day: Fri
         date: Feb 16
         lectures:
-          - title: Trojan horses, backdoors, keyloggers, rootkits
+          - title: Trojan horses, back doors, key loggers, rootkits
         reading: 7.3 - 7.5 (10 pages)
       - day: Mon
         date: Feb 19
@@ -157,7 +165,7 @@ units:
       - day: Fri
         date: Mar 8
         lectures:
-          - title: XSS, SQWL injection
+          - title: XSS, SQL injection
         reading: 9.6 - 9.7 (7 pages)
 
   - title: Firewalls and tunnels
@@ -179,7 +187,7 @@ units:
         date: Mar 18
         lectures:
           - title: SSH, VPNs
-        reaading: 10.3 - 10.4 (8 pages)
+        reading: 10.3 - 10.4 (8 pages)
 
   - title: Intrusion detection and network-based attacks
     days:

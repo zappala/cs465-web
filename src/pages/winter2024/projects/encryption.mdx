@@ -1,0 +1,158 @@
+---
+layout: ../../../semesters/Winter2024Markdown.astro
+---
+
+# Encryption
+
+## Objectives
+
+In this project, you will gain experience using cryptographic primitives
+including symmetric encryption, public-key encryption, message authentication
+codes, and digital signatures. You will use these together to implement a
+hybrid-encryption scheme, a scheme that you could find in the real world.
+
+In addition to teaching about cryptography, this lesson also serves to improve
+your familiarity with enterprise-development languages and practices. This
+includes introducing you to C#, containerized development, and reading through
+online document. These are important real-world skills and practicing them in
+this class will help give you an advantage when you enter the workforce.
+
+## Requirements
+
+In this project you will be implementing an encrypted echo client and server.
+
+An echo server receives string from clients and simply echos those strings back
+to the clients. An echo client reads input from the command line, sends that
+input to the echo server, and prints to the command line anything it receives
+from the server.
+
+I have provided you a working echo server and client that you will enhance to
+secure communication using hybrid encryption. To complete this project, you will
+take the following steps:
+
+1. Download and unzip the [handout file](/files/encryption-handout.zip).
+2. Open the project using Visual Studio Code. Build and reopen in a dev
+   container.
+3. Modify the `EncryptedEchoServer.cs` and `EncryptedEchoClient.cs` files to
+   support hybrid encryption. Do not add, edit, or delete any other source
+   files.
+
+When implementing the required functionality, make sure you use the same block
+modes, padding, and hashing algorithms on the client and server, otherwise it
+won't work. Use the ones indicated in this writeup and in the source code, or
+your submission won't pass the autograder.
+
+### Echo Client
+
+On the client you will implement three methods:
+
+1. `ProcessServerHello`: This method will read a RSA public key sent by the
+   server when the client first connects. This key will be encoded using Base64.
+2. `TransformOutgoingMessage`: This method will be responsible for applying
+   hybrid encryption to the messages typed into the console:
+   1. You will need to generate an AES, message encryption key. You will use
+      this key to encrypt the message using CBC mode and PKCS7 padding. You
+      should use a different key each time you encrypt a message.
+   2. You will need to generate an HMAC for your plaintext message. Use the
+      SHA256 variant of the HMAC algorithm. Generate a random key each time you
+      generate a HMAC.
+   3. Encrypt the two keys you generated using RSA. Use the OAEP padding scheme
+      with SHA256.
+3. `TransformIncomingMessage`: This method will be responsible for processing
+   messages sent by the echo server and validating their digital signatures.
+   Make sure to use PSS padding with SHA256.
+
+### Echo Server
+
+Your server will need to generate an RSA key upon starting. It will also need to
+implement three methods:
+
+1. `GetServerHello`: Returns the server's RSA public key encoded using Base64.
+2. `TransformIncomingMessage`: This method will be responsible for applying
+   hybrid encryption to the messages typed into the console:
+   1. Decrypt the message encryption and HMAC keys using the server's RSA key.
+   2. Decrypt the message with AES using CBC mode and PKCS7 padding.
+   3. Verify the HMAC of the received message. Use the SHA256 variant of the
+      HMAC algorithm.
+3. `TransformOutgoingMessage`: This method will be responsible for using the
+   server's RSA key to digitally sign messages being sent by the server. Make
+   sure to use PSS padding with SHA256.
+
+## Starting Point
+
+The cryptographic primitives needed in this project can all be found in the
+`System.Security.Cryptography` namespace. You will need the `AES`, `RSA`,
+`HMACSHA256`, and `RandomNubmerGenerator` classes to complete this lab. Read up
+on how they work.
+
+By default, the provided run a basic echo server without encryption. I recommend
+that you add the functionality step by step:
+
+1. Have the server generate and send a public key in its hello message.
+2. Implement hybrid encryption on the client.
+3. Implement hybrid decryption on the server.
+4. Implement HMAC generation on the client.
+5. Implement HMAC verification on the server.
+6. Implement signature generation on the server.
+7. Implement signature verification on the client.
+
+If you add functionality in this order, you should largely avoid breaking your
+solution as you slowly add more features.
+
+To aid in testing, I have provided you with an `echo-test` executable that fully
+implements the desired spec. You can use this to test your finished solutions.
+If they work with `echo-test` they are likely to work with the pass-off script
+used for grading. If you are using an ARM device (like the Mac M1/M2) use
+`echo-test-arm`.
+
+## Resources
+
+C# as a language sits between C/C++ and Java. Like Java, it is a high-level
+language, that abstracts many details about memory management and types. Like
+C/C++ it allows low-level access to hardware. You will only need a basic
+understanding of C# to complete this lab. The following are some resources to
+get you started about C# and its libraries:
+
+- [A tour of the C# language](https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/)
+- [System.Security.Cryptography](https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography?view=net-7.0)
+  documentation. You can find documentation for any security functionality you
+  will need on linked from this page. Some items you may want to look at
+  include,
+  - RandomNumberGenerator
+  - RSA
+  - AES
+  - HMACSHA256
+  - CryptographicException
+- [System.Text.Encoding](https://learn.microsoft.com/en-us/dotnet/api/system.text.encoding?view=net-7.0)
+  for converting between text and bytes.
+- [System.Convert](https://learn.microsoft.com/en-us/dotnet/api/system.convert?view=net-7.0)
+  for Base64 encodings.
+
+## Grading Rubric
+
+- Echo client (200 points)
+  - 10 points for properly retrieving the server's public key from the sever's
+    hello message.
+  - 50 points for correctly implementing hybrid encryption.
+  - 20 points for not reusing the message encryption key.
+  - 50 points for correctly implementing message authentication using an HMAC.
+  - 20 points for not reusing the HMAC key.
+  - 20 points for using distinct keys for the message encryption and HMAC keys.
+  - 30 points for properly verifying signed messages from the server.
+- Echo server (180 points)
+  - 25 points for generating a new RSA key each time a new server is created.
+  - 25 points for returning the same RSA key in each hello message from the same
+    server.
+  - 50 points for correctly implementing hybrid decryption.
+  - 30 points for correctly checking the message's HMAC.
+  - 50 points for correctly generating a digital signature on messages returned
+    from the echo server.
+
+## Handout
+
+[Handout file](/files/encryption-handout.tar.gz)
+
+## Submission
+
+Submit your `EncryptedEchoServer.cs` and `EncryptedEchoClient.cs` files on
+Canvas. Make sure that you do not change the names of these files.

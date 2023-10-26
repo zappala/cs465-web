@@ -2,7 +2,7 @@ import { Label, Badge } from "./helpers.jsx";
 
 import { load_yaml } from "./YamlLoader.js";
 
-export default function GridSchedule() {
+export default function GridSchedule(props) {
   const schedule = load_yaml("src/data/schedule.yaml");
 
   // render units
@@ -18,7 +18,7 @@ export default function GridSchedule() {
             <div className="bg-byu text-white text-center mb-1 p-2 break-words">
               {unit.title}
             </div>
-            <div>{render_days(unit)}</div>
+            <div>{render_days(props.prefix, unit)}</div>
           </div>
         ))}
       </>
@@ -26,16 +26,16 @@ export default function GridSchedule() {
   };
 
   // render days
-  const render_days = (unit) => {
+  const render_days = (prefix, unit) => {
     if (unit.days === undefined) {
       console.log("WARNING: days undefined", unit.title);
       return <></>;
     }
-    return <>{unit.days.map((day, index) => render_day(day, index))}</>;
+    return <>{unit.days.map((day, index) => render_day(prefix, day, index))}</>;
   };
 
   // render a day or a separator
-  const render_day = (day, index) => {
+  const render_day = (prefix, day, index) => {
     if (day.separator) {
       return <></>;
     }
@@ -67,33 +67,33 @@ export default function GridSchedule() {
           {day.day} {day.date}
         </div>
         <div className="w-4/12 bg-gray-200 mb-1 mr-1 p-2">
-          {render_lectures(day)}
+          {render_lectures(prefix, day)}
         </div>
         <div className="w-3/12 bg-gray-200 mb-1 mr-1 p-2">
           {render_reading(day)}
         </div>
         <div className="w-3/12 bg-gray-200 mb-1 mr-1 p-2">
-          {render_project(day.project)}
+          {render_project(prefix, day.project)}
         </div>
       </div>
     );
   };
 
   // render any/all lectures in a day
-  const render_lectures = (day) => {
+  const render_lectures = (prefix, day) => {
     if (!day.lectures) return <></>;
     if (day.lectures.constructor.name != "Array") return <></>;
     return (
       <ul>
         {day.lectures.map((lecture, lecture_index) =>
-          render_lecture(lecture, lecture_index)
+          render_lecture(prefix, lecture, lecture_index)
         )}
       </ul>
     );
   };
 
   // render an individual lecture
-  const render_lecture = (lecture, index) => {
+  const render_lecture = (prefix, lecture, index) => {
     if (!lecture.link) {
       return <li key={index}>{lecture.title}</li>;
     }
@@ -115,7 +115,7 @@ export default function GridSchedule() {
       >
         <a
           className="underline decoration-lightblue"
-          href={lecture.link}
+          href={prefix + '/' + lecture.link}
           target={target}
         >
           <Badge name={lecture.instructor} />
@@ -132,7 +132,7 @@ export default function GridSchedule() {
   };
 
   // render a project
-  const render_project = (project) => {
+  const render_project = (prefix, project) => {
     if (!project) return <></>;
     let result = [];
     if (!project.link) result.push(project.title);
@@ -141,7 +141,7 @@ export default function GridSchedule() {
         <a
           key="project"
           className="underline decoration-lightblue"
-          href={project.link}
+          href={prefix + '/' + project.link}
         >
           {project.title}
         </a>
