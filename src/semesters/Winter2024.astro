@@ -3,7 +3,7 @@ import Layout from "../layouts/Front.astro";
 import NavBar from "../menu/NavBar.astro";
 
 const semester = "Winter 2024";
-const prefix = '/winter2024';
+const prefix = "/winter2024";
 const items = [
   {
     title: "Home",
@@ -18,16 +18,37 @@ const items = [
     url: "/projects",
     submenu: [
       {
-        title: "test",
-        url: "/projects/test",
+        title: "Threat Modeling",
+        url: "/projects/threat-modeling",
+      },
+      {
+        title: "Encryption",
+        url: "/projects/encryption",
+      },
+      {
+        title: "Web Authentication",
+        url: "/projects/web-authentication",
+      },
+      {
+        title: "Exploit and Patch",
+        url: "/projects/exploit-and-patch",
+      },
+      {
+        title: "PKI",
+        url: "/projects/pki",
+      },
+      {
+        title: "Web Exploit and Patch",
+        url: "/projects/web-exploit-and-patch",
+      },
+      {
+        title: "CTF",
+        url: "/projects/ctf",
       },
     ],
   },
 ];
-
 ---
-
-
 
 <Layout>
   <NavBar semester={semester} prefix={prefix} items={items} />
@@ -35,7 +56,7 @@ const items = [
     <div
       class="bg-white ml-5 mr-5 sm:px-[75px] sm:ml-auto sm:mr-auto py-3 max-w-5xl rounded-lg"
     >
-        <slot />
+      <slot />
     </div>
   </div>
 </Layout>

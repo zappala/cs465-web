@@ -1,0 +1,181 @@
+---
+layout: ../../../semesters/Winter2024Markdown.astro
+---
+
+# Web Authentication
+
+## Objectives
+
+In this project, you will gain experience implementing proper hash-based
+password authentication on a website. This includes gaining experience using
+salted passwords, iterated hashing, and memory hard hashing functions. You will
+also gain experience using PBKDF2, BCrypt, and Argon2id, preparing you to
+implement and support password-based authentication in real-world applications.
+
+In addition to teaching about cryptography, this lessons will also provide
+exposure to a modern Web application framework: ASP.NET using Razor. You will
+also continue increasing your familiarity with containerized development.
+
+## Requirements
+
+In this project, you will be implementing four password hashing algorithms:
+
+1. Iterated hashing using SHA255
+2. PBKDF2
+3. BCrypt
+4. Argon2id
+
+Working with cryptographic functions can be tricky. This lab will help you get
+hands on experience using these functions.
+
+To complete this project, you will take the following steps:
+
+1. Download and unzip the [handout](/files/web-authentication-handout.tar.gz).
+2. Open the project using Visual Studio Code. Build and reopen in a dev
+   container.
+3. Modify the following files to implement the various hash algorithms.
+   1. `/Areas/Identity/IterativeHasher.cs`
+   2. `/Areas/Identity/PBDKF2Hasher.cs`
+   3. `/Areas/Identity/BCryptHasher.cs`
+   4. `/Areas/Identity/Argon2IdHasher.cs`
+
+To run your server, you will use `dotnet run`. After starting up, the server can
+be accessed at [http://localhost:5126](http://localhost:5126).
+
+When implementing the required functionality, make sure you use the settings
+given to you in this writeup and in the files themselves. If you do not, your
+code may still work but will not pass the autograder.
+
+If you want functionality shared between the four hashers, you can put it in
+`/Areas/Identity/Utils.cs`. That file also contains an Encoding (ASCII) that you
+should use if you ever need to convert from a password to bytes.
+
+## Password Hashing
+
+For each hasher, you will be implementing two functions:
+
+1. `HashPassword`: This function takes a password as input and returns a value
+   to store in the database that can later be used to verify the password.
+   **Critically, this is not just the hash of the password, but must contain all
+   necessary information needed to later verify a password.** For example, it
+   must contain the salt.
+2. `VerifyHashedPassword`: This function takes a password and the stored
+   password verifier, and returns whether the password is valid based on the
+   stored verifier. It is up to this function to properly decode the value from
+   the database.
+
+### Iterative Hasher
+
+For this hasher, you will be using SHA256 to hash passwords. You must use a
+random 32-byte salt. You must produce a 32-byte digest. You must also use
+100,000 iterations. The value stored to the database should be encoded as
+`Base64(salt):Base64(digest)`.
+
+When hashing, only the first iteration incorporates the salt. It should do so by
+prepending the salt's bytes to the password's bytes.
+
+### PBDKF2 Hasher
+
+For this hasher, you will be using PBKDF2 to hash passwords. You must use a
+random 32-byte salt. You must produce a 32-byte digest. You must also use
+100,000 iterations. Internally, the PBKDF2 algorithm needs to be set to use
+SHA256. The value stored to the database should be encoded as
+`Base64(salt):Base64(digest)`.
+
+You should use the
+[Rfc2898DeriveBytes.Pbkdf2](https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography.rfc2898derivebytes.pbkdf2?view=net-7.0)
+method.
+
+### BCrypt Hasher
+
+For this hasher, you will be using BCrypt to hash passwords. BCrypt should use
+between 100,000 and 200,000 iterations (there is only one value that will work,
+which you can find by reading the documentation).
+
+You should use the [bcrypt.net - next](https://github.com/BcryptNet/bcrypt.net)
+library.
+
+### Argon2id Hasher
+
+For this hasher, you will be using Argon2id to hash passwords. You must use a
+random 32-byte salt. You must produce a 32-byte digest. You must use 8 degrees
+of parallelism, 4 iterations, and a memory size of 128MB. The value stored to
+the database should be encoded as `Base64(salt):Base64(digest)`.
+
+You should use the
+[Konscious.Security.Cryptography](https://github.com/kmaragon/Konscious.Security.Cryptography)
+library.
+
+## Testing
+
+You can test your solution by registering and logging in as various users.
+
+To aid you in testing your code, I've also provided an `app-test.db` file that
+has properly encoded passwords for each of the four password hashing algorithms.
+Feel free to look at this file in the SQLite database explorer to see if your
+hashed passwords look correct. Additionally, you may copy this database to
+`app.db` to use it with your code and ensure that you can login with the
+following four users:
+
+| Username  | Password  |
+| --------- | --------- |
+| Iterative | Iterative |
+| PBKDF2    | PBKDF2    |
+| BCrypt    | BCrypt    |
+| Argon2id  | Argon2id  |
+
+## Grading Rubric
+
+- Iterative hashing (60 points)
+  - 10 points for correctly salting the password
+  - 10 points for hashing the password the required number of iterations with
+    SHA256
+  - 10 points for verifying a password using the stored password verifier
+  - 30 points for exactly following all requirements for this function (and
+    passing the autograder)
+- PBKDF2 (60 points)
+  - 10 points for correctly salting the password
+  - 10 points for hashing the password with PBKDF2
+  - 10 points for verifying a password using the stored password verifier
+  - 30 points for exactly following all requirements for this function (and
+    passing the autograder)
+- BCrypt (60 points)
+  - 10 points for correctly salting the password
+  - 10 points for hashing the password with BCrypt (from the bcrypt.net - next
+    library)
+  - 10 points for verifying a password using the stored password verifier
+  - 30 points for exactly following all requirements for this function (and
+    passing the autograder)
+- Argon2id (60 points)
+  - 10 points for correctly salting the password
+  - 10 points for hashing the password with Argon2id (from the
+    Konscious.Security.Cryptography library)
+  - 10 points for verifying a password using the stored password verifier
+  - 30 points for exactly following all requirements for this function (and
+    passing the autograder)
+
+## Handout
+
+[Handout file](/files/web-authentication-handout.tar.gz).
+
+## Submission
+
+Submit the four password hasher files (`IterativeHasher.cs`, `PBDKF2}Hasher.cs`,
+`BCryptHasher.cs`, `Argon2IdHasher.cs`) on Canvas. Also submit `Utils.cs` (even
+if you didn't modify it).
+
+## Further study
+
+The following resources were used to create this lab. If you would like to learn
+more about ASP.NET, Blazor, Razor, or the ASP.NET Identity Framework, feel free
+to peruse these resources:
+
+This project was created from a Blazor Server template. If you want to learn
+more, go
+[here](https://learn.microsoft.com/en-us/aspnet/core/blazor/security/server/?source=recommendations&view=aspnetcore-7.0&tabs=netcore-cli).
+
+1. [Blazor Tutorial - Build your first Blazor app](https://dotnet.microsoft.com/en-us/learn/aspnet/blazor-tutorial/intro)
+1. [Introduction to Identity on ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/identity?view=aspnetcore-7.0&tabs=netcore-cli)
+1. [Scaffold Identity in ASP.NET Core projects](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/scaffold-identity?view=aspnetcore-7.0&tabs=netcore-cli)
+1. [Identity model customization in ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/customize-identity-model?view=aspnetcore-7.0)
+1. [Migrations Overview](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli)

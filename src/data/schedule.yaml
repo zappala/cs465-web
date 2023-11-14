@@ -20,7 +20,7 @@ units:
         project:
           title: Threat modeling
           link: /projects/threat-modeling
-          due: Jan 27
+          due: Jan 26
 
   - title: Cryptographic building blocks
     days:
@@ -63,7 +63,7 @@ units:
         project:
           title: Encryption
           link: /projects/encryption
-          due: Feb 3
+          due: Feb 2
 
   - title: Access Control
     days:
@@ -82,7 +82,10 @@ units:
         lectures:
           - title: Advanced file access control, RBAC
         reading: 5.5 - 5.7 (8 pages)
-
+        project:
+          title: Web Authentication
+          link: /projects/web-authentication
+          due: Feb 12
   - title: Software Security
     days:
       - day: Wed
@@ -108,6 +111,10 @@ units:
         lectures:
           - title: Malware, viruses, and worms
         reading: 7.0 - 7.2 (7 pages)
+        project:
+          title: Exploit and Patch
+          link: /projects/exploit-and-patch
+          due: Feb 20
       - day: Fri
         date: Feb 16
         lectures:
@@ -152,6 +159,10 @@ units:
         lectures:
           - title: Domains, URLs, HTML, HTTP, scripts
         reading: 9.0 - 9.1 (7 pages)
+        project:
+          title: PKI
+          link: /projects/pki
+          due: Mar 8
       - day: Mon
         date: Mar 4
         lectures:
@@ -175,6 +186,10 @@ units:
         lectures:
           - title: Networking and TCP/IP, IPSec
         readings: 10.6 (3 pages), 10.5 (3 pages)
+        project:
+          title: Web Exploit and Patch
+          link: /projects/web-exploit-and-patch
+          due: Mar 22
       - day: Wed
         date: Mar 13
         lectures:
@@ -209,6 +224,9 @@ units:
         lectures:
           - title: WLAN, WLAN threats
         reading: 12.0 - 12.2 (7 pages)
+        project:
+          title: CTF
+          link: /projects/ctf
       - day: Wed
         date: Mar 27
         lectures:

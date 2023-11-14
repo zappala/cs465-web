@@ -25,7 +25,7 @@ const Menu = ({ prefix, items }) => {
               )}
             </div>
           </button>
-          <Dropdown submenus={items.submenu} dropdown={dropdown} />
+          <Dropdown prefix={prefix} submenus={items.submenu} dropdown={dropdown} />
         </>
       ) : (
         <a
