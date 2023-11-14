@@ -6,5 +6,10 @@ import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx(), tailwind(), react()]
+  integrations: [mdx(), tailwind(), react()],
+  vite: {
+    ssr: {
+      noExternal: ["react-icons"],
+    },
+  },
 });
