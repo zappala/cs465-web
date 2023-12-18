@@ -3,7 +3,7 @@ import { Label, Badge } from "./helpers.jsx";
 import { load_yaml } from "./YamlLoader.js";
 
 export default function GridSchedule(props) {
-  const schedule = load_yaml("src/data/schedule.yaml");
+  const schedule = load_yaml("src/data" + props.prefix + "/schedule.yaml");
 
   // render units
   const render_units = (units) => {
@@ -115,7 +115,7 @@ export default function GridSchedule(props) {
       >
         <a
           className="underline decoration-lightblue"
-          href={prefix + '/' + lecture.link}
+          href={prefix + "/" + lecture.link}
           target={target}
         >
           <Badge name={lecture.instructor} />
@@ -141,7 +141,7 @@ export default function GridSchedule(props) {
         <a
           key="project"
           className="underline decoration-lightblue"
-          href={prefix + '/' + project.link}
+          href={prefix + "/" + project.link}
         >
           {project.title}
         </a>

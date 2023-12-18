@@ -11,6 +11,7 @@ units:
         date: Jan 10
         lectures:
           - title: Goals, policies, attacks, risk, DREAD
+            link: /notes/concepts-and-principles
         reading: 1.0 - 1.4 (10 pages)
       - day: Fri
         date: Jan 12

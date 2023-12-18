@@ -1,0 +1,120 @@
+---
+layout: ../../../semesters/Winter2024Markdown.astro
+---
+
+# Concepts and Principles
+
+## Security and Privacy
+
+- Understand the definition of computer security, what cybersecurity refers to, and how privacy may (or may not!) be different from security.
+
+- Computer security involves protecting computer-related assets from unauthorized actions and their consequences, which includes:
+
+  - prevention of unauthorized actions
+  - detecting unauthorized actions
+  - mitigating effects of attacks when they (inevitably) occur
+  - recovery from attacks
+
+- Cybersecurity is often used interchangeably with computer security. Often cybersecurity is IT-focused and relates to protecting network-connected assets, identifying break-ins, and recovering from break-ins. Computer security is used more often in a CS/academic context. It often encompasses a broader range of activities, such as developing secure software, finding and patching software vulnerabilities, reverse engineering code, developing new forms of cryptography and new applications of cryptography.
+
+- Privacy refers to protecting personally sensitive information and controlling how it is shared. This affects any application that collects personal data (e.g. health information, email, facial recognition, phone location, browser history). It also has numerous social impacts, such as ads tracking you online, police departments purchasing your phone location, mass surveillance with cameras and facial recognition, etc. As a result there are a variety of attempts to create privacy legislation, such as GDPR and the California Conusmer Privacy Act. Simultaenously, several nations are advocating for laws that provide governments a "backdoor" to decrypt any encrypted communications, such as wWhatsApp messages.
+
+- Computer security and privacy are often intertwined and hard to distinguish. For example, if I use software that encrypts my email so that nobody can read it except me and my friend, does that mean I'm focused on security (preventing an adversary from reading my emails) or privacy (preventing Google from reading my email to use it for ads or AI training)?
+
+## Fundamental goals of security
+
+- Ultimate goal: Help users complete their desired task safely and without short- or long-term risk
+
+- CIA triad
+
+  - confidentiality
+  - integrity
+  - availability
+
+- AAA security
+  - authentication
+  - authorization
+  - accounting
+
+## Security mindset
+
+- Requires thinking carefully about your assets and threats to them
+
+- More terminology
+
+  - assets -- what we want to protect, can be physical or virtual
+
+  - policy -- what the system is supposed to do and what it should _not_ do
+
+  - adversary -- entity who wishes to violate a system's policy to take unauthorized action on a target asset, also called threat agent/actor
+
+  - attack -- a violation of a security policy by an adversary
+
+  - threat -- any combination of circumstances that _might_ allow harm to an asset
+
+  - threat/attack vector -- a specific set of steps taken to attack a system
+
+  - mitigation -- steps taken to reduce the likelihood of an attack or lesson the damage from an attack that succeeds
+
+- Policy examples
+  - Smart home security policy
+  - Physical bank security policy
+  - CS department computer security policy
+
+## Risk assessment
+
+- Calculates the expected loss due to an attack.
+
+- Risk = likelihood \* impact
+
+  - likelihood = P(attack) \* P(vulnerability)
+  - impact = cost (tangible and intangible)
+
+- Hard to get numbers that are credible
+
+- Risk assessment questions
+
+  1. What assets are most valuable, and what are their values?
+  2. What system vulnerabilities exist?
+  3. What are the relevant threat agents and attack vectors?
+  4. What are the associated estimates of attack probabilities, or frequencies?
+
+- Alternative:
+
+![risk matrix](/images/risk-matrix.svg)
+
+## DREAD risk assessment model
+
+Rate the following from 1 to 10:
+
+- D = damage -- how bad would an attack be?
+
+- R = reproducability -- how easy is it to reproduce an attack?
+
+- E = exploitability -- how much work is it to launch the attack?
+
+- A = affected users -- how many people will be impacted?
+
+- D = discoverability -- how easy is it to discover the attack?
+
+Example payroll application:
+
+| Factor | Score | Reason                                                |
+| ------ | ----- | ----------------------------------------------------- |
+| D      | 8     | payroll data is extremely sensitive                   |
+| R      | 10    | 100% reproducible                                     |
+| E      | 7     | Must be on the application's subnet                   |
+| A      | 10    | Affects everyone                                      |
+| D      | 10    | Easy for attacker to identify that you are vulnerable |
+
+Score: 8 + 10 + 7 + 10 + 10 / 5 = 9
+
+Risk assessment examples
+
+- Smart home security policy
+- Physical bank security policy
+- CS department computer security policy
+
+# Modeling Adversaries
+
+# Security Analysis
