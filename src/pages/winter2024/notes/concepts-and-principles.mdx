@@ -4,26 +4,12 @@ layout: ../../../semesters/Winter2024Markdown.astro
 
 # Concepts and Principles
 
-## Security and Privacy
+## Key Concepts
 
-- Understand the definition of computer security, what cybersecurity refers to, and how privacy may (or may not!) be different from security.
+### Fundamental goals of security
 
-- Computer security involves protecting computer-related assets from unauthorized actions and their consequences, which includes:
-
-  - prevention of unauthorized actions
-  - detecting unauthorized actions
-  - mitigating effects of attacks when they (inevitably) occur
-  - recovery from attacks
-
-- Cybersecurity is often used interchangeably with computer security. Often cybersecurity is IT-focused and relates to protecting network-connected assets, identifying break-ins, and recovering from break-ins. Computer security is used more often in a CS/academic context. It often encompasses a broader range of activities, such as developing secure software, finding and patching software vulnerabilities, reverse engineering code, developing new forms of cryptography and new applications of cryptography.
-
-- Privacy refers to protecting personally sensitive information and controlling how it is shared. This affects any application that collects personal data (e.g. health information, email, facial recognition, phone location, browser history). It also has numerous social impacts, such as ads tracking you online, police departments purchasing your phone location, mass surveillance with cameras and facial recognition, etc. As a result there are a variety of attempts to create privacy legislation, such as GDPR and the California Conusmer Privacy Act. Simultaenously, several nations are advocating for laws that provide governments a "backdoor" to decrypt any encrypted communications, such as wWhatsApp messages.
-
-- Computer security and privacy are often intertwined and hard to distinguish. For example, if I use software that encrypts my email so that nobody can read it except me and my friend, does that mean I'm focused on security (preventing an adversary from reading my emails) or privacy (preventing Google from reading my email to use it for ads or AI training)?
-
-## Fundamental goals of security
-
-- Ultimate goal: Help users complete their desired task safely and without short- or long-term risk
+- Ultimate goal: Help users complete their desired task safely and without
+  short- or long-term risk
 
 - CIA triad
 
@@ -32,34 +18,28 @@ layout: ../../../semesters/Winter2024Markdown.astro
   - availability
 
 - AAA security
+
   - authentication
   - authorization
   - accounting
 
-## Security mindset
+# Terminology
 
-- Requires thinking carefully about your assets and threats to them
+- assets -- what we want to protect, can be physical or virtual
 
-- More terminology
+- policy -- what the system is supposed to do and what it should _not_ do
 
-  - assets -- what we want to protect, can be physical or virtual
+- adversary -- entity who wishes to violate a system's policy to take
+  unauthorized action on a target asset, also called threat agent/actor
 
-  - policy -- what the system is supposed to do and what it should _not_ do
+- attack -- a violation of a security policy by an adversary
 
-  - adversary -- entity who wishes to violate a system's policy to take unauthorized action on a target asset, also called threat agent/actor
+- threat -- any combination of circumstances that _might_ allow harm to an asset
 
-  - attack -- a violation of a security policy by an adversary
+- threat/attack vector -- a specific set of steps taken to attack a system
 
-  - threat -- any combination of circumstances that _might_ allow harm to an asset
-
-  - threat/attack vector -- a specific set of steps taken to attack a system
-
-  - mitigation -- steps taken to reduce the likelihood of an attack or lesson the damage from an attack that succeeds
-
-- Policy examples
-  - Smart home security policy
-  - Physical bank security policy
-  - CS department computer security policy
+- mitigation -- steps taken to reduce the likelihood of an attack or lesson the
+  damage from an attack that succeeds
 
 ## Risk assessment
 
@@ -82,51 +62,6 @@ layout: ../../../semesters/Winter2024Markdown.astro
 - Alternative:
 
 ![risk matrix](/images/risk-matrix.svg)
-
-## DREAD risk assessment model
-
-Rate the following from 1 to 3 (Low, Medium, High):
-
-- D = damage -- how bad would an attack be?
-
-- R = reproducability -- how easy is it to reproduce an attack?
-
-- E = exploitability -- how much work is it to launch the attack?
-
-- A = affected users -- how many people will be impacted?
-
-- D = discoverability -- how easy is it to discover the attack?
-
-Example payroll application, malicious user views confidential on-the-wire payroll data
-
-| Factor | Score | Reason                                                |
-| ------ | ----- | ----------------------------------------------------- |
-| D      | 3     | payroll data is extremely sensitive                   |
-| R      | 3     | 100% reproducible                                     |
-| E      | 2     | Must be on the application's subnet                   |
-| A      | 3     | Affects everyone                                      |
-| D      | 3     | Easy for attacker to identify that you are vulnerable |
-
-Score: 14
-
-How bad is it?
-
-- 5 - 7: low risk
-- 8 - 11: medium risk
-- 12 - 15: high risk
-
-Lots of criticism, because scores can be subjective and can vary based on individual perspectives.
-
-Risk assessment examples
-
-- Smart home security policy
-- Physical bank security policy
-- CS department computer security policy
-
-Further reading
-
-- [DREADful](https://learn.microsoft.com/en-us/archive/blogs/david_leblanc/dreadful)
-- [Experiences Threat Modeling at Microsoft](https://shostack.org/files/papers/modsec08/Shostack-ModSec08-Experiences-Threat-Modeling-At-Microsoft.pdf)
 
 ## Modeling Adversaries
 
@@ -151,10 +86,121 @@ Examples:
 
 - Open-ended activity to identify vulnerabilities and design defenses
 
-- See [Figure 1.4, page 11](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch1-rev1.pdf)
+- See
+  [Figure 1.4, page 11](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch1-rev1.pdf)
 
 Key points:
 
 - security analysis must be done throughout the software lifecycle
-- a formal security analysis can be done once a product is developed, to review against security standards (either from industry or government)
+- a formal security analysis can be done once a product is developed, to review
+  against security standards (either from industry or government)
 - penetration testing can be done once a product is deployed
+
+## Extra Material
+
+### Security and Privacy
+
+- Understand the definition of computer security, what cybersecurity refers to,
+  and how privacy may (or may not!) be different from security.
+
+- Computer security involves protecting computer-related assets from
+  unauthorized actions and their consequences, which includes:
+
+  - prevention of unauthorized actions
+  - detecting unauthorized actions
+  - mitigating effects of attacks when they (inevitably) occur
+  - recovery from attacks
+
+- Cybersecurity is often used interchangeably with computer security. Often
+  cybersecurity is IT-focused and relates to protecting network-connected
+  assets, identifying break-ins, and recovering from break-ins. Computer
+  security is used more often in a CS/academic context. It often encompasses a
+  broader range of activities, such as developing secure software, finding and
+  patching software vulnerabilities, reverse engineering code, developing new
+  forms of cryptography and new applications of cryptography.
+
+- Privacy refers to protecting personally sensitive information and controlling
+  how it is shared. This affects any application that collects personal data
+  (e.g. health information, email, facial recognition, phone location, browser
+  history). It also has numerous social impacts, such as ads tracking you
+  online, police departments purchasing your phone location, mass surveillance
+  with cameras and facial recognition, etc. As a result there are a variety of
+  attempts to create privacy legislation, such as GDPR and the California
+  Conusmer Privacy Act. Simultaenously, several nations are advocating for laws
+  that provide governments a "backdoor" to decrypt any encrypted communications,
+  such as wWhatsApp messages.
+
+- Computer security and privacy are often intertwined and hard to distinguish.
+  For example, if I use software that encrypts my email so that nobody can read
+  it except me and my friend, does that mean I'm focused on security (preventing
+  an adversary from reading my emails) or privacy (preventing Google from
+  reading my email to use it for ads or AI training)?
+
+  ### Security mindset
+
+- Requires thinking carefully about security throughout a software project you
+  are working on
+
+### DREAD risk assessment model
+
+Rate the following from 1 to 3 (Low, Medium, High):
+
+- D = damage -- how bad would an attack be?
+
+- R = reproducability -- how easy is it to reproduce an attack?
+
+- E = exploitability -- how much work is it to launch the attack?
+
+- A = affected users -- how many people will be impacted?
+
+- D = discoverability -- how easy is it to discover the attack?
+
+Example payroll application, malicious user views confidential on-the-wire
+payroll data
+
+| Factor | Score | Reason                                                |
+| ------ | ----- | ----------------------------------------------------- |
+| D      | 3     | payroll data is extremely sensitive                   |
+| R      | 3     | 100% reproducible                                     |
+| E      | 2     | Must be on the application's subnet                   |
+| A      | 3     | Affects everyone                                      |
+| D      | 3     | Easy for attacker to identify that you are vulnerable |
+
+Score: 14
+
+How bad is it?
+
+- 5 - 7: low risk
+- 8 - 11: medium risk
+- 12 - 15: high risk
+
+Lots of criticism, because scores can be subjective and can vary based on
+individual perspectives.
+
+Further reading
+
+- [DREADful](https://learn.microsoft.com/en-us/archive/blogs/david_leblanc/dreadful)
+- [Experiences Threat Modeling at Microsoft](https://shostack.org/files/papers/modsec08/Shostack-ModSec08-Experiences-Threat-Modeling-At-Microsoft.pdf)
+
+## Examples
+
+### Security Policies
+
+Discuss with a neighbor and then with the class:
+
+- Smart home
+- Bank website
+
+### Risk Assessment
+
+Fill out a DREAD table with your neighbor and then discuss with the class:
+
+- Smart home
+
+  - You have a smart home system that can be unlocked by an app (e.g. you have a
+    family member who forgot their key)
+  - There is a vulnerability in the smart home provider's server that controls
+    access to your home
+
+- Bank website
+  - A customer's password is easy to guess
