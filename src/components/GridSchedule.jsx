@@ -97,10 +97,16 @@ export default function GridSchedule(props) {
     if (!lecture.link) {
       return <li key={index}>{lecture.title}</li>;
     }
-    let after_content = "after:content-['_↗,_']";
-    let after_last_content = "last:after:content-['_↗'] ";
-    let target = "_blank";
+    let after_content = "";
+    let after_last_content = "";
+    let target = "";
     let icon = <></>;
+    if (lecture.type == "tab") {
+      after_content = "after:content-['_↗,_']";
+      after_last_content = "last:after:content-['_↗'] ";
+      target = "_blank";
+      icon = <></>;
+    }
     if (lecture.type === "zip") {
       icon = <img className="w-5 inline" src="/icons/zip.png" />;
       after_content = `after:content-[',_']`;
