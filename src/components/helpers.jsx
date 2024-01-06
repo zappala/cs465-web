@@ -3,7 +3,7 @@ export function Label(props) {
   return (
     <button
       disabled
-      className="rounded-lg bg-byu text-white w-auto text-xs md:text-sm px-2"
+      className="rounded-lg bg-red-200 w-auto text-xs md:text-sm px-2"
     >
       {props.type ? props.type + ":" : "Due:"} {props.children}
     </button>

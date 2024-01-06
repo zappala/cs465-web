@@ -97,8 +97,8 @@ export default function GridSchedule(props) {
     if (!lecture.link) {
       return <li key={index}>{lecture.title}</li>;
     }
-    let after_content = "";
-    let after_last_content = "";
+    let after_content = `after:content-[',_']`;
+    let after_last_content = "last:after:content-['']";
     let target = "";
     let icon = <></>;
     if (lecture.type == "tab") {
