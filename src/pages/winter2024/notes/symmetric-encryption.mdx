@@ -6,13 +6,27 @@ layout: ../../../semesters/Winter2024Markdown.astro
 
 ## Ungraded Quiz
 
-- What is the cryptographic key in a Caeasar cipher? In a substitution cipher?
+- What is the difference between information-theoretic security and
+  computational security?
+
+- What is the key space? Why does it need to be large?
+
+- What is the cryptographic key in a Caeasar cipher? How big is the key space?
+
+-
+
+- What is the difference between a block cipher and a stream cipher?
+
+- Why does a block cipher need modes?
 
 ## Important note
 
-- You should not design your own cryptographic algorithms and protocols (unless you are doing PhD-level research or have become a cryptography expert)
+- You should not design your own cryptographic algorithms and protocols (unless
+  you are doing PhD-level research or have become a cryptography expert)
 
-- [Kerckhoffs's principle](https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle), as restated by Steven Bellovin -- "design your system assuming that your opponents know it in detail"
+- [Kerckhoffs's principle](https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle),
+  as restated by Steven Bellovin -- "design your system assuming that your
+  opponents know it in detail"
 
 ## Key Concepts
 
@@ -26,9 +40,9 @@ possible keys -- this is called an _exhaustive key search_ or a \_brute force
 search.
 
 - Example: DES keys, 56 bits
-- A keyspace of 56 bits provides 2 56 ≈ 7.2×10<sup>16</sup> possible keys. At a rate of
-  10<sup>12</sup> keys per second it would take approximately 7.2×10<sup>4</sup> seconds or about 20
-  hours to try every key.
+- A keyspace of 56 bits provides 2 56 ≈ 7.2×10<sup>16</sup> possible keys. At a
+  rate of 10<sup>12</sup> keys per second it would take approximately
+  7.2×10<sup>4</sup> seconds or about 20 hours to try every key.
 - In January 1999, distributed.net and the Electronic Frontier Foundation
   collaborated to publicly break a DES key in 22 hours and 15 minutes.
 
@@ -85,15 +99,24 @@ Vernam cipher: see
 
 ### AES
 
-- AES is the most common block cipher -- [see Figure 2.3, page 34](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch2-rev1.pdf)
+- AES is the most common block cipher --
+  [see Figure 2.3, page 34](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch2-rev1.pdf)
+- 128-bit block
+- 128, 192, or 256 bit key
 
 ### Block cipher modes
 
-- block cipher modes are used to encrypt variable-size pieces of data using a block cipher
+- block cipher modes are used to encrypt variable-size pieces of data using a
+  block cipher
+
   - ECB
   - CBC
   - CTR
+
 - [Wikipedia article on block cipher modes](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation)
+
+- everywhere you see "block cipher encryption" in the below diagrams, that is
+  where AES fits in
 
 ### ECB Mode
 
@@ -108,7 +131,8 @@ Vernam cipher: see
 
 - Cipher Block Chaining
 - blocks are chained together
-- uses an Initialization Vector to make sure each message is unique, should be random
+- uses an Initialization Vector to make sure each message is unique, should be
+  random
 - encryption must be done sequentially by block
 - message must be padded to a multiple of the block size
 
@@ -121,8 +145,10 @@ Vernam cipher: see
 - uses a non-repeating counter
 - nonce is an initialization vectore
 - for a given AES key, do not re-use the same nonce
-- the counter is encrypted and then XORed with the plaintext to produce ciphertext
-- turns a block cipher into a stream cipher, since each bit of the plaintext is individually XORed with the encrypted counter
+- the counter is encrypted and then XORed with the plaintext to produce
+  ciphertext
+- turns a block cipher into a stream cipher, since each bit of the plaintext is
+  individually XORed with the encrypted counter
 - encryption and decryption can be done in parallel
 
 ![CTR mode encryption](/images/notes/ctr-mode-encryption.png)
@@ -133,7 +159,8 @@ Vernam cipher: see
 - Relies on the size of the key space
 - AES typically uses a key space of 256 bits = 2<sup>256</sup> possible keys
 - For comparison:
-  - 1 in 2<sup>61</sup> odds of winning the lottery and being hit by lightning in the same day
+  - 1 in 2<sup>61</sup> odds of winning the lottery and being hit by lightning
+    in the same day
   - 2<sup>92</sup> atoms in the average human body
 - Thermodynamic limits
   - physics: To set or clear a bit requires no less than 𝑘𝑇 "erg"

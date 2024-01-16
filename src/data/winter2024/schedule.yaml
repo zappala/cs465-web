@@ -33,7 +33,7 @@ units:
       - day: Wed
         date: Jan 17
         lectures:
-          - title: Symmetric encryption, entity authentication
+          - title: Symmetric encryption
             link: /notes/symmetric-encryption
         reading: 2.0 - 2.2 (8 pages), 4.1 (5 pages)
       - day: Fri
