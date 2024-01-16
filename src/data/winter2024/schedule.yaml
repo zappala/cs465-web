@@ -34,6 +34,7 @@ units:
         date: Jan 17
         lectures:
           - title: Symmetric encryption, entity authentication
+            link: /notes/symmetric-encryption
         reading: 2.0 - 2.2 (8 pages), 4.1 (5 pages)
       - day: Fri
         date: Jan 19
