@@ -35,11 +35,13 @@ units:
         lectures:
           - title: Symmetric encryption
             link: /notes/symmetric-encryption
+          - title: Entity Authentication
+            link: /notes/entity-authentication
         reading: 2.0 - 2.2 (8 pages), 4.1 (5 pages)
       - day: Fri
         date: Jan 19
         lectures:
-          - title: Asymmetric encryption, key agreement
+          - title: Public key cryptography
         reading: 2.3 - 2.4 (4 pages), 4.2 - 4.4 (9 pages)
       - day: Mon
         date: Jan 22
