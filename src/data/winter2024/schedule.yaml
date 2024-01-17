@@ -43,6 +43,10 @@ units:
         lectures:
           - title: Public key cryptography
         reading: 2.3 - 2.4 (4 pages), 4.2 - 4.4 (9 pages)
+        project:
+          title: Password Cracking
+          link: /projects/password-cracking
+          due: None
       - day: Mon
         date: Jan 22
         lectures:
