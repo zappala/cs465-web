@@ -42,6 +42,9 @@ units:
         date: Jan 19
         lectures:
           - title: Public key cryptography
+            link: /notes/public-key-cryptography
+          - title: Key establishment
+            link: /notes/key-establishment
         reading: 2.3 - 2.4 (4 pages), 4.2 - 4.4 (9 pages)
         project:
           title: Password Cracking
