@@ -54,6 +54,7 @@ units:
         date: Jan 22
         lectures:
           - title: Hashing and message authentication
+            link: /notes/hashing-and-message-authentication
         reading: 2.5 - 2.6 (6 pages)
 
   - title: User Authentication
