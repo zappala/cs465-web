@@ -63,6 +63,7 @@ units:
         date: Jan 24
         lectures:
           - title: Password authentication
+            link: /notes/password-authentication
         reading: 3.0 - 3.2 (9 pages), 3.8 (5 pages)
       - day: Fri
         date: Jan 26
