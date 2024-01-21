@@ -1,0 +1,65 @@
+---
+layout: ../../../semesters/Winter2024Markdown.astro
+---
+
+# Account recovery, CAPTCHAs, and SSO
+
+## Ungraded Quiz
+
+- Why is account recovery important? Why is it problematic?
+- How does reCAPTCHA work?
+- How does SSO work? Who are the parties? What is the workflow?
+
+## Key concepts
+
+### Account recovery
+
+- _never_ store passwords in the clear so that you can offer "password recovery"
+- recovery link or code sent via email
+  - difficulty: compromised email account can be use dto take over other accounts
+  - see [Email as a Master Key: Analyzing Account Recovery in the Wild](https://ieeexplore.ieee.org/abstract/document/8486017)
+- one-time code sent via SMS
+  - difficulty: phones subject to targeted SIM cloning attacks
+- challenge questions
+  - diffiuclty: users may forget answers, answers may be easily guessed, likely stored in plaintext so can be leaked
+  - not recommended
+  - see [Secrets, Lies, and Account Recovery: Lessons from the Use of Personal Knowledge Questions at Google](https://dl.acm.org/doi/abs/10.1145/2736277.2741691)
+
+### CAPTCHA
+
+- used to prevent mass creation of free accounts, spam on discussion boards
+- often bsaed on character recognition, audio recognition, image recognition, or cognitive games
+- can use as an alternative to rate limiting
+- susceptible to AI, human labor pools
+- reCAPTCHA ("I am not a robot") measures human interaction with the webpage
+- see [Gotta CAPTCHA ’Em All: A Survey of 20 Years of the Human-or-computer Dilemma](https://dl.acm.org/doi/pdf/10.1145/3477142)
+
+### Single Sign-On (SSO)
+
+- uses an identity provider to issue access tokens for an account held at a relying party
+- centralized login, but also concentrated risk
+
+- types of systems
+
+  - credential manager (including password managers)
+  - enterprise SSO -- typically used in a corporate environment, e.g. Kerberos, Central Authentication Services (CAS)
+  - Federated Identity -- e.g. Google OAtuh or Facebook login
+
+- Federated Identity
+
+  - when logging into a relying party (website), redirected to identity provider
+  - user authenticates to identity provider, given a token, and redirected back to original relying party
+  - relying party accepts token from identity provider as authenticating the user
+  - see [Signing Me onto Your Accounts through Facebook and Google: A Traffic-Guided Security Study of Commercially Deployed Single-Sign-On Web Services](https://ieeexplore.ieee.org/abstract/document/6234424)
+  - see [Towards Automated Auditing for Account and Session Management Flaws in Single Sign-On Deployments](https://ieeexplore.ieee.org/abstract/document/9833753)
+
+- Kerberos
+
+  - uses a centralized key distribution center (KDC), called T
+  - enables mutual authentication between client A and server B
+  - see the exchange in the [middle of page 114](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch4-rev1.pdf)
+    - A authenticates to T, receives an encrypted ticket it can give to B, plus a secret key for communicating with B, k<sub>s</sub>. The ticket contains the secret key, but encrypted for B.
+    - A can now give the ticket to B, plus prove that it knows the secret key k<sub>s</sub>
+    - B then authenticates to A that it knows the secret key k<sub>s</sub>
+
+- This is a simplified version of Kerberos, there are _many_ more details

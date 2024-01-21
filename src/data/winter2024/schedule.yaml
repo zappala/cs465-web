@@ -64,11 +64,12 @@ units:
         lectures:
           - title: Password authentication
             link: /notes/password-authentication
-        reading: 3.0 - 3.2 (9 pages), 3.8 (5 pages)
+        reading: 3.0 - 3.2 (9 pages), 3.6 (3 pages) 3.8 (5 pages)
       - day: Fri
         date: Jan 26
         lectures:
           - title: Account recovery, CAPTCHAs, SSO
+            link: /notes/account-recovery-captchas-sso
         reading: 3.3 (2 pages), 3.7 (2 pages), 4.7 (2 pages)
       - day: Mon
         date: Jan 29
