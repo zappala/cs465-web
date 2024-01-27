@@ -75,6 +75,7 @@ units:
         date: Jan 29
         lectures:
           - title: Multi-factor authentication
+            link: /notes/multi-factor-authentication
         reading: 3.4 - 3.5 (10 pages)
         project:
           title: Encryption
