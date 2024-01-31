@@ -19,7 +19,9 @@ this class will help give you an advantage when you enter the workforce.
 
 ## Project Setup
 
-These instructions will walk you through the steps you need to take to develop code for this project. When you dowload software, be sure to choose the right version for your machine:
+These instructions will walk you through the steps you need to take to develop
+code for this project. When you dowload software, be sure to choose the right
+version for your machine:
 
 - Windows
   - Intel processors: `x64`
@@ -30,11 +32,15 @@ These instructions will walk you through the steps you need to take to develop c
 
 ### Install Visual Studio code
 
-Use the [Visual Studio Code download page](https://code.visualstudio.com/download) to find the distribution for your machine. Download and install the package.
+Use the
+[Visual Studio Code download page](https://code.visualstudio.com/download) to
+find the distribution for your machine. Download and install the package.
 
 ### Install Docker Desktop
 
-Use the [Docker Desktop download page](https://www.docker.com/products/docker-desktop/) find the distribution for your machine. Download and install the package.
+Use the
+[Docker Desktop download page](https://www.docker.com/products/docker-desktop/)
+find the distribution for your machine. Download and install the package.
 
 ### Install a terminal
 
@@ -44,13 +50,16 @@ If you are using Windows:
 
 1. [Install Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/install)
 
-1. Install the WSL extension in Visual Studio Code. Go to `Extensions` in VSCode by using the icon on the left toolbar. Search for and install the `WSL` extension.
+1. Install the WSL extension in Visual Studio Code. Go to `Extensions` in VSCode
+   by using the icon on the left toolbar. Search for and install the `WSL`
+   extension.
 
 ### Setup DotNet
 
 1. Download and unzip the [handout file](/code/encryption-handout.zip).
 2. Open this folder using Visual Studio Code.
-3. If you are using Windows, press `F1` and then run `WSL: Reopen Folder in WSL`.
+3. If you are using Windows, press `F1` and then run
+   `WSL: Reopen Folder in WSL`.
 4. Open a terminal in VSCode, and run:
 
 ```bash
@@ -67,22 +76,25 @@ Go to `Extensions` in VSCode by using the icon on the left toolbar.
 
 ### Open a Dev Container
 
-Type `F1` to open the command pallette. Run the following command: `Dev Containers: Open Folder in Container`. VSCode should restart automatically.
-Once you have the container opened, VSCode will tell you that dependencies are missing. Make sure you click yes!
+Type `F1` to open the command pallette. Run the following command:
+`Dev Containers: Open Folder in Container`. VSCode should restart automatically.
+Once you have the container opened, VSCode will tell you that dependencies are
+missing. Make sure you click yes!
 
 ## Requirements
 
 In this project you will be implementing an encrypted echo client and server.
 
 An echo server receives strings from clients and simply echos those strings back
-to the clients. An echo client reads input from the terminal, sends that
-input to the echo server, and prints to the terminal anything it receives
-from the server.
+to the clients. An echo client reads input from the terminal, sends that input
+to the echo server, and prints to the terminal anything it receives from the
+server.
 
 I have provided you a working echo server and client that you will enhance to
 secure communication using hybrid encryption. To complete this project, you will
-need to modify the `EncryptedEchoServer.cs` and `EncryptedEchoClient.cs` files to
-support hybrid encryption. Do not add, edit, or delete any other source files.
+need to modify the `EncryptedEchoServer.cs` and `EncryptedEchoClient.cs` files
+to support hybrid encryption. Do not add, edit, or delete any other source
+files.
 
 When implementing the required functionality, make sure you use the same block
 modes, padding, and hashing algorithms on the client and server, otherwise it
@@ -93,10 +105,15 @@ your submission won't pass the autograder.
 
 To build and run the code, do the following:
 
-1. Open a terminal in VSCode. In this terminal, type `dotnet run server`. This runs the echo server.
-1. Open a _second_ terminal in VSCode. In that terminal, type `dotnet run client`. This runs the echo client.
+1. Open a terminal in VSCode. In this terminal, type `dotnet run server`. This
+   runs the echo server.
+1. Open a _second_ terminal in VSCode. In that terminal, type
+   `dotnet run client`. This runs the echo client.
 
-The code, as provided, functions as an _unencrypted_ echo client and server. Type anything you want at the terminal for the client, and it sends this string to the server, which sends the same string back. The client then outputs the string on the terminal. So you should see:
+The code, as provided, functions as an _unencrypted_ echo client and server.
+Type anything you want at the terminal for the client, and it sends this string
+to the server, which sends the same string back. The client then outputs the
+string on the terminal. So you should see:
 
 ```
 hello who is this?
@@ -107,13 +124,44 @@ what a coincidence
 what a coincidence
 ```
 
-To aid you in testing your code, I've provided an `echo-test` binary. It contains a working encrypted echo server and client. Run them using `./echo-test server` and `./echo-test client`, respectively. This can be used to test your own implementations. For example, run your server with the echo-test client, or run your client with the echo-test server. If you can run against these tools without any issue, you should receive full credit on passoff (unless you cut corners around key generation). If you are using an arm device (like the mac M1/M2) use `echo-test-arm` in the above commands.
+To aid you in testing your code, I've provided an `echo-test` binary. It
+contains a working encrypted echo server and client. Run them using
+`./echo-test server` and `./echo-test client`, respectively. This can be used to
+test your own implementations. For example, run your server with the echo-test
+client, or run your client with the echo-test server. If you can run against
+these tools without any issue, you should receive full credit on passoff (unless
+you cut corners around key generation). If you are using an arm device (like the
+mac M1/M2) use `echo-test-arm` in the above commands.
 
-Note that this allows you to write code for just the client, test and debug it, before writing the code for the server. You should eventually be able to run your client with your server, using encryption, with no issues.
+Note that this allows you to write code for just the client, test and debug it,
+before writing the code for the server. You should eventually be able to run
+your client with your server, using encryption, with no issues.
+
+### Client-Server Protocol
+
+The protocol you will build should do the following:
+
+![encryption project](/images/projects/encryption-protocol.png)
+
+- The server generates an RSA key pair, (S, V)
+- The client sends the server a Hello message
+- The server response includes its RSA public key, V
+- The client creates a symmetric encryption key K and an HMAC key H
+- The client sends a message that includes:
+  - E<sub>V</sub>(K) -- the key K, encrypted with V
+  - IV -- the AES initialization vector
+  - E<sub>K</sub>(message) -- a message, encrypted with key K
+  - E<sub>V</sub>(H) -- the key H, encrypted with V
+  - HMAC<sub>H</sub>(message) -- the HMAC of the message, using key H
+- The server responds with a message that includes:
+  - message -- not encrypted
+  - E<sub>S</sub>(SHA256(message)) -- a signature of the SHA256 hash of the
+    message, using key S
 
 ### Echo Client
 
-On the client you will implement three methods:
+Start by writing the client and testing it with the solution server. On the
+client you will implement three methods:
 
 1. `ProcessServerHello`: This method will read a RSA public key sent by the
    server when the client first connects. This key will be encoded using Base64.
@@ -133,8 +181,9 @@ On the client you will implement three methods:
 
 ### Echo Server
 
-Your server will need to generate an RSA key upon starting. It will also need to
-implement three methods:
+After your client works with the solution server, write your server and test it
+with the solution client. Your server will need to generate an RSA key upon
+starting. It will also need to implement three methods:
 
 1. `GetServerHello`: Returns the server's RSA public key encoded using Base64.
 2. `TransformIncomingMessage`: This method will be responsible for applying
@@ -147,32 +196,14 @@ implement three methods:
    server's RSA key to digitally sign messages being sent by the server. Make
    sure to use PSS padding with SHA256.
 
-## Starting Point
+## Cryptographic Library
 
 The cryptographic primitives needed in this project can all be found in the
 `System.Security.Cryptography` namespace. You will need the `AES`, `RSA`,
 `HMACSHA256`, and `RandomNubmerGenerator` classes to complete this lab. Read up
-on how they work.
-
-By default, the provided run a basic echo server without encryption. I recommend
-that you add the functionality step by step:
-
-1. Have the server generate and send a public key in its hello message.
-2. Implement hybrid encryption on the client.
-3. Implement hybrid decryption on the server.
-4. Implement HMAC generation on the client.
-5. Implement HMAC verification on the server.
-6. Implement signature generation on the server.
-7. Implement signature verification on the client.
-
-If you add functionality in this order, you should largely avoid breaking your
-solution as you slowly add more features.
-
-To aid in testing, I have provided you with an `echo-test` executable that fully
-implements the desired spec. You can use this to test your finished solutions.
-If they work with `echo-test` they are likely to work with the pass-off script
-used for grading. If you are using an ARM device (like the Mac M1/M2) use
-`echo-test-arm`.
+on how they work. Be sure to look at the _methods_ for these classes. Don't use
+the example code. Instead, find and learn to use each of the appropriate
+methods.
 
 ## Resources
 
