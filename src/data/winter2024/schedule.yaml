@@ -87,7 +87,8 @@ units:
       - day: Wed
         date: Jan 31
         lectures:
-          - title: Reference monitors, memory access control
+          - title: Memory protection
+            link: /notes/memory-protection
         reading: 5.0 - 5.2 (8 pages)
       - day: Fri
         date: Feb 2

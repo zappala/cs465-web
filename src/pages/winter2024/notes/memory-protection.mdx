@@ -1,0 +1,87 @@
+---
+layout: ../../../semesters/Winter2024Markdown.astro
+---
+
+# Memory Protection
+
+## Key Concepts
+
+- We are making the transition to Operating Systems security.
+- Will be focusing on fundamentals, with examples from Linux and Multics
+- Why Multics? Really influential!
+
+> "Multics is the first major operating system to be designed as a secure system
+> from the outset."
+
+- discussing operating systems with multiple users, and multiple processes per
+  user
+
+### Isolation
+
+- Two proceses, sharing the same computer system -- need to be sure they can't
+  access each others' memory! Otherwise, _nothing_ is safe.
+- Started with three components:
+  - _descriptor register_: which addresses a process can access
+  - _privileged bit_: when set, can change the descriptor register contents, can
+    only be used by _supervisor_
+  - _supervisor_: special process that is in charge of the system
+  - strict isolation, without sharing
+
+### Segment addressing + access permissions
+
+- divides memory into segments, each one with access permissions for read,
+  write, execute, mode (e.g. supervisor or user), fault
+- start of virtual memory -- the same physical address can be mapped to multiple
+  processes, each with different segment identifiers and access permissions
+- see
+  [Figure 5.2, page 129](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch5-rev1.pdf)
+
+### Accountability
+
+- each user of the system gets a separate username, password, user ID
+- processes also get identifiers
+- need to keep track of everything, e.g. for billing purposes
+
+### Roles
+
+- e.g. user, administrator
+- often change usernames when changing roles
+- bad practice to share username among people (e.g. sudo, root)
+- better to use role-based access control (RBAC, see section 5.7)
+
+### Reference monitor
+
+- need to defend against malicious users
+- every access by a program to any memory is validated against a list of
+  permitted uses, based on the user and the program function
+- uses an _access matrix_ of all subject/object pairs and their associated
+  permissions
+- see
+  [Figure 5.4, page 131](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch5-rev1.pdf)
+- typically implemented as a monitor per class of object
+- must be:
+  - tamper-proof
+  - not circumventable
+  - verifiable by analysis and tests
+- called a _security kernel_
+- difficult to implement in practice -- see the discussion on dependencies
+- if you focus on subjects and what they can do -- you get _capability lists_
+- if you focus on objects and what is allowed -- you get _access control lists_
+- _audit trails_ allow you to inspect what happened, after the fact
+
+### Aside
+
+This, about Multics, is pretty incredible. See
+[Multics](https://en.wikipedia.org/wiki/Multics).
+
+> Multics also supports extremely aggressive on-line reconfiguration: central
+> processing units, memory banks, disk drives, etc. can be added and removed
+> while the system continues operating. At the MIT system, where most early
+> software development was done, it was common practice to split the
+> multiprocessor system into two separate systems during off-hours by
+> incrementally removing enough components to form a second working system,
+> leaving the rest still running for the original logged-in users. System
+> software development testing could be done on the second system, then the
+> components of the second system were added back to the main user system,
+> without ever having shut it down. Multics supports multiple CPUs; it is one of
+> the earliest multiprocessor systems.
