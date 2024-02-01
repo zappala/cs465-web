@@ -1,0 +1,44 @@
+---
+layout: ../../../semesters/Winter2024Markdown.astro
+---
+
+# File-based Access Control
+
+## Key Concepts
+
+### File-based permissions
+
+- Multics and UNIX -- treat every object as a logical file -- e.g. printing to a
+  printer is printing to a file
+- metadata stores permissions
+- access to every object is thus "file permissions"
+- ACLs have disadvantages
+  - long (consumes memory, time)
+  - frequent updates needed
+  - tedious
+  - [can use these in Linux!](https://www.geeksforgeeks.org/access-control-listsacl-linux/)
+
+
+### ugo
+
+- ugo -- user, group, other
+- userID
+- groupID
+- see /etc/passwd, /etc/shadow, /etc/group
+- superuser: userID = 0, root
+- fixed length!
+- less expressive than ACLs
+- see `ls -al`
+- see [Table 5.1, page 136](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch5-rev1.pdf)
+- initial value for file permissions set by `umask` -- play with this to see how it works
+- change permissions using chown, chgrp
+
+###  setuid bit
+
+- [see Figure 5.5, page 135](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch5-rev1.pdf)
+- can be set by owner
+- means the file, if run, executes with the permissons of the owner, rather than the user running the program
+- allows the program to do things the owner can do
+- attackers look for programs owned by root with setuid bit set
+- if you can find a vulnerability in a root-owned program with setuid bit set, you can do anything on the system
+- real
