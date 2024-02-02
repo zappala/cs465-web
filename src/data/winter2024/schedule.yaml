@@ -93,7 +93,8 @@ units:
       - day: Fri
         date: Feb 2
         lectures:
-          - title: Basic file access control
+          - title: File-based access control
+            link: /notes/file-based-access-control
         reading: 5.3 - 5.4 (5 pages)
       - day: Mon
         date: Feb 5
