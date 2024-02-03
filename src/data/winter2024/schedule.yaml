@@ -99,7 +99,8 @@ units:
       - day: Mon
         date: Feb 5
         lectures:
-          - title: Advanced file access control, RBAC
+          - title: Directories, links, RBAC
+            link: /notes/directories-links-rbac
         reading: 5.5 - 5.7 (8 pages)
         project:
           title: Web Authentication

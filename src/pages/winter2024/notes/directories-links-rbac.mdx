@@ -1,0 +1,54 @@
+---
+layout: ../../../semesters/Winter2024Markdown.astro
+---
+
+# Directories, links, and role-based access Control
+
+## Key concepts
+
+### Directories
+
+![UNIX file system hierarchy](/images/notes/unix-filesystem.png)
+
+- remember, everything is a file
+- this means a directory entry is a file
+  - the data in the file is the file system data for the sub-directories and files in that directory
+  - the meta-data for the directory entry are the permissions data, a flag indicating this is a directory, and a pointer to the data block
+  - the directory entries always include "." meaning this directory, and ".." meaning the parent directory
+- permissions for directories include:
+
+  - r: you can list the contents of the directory -- view the `dir-entries` for that directory
+  - w: you add edit directory content, meaning alter `dir-entries`, such as creating, moving, or deleting files -- requires x permission too
+  - x: you can traverse and search the directory, e.g. using the `find` command
+  - t-bit: prevent deletion or renaming of files owned by other users
+
+- [See Figure 5.6, page 140](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch5-rev1.pdf) to understand the UNIX directory structure
+
+- [see Figure 5.7, page 142](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch5-rev1.pdf) to understand the distinction between the mental model of a file system and its implementation
+
+- a _chroot jail_ limits visibility of the file system using `chroot`
+  - doesn't extend to process or networking space -- meaning you can create a child process that goes outside of the \_chroot
+  - see [here](https://tbhaxor.com/breaking-out-of-chroot-jail-shell-environment/) for a good explanation
+  - FreeBSD has a `jail()` that is stricter and describes what processes a process may influence, what network services they can use, etc., see [here](https://papers.freebsd.org/2000/phk-jails.files/sane2000-jail.pdf)
+
+### Links
+
+- a _hard link_ is a direct alias to a file -- the `dir-entry` points to the same file object
+- a _symbolic link_ is a n indirect alias to a file -- the `dir-entry` points to an inode whose datablock contains the pathname of the original file
+- see [Figure 5.8, page 143](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch5-rev1.pdf)
+- some important differences, see [Figure 5.9, page 143](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch5-rev1.pdf)
+- experiment with these!
+
+### Role-based access control (RBAC)
+
+- assign permissions to objects (files) based on roles
+- if a person/subject changes roles, they get new access by being granted that role or can lose access by having a role removed
+- can be much easier than having to change permissions for individual files each time people change roles
+
+### Mandatory access control and SELinux
+
+- useful for organizations or the government -- who you are determines which files you have access to, and this is controlled by an administrator, e.g. a security clearance
+- SELinux is a Linux Security Module that provides mandatory access control for Linux
+- demonstrates that you can take a commodity operating system and provide mandatory access control
+- originally developed by the NSA
+- integrates role-based access control
