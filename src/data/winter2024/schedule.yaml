@@ -112,6 +112,7 @@ units:
         date: Feb 7
         lectures:
           - title: Race conditions, integer vulnerabilities
+            link: /notes/race-conditions-integer-vulnerabilities
         reading: 6.0 - 6.2 (11 pages)
       - day: Fri
         date: Feb 9
