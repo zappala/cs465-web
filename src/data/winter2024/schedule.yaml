@@ -117,8 +117,9 @@ units:
       - day: Fri
         date: Feb 9
         lectures:
-          - title: Stack overflows, heap overflow
-        readings: 6.3 - 6.4 (5 pages)
+          - title: Stack and heap overflows
+            link: /notes/stack-and-heap-overflows
+        reading: 6.3 - 6.4 (5 pages)
       - day: Mon
         date: Feb 12
         lectures:
