@@ -123,7 +123,8 @@ units:
       - day: Mon
         date: Feb 12
         lectures:
-          - title: Defenses, privilege escalation
+          - title: Defenses and privilege escalation
+            link: /notes/defenses-and-privilege-escalation
         reading: 6.6 - 6.8 (6 pages)
 
   - title: Malicious software
@@ -132,6 +133,7 @@ units:
         date: Feb 14
         lectures:
           - title: Malware, viruses, and worms
+            link: /notes/malware-viruses-worms
         reading: 7.0 - 7.2 (7 pages)
         project:
           title: Exploit and Patch
