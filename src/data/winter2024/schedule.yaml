@@ -142,26 +142,28 @@ units:
       - day: Fri
         date: Feb 16
         lectures:
-          - title: Trojan horses, back doors, key loggers, rootkits
+          - title: How malware works
+            link: /notes/how-malware-works
         reading: 7.3 - 7.5 (10 pages)
       - day: Mon
         date: Feb 19
         holiday: Presidents Day
       - day: Tue
         date: Feb 20
-        lectures:
-          - title: Ransomware, social engineering
-        reading: 7.6 - 7.8 (7 pages)
+        holiday: Monday Instruction, but no class
 
-  - title: Exam
-    days:
       - day: Wed
         date: Feb 21
         lectures:
-          - title: Exam prep
+          - title: Ransomware, social engineering
+        reading: 7.6 - 7.8 (7 pages)
+  - title: Exam
+    days:
       - day: Fri
         date: Feb 23
-        exam: Exam
+        lectures:
+          - title: Exam prep
+        projects: Midterm (TBD)
 
   - title: Certificate management and use cases
     days:
