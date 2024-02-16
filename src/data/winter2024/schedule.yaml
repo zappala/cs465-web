@@ -155,7 +155,8 @@ units:
       - day: Wed
         date: Feb 21
         lectures:
-          - title: Ransomware, social engineering
+          - title: Other Malware
+            link: /notes/other-malware
         reading: 7.6 - 7.8 (7 pages)
   - title: Exam
     days:
