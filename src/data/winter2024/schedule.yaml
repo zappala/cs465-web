@@ -163,8 +163,11 @@ units:
       - day: Fri
         date: Feb 23
         lectures:
-          - title: Exam prep
-        projects: Midterm (TBD)
+          - title: Midterm prep
+            link: /notes/midterm-prep
+        project:
+          title: Midterm
+          due: Mar 1
 
   - title: Certificate management and use cases
     days:
@@ -208,7 +211,7 @@ units:
       - day: Mon
         date: Mar 11
         lectures:
-          - title: Phising, Web security indicators
+          - title: Phishing, Web security indicators
         reading: 9.8 (5 pages)
 
   - title: Firewalls and tunnels
