@@ -1,0 +1,129 @@
+---
+layout: ../../../semesters/Winter2024Markdown.astro
+---
+
+# Certificates, certification authorities, and PKI
+
+## Ungraded quiz
+
+- If an attacker can give you the wrong public key for a website or a person,
+  what does this enable them to do?
+
+- What is a public key certificate used for?
+
+- What is a trust model?
+
+- What trust model do web browsers use?
+
+## Key Concepts
+
+### Public key certificates
+
+- a _public key certificate_ associate a public key with an owner
+  - combination of Subject and public key signed by a Certification Authority
+    (CA)
+  - a _relying party_ relies on this certification authority and trusts its
+    signature
+  - see
+    [Table 8.1, page 215](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch8-rev1.pdf)
+    for a list of fields that can appear in a certificate
+  - _Subject_ and _Issuer_ are of type _Name_, which is a set of attributes and
+    values
+- CA's can issue certificates for humans, web servers
+- see
+  [page 216](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch8-rev1.pdf)
+  for a list of steps that a CA takes before issuing a certificate
+
+- _public key infrastructure_ (PKI) -- infrastructure used for managing public
+  keys, private keys, and their use
+
+  - authenticate entities and establish session keys
+  - allows the use of encryption, digital signatures, etc
+  - see
+    [Figure 8.1, page 217](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch8-rev1.pdf)
+  - includes a set of standards from the International Telecommunication Union
+    (ITU) -- X.509
+  - long term storage of private keys is challenging -- whether for a website, a
+    cryptocurrency wallet, or any other use
+
+### Certificate chain validation
+
+- Validating a certificate chain
+
+  - see
+    [Figure 8.2, page 218](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch8-rev1.pdf)
+  - requires a root of trust
+  - see list of steps, below the figure
+
+- Verifying public keys using an out-of-band channel
+
+  - see the example in the book -- involving a hash of a public key using a
+    numeric or image representation
+  - for example, verifying a contact's public key in WhatsApp or Signal
+
+- Terms
+  - _self-sign certificate_ -- signed by yourself instead of a CA
+  - _trusted certificate store_ (or root store) -- trusted certificates to
+    bootstrap a chain
+  - _untrusted certificates_ -- see
+    [Figure 8.3, page 219](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch8-rev1.pdf)
+  - _TOFU_ -- trust on first use + _key continuity_ -- see
+    [MailPile](https://www.mailpile.is) and
+    [autocrypt](https://autocrypt.org/index.html) for TOFU for email (note, does
+    not seem to be in active development)
+    - TOFU is also often used with SSH!
+  - _revocation_ -- used whena public key has been compromised, e.g. by adding a
+    revoked certificate to a list (CRL)
+
+### CA/PKI architectures
+
+- _trust model_ -- rules and processes to determine which certificates are
+  trusted
+
+  - will vary depending on the application
+  - consider a private network among automotive suppliers vs secure email for
+    the government vs secure communications between consumers and websites
+
+- Model 1: Single-CA systems
+
+  - see
+    [Figure 8.5, page 225](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch8-rev1.pdf)
+  - can be connected with a ring or bridge
+
+- Model 2: Strict Hierarchy
+
+  - see
+    [Figure 8.6, page 226](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch8-rev1.pdf)
+  - can use reverse-certificates to traverse the hierarchy from bottom up
+
+- Model 3: Ring-mesh of tree roots
+
+  - like Model 1, but each single-CA is a hierarchy
+
+- Model 4: Forest of hierarchical trees (browser model)
+
+  - see
+    [Figure 8.7, page 227](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch8-rev1.pdf)
+  - configure all browsers with a set of trust anchors (root store)
+
+- Model 5: Decentralized CA Trust (Enterprise PKI model)
+
+  - see
+    [Figure 8.8, page 227](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch8-rev1.pdf)
+  - may be disconnected -- does not need universal connectivity
+  - can decide which trust anchors to import to your company
+
+- Model 6: Web of Trust
+
+  - no CAs
+  - every person decides who to trust
+  - originally envisioned _key signing parties_
+
+- two key elements
+  - trust anchors
+  - CA certificates (where a CA certifies another CA)
+
+## Challenge Question
+
+- If you had to build a PKI for certificates issued to humans, how would you do
+  this?

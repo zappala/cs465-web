@@ -175,6 +175,7 @@ units:
         date: Feb 26
         lectures:
           - title: Certificates
+            link: /notes/certificates
         reading: 8.0 - 8.2 (4 pages), 8.4 (5 pages)
       - day: Wed
         date: Feb 28
