@@ -72,6 +72,21 @@ server {
 }
 ```
 
+### Let's Encrypt
+
+- It used to be expensive to get a certificate for a website
+  - You can now get one free with Let's Encrypt
+  - It uses a protocol called ACME to automatically verify you own a domain
+  - For example, you contact an ACME server to request a certificate, and it
+    gives you a file to serve from your website, once it verifies that you are
+    serving it, then it issues you the certificate
+  - see [Let's Encrypt Stats](https://letsencrypt.org/stats/)
+
+Extra reading:
+
+- [Let’s Encrypt: An Automated Certificate Authority to Encrypt the Entire Web](https://dl.acm.org/doi/pdf/10.1145/3319535.3363192)
+  -- describes how Let's Encrypt was built,the ACME protocol, lessons learned
+
 ### Secure email
 
 - goal is to have end-to-end encryption of messages between communicating parties
