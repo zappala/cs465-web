@@ -181,6 +181,7 @@ units:
         date: Feb 28
         lectures:
           - title: TLS and secure email
+            link: /notes/tls-and-secure-email
         reading: 8.5 - 8.6 (9 pages)
 
   - title: Web and browser security
