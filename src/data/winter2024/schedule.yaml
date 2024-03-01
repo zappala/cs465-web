@@ -199,7 +199,8 @@ units:
       - day: Mon
         date: Mar 4
         lectures:
-          - title: TLS, HTTPS, HTTP cookies, DOM objects
+          - title: TLS and cookies
+            link: /notes/tls-and-cookies
         reading: 9.2 - 9.3 (5 pages)
       - day: Wed
         date: Mar 6
