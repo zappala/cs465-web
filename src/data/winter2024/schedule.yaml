@@ -189,7 +189,8 @@ units:
       - day: Fri
         date: Mar 1
         lectures:
-          - title: Domains, URLs, HTML, HTTP, scripts
+          - title: Web review
+            link: /notes/web-review
         reading: 9.0 - 9.1 (7 pages)
         project:
           title: PKI
