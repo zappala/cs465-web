@@ -205,7 +205,8 @@ units:
       - day: Wed
         date: Mar 6
         lectures:
-          - title: DOM SOP, auth cookies, malicious scripts, CSRF
+          - title: Same-origin policy and malicious scripts
+            link: same-origin-policy-and-malicious-scripts
         reading: 9.4 - 9.5 (5 pages)
       - day: Fri
         date: Mar 8
