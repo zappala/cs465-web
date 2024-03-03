@@ -206,12 +206,13 @@ units:
         date: Mar 6
         lectures:
           - title: Same-origin policy and malicious scripts
-            link: same-origin-policy-and-malicious-scripts
+            link: /notes/same-origin-policy-and-malicious-scripts
         reading: 9.4 - 9.5 (5 pages)
       - day: Fri
         date: Mar 8
         lectures:
           - title: XSS, SQL injection
+            link: /notes/xss-and-sql-injection
         reading: 9.6 - 9.7 (7 pages)
       - day: Mon
         date: Mar 11
