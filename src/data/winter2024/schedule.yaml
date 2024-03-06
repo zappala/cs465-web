@@ -217,7 +217,8 @@ units:
       - day: Mon
         date: Mar 11
         lectures:
-          - title: Phishing, Web security indicators
+          - title: Phishing
+            link: /notes/phishing
         reading: 9.8 (5 pages)
 
   - title: Firewalls and tunnels
