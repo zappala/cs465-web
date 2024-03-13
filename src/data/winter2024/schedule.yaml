@@ -226,8 +226,9 @@ units:
       - day: Wed
         date: Mar 13
         lectures:
-          - title: Networking and TCP/IP, IPSec
-        reading: 10.6 (3 pages), 10.5 (3 pages)
+          - title: Networking background
+            link: /notes/networking-background
+        reading: 10.6 (3 pages),
         project:
           title: Web Exploit and Patch
           link: /projects/web-exploit-and-patch
@@ -243,8 +244,8 @@ units:
       - day: Wed
         date: Mar 20
         lectures:
-          - title: SSH, VPNs
-        reading: 10.3 - 10.4 (8 pages)
+          - title: SSH, VPNs, IPsec
+        reading: 10.3 - 10.5 (11 pages)
 
   - title: Intrusion detection and network-based attacks
     days:
