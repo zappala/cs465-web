@@ -239,52 +239,56 @@ units:
       - day: Mon
         date: Mar 18
         lectures:
-          - title: Packet firewalls, proxy firewalls
-        reading: 10.0 - 10.2 (11 pages)
+          - title: Networking background
+            link: /notes/networking-background
       - day: Wed
         date: Mar 20
+        lectures:
+          - title: Firewalls
+            link: /notes/firewalls
+        reading: 10.0 - 10.2 (11 pages)
+      - day: Fri
+        date: Mar 22
         lectures:
           - title: SSH, VPNs, IPsec
         reading: 10.3 - 10.5 (11 pages)
 
   - title: Intrusion detection and network-based attacks
     days:
-      - day: Fri
-        date: Mar 22
-        lectures:
-          - title: Intrusion detection, sniffers
-        reading: 11.0 - 11.3 (10 pages)
       - day: Mon
         date: Mar 25
         lectures:
-          - title: DOS, address resolution attacks
-        reading: 11.4 - 11.5 (9 pages)
-
-  - title: Wireless LAN security
-    days:
+          - title: Intrusion detection, sniffers
+        reading: 11.0 - 11.3 (10 pages)
       - day: Wed
         date: Mar 27
         lectures:
-          - title: WLAN, WLAN threats
-        reading: 12.0 - 12.2 (7 pages)
+          - title: DOS, address resolution attacks
+        reading: 11.4 - 11.5 (9 pages)
+      - day: Fri
+        date: Mar 29
+        holiday: No Class
+
+  - title: Review and Help
+    days:
+      - day: Mon
+        date: Apr 1
+        lectures:
+          - title: CTF demo, by James
         project:
           title: CTF
           link: /projects/ctf
           due: Apr 8
-      - day: Fri
-        date: Mar 29
+      - day: Wed
+        date: Apr 3
         lectures:
-          - title: EAP, Radius, WPA3
-        reading: 12.3, 12.8 (9 pages)
+          - title: Threat Modeling review, by James
+      - day: Fri
+        date: Apr 5
+        holiday: No Class
 
   - title: Privacy
     days:
-      - day: Mon
-        date: Apr 1
-      - day: Wed
-        date: Apr 3
-      - day: Fri
-        date: Apr 5
       - day: Mon
         date: Apr 8
       - day: Wed

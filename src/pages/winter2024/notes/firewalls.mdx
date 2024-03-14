@@ -1,0 +1,80 @@
+---
+layout: ../../../semesters/Winter2024Markdown.astro
+---
+
+# Firewalls
+
+- Defensive technology
+- Designed to screen out incoming traffic at the perimeter of an organization's
+  network and also authorize outbound traffic
+
+  - but also can be on individual machines
+
+- see
+  [Figure 10.1, page 283](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf)
+
+- note an organization may want to inspect outgoing traffic to ensure sensitive
+  data isn't exfiltrated
+
+## Packet-filter firewall
+
+- inspects individual packets using rules
+  - often a "match first rule" system
+  - actions are ACCEPT, DROP (no notice), REJECT (provide error), LOG
+- filter rules usually based on:
+
+  - source IP address
+  - source port
+  - destinaton IP address
+  - destination port
+  - protocol
+
+- may also use ICMP type and code
+- _stateless_ filters vs _stateful_ filters
+
+  - e.g. can track TCP connection states, treat packets belonging to an accepted
+    TCP connection different from new connections
+
+- see
+  [Table 10.1, page 285](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf),
+  and the text above it explaining each type of rule
+
+- the "perimeter" doesn't take into account personal devices, USB drives, phones
+
+- limitations:
+  [see list on page 286](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf)
+
+- advantages of dedicated firewalls:
+  [see list on page 287](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf)
+
+## Proxy firewalls
+
+- \_circuit-level proxy firewalls: relay an entire connection, either allow or
+  deny, and then relay bytes
+
+  - [see Figure 10.2, page 289](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf)
+  - uses a socket daemon, _sockd_, on the firewall, and the SOCKS protocol to
+    communicate
+  - user <-> sockd <-> Internet site
+  - separate TCP connections!
+  - application -> intercepted by SOCKS library -> SOCKS protocol to sockd ->
+    internet
+  - connection is allowed or disallowed
+
+- _application-level proxy firewalls_: relay application-specific traffic
+  - [see Figure 10.3, page 290](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf)
+  - able to inspect contents of packets since they have knowledge of the
+    protocol
+  - can remove malicious JavaScript, emails, etc.
+
+## Enterprise firewall architectures
+
+- see
+  [Figure 10.4, page 292](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf)
+- the firewall (3) is exposed to the hostile newtork, so it maybe called a
+  _bastion host_
+- the web server and DNS server are public-facing, so they sit on a network
+  right after the firewall, in a _demilitarized zone_ or DMZ
+- there is a second internal firewall (4) that protects internal assets
+- routers (1) and (2) provide connectivity
+- provides defense in depth
