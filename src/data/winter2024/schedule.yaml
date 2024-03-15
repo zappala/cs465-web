@@ -251,6 +251,7 @@ units:
         date: Mar 22
         lectures:
           - title: SSH, VPNs, IPsec
+            link: /notes/ssh-vpns-ipsec
         reading: 10.3 - 10.5 (11 pages)
 
   - title: Intrusion detection and network-based attacks
@@ -262,23 +263,23 @@ units:
         reading: 11.0 - 11.3 (10 pages)
       - day: Wed
         date: Mar 27
-        lectures:
-          - title: DOS, address resolution attacks
-        reading: 11.4 - 11.5 (9 pages)
+        holiday: No Class
       - day: Fri
         date: Mar 29
-        holiday: No Class
-
-  - title: Review and Help
-    days:
-      - day: Mon
-        date: Apr 1
         lectures:
           - title: CTF demo, by James
         project:
           title: CTF
           link: /projects/ctf
           due: Apr 8
+      - day: Mon
+        date: Apr 1
+        lectures:
+          - title: DOS, address resolution attacks
+        reading: 11.4 - 11.5 (9 pages)
+
+  - title: Review and Help
+    days:
       - day: Wed
         date: Apr 3
         lectures:
