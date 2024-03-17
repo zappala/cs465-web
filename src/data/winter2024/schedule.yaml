@@ -259,7 +259,8 @@ units:
       - day: Mon
         date: Mar 25
         lectures:
-          - title: Intrusion detection, sniffers
+          - title: Intrusion detection and scanners
+            link: /notes/intrusion-detection-and-scanners
         reading: 11.0 - 11.3 (10 pages)
       - day: Wed
         date: Mar 27
@@ -276,6 +277,7 @@ units:
         date: Apr 1
         lectures:
           - title: DOS, address resolution attacks
+            link: /notes/dos-and-address-resolution-attacks
         reading: 11.4 - 11.5 (9 pages)
 
   - title: Review and Help
