@@ -292,7 +292,9 @@ units:
       - day: Mon
         date: Apr 8
         lectures:
-          - title: Guest speaker, Morian Eberhard
+          - title:
+              Guest speaker, Morian Eberhard, Chief Information & Security
+              Officer at Nu Skin International, Inc
 
   - title: Privacy
     days:
