@@ -289,17 +289,35 @@ units:
       - day: Fri
         date: Apr 5
         holiday: No Class
+      - day: Mon
+        date: Apr 8
+        lectures:
+          - title: Guest speaker, Morian Eberhard
 
   - title: Privacy
     days:
-      - day: Mon
-        date: Apr 8
       - day: Wed
         date: Apr 10
+        reading: see notes for reading
+        lectures:
+          - title: Privacy Frameworks
+            link: /notes/privacy-frameworks
+        project:
+          title: Privacy and contextual integrity
+          link: /projects/privacy-and-contextual-integrity
+          due: Apr 17
       - day: Fri
         date: Apr 12
+        reading: see notes for reading
+        lectures:
+          - title: Web tracking and advertising
+            link: /notes/web-tracking-and-advertising
       - day: Mon
         date: Apr 15
+        reading: see notes for reading
+        lectures:
+          - title: App privacy
+            link: /notes/app-privacy
   - title: Recap
     days:
       - day: Wed
