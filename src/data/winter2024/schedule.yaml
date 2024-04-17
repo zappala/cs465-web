@@ -325,4 +325,5 @@ units:
       - day: Wed
         date: Apr 17
         lectures:
-          - title: Exam Prep
+          - title: Final Prep
+            link: /notes/final-prep
