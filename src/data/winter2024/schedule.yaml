@@ -327,3 +327,7 @@ units:
         lectures:
           - title: Final Prep
             link: /notes/final-prep
+        project:
+          title: Privacy threat modeling (Extra Credit)
+          link: /projects/privacy-threat-modeling
+          due: Apr 23
