@@ -4,10 +4,8 @@ units:
       - day: Wed
         date: Sep 4
         lectures:
-          - title: Course overview
-            link: /syllabus
-          - title: Security and Privacy
-            link: /notes/security-and-privacy
+          - title: Introduction
+            link: /notes/introduction
   - title: Operating System Security
     days:
       - day: Fri
@@ -19,9 +17,10 @@ units:
           - title: Linux Journey
             link: https://linuxjourney.com/
             sections: Text-Fu, User Management, Permissions, Processes
-        project:
-          title: Linux
-          due: Sep 13
+        homework:
+          title: Linux Practice
+          link: /homework/linux-practice
+          due: Sep 11
       - day: Mon
         date: Sep 9
         lectures:
@@ -31,6 +30,9 @@ units:
           - title: "Operating Systems: Three Easy Pieces"
             link: https://pages.cs.wisc.edu/~remzi/OSTEP/
             sections: "4. Processes, 6. CPU Scheduling, 13. Address spaces"
+        project:
+          title: Linux
+          due: Sep 13
       - day: Wed
         date: Sep 11
         lectures:
@@ -286,7 +288,7 @@ units:
             sections: 9.6 - 9.7
         project:
           title: Web Exploit and Patch
-          due: TBD
+          due: Dec 6
       - day: Wed
         date: Nov 20
         lectures:

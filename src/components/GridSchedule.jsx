@@ -73,6 +73,7 @@ export default function GridSchedule(props) {
           {render_reading_or_readings(prefix, day)}
         </div>
         <div className="w-3/12 bg-gray-200 mb-1 mr-1 p-2">
+          {render_homework(prefix, day.homework)}
           {render_project(prefix, day.project)}
         </div>
       </div>
@@ -168,6 +169,32 @@ export default function GridSchedule(props) {
         </li>
       );
     } else if (!reading.link) return <>{reading.title}</>;
+  };
+
+  // render a homework
+  const render_homework = (prefix, homework) => {
+    if (!homework) return <></>;
+    let result = [];
+    if (!homework.link) result.push(homework.title);
+    else
+      result.push(
+        <a
+          key="homework"
+          className="underline decoration-lightblue"
+          href={prefix + "/" + homework.link}
+        >
+          {homework.title}
+        </a>
+      );
+    if (homework.due)
+      result.push(
+        <>
+          {" "}
+          <span>&nbsp;</span>
+          <Label>{homework.due}</Label>
+        </>
+      );
+    return result;
   };
 
   // render a project

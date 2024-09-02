@@ -1,0 +1,94 @@
+---
+layout: ../../../semesters/Fall2024Markdown.astro
+---
+
+# Linux Practice
+
+For this homework, you're going to use Docker to run a Ubuntu container and then
+practice using the Linux command line.
+
+## Docker setup
+
+(1) Install [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+
+You may need to create a Docker account when you run Docker Desktop.
+
+Once you have Docker Desktop running, you're going to use a terminal for the
+following commands. You can use a Mac terminal (I recommend
+[iterm2](https://iterm2.com/)), WSL on Windows, or the terminal that is built
+into DOcker Desktop (see bottom right of the window).
+
+(2) Verify you can use docker on the command line:
+
+```
+docker version
+```
+
+(3) Get the Docker container from Docker Hub:
+
+```
+docker pull zappala/linux-land
+```
+
+(4) Run the Docker container:
+
+```
+docker run -d -p 2222:22 --name lotr zappala/linux-land
+```
+
+This runs the container and maps port 22 (used for ssh) to port 2222 and also
+gives the container the name `lotr`.
+
+(5) Find the IP address of your Docker container:
+
+```
+docker inspect lotr | grep IPAddress
+```
+
+(6) Use `ssh` to login to the Linux image.
+
+There are two accounts set up on this image: `root` (password tolkien) and
+`bilbo` (password ring):
+
+```
+ssh -p 2222 bilbo@localhost
+```
+
+## Linux command line
+
+Use the [Linux Journey](https://linuxjourney.com/) site to complete the
+following sections:
+
+- Command Line
+- Text-Fu
+- User Management
+- Permissions
+- Processes
+
+For each section, run all the commands they show you, and play around. Create
+directories and files. Add a new user. Change permissions on files.
+
+Note, the following commands will not work:
+
+- man: because man pages are not installed
+- whatis: because man pages are not installed
+- sudo: use root account instead
+
+You can use Google to find the appropriate man pages as needed.
+
+Finally, I recommend using `useradd` to add an account as shown. Try using `ssh`
+to connect to that account with the password you create. What happens? Then
+create an account using `useradd -m -s /bin/bash arwen`. Why does this work
+better?
+
+## Grading
+
+Homework is graded on a participation basis. Turn in this homework if you:
+
+- Have run the Docker setup and logged into the machine.
+- Have run at least 80% of the commands given
+
+Note, if you are already a master with Linux (e.g. you have used it for several
+years on a personal machine), then review all the material but you may skip
+anything you already know. If you don't know Docker, be sure to at least try
+that part.
