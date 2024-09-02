@@ -1,0 +1,287 @@
+---
+layout: ../../../semesters/Winter2024Markdown.astro
+---
+
+# Networking background
+
+![high level map of the Internet](/images/notes/worldBlack.jpg)
+
+## Internet components and structure
+
+The Internet is:
+
+- roughly hierarchical
+- composed of networks
+- composed of routers, links, a wide variety of edge devices
+
+![Internet components](/images/notes/fig01_01.png)
+
+- networks connect using customer-provider relationships (usually in a
+  contract!)
+- tier-1 ISPs provide international coverage, treat each other as peers
+
+![Internet components](/images/notes/fig01_11.png)
+
+- [Lumen's network map](https://www.lumen.com/en-us/resources/network-maps.html)
+  shows what a Tier 1 ISP looks like
+
+- the Internet is only roughly hierarchical:
+
+![Internet structure](/images/notes/internet-structure.png)
+
+- _PoP (Point of Presence)_: router(s) in the provider's network where customer
+  ISPs can connect
+- _multi-homing_: customer ISPs may connect to more than one provider, for fault
+  tolerance
+- _peering_: connect directly to another ISP at the same level, instead of going
+  through a provider, usually without any cost
+- _IXP_: third-party location where ISPs can peer with each other
+- _content provider networks_: large content providers (e.g. Google) have large
+  networks, connect directly to lower-level ISPs and IXPs
+
+## Principles
+
+- Interoperability
+
+  - each network is independent
+  - they interoperate due to standards, especially: IP, BGP, TCP, DNS
+  - a network can do whatever it wants internally
+
+- packet switching
+
+  - data is divided into packets
+  - all packets from all sources share each link
+  - each packet uses full link bandwidth
+  - packets are stored before being forwarded
+  - link never idle if some packets in the queue
+
+### The triumph of packet switching
+
+circuit switching:
+
+![circuit switching](/images/notes/fig01_08.png)
+
+packet switching:
+
+![packet switching](/images/notes/fig01_10.png)
+
+- makes Internet routers very simple, with complexity at the edges
+- see
+  [End-to-end arguments in system design](https://web.mit.edu/Saltzer/www/publications/endtoend/endtoend.pdf)
+- enables the Internet to support a wide variety of applications
+- for a long time, circuits were considered best for voice and video but we now
+  use Skype and watch movies over the Internet
+
+→ never underestimate the power of lots of bandwidth and caching
+
+### Other Principles
+
+- rough consensus and working code
+
+  - implementations available
+  - design influenced by experience: performance • fluid and open
+    standardization body (IETF)
+
+- open (rather than proprietary) architecture
+
+## Internet architecture
+
+![networking stack](/images/notes/fig01_19.png)
+
+- layering helps to build complex systems
+
+  - split large system into smaller pieces
+  - identify each layer’s functionality and interfaces
+  - can change a layer’s implementation as long as interfaces remain the same
+
+- encapsulation vs decapsulation
+
+![encapsulation vs decapsulation](/images/notes/fig01_20.png)
+
+### Why is the Internet so vulnerable to attacks?
+
+[The Design Philosophy of the DARPA Internet Protocols](http://ccr.sigcomm.org/archive/1995/jan95/ccr-9501-clark.pdf)
+
+- fundamental goal: develop an internetwork for existing networks
+- second-level goals (in order of importance)
+  - survivability
+  - multiple types of service (delay vs bandwidth, reliable vs datagram)
+  - variety of networks
+  - distributed management
+  - cost effective
+  - host attachment with low effort
+  - accountable resources
+
+→ security was not considered
+[Brief History of the Internet](https://www.internetsociety.org/wp-content/uploads/2017/09/ISOC-History-of-the-Internet_1997.pdf)
+
+## DNS: Domain Name System
+
+- people like to use names for computers (www.byu.edu), but computers need to
+  use numbers (128.187.16.184)
+  - the Domain Name System (DNS) is a distributed database providing this
+    service
+  - a program sends a query a local resolver
+  - the resolver contacts DNS servers as needed
+- many DNS services
+  - host name to IP address translation
+  - host aliasing (canonical name versus alias names)
+  - look up mail server for a host
+  - load distribution - can provide a set of IP addresses for one canonical name
+- demonstrate: _dig_
+
+- domain name: top-level domain (TLD) + one or more subdomains
+  - example: cs.byu.edu
+  - may be 127 levels deep, 63 characters per label, 255 characters per name
+
+![DNS hierarchy](/images/notes/fig02_19.png)
+![DNS hierarchy](/images/notes/fig02_21.png)
+
+- resolver contacts root name server if it doesn't have the mapping
+- each server that doesn't know the mapping tells the local name server the
+  identity of the next server in the hierarchy that can answer the query
+- any name server that learns a mapping caches it
+- TLD servers usually cached in a local name server, so root name server
+  (theoretically) not visited often
+
+## UDP
+
+- best-effort service
+  - connectionless: no state setup
+  - unreliable: lost packets are not re-sent • no flow control
+  - no congestion control (won't slow down, you can send as much and as fast as
+    you want)
+
+![UDP header](/images/notes/fig03_07.png)
+
+- defined in [RFC 768, from 1980](https://www.ietf.org/rfc/rfc768.txt)
+
+  - port numbers (16 bits each)
+  - length of UDP segment, including header (bytes)
+  - checksum: detect some bit errors in transmitted segment
+  - application data (sometimes called ADU)
+
+- binary protocol
+
+## TCP
+
+![TCP segmentation](/images/notes/fig03_28.png)
+
+- _pipelining_: multiple data segments outstanding at once
+- VERY important to use the high bandwidth available on the Internet
+- uses congestion control to slow down when the network is overloaded, converge
+  to a roughly fair allocation of bandwidth among compeeting flows
+
+![TCP sequence numbers](/images/notes/fig03_31.png)
+
+- sequence number: byte number of this segment within the byte stream
+- ACK number: sequence number of **next** byte expected from sender
+  - an ACK tells the sender that the receiver has EVERYTHING up to but NOT
+    INCLUDING the byte in the ack number
+  - "this is the next in-order byte I am expecting"
+- the power of cumulative ACKs
+  - if an ACK is ever lost, a subsequent ACK synchronizes the state of the
+    receiver with the sender
+  - no need to retransmit lost ACKs, which would get messy
+
+### TCP retransmission scenarios
+
+![TCP retransmission scenario](/images/notes/fig03_34.png)
+![TCP retransmission scenario](/images/notes/fig03_35.png)
+![TCP retransmission scenario](/images/notes/fig03_36.png)
+
+### TCP handshake
+
+![TCP handshake](/images/notes/fig03_39.png)
+
+### TCP header
+
+![TCP header](/images/notes/fig03_29.png)
+
+- _sequence and ACK number_: count in terms of bytes
+- flags
+  - `A`: ACK number is valid
+  - `R` (RST): reset connection
+  - `S` (SYN): establish connection
+  - `F` (FIN): close connection
+  - `U` (URG): urgent data, typically not used
+  - `P` (PSH): push (send) data immediately, used for TELNET
+- _receive window_: number of bytes receiver can accept (flow control)
+
+## IPv4
+
+- common protocol for all networks
+- very simple
+- has lasted nearly years (since ~1978!)
+
+![IPv4 header](/images/notes/fig04_13.png)
+
+- source IP address (easily spoofed)
+- destination IP address
+- TTL (hop count)
+- protocol: typically UDP or TCP
+
+- IP addresses
+
+  - 32 bits
+  - dotted decimal notation
+  - `byu.edu` is `128.187.16.184`
+
+- forwarding process: check the destination address
+  - _is this one of my addresses?_ send to next protocol specified in IP header
+  - _is this one of my subnets?_ send to link layer to forward to the
+    destination
+  - _do I have a route?_ send to link layer to forward to next IP hop
+  - _destination unknown!_ send an ICMP error to the source of the IP packet
+
+## IPv6
+
+![IPv6 header](/images/notes/fig04_24.png)
+
+- simplified
+- result of negotiation
+- _traffic class_: enable routers to map traffic into classes (delay, loss
+  guarantees, etc)
+- _flow label_: uniquely identify all packets for a particular flow/application,
+  used for QoS
+- _Next Header_: upper layer protocol or option
+
+- IPv6 addresses
+  - 128 bits
+
+## Link layer
+
+![LAN](/images/notes/fig05_16.png)
+
+- MAC addresses
+
+  - used to get frame from one interface to another physically-connected
+    interface (on the same network)
+  - most are 48 bits long, depends on link-layer protocol
+  - address burned into the adapter ROM
+  - broadcast address usually all ones (FF-FF-FF-FF-FF-FF)
+
+- address assignment administered by IEEE
+  - manufacturer buys portion of MAC address space (prefix)
+  - uses that prefix for all MAC addresses and ensures it does not reuse the
+    suffix
+  - uniqueness provides address portability
+
+### ARP: Address Resolution Protocol
+
+- protocol that queries for IP addresses and maps to the associated MAC address
+- each host builds a table
+
+  - IP address
+  - MAC address
+  - TTL (e.g. 20 minutes)
+
+- if host A has no entry for IP address B in table
+
+  - A broadcasts ARP query for B
+  - all hosts on LAN receive query
+  - host with address B responds by unicast to A with its MAC address
+  - all hosts hear query and response, cache translations for A and B in their
+    ARP tables
+
+- all hosts process all ARP packets, even if not addressed to themselves

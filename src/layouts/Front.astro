@@ -36,42 +36,48 @@ import "../assets/base.css";
   <body>
     <header>
       <div class="bg-white text-byu pl-2 md:pl-7 pr-0 py-2 flex items-center">
-        <img
-          class="h-8 md:h-10 pt-1"
-          alt="BYU logo"
-          src="/images/BYU-monogram-navy.svg"
-        />
-        <span
-          class="text-xl md:text-2xl font-bold border-l border-byu mt-1 pl-4"
-          >Computer Science</span
+        <a href="https://www.byu.edu"
+          ><img
+            class="h-8 md:h-10 pt-1"
+            alt="BYU logo"
+            src="/images/BYU-monogram-navy.svg"
+          /></a
+        >
+        <a href="https://cs.byu.edu"
+          ><span
+            class="text-xl md:text-2xl font-bold border-l border-byu mt-1 pl-4"
+            >Computer Science</span
+          ></a
         >
       </div>
-      <div
-        class="bg-bluey text-white flex-grow pl-5 md:pl-10 pr-20 md:py-5 text-xl md:text-3xl"
-      >
-        CS 465 Introduction to Security and Privacy
-      </div>
     </header>
+    <div
+      class="bg-bluey text-white flex-grow pl-5 md:pl-10 pr-20 md:py-5 text-xl md:text-3xl"
+    >
+      <a href="https://cs465.zappala.org"
+        >CS 465 Introduction to Security and Privacy</a
+      >
+    </div>
   </body>
-
-  <slot />
-
-  <style>
-    html {
-      font-size: var(--font-size-base);
-      color: var(--color-text);
-      background-color: var(--color-bg);
-    }
-
-    body {
-      box-sizing: border-box;
-      margin: 0;
-      line-height: 24px;
-      padding: 0px;
-      text-size-adjust: 100%;
-      font-size: 16px;
-      font-weight: 400;
-      color: #1a202c;
-    }
-  </style>
 </html>
+
+<slot />
+
+<style>
+  html {
+    font-size: var(--font-size-base);
+    color: var(--color-text);
+    background-color: var(--color-bg);
+  }
+
+  body {
+    box-sizing: border-box;
+    margin: 0;
+    line-height: 24px;
+    padding: 0px;
+    text-size-adjust: 100%;
+    font-size: 16px;
+    font-weight: 400;
+    color: #1a202c;
+  }
+</style>

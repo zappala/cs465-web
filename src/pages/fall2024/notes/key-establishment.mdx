@@ -1,0 +1,85 @@
+---
+layout: ../../../semesters/Winter2024Markdown.astro
+---
+
+# Key Establishment
+
+## Ungraded Quiz
+
+- What is the purpose of the Diffie-Hellman protocol?
+
+- Can you explain how a man-in-the-middle attack works to subvert
+  Diffie-Hellman?
+
+- What do we need to add to prevent attacks against DH?
+
+## Key Concepts
+
+### Key Establishment
+
+- Important question -- how do Bob and Alice create a key that they share?
+
+- They could share the key in person, e.g. using a USB drive.
+- Alice could generate a key and then encrypt it with Bob's public key -- e.g.
+  hybrid encryption.
+
+  - If someone records the conversation and then steals Bob's private key, they
+    can decrypt everything
+
+- _Key agreement protocol_ -- both parties contribute some information to derive
+  a shared key
+  - the generated key is ephemeral -- used only for a short time, destroyed
+    after use
+  - no long term secrets -- so even if an attacker steals Bob's private key and
+    has a record of the conversation, they can't compute the derived key
+
+### Diffie Hellman
+
+- "allows two parties with no prior contact nor any pre-shared keying material,
+  to establish a shared secret by exchanging numbers over a channel readable by
+  everyone else." Pretty amazing!
+
+- Be able to understand and follow the DH protocol,
+  [explained on page 101](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch4-rev1.pdf)
+
+![diffie-hellman](/images/notes/diffie-hellman.png)
+
+- Computing a from g<sup>a</sup> and public parameters _g_ and _p_ is called the
+  discrete logarithm problem -- computationally difficult if _p_ is chosen with
+  certain properties
+
+- Once you derive DH key K, you put it into a _key derivation function_ to get
+  the actual key used.
+
+- Textbook DH is susceptible to various attacks -- see the book for details --
+  you should know to be careful about checking these details
+
+- Textbook DH is unauthenticated -- an active attacker can easily subvert it.
+  You should be able to explain this attack. See
+  [page 102](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch4-rev1.pdf)
+
+- The STS protocol adds digital signatures to DH. You should be able to see a
+  description like the one in the book and understand it.
+
+### Key authentication properties and goals
+
+- forward secrecy -- disclosure of a long-term secret does not compromise the
+  secrecy of session keys used for earlier sessions
+
+- known-key security -- compromised session keys do not allow later
+  impersonation or compromise future session keys
+
+- entity authentication and liveness -- if you verify an entity is actively
+  participating in a protocol, this gives you _liveness_
+
+- key-use confirmation -- you can verify a party has a session key without
+  verifying who they are
+
+- implicit authentication -- encrypting a session key using RSA -- you know the
+  other party is the only one that can get the session key, but you don't know
+  if they have received it
+
+- implicit authentication + key-use confirmation = explicit authentication
+
+- if you want to see details, study the STS implementation details, then read
+  through the informal explanation of the properties provided

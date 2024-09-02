@@ -1,0 +1,112 @@
+---
+layout: ../../../semesters/Winter2024Markdown.astro
+---
+
+# SSH, VPNs, and IPSec
+
+## SSH
+
+- provides an encrypted _tunnel_ between two hosts
+  - typically, we think of a tunnel as a way to connect two machines over a
+    network that doesn't support the service we want
+  - in this case, ssh provides an `encrypted connection` for remote access, over
+    an unencrypted network
+- we used to have cleartext utilities for working with remote hosts, and now
+  there are encrypted equivalents,
+  [see Table 10.2, page 293](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf)
+
+- [see Figure 10.5, page 293](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf)
+  for an illustration of how SSH provides a tunnel between a client `ssh` and a
+  server `sshd`
+
+  - the applications on the remote host do not need to be "ssh-aware"
+
+- protocols
+
+  - _transport protocol_: authentication, encryption, integrity, negotiates
+    parameters and keys
+  - _user authentication protocol_: handles user authentication, runs on top of
+    the transport protocol
+  - _connection protocol_: enables multiple logical connections over a single
+    physical connection, also runs over the transprt protocol
+
+- user authentication
+
+  - password
+  - Kerberos ticket
+  - client public key
+
+- public key authentication
+
+  - client sends public key and signature over data, including session ID
+  - public key must be pre-registered as an authorized key
+  - signature must be valid
+  - session data must match
+  - you should setup public key authentication when you use ssh and you should
+    put a password on your private key
+
+- SSH server authentication
+
+  - outside of busineses, we often use TOFU (trust on first use) for a server
+    key
+    - can verify a hash of the fingerprint if you can get a valid hash over an
+      independent channel -- not done in practice
+  - in enterprises, use a CA model, with a CA managed by the enterprise
+
+- SSH port forwarding
+
+  - [see Figure 10.6, page 295](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf)
+
+- How scp works
+
+  - [see Figure 10.7, page 296](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf)
+
+- old model of trusted logins illustrates the dangers of transited trust
+
+## VPNs
+
+- Virtual Private Network
+
+- want to extend a private network (home or enterprise) to other locations
+- [see Figure 10.8, page 298](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf)
+- can use hosts or gateways as endpoints,
+  [see FIgure 10.9, page 299](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf)
+- encrypted tunnels make it difficult for an enterprise to filter malicious
+  content, catch data exfiltration, block unwanted protocols or sites
+
+## IPsec
+
+- provide security at the network layer,
+  [see Figure 10.10, page 300](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf)
+
+- used for VPNs
+
+- Internet Key Exchange (IKE)
+
+  - automated key exchange using Diffie-Hellman, plus parameter negotiation
+  - security association (SA) - shared state of algorithms, sequence numbers,
+    cryptographic keys
+
+- Authentication Header (AH)
+
+  - used for authentication only (no encryption)
+  - see
+    [Figure 3.11, page 301](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf)
+    - remember, the IP header contains a Protocol field, this field is set to
+      IPsec, so the receiving router knows that it will next see an AH
+    - the Next Header field tells what protocol comes next in the payload, e.g.
+      TCP
+    - the SPI is an index to the SA that was created
+
+- Encapsulating Security Payload (ESP)
+
+  - used for confidentiality in addition to authentication
+  - see
+    [Figure 3.12, page 301](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf)
+  - Next Header indicates what type of protocol was encrypted (e.g. TCP or IP)
+
+- small differences in transport mode vs tunnel mode,
+  [see Figure 3.13, page 302](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf)
+  - note that in tunnel mode, the IPsec payload includes an IP header -- this is
+    to send the packet to the host after exiting the tunnel, which terminates at
+    a router

@@ -70,7 +70,7 @@ export default function GridSchedule(props) {
           {render_lectures(prefix, day)}
         </div>
         <div className="w-3/12 bg-gray-200 mb-1 mr-1 p-2">
-          {render_reading(day)}
+          {render_reading_or_readings(prefix, day)}
         </div>
         <div className="w-3/12 bg-gray-200 mb-1 mr-1 p-2">
           {render_project(prefix, day.project)}
@@ -131,10 +131,43 @@ export default function GridSchedule(props) {
     );
   };
 
+  // render reading(s)
+  const render_reading_or_readings = (prefix, day) => {
+    if (day.reading) return <>{day.reading}</>;
+    if (!day.readings) return <></>;
+    if (day.readings.constructor.name != "Array") return <></>;
+    return (
+      <ul>
+        {day.readings.map((reading, reading_index) =>
+          render_reading(prefix, reading, reading_index)
+        )}
+      </ul>
+    );
+  };
+
   // render any/all guides in a day
-  const render_reading = (day) => {
-    if (!day.reading) return <></>;
-    return <>{day.reading}</>;
+  const render_reading = (prefix, reading, index) => {
+    let after_content = `after:content-[',_']`;
+    let after_last_content = "last:after:content-['']";
+    let target = "";
+    if (!reading.title) return <>{reading}</>;
+    if (reading.link && reading.sections) {
+      return (
+        <li
+          className={`inline ${after_content} ${after_last_content} after:text-xs`}
+          key={index}
+        >
+          <a
+            className="underline decoration-lightblue"
+            href={reading.link}
+            target={target}
+          >
+            {reading.title}
+          </a>
+          , {reading.sections}
+        </li>
+      );
+    } else if (!reading.link) return <>{reading.title}</>;
   };
 
   // render a project
@@ -170,7 +203,7 @@ export default function GridSchedule(props) {
         <p className="w-2/12 p-2 font-bold">Day</p>
         <p className="w-4/12 p-2 font-bold">Topics</p>
         <p className="w-3/12 p-2 font-bold">Reading</p>
-        <p className="w-3/12 p-2 font-bold">Projects</p>
+        <p className="w-3/12 p-2 font-bold">Assignments</p>
       </div>
       {render_units(schedule.units)}
     </div>

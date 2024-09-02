@@ -1,0 +1,77 @@
+---
+layout: ../../../semesters/Winter2024Markdown.astro
+---
+
+# Denial of Service and address resolution attacks
+
+## Denial of Service
+
+- deny legitimate users access to a service by degrading performance or causing
+  failure
+- floding attacks exhaust resources -- network bandwidth, CPU, memory, disk
+  space
+- motives
+
+  - financial gain via extortion
+  - commercial competitive gain by a competitor
+  - activism
+  - information warfare
+  - hacker experimentation / ego boost
+  - vengeance
+
+- distributed denial of service (DDoS) attack
+
+  - may use a botnet
+  - may spoof source addresses
+
+- [see examples, page 321](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch11-rev1.pdf),
+  covering DoS by poison packets, SYN flooding
+
+- see description of UDP and ICMP floods
+- [see example of smurf attack](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch11-rev1.pdf)
+
+- key concept: amplification
+
+## Defenses
+
+- ingress filtering and egress filtering
+  - e.g. drop packets sent to broadcast addresses
+  - e.g. filter out packets not originating from accepted hosts
+- disabling unused services
+- rate limiting of ICMP responses
+- patching software that is vulnerable
+- upstream filtering by ISPs protects against DoS attacks
+
+## DNS attacks
+
+- affects both DNS and ARP
+- [see Figure 11.7, page 326](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch11-rev1.pdf))
+  for an example of a DNS query resolution
+
+- pharming attack -- falsifies name to address resolution
+- attack vectors
+
+  - local host file
+  - tampering at intermediate servers
+  - network-based response alteration
+
+- DNS cache poisoning
+  - queries sent with a random ID
+  - a response should carry the same ID
+  - an attacker who can guess an ID (e.g. if not properly randomized) can send a
+    response to a cache, e.g. using a spoofed source address, and get the DNS
+    cache to cache the bad response
+- a general defense is DNSSEC, but its deployment has been slow
+
+## ARP attacks
+
+- [see Figure 11.8, page 328](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch11-rev1.pdf)
+  for an overview of an ARP attack
+
+  - false ARP replies that are cached
+  - the problem is that replies are not authenticated
+
+- defense
+  - static, read-only tables
+  - cross-checking ARP responses
+  - firewalls

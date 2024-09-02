@@ -1,0 +1,102 @@
+---
+layout: ../../../semesters/Winter2024Markdown.astro
+---
+
+# Threat Modeling
+
+## Objectives
+
+Learning to think like an attacker is a critical part of cybersecurity. In this
+project, you will observe a system and consider how you might exploit it. You
+will also gain experience using the DREAD and STRIDE models discussed in class.
+
+## Requirements
+
+**In this project, you should work with up to three partners (groups of 2–4
+people).** If you really want to, you are permitted to work alone.
+
+With your partners, observe people in a public place using a computerized
+system. For example, you might observe people using a public transit ticket
+machine, a parking garage pay station, a hardware store self-checkout machine, a
+library self-checkout machine, or an airport self-check-in kiosk. Stay long
+enough to observe 3–5 people use the system. Also, if possible, try using the
+system at least once yourself to understand how it works.
+
+Based on your observations, write a report about the system containing the
+following sections:
+
+1. _System description_
+   - What was the system?
+   - Who is supposed to use the system? What are their tasks? What are their
+     goals?
+2. _Diagrams_
+   - Diagram the user workflow.
+   - Produce a data flow diagram for the system.
+     - As you don't have access to the inner workings of the system, make
+       reasonable guesses to fill in this diagram.
+3. _Asset analysis_
+   - What assets exists in this system?
+   - What assets are most valuable?
+4. _Adversary analysis_
+   - Who might try to attack the system? _(hint: remember Table 1.2 in the
+     book)_
+     - Are they an insider or outsider?
+   - What are their objectives?
+   - What are their methods?
+   - What are their capabilities?
+   - You should identify at least three adversaries.
+5. _Attack trees_
+   - Create 1–2 attack trees for each of the adversaries you identified.
+   - You must have at least 5 attack trees.
+   - Your analysis must have at least two adversaries and five attack trees.
+6. _Defender analysis_
+   - Who is trying to defend the system?
+   - What resources do they have access to?
+     - As you don't have access to the inner workings of the system, make
+       reasonable guesses about this information.
+7. _Risk analysis_
+   - Use the DREAD model to evaluate the risk for five of the attack trees.
+     - Make sure you take into account all relevant information, including
+       attacker capabilities and defender resources.
+     - As you don't have access to the inner workings of the system, make
+       reasonable guesses to fill in the model.
+8. _Mitigations_
+   - Propose three mitigations that could lower the calculated risk for any of
+     the attack trees.
+   - Recalculate risk using DREAD taking into account these mitigations.
+     Identify which of the DREAD calculations
+   - you updated from the previous section.
+9. _Reflect_
+   - Reflect on what you have learned in this assignment.
+     - What did you learn about the system?
+     - How does this impact how you think of security?
+   - This should be 2–3 paragraphs.
+
+## Grading Rubric
+
+- 10 points for the system description section.
+- 10 points for the diagrams section.
+- 20 points for the asset analysis section.
+- 20 points for the adversary analysis section.
+- 20 points for the attack tree section.
+- 20 points for the defender analysis section.
+- 20 points for the risk analysis section.
+- 20 points for the mitigations section.
+- 20 points for the reflection section.
+
+For each section, we will be looking to see that the report covers all the
+requested items and that an honest effort has been made. I am not looking for
+perfection, especially since you are new to threat analysis and do not have
+access to all the information about the system.
+
+The TA may deduct up to 20% of your grade for poor writing quality. This penalty
+will only be accessed if the writing is so poor as make it difficult for the TA
+to read and understand the report. This penalty will not be used to punish minor
+writing errors. If you run a grammar and spelling check, most students should
+not need to worry about this penalty.
+
+## Submission
+
+List the full name of all group members in your report. Have one group member
+submit a PDF with your group's report. We will give identical grades to all
+group members.

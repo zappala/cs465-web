@@ -1,0 +1,135 @@
+---
+layout: ../../../semesters/Winter2024Markdown.astro
+---
+
+# PKI
+
+## Objectives
+
+In this project, you will gain first-hand experience examining Web PKI
+certificates. You will also get to experience using cryptographic software.
+
+**This experience may be quite frustrating. This isn't a bug with the project
+but a feature.** When cryptographic software is not designed with humans in
+mind, it can cause problems. The first step in learning to build better software
+is to experience the current state of affairs.
+
+## Requirements
+
+In this project, you will gain experience with PKI on the Web and in Email. You
+will write up your experience in a report that you will submit to Canvas. This
+report will be composed of two parts, described below.
+
+### Part 1—Investigating Web PKI Certificates
+
+For this part of the project, you will be investigating the certificates for
+several websites. To do so, I recommend using SSL Lab's
+[SSL test tool](https://www.ssllabs.com/ssltest/), though you are welcome to use
+whatever tool you want.
+
+Using your selected tool, retrieve and examine the certificates for the
+following websites:
+
+- google.com
+- amazon.com
+- utk.edu
+- dhs.gov
+
+For each of these websites, your report should describe the following
+information:
+
+- What is the subject of the leaf certificate?
+- What is the issuer of the leaf certificate?
+- What is its validity period?
+- What type of public key is it using?
+- What algorithm was used to sign the certificate?
+
+You will also be examining several sites that have broken certificates:
+
+- self-signed.badssl.com
+- untrusted-root.badssl.com
+- wrong.host.badssl.com
+- expired.badssl.com
+
+While the error for each is obvious (it is in the domain name), your report will
+need to identify the flawed portion of the certificate in the `openssl` output.
+Your report should also describe why the value you identified is flawed and what
+the value should be in order to avoid an error. _To be clear, the text you are
+looking for is not the line that starts with `Verification error:`, but inside
+the actual certificate information._
+
+### Part 2—Using an Email PKI Certificate
+
+For this part of the project, you will create a S/MIME certificate and have that
+certificate signed by a trusted certificate authority (CA). You are free to
+choose whatever CA you wish and there are there are options you can (and should)
+find that cost no money. Next, you will work with another student in the class
+and use your certificates to send signed **and** encrypted email to each other. This is one place to get a free email certificate: [https://extrassl.actalis.it/portal/uapub/freemail?lang=en](https://extrassl.actalis.it/portal/uapub/freemail?lang=en)
+
+As this project is intended to give you a real-world experience using
+cryptographic software, how to complete this tasks is left to your discretion,
+as it would be in the real-world. As such, you are free to use any online
+resources and tools you want to complete this exercise. **Additionally, if after
+three hours you have been unable to complete this assignment, you can stop at
+that point.**
+
+As you complete this part of the project, you will record the following
+information in your report:
+
+- The name of the student with which you (attempted to) exchanged secure email.
+- What was the process for creating a certificate?
+- What was the process for getting that certificate signed?
+- What was the process for sharing a key between you and your partner?
+- Include a screenshot of the signed and encrypted email you send and the email
+  you received.
+  - Identify where in the images you were able to verify the signature.
+  - Identify where in the image you were able to confirm that encryption was
+    used.
+- Explain which parts of the process were difficult to understand or execute.
+  - If you ultimately fail to send secure email after three hours, make sure
+    this section is very detailed about what you attempted and why it failed.
+- Rate your experience using the
+  [System Usability Scale](https://usabilitygeek.com/how-to-use-the-system-usability-scale-sus-to-evaluate-the-usability-of-your-website/)
+  . Give your answer for each question and compute your overall score.
+- Now that you know about secure email technology, will you continue using it in
+  the future? Why or why not?
+
+In your report, as you answer these questions, make sure you identify any tools
+that you used.
+
+## Grading Rubric
+
+- Part 1 (80 points)
+  - 10 points for describing the required information for each of the valid
+    certificates.
+    - Two points for each item.
+  - 10 points for identifying the error in each of the invalid certificates and
+    describing how it would be fixed.
+    - 5 points for identifying the problematic part of the certificate.
+    - 5 points for describing how it would be fixed.
+- Part 2 (100 points)
+  - 10 points for identify the student you worked with.
+  - 15 points for describing how you created a certificate.
+  - 15 points for describing how you got the certificate signed.
+  - 15 points for describing how you shared keys between you and your partner.
+  - 15 points for the text and an image(s) showing the signed and encrypted
+    message you sent and the one you received. The text should clearly identify
+    where in the image you confirmed that the email was properly signed and
+    encrypted.
+  - 20 points for describing difficulties encountered during the process.
+    - If you fail to send a signed and encrypted email, you can receive points
+      for those above sections here by describing what approaches you tried, why
+      they failed, and what you would try next.
+  - 10 points for reporting your SUS ratings.
+  - 10 points for answering the question regarding whether you will continue
+    using secure email.
+
+The TA may deduct up to 20% of your grade for poor writing quality. This penalty
+will only be accessed if the writing is so poor as make it difficult for the TA
+to read and understand the report. This penalty will not be used to punish minor
+writing errors. If you run a grammar and spelling check, most students should
+not need to worry about this penalty.
+
+## Submission
+
+Submit your report as a PDF file on Canvas.

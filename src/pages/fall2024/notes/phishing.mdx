@@ -1,0 +1,92 @@
+---
+layout: ../../../semesters/Winter2024Markdown.astro
+---
+
+# Phishing
+
+## Ungraded Quiz
+
+- What is the difference between phishing and spear phishing?
+- Why is phishing still prevalent after so many years of trying to stop it?
+
+## Types of Phishing Attacks
+
+- _phishing_: tricks a person into visiting a fraudulent version of a legitimate
+  website, with the goal of obtaining sensitive information -- passwords,
+  banking information, credit card details
+
+- _spear phishing_: targeted to a particular individual or organization
+
+  - can be more convincing since it is targeting an individual
+  - attacker will research the target in advance
+  - can purport to come from a known contact or include reference to known
+    information
+
+- _whaling_: targeted to higher-level management
+
+- [see Crowdstrike explanation and examples](https://www.crowdstrike.com/cybersecurity-101/phishing/spear-phishing/)
+
+## Phishing enablers
+
+- _mental model_: a person's understanding of how a system works and what it
+  does
+
+  - influences a person's security-related decisions / threat model
+  - phishing may exploit flaws in a person's mental model
+  - software developers (especially working in security) should try to align
+    their software with mental models
+
+- URLs by design hide the actual link
+- typosquatting
+- redirects
+- web design that looks like the authentic website or "looks trustworthy"
+- copycate domains, like `paypal-security.com` or `pay.pal.com`
+- misunderstanding that the lock icon means a site is "safe"
+
+## Phishing defenses
+
+- spam filtering
+- domain filtering
+- user education
+
+- notes of interest
+  - transient phishing sites are a problem
+  - once users are on a fraudulent site, even experts have a hard time detecting
+    this
+
+## Security indicators
+
+- a closed padlock icon
+- HTTPS
+- warnings (Not Secure)
+
+- regular changes may be confusing
+- differences between browsers
+
+- [Rethinking Connection Security Indicators](https://www.usenix.org/system/files/conference/soups2016/soups2016-paper-porter-felt.pdf)
+  -- if you want to see justification for Chrome's designs
+
+- distinguishing between "not secure" (not using HTTPS) vs "unsafe" (hosting
+  malware) -- see
+  [Google Safe Browsing project](https://safebrowsing.google.com)
+
+## Usable security
+
+- area of research that combines human factors and security
+
+  - merges two areas of CS (HCI, security)
+  - frequently uses theories and methods from psychology and sociology
+
+- see
+  [Table 9.3, page 273](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch9-rev1.pdf)
+  and discussion to see some examples of design principles
+
+- [see SOUPS 2023 Technical Sessions](https://www.usenix.org/conference/soups2023/technical-sessions)
+- [see SOUPS 2022 Technical Sessions](https://www.usenix.org/conference/soups2022/technical-sessions)
+
+## Extra reading on phishing
+
+- [SoK: Still Plenty of Phish in the Sea — A Taxonomy of User-Oriented Phishing Interventions and Avenues for Future Research](https://www.usenix.org/system/files/soups2021-franz.pdf)
+  -- SOUPS 2021
+- [SoK: A Comprehensive Reexamination of Phishing Research From the Security Perspective](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8924660)
+  -- IEEE Communications Surveys & Tutorials, 2020

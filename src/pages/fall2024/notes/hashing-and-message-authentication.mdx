@@ -1,0 +1,71 @@
+---
+layout: ../../../semesters/Winter2024Markdown.astro
+---
+
+# Hashing and message authentication
+
+## Ungraded Quiz
+
+- Properties of a cryptographic hash function:
+
+  - preimage resistance
+  - second preimage resistance
+  - collision resistance
+
+- You want to store hashed passwords in a database. What properties do you need?
+
+- You want to compute a digital signature of a hash. What attack can be stopped by a hash functon that has second preimage resistance? What attack can be stopped by a hash function that has collision resistance?
+
+## Key concepts
+
+### Cryptographic hash functions
+
+- [Figure 2.10](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch2-rev1.pdf) shows a cryptographic hash function
+
+- desirable properties:
+
+  - _one-way_ or _preimage resistance_: For any given value h, it is computationally infeasible to find x such that H(x) = h
+    - there are actually many inputs that map to a single output (since the output is fixed size), but it is still comptuationally infeasible to find them
+
+  * _second preimage resistance_: For any given block x, it is computationally infeasible to find y ≠ x with H(y) = H(x)
+  * _collision resistance_ : it is computationally infeasible to find any pair (x, y) such that H(x) = H(y)
+
+- common cryptographic hash functions -- see [Table 2.1, page 44](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch2-rev1.pdf)
+
+- MD5 is deprecated
+
+  - shown to not be collision resistant, so not suitable for digital signatures or TLS certificates
+  - also it is fast, which is a bad property for password hashing
+
+- SHA-1 is also deprecated -- discontinued by web browsers in 2017, by Microsoft for Windows Update in 2020
+
+  - shown to not be collision resistant
+  - chosen-prefix attack -- given two different prefixes, p1 and p2, attacker can find two suffixes, s1 and s2, such that H(p1 | s1) = hash(p2| s2) -- an attack in 2019 would cost $100,000
+
+- SHA-2 and SHA-3 are considered secure
+
+- Digital signatures
+
+  - typically sign a hash instead of the original message or file
+  - hash needs to be collision resistant
+  - see [Figure 2.11, page 45](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch2-rev1.pdf)
+
+- More info on hash functions
+
+  - see [Secure Hash Algorithms](https://cryptobook.nakov.com/cryptographic-hash-functions/secure-hash-algorithms)
+  - see [Hash Functions](https://joyofcryptography.com/pdf/chap11.pdf)
+
+### Message authentication
+
+- covers both integrity of the data and the identity of the party that sent the message
+- sender computes and sends a message authentication code (MAC), which the receiver verifies
+- does not provide non-repudiation since either party could have created the message and MAC using the shared key
+- see [Figure 2.12, page 46)(https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch2-rev1.pdf)
+
+- HMAC builds a MAC from a hash function, e.g. HMAC-SHA256
+
+### Authenticated encryption
+
+- _authenticated encryption_: provides both confidentiality and integrity (protecting against message modification and injection that an active attacker may try)
+- _authenticated encryption with associated data_: provides additional associated data that is authenticated but not encrypted -- see [Figure 2.13, page 48](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch2-rev1.pdf)
+- use a special algorithm -- see [Table 2.2, page 49](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch2-rev1.pdf) -- typically AEAD_AES_128_GCM

@@ -1,0 +1,175 @@
+---
+layout: ../../../semesters/Winter2024Markdown.astro
+---
+
+# Concepts and Principles
+
+## Ungraded Quiz
+
+Talk to your neighbor:
+
+1. Define confidentiality, integrity, and availabilty. Give one example of when you might want each of these properties in your use of the Internet.
+
+1. What is the difference between authentication and authorization? Give an example of when this difference might be important to you if you were the owner of a website.
+
+1. What threats do you face to your personal computing devices (laptop, phone)? Who is the adversary? What is their goal?
+
+1. What is the purpose of risk assessment?
+
+1. Consider [Figure 1.4, page 11](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch1-rev1.pdf). How does this compare to the software development process you have experienced in classes at BYU? If you have had an internship or job in a software industry, how does this compare to the software development process you experienced at work?
+
+## Key Concepts
+
+### Fundamental goals of security
+
+- Ultimate goal: Help users complete their desired task safely and without
+  short- or long-term risk
+
+- CIA triad
+
+  - confidentiality
+  - integrity
+  - availability
+
+- AAA security
+
+  - authentication
+  - authorization
+  - accounting
+
+### Terminology
+
+- assets -- what we want to protect, can be physical or virtual
+
+- policy -- what the system is supposed to do and what it should _not_ do
+
+- adversary -- entity who wishes to violate a system's policy to take
+  unauthorized action on a target asset, also called threat agent/actor
+
+- attack -- a violation of a security policy by an adversary
+
+- threat -- any combination of circumstances that _might_ allow harm to an asset
+
+- threat/attack vector -- a specific set of steps taken to attack a system
+
+- mitigation -- steps taken to reduce the likelihood of an attack or lesson the
+  damage from an attack that succeeds
+
+### Risk assessment
+
+- Calculates the expected loss due to an attack.
+
+- Risk = likelihood \* impact
+
+  - likelihood = P(attack) \* P(vulnerability)
+  - impact = cost (tangible and intangible)
+
+- Hard to get numbers that are credible
+
+- Risk assessment questions
+
+  1. What assets are most valuable, and what are their values?
+  2. What system vulnerabilities exist?
+  3. What are the relevant threat agents and attack vectors?
+  4. What are the associated estimates of attack probabilities, or frequencies?
+
+- Alternative:
+
+![risk matrix](/images/risk-matrix.svg)
+
+### Modeling Adversaries
+
+Consider:
+
+- who are they?
+- what are their objectives?
+- what are their methods?
+- what are their capabilities?
+
+Examples:
+
+- foreign intelligence
+- cyber terrorists
+- industrial spy
+- organized crime
+- crackers
+- malicious insiders
+- non-malicious employees
+
+### Security Analysis
+
+- Open-ended activity to identify vulnerabilities and design defenses
+
+- See
+  [Figure 1.4, page 11](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch1-rev1.pdf)
+
+Key points:
+
+- security analysis must be done throughout the software lifecycle
+- a formal security analysis can be done once a product is developed, to review
+  against security standards (either from industry or government)
+- penetration testing can be done once a product is deployed
+
+## DREAD risk assessment model
+
+Rate the following from 1 to 3 (Low, Medium, High):
+
+- D = damage -- how bad would an attack be?
+
+- R = reproducability -- how easy is it to reproduce an attack?
+
+- E = exploitability -- how much work is it to launch the attack?
+
+- A = affected users -- how many people will be impacted?
+
+- D = discoverability -- how easy is it to discover the attack?
+
+Example payroll application, malicious user views confidential on-the-wire
+payroll data
+
+| Factor | Score | Reason                                                |
+| ------ | ----- | ----------------------------------------------------- |
+| D      | 3     | payroll data is extremely sensitive                   |
+| R      | 3     | 100% reproducible                                     |
+| E      | 2     | Must be on the application's subnet                   |
+| A      | 3     | Affects everyone                                      |
+| D      | 3     | Easy for attacker to identify that you are vulnerable |
+
+Score: 14
+
+How bad is it?
+
+- 5 - 7: low risk
+- 8 - 11: medium risk
+- 12 - 15: high risk
+
+Lots of criticism, because scores can be subjective and can vary based on
+individual perspectives.
+
+Further reading
+
+- [DREADful](https://learn.microsoft.com/en-us/archive/blogs/david_leblanc/dreadful)
+- [Experiences Threat Modeling at Microsoft](https://shostack.org/files/papers/modsec08/Shostack-ModSec08-Experiences-Threat-Modeling-At-Microsoft.pdf)
+
+## Exercises
+
+### Security Policies
+
+Discuss with a neighbor and then with the class:
+
+- Smart home
+- Bank website
+
+### Risk Assessment
+
+Fill out a DREAD table with your neighbor and then discuss with the class:
+
+- Smart home
+
+  - You have a smart home system that can be unlocked by an app (e.g. you have a
+    family member who forgot their key)
+  - There is a vulnerability in the smart home provider's server that controls
+    access to your home
+
+- Bank website
+  - A customer's password is easy to guess

@@ -1,0 +1,102 @@
+---
+layout: ../../../semesters/Winter2024Markdown.astro
+---
+
+# Intrusion detection and scanners
+
+## Intrusion detection
+
+- try to identify unauthorized or malicious traffic
+- intrusion detection system
+
+  - monitors events
+  - logs related data
+  - analyzes data
+  - reports events requiring human attention
+
+- may monitor processes, programs, commands, data at rest, network packets
+- need to collect evidence for a forensic process
+- intrusion prevention system
+
+  - includes active responses
+  - alter packets, strip out malware, reset TCP connections, terminate processes
+  - real-time
+
+- understand network-based IDS vs host-based IDS, and different types of data
+  they collect
+
+- [see Figure 11.1, page312](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch11-rev1.pdf)
+  to understand IDS event outcomes and metrics
+
+- understand the example, below the figure, to see why alarm precision is
+  helpful
+- understand that false positives keeps security experts busy (but wasting time)
+  -- frustrating to deal with
+- false negatives are of course also harmful
+
+## Approaches to intrusion detection
+
+- [see Table 11.1, page 314](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch11-rev1.pdf)
+- signature-based
+  - signatures usually automatically updated from vendor
+  - may look at behavior (effects of the attack) as well
+- specification-based
+  - define what is allowed for a protocol or application
+- anomaly-based
+  - measure normal behavior
+  - classify anything else as an anomaly
+  - often uses machine learning
+  - challenges
+    - feature selection
+    - intruder-free training
+    - session creep (intruders slowly adding themselves)
+
+## Sniffers
+
+- to look at network traffic, need to capture packets and examine them at line
+  speed
+- helpful even outside of intrusion detection
+- also used by attackers!
+- understand difference between a hub and a switch, and how this affects traffic
+  seen by a host
+- network cards can be put into promiscuous mode to sniff traffic
+
+## Vulnerability assessment tools
+
+- explore weaknesses in your systems so that you can modify / update them for
+  increased security
+- vulnerability assessment -- examines systems for vulnerability
+- penetration testing -- tries to exploit a vulnerability
+- can be used for both defense and offense
+- make sure you get authorization to do any kind of vulnerabilty assessment or
+  penetration testing
+- make sure you follow responsible disclosure when finding a vulnerability
+- port scanning is a common assessment tool -remote OS fingerprint is also a
+  common assessment tool
+- see example of what `nmap` can do
+- see example of what `Nessus` can do
+
+## Vulnerability disclosure process
+
+- [Coordinated Vulnerability Disclosure Process](https://www.cisa.gov/coordinated-vulnerability-disclosure-process)
+
+- Read the
+  [USENIX Security Ethical Considerations and Proactive Harm Prevention guidelines](https://www.usenix.org/conference/usenixsecurity23/submission-policies-and-instructions)
+
+- Read
+  [a case study in responsible disclosure](https://enigma0x3.net/2018/10/23/cve-2018-8414-a-case-study-in-responsible-disclosure/)
+
+## Extra Reading
+
+- [99% False Positives: A Qualitative Study of SOC Analysts' Perspectives on Security Alarms](https://www.usenix.org/system/files/sec22-alahmadi.pdf)
+  -- interviews with analysts, discussing burnout from false alarms, with most
+  alarms caused by legitimate behavior.
+
+- [Matched and Mismatched SOCs: A Qualitative Study on Security Operations Center Issues](https://dl.acm.org/doi/pdf/10.1145/3319535.3354239)
+  -- interview study with analysts identifying a wide range of technical and
+  non-technical issues in SOCs.
+
+- Watch
+  [Can Vulnerability Disclosure Processes Be Responsible, Rational, and Effective?](https://www.usenix.org/conference/lisa11/can-vulnerability-disclosure-processes-be-responsible-rational-and-effective)
+
+- [Ethical Hacking for Boosting IoT Vulnerability Management: A First Look into Bug Bounty Programs and Responsible Disclosure](https://dl.acm.org/doi/pdf/10.1145/3357767.3357774)

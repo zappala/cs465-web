@@ -1,0 +1,46 @@
+---
+layout: ../../semesters/Fall2024.astro
+---
+
+import { Cards, Card } from "../../components/Card.jsx";
+
+<article
+    class="prose prose-blockquote:not-italic prose-blockquote:font-normal prose-blockquote:text-base prose-blockquote:bg-blue-200 prose-blockquote:border-l-0 prose-blockquote:px-4 prose-blockquote:py-1 prose-blockquote:rounded-lg pb-8 text-lg">
+
+# Staff
+
+## Office Hours
+
+| Staff          | Position   | Location  | Hours                                                      |
+| -------------- | ---------- | --------- | ---------------------------------------------------------- |
+| Daniel Zappala | Instructor | TMCB 2224 | [Make an appointment](https://calendly.com/daniel-zappala) |
+| Jason Brown    | TA         | TBC       | TBD                                                        |
+| Brennan Duncan | TA         | TBD       | TBD                                                        |
+
+## Instructor
+
+<Card
+  name="Daniel Zappala"
+  image="/staff/zappala.png"
+  email="zappala@cs.byu.edu"
+>
+  Hello! CS 465 continues to evolve -- we're adding Rust this year. My research
+  area is usable security and privacy, which focuses on people and designing
+  technology that fits their needs. My hobbies include reading, hiking,
+  genealogy, and landscape photography. You can learn more about me at
+  [zappala.byu.edu](https://zappala.byu.edu).
+</Card>
+
+## TAs
+
+<Card
+  name="Jason Brown"
+  image="/staff/jason-brown-square.jpg"
+  email="jasbrown@student.byu.edu"
+>
+  Hello! I am a CS student finishing up my bachelor's degree and am planning on
+  going into cybersecurity after I graduate. My hobbies include tennis, video
+  games and game design. I am excited to work with yall going forward.
+</Card>
+
+</article>
