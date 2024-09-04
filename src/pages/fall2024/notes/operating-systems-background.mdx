@@ -1,0 +1,60 @@
+---
+layout: ../../../semesters/Fall2024Markdown.astro
+---
+
+# Operating Systems Background
+
+## Questions on the readings
+
+The readings today are from
+[Operating Systems: Three Easy Pieces](https://pages.cs.wisc.edu/~remzi/OSTEP/),
+an open source textbook. You shoud have read these sections:
+
+- [Processes](https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf)
+- [CPU Scheduling](https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-sched.pdf)
+- [Address Spaces](https://pages.cs.wisc.edu/~remzi/OSTEP/vm-intro.pdf)
+
+## Key concepts
+
+- Processes
+
+  - processes enable the OS to provide the illusion that the system has an
+    unlimited number of CPUs available, enabling many programs to run
+    "simultaneously"
+  - a process is a running program: state (registers, stack), memory (address
+    space), I/O
+  - the OS provides an API so that programs can create, destroy, wait for, and
+    control processes
+  - processes have a stack and a heap
+  - a process can be in a variety of states, e.g. ready, running, blocked (e.g.
+    waiting for I/O)
+  - the OS keeps track of a process using a data structure
+
+- CPU scheduling
+
+  - scheduling algorithm: the part of the OS that decides which process runs and
+    for how long
+  - can measure effectiveness of a scheduling algorithm with metrics, e.g.
+    turnaround time (time completed - time arrived) or response time (time first
+    run - time arrived)
+  - see the book diagrams for turnaround time for different scheduling
+    algorithms
+  - First In, First Out (FIFO) -- can lead to long turnaround times if there are
+    long-running processes
+  - Shortest Job First (SJF)
+  - Shortest Time-to-Completion First (STCF)
+  - Round Robin -- better for response time
+  - modern schedulers are much more complex -- see multi-level feedback queue in
+    next chapter
+
+- Address spaces
+  - the pictures are particularly heplful for this chapter
+  - early systems let a process use all physical memory not in use by the OS
+  - modern systems use multi-programming, allowing multiple proceses to be in
+    memory at a time
+  - each process gets its own virtual address space, with the OS mapping the
+    virtual numbers to physical space
+  - the OS swaps memory in and out of physical space based on what the running
+    process needs
+  - the OS uses memory protection so that processes cannot access memory from
+    another process

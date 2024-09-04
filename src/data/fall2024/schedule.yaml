@@ -29,9 +29,10 @@ units:
         readings:
           - title: "Operating Systems: Three Easy Pieces"
             link: https://pages.cs.wisc.edu/~remzi/OSTEP/
-            sections: "4. Processes, 6. CPU Scheduling, 13. Address spaces"
+            sections: "4. Processes, 7. CPU Scheduling, 13. Address spaces"
         project:
           title: Linux
+          link: /projects/linux
           due: Sep 13
       - day: Wed
         date: Sep 11

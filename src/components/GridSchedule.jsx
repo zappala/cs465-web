@@ -122,7 +122,7 @@ export default function GridSchedule(props) {
       >
         <a
           className="underline decoration-lightblue"
-          href={prefix + "/" + lecture.link}
+          href={prefix + lecture.link}
           target={target}
         >
           <Badge name={lecture.instructor} />
@@ -175,13 +175,14 @@ export default function GridSchedule(props) {
   const render_homework = (prefix, homework) => {
     if (!homework) return <></>;
     let result = [];
+    result.push("Homework: ");
     if (!homework.link) result.push(homework.title);
     else
       result.push(
         <a
           key="homework"
           className="underline decoration-lightblue"
-          href={prefix + "/" + homework.link}
+          href={prefix + homework.link}
         >
           {homework.title}
         </a>
@@ -201,13 +202,14 @@ export default function GridSchedule(props) {
   const render_project = (prefix, project) => {
     if (!project) return <></>;
     let result = [];
+    result.push("Project: ");
     if (!project.link) result.push(project.title);
     else
       result.push(
         <a
           key="project"
           className="underline decoration-lightblue"
-          href={prefix + "/" + project.link}
+          href={prefix + project.link}
         >
           {project.title}
         </a>

@@ -8,17 +8,17 @@ export function Cards(props) {
 
 export function Card(props) {
   return (
-    <div className="w-full flex shadow-lg p-3 border-t border-gray-200 dark:bg-gray-900 mb-3">
+    <div className="w-full md:flex shadow-lg p-3 border-t border-gray-200 dark:bg-gray-900 mb-3">
       {props.image && (
         <img
-          className="w-28 h-28 rounded-full mr-8"
+          className="w-28 h-28 rounded-full mr-8 ml-5"
           src={"/images/" + props.image}
           alt={"Photo of " + props.name}
         />
       )}
-      <div className="mr-5">{Instructor(props)}</div>
+      <div className="md:mt-10 mr-5 ml-5">{Instructor(props)}</div>
 
-      <div className="text-gray-700 text-sm ml-5">{props.children}</div>
+      <div className="text-gray-700 text-sm ml-5 mr-5">{props.children}</div>
     </div>
   );
 }
