@@ -25,6 +25,48 @@ homework to show you how to get started with Docker containers.
 
 - Review of the [Linux Journey](https://linuxjourney.com/) materials.
 
+## Dockerfile
+
+- Dockerfile for Alpine Linux and bash:
+
+```
+FROM alpine:latest
+RUN apk update && apk add bash
+```
+
+Then:
+
+```
+docker build -t alpine_linux .
+docker run -it alpine_linux /bin/bash
+```
+
+- Dockerfile used to build the image for the homework
+
+```
+FROM ubuntu:20.04
+
+
+# install ssh
+RUN apt update && apt install -y openssh-server
+# install needed packages
+RUN apt install -y less
+
+
+RUN mkdir /var/run/sshd
+# Set root password for SSH access (change 'your_password' to your desired password)
+RUN echo 'root:tolkien' | chpasswd
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+# setup bilbo user
+RUN useradd -m -s /bin/bash bilbo
+RUN echo "bilbo:ring" | chpasswd
+
+EXPOSE 22
+CMD ["/usr/sbin/sshd", "-D"]
+```
+
 ## Discussion
 
 - How does the command line give you access to basic OS functionality?
