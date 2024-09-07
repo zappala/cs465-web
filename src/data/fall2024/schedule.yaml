@@ -31,17 +31,18 @@ units:
             link: https://pages.cs.wisc.edu/~remzi/OSTEP/
             sections: "4. Processes, 7. CPU Scheduling, 13. Address spaces"
         project:
-          title: Linux
+          title: Linux and Access Control
           link: /projects/linux
           due: Sep 13
       - day: Wed
         date: Sep 11
         lectures:
           - title: Access control
+            link: /notes/access-control
         readings:
           - title: "Operating Systems: Three Easy Pieces"
             link: https://pages.cs.wisc.edu/~remzi/OSTEP/
-            sections: "55. Access Control"
+            sections: "53. Intro Security, 55. Access Control"
 
   - title: "Software Security: Vulnerabilities and Malware"
     days:
