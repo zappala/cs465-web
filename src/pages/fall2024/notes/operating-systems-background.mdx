@@ -58,3 +58,101 @@ an open source textbook. You shoud have read these sections:
     process needs
   - the OS uses memory protection so that processes cannot access memory from
     another process
+
+## Class Exercises
+
+Clone the
+[OS homework repo](https://github.com/remzi-arpacidusseau/ostep-homework/).
+
+### Processes
+
+Use `cd cpu-intro` to get to the appropriate directory.
+
+This is meant to show you VERY basic CPU scheduling and the how the OS wants
+balance I/O and CPU.
+
+Run the process simulator from the end of the
+[Processes](https://pages.cs.wisc.edu/~remzi/OSTEP/cpu-intro.pdf) chapter. The
+`-l` flag provides a set of jobs of the form `X:Y`, where `X` is the number of
+instructions and `Y` is the percent chance that an instruction is CPU not IO.
+The `-c` flag computes how the CPU would alternate among proceses, and `-p`
+prints statistics.
+
+```bash
+# two jobs, 5 instructions each, 100% chance each instruction is CPU computation
+python process-run.py -l 5:100,5:100
+```
+
+Instructions about the CPU scheduling are at the end. Figure out what it will
+do, then run:
+
+```
+python process-run.py -l 5:100,5:100 -c -p
+```
+
+Repeat with:
+
+```bash
+# two jobs, first has 4 CPU instructions, second has 1 IO instruction
+python process-run.py -l 4:100,1:0
+
+# switches the order of the two processes above
+python process-run.py -l 1:0,4:100
+
+# tells the CPU to swap in another ready process if one is blocked on I/O
+python process-run.py -l 1:0,4:100 -S SWITCH_ON_IO
+
+# four processes, first uses I/O, next three use CPU
+# tells the CPU that if a job finishes its I/O, it is at the back of the ready queue
+python process-run.py -l 3:0,5:100,5:100,5:100 -S SWITCH_ON_IO -I IO_RUN_LATER
+
+# same as above, except rtells the CPU that if a job finishes its I/O, it is at the front of the run queue
+python process-run.py -l 3:0,5:100,5:100,5:100 -S SWITCH_ON_IO -I IO_RUN_IMMEDIATE
+```
+
+### CPU Scheduling
+
+Use `cd cpu-sched` to get to the appropriate directory.
+
+```bash
+# three jobs, length 300, 200, 100, FIFO scheduling
+python scheduler.py -l 300,200,100 -p FIFO -c
+
+# three jobs, length 300, 200, 100, SJF scheduling
+python scheduler.py -l 300,200,100 -p SJF -c
+
+# three jobs, length 300, 200, 100, RR scheduling
+python scheduler.py -l 300,200,100 -p RR -c
+
+# three jobs, length 300, 200, 100, RR scheduling, quantum of 10 for the scheduler
+python scheduler.py -l 300,200,100 -p RR -c -q 10
+```
+
+### Address spaces
+
+- Connect to a Linux VPS (e.g. one running on Amazon or Digital Ocean)
+
+- Look at the
+  [man page for `free`](https://man7.org/linux/man-pages/man1/free.1.html).
+
+- Run:
+
+```bash
+# free memory in mebibytes
+free -m
+# free memory in "human format"
+free -h
+```
+
+- Look at the
+  [man page for `pmap`](https://man7.org/linux/man-pages/man1/pmap.1.html)
+
+- Run:
+
+```bash
+# find the process ID of nginx
+ps -aux | grep nginx
+# use pmap on it
+sudo pmap 831
+sudo pmap -x 831
+```
