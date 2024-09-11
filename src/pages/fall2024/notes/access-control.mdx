@@ -19,24 +19,24 @@ an open source textbook. You shoud have read these sections:
 
 ## Key concepts
 
-- OS Security
-  - Everything runs on top of the OS, so if it is insecure ... 😱
-  - The more complex a prgram, the harder it is to secure. The OS is really
-    complex. So is the browser, which acts almost like a layer above the OS
-    these days.
-  - Recall, the OS can:
+### OS Security
 
-```
-- examine or alter any process’s memory
-- read, write, delete or corrupt any file on any writeable persistent
-- storage medium, including hard disks and flash drives
-- change the scheduling or even halt execution of any process
-- send any message to anywhere, including altered versions of those a process wished to send
-- enable or disable any peripheral device
-- give any process access to any other process’s resources
-- arbitrarily take away any resource a process controls
-- respond to any system call with a maximally harmful lie
-```
+- Everything runs on top of the OS, so if it is insecure ... 😱
+- The more complex a prgram, the harder it is to secure. The OS is really
+  complex. So is the browser, which acts almost like a layer above the OS these
+  days.
+- Recall, the OS can:
+
+  - examine or alter any process’s memory
+  - read, write, delete or corrupt any file on any writeable persistent
+  - storage medium, including hard disks and flash drives
+  - change the scheduling or even halt execution of any process
+  - send any message to anywhere, including altered versions of those a process
+    wished to send
+  - enable or disable any peripheral device
+  - give any process access to any other process’s resources
+  - arbitrarily take away any resource a process controls
+  - respond to any system call with a maximally harmful lie
 
 - We assume the OS is secure, but a flaw in a program can allow an attacker to
   hijack the OS
@@ -64,48 +64,50 @@ an open source textbook. You shoud have read these sections:
     or functionality
   - acceptability: ease of use -- users must want to use it
 
-- Access control
+### Access control
 
-  - Basic idea
-    - Figure out if the request fits within the security policy.
-    - If it does, perform the operation. If not, make sure it isn't done
-  - For example
+- Basic idea
+- Figure out if the request fits within the security policy.
+- If it does, perform the operation. If not, make sure it isn't done
+- For example
 
-    - If a process wants to open a file for reading and writing, should the OS
-      let it? How does it know?
+- If a process wants to open a file for reading and writing, should the OS let
+  it? How does it know?
 
-  - A reference monitor is the part of the OS that enforces policy when a
-    `subject` requests `access` to an `object`
-  - Two common methods: `access control lists`, `capabilities`
-  - Access control list
-    - for each object, list which subjects have a type of access
-    - e.g. for a file, list which users have read access
-    - ror UNIX/Linux, early designers chose to use 9 bits for each file
-      - execute (x), write (w), read (r)
-      - user/owner (u), group (g), other/world (o)
-    - saves lots of space! stored in file metadata in the file system
-    - hard to find ALL of the resources a given user has access to
-  - Capabilities
+- A reference monitor is the part of the OS that enforces policy when a
+  `subject` requests `access` to an `object`
+- Two common methods: `access control lists`, `capabilities`
+- Access control list
 
-    - for each subject, list which objects they have access to
-    - e.g. for a user, list which files they have read access to
-    - think of a capability as a set of physical keys, giving a process access
-      to certain rooms in a house
-    - e.g., a process may be given the capability to read/write files in a given
-      directory
-    - capabilities must be controlled by the OS (or else any process could give
-      itself any capability)
-    - behind the scenes, an OS like Linux will use capabilities to keep track of
-      access once it is granted
+  - for each object, list which subjects have a type of access
+  - e.g. for a file, list which users have read access
+  - ror UNIX/Linux, early designers chose to use 9 bits for each file
+    - execute (x), write (w), read (r)
+    - user/owner (u), group (g), other/world (o)
+  - saves lots of space! stored in file metadata in the file system
+  - hard to find ALL of the resources a given user has access to
 
-  - _Mandatory access control_: an organization/government/enterprise controls
-    access for all objects
-  - _Discretionary access control_: the owner of an object controls access
-  - _Role-based access control_: access based on your role (e.g. a customer can
-    order products, an inventory manager can change inventory status, an admin
-    can change roles)
-  - _Privilege escalation_: temporarily gain access beyond normal level, e.g.
-    `sudo`, `setuid` bit
+- Capabilities
+
+  - for each subject, list which objects they have access to
+  - e.g. for a user, list which files they have read access to
+  - think of a capability as a set of physical keys, giving a process access to
+    certain rooms in a house
+  - e.g., a process may be given the capability to read/write files in a given
+    directory
+  - capabilities must be controlled by the OS (or else any process could give
+    itself any capability)
+  - behind the scenes, an OS like Linux will use capabilities to keep track of
+    access once it is granted
+
+- _Mandatory access control_: an organization/government/enterprise controls
+  access for all objects
+- _Discretionary access control_: the owner of an object controls access
+- _Role-based access control_: access based on your role (e.g. a customer can
+  order products, an inventory manager can change inventory status, an admin can
+  change roles)
+- _Privilege escalation_: temporarily gain access beyond normal level, e.g.
+  `sudo`, `setuid` bit
 
 ## Class Exercises
 
