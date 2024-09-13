@@ -50,6 +50,7 @@ units:
         date: Sep 13
         lectures:
           - title: Race Conditions, integer vulnerabilities
+            link: /notes/race-conditions-integer-vulnerabilities
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
