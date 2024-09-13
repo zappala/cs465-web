@@ -57,7 +57,7 @@ units:
       - day: Mon
         date: Sep 16
         lectures:
-          - title: Stake and heap overflows
+          - title: Stack and heap overflows
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
