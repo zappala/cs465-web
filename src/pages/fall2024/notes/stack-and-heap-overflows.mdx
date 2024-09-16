@@ -4,18 +4,23 @@ layout: ../../../semesters/Winter2024Markdown.astro
 
 # Stack and Heap Overflows
 
-## Ungraded Quiz
+## Introductions
 
-- Explain how a stack-based buffer overflow attack works
-- Explain how a heap-based buffer overflow attack works
-- Why would an attacker use a heap spray attack?
+- introductions of two students
 
-## Relevance
+## Questions on the readings
+
+The readings today are from
+[Computer Security and the Internet](https://people.scs.carleton.ca/~paulv/toolsjewels.html]),
+[Chapter 6](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch6-rev1.pdf),
+sections 6.3 - 6.4.
+
+## Key Concepts
 
 - Both stack and heap overflow attacks are REALLY common -- see
   [CVE list](https://www.cvedetails.com/vulnerability-list/opov-1/overflow.html)
 
-## Stack-Based Buffer Overflow Attacks
+### Stack-Based Buffer Overflow Attacks
 
 - Understand memory layout of a process -- see
   [Figure 6.3, page 166](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch6-rev1.pdf)
@@ -29,7 +34,20 @@ layout: ../../../semesters/Winter2024Markdown.astro
   [Figure 6.5, page 168](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch6-rev1.pdf)
 - understand what a no-op sled is and why an attacker would use it
 
-## Heap-based Buffer Overflow Attacks
+### Exploiting a Buffer Overflow Vulnerability
+
+- understand shell code
+  - see 6.8, page 176
+
+64+32 = 96
+
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAA\x1c\x26\x8f\x8f
+ø
+
+### Heap-based Buffer Overflow Attacks
 
 - Dangerous when the heap is both writeable and executable
 - see
@@ -62,3 +80,7 @@ MyJump(int c)
    }
 }
 ```
+
+- Explain how a stack-based buffer overflow attack works
+- Explain how a heap-based buffer overflow attack works
+- Why would an attacker use a heap spray attack?

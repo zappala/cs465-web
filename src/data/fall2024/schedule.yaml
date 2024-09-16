@@ -49,57 +49,56 @@ units:
       - day: Fri
         date: Sep 13
         lectures:
-          - title: Race Conditions, integer vulnerabilities
-            link: /notes/race-conditions-integer-vulnerabilities
+          - title: Race conditions and threads
+            link: /notes/race-conditions-and-threads
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 6.0 - 6.2
+            sections: 6.0 - 6.1
       - day: Mon
         date: Sep 16
         lectures:
-          - title: Stack and heap overflows
+          - title: Integer Vulnerabilities
+            link: /notes/integer-vulnerabilities
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 6.3 - 6.4
-        project:
-          title: Exploit and Patch
-          due: Sep 25
+            sections: 6.2
       - day: Wed
         date: Sep 18
         lectures:
-          - title: Defenses and privilege escalation
+          - title: Stack overflows
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 6.6 - 6.8
+            sections: 6.3
+        project:
+          title: Exploit and Patch
+          due: Sep 25
       - day: Fri
         date: Sep 20
         lectures:
-          - title: Malware, viruses, and worms
+          - title: Heap overflows and Defenses
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 7.0 - 7.3
+            sections: 6.4, 6.6
       - day: Mon
         date: Sep 23
         lectures:
-          - title: Stealth and Rootkits
+          - title: Shell code and Privilege escalation
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 7.4-7.5
-          - title: Windows Secure Boot
-            link: https://learn.microsoft.com/en-us/windows/security/operating-system-security/system-security/secure-the-windows-10-boot-process
+            sections: 6.7, 6.8
       - day: Wed
         date: Sep 25
         lectures:
-          - title: Ransomware, botnets, social engineering
+          - title: Malware
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 7.7-7.8
+            sections: 7 (skim)
 
   - title: "Software Security: Rust and Cryptography"
     days:
