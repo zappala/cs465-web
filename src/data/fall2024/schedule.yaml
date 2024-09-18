@@ -73,10 +73,10 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 6.3
-        project:
-          title: Exploit and Patch
-          link: /projects/exploit-and-patch
-          due: Sep 25
+        homework:
+          title: Vulnerability Practice
+          link: /homework/vulnerability-practice
+          due: Sep 23
       - day: Fri
         date: Sep 20
         lectures:
@@ -85,6 +85,10 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 6.4, 6.6
+        project:
+          title: Exploit and Patch
+          link: /projects/exploit-and-patch
+          due: Sep 27
       - day: Mon
         date: Sep 23
         lectures:
