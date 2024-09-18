@@ -75,6 +75,7 @@ units:
             sections: 6.3
         project:
           title: Exploit and Patch
+          link: /projects/exploit-and-patch
           due: Sep 25
       - day: Fri
         date: Sep 20
