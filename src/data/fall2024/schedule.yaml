@@ -82,7 +82,8 @@ units:
         lectures:
           - title: Heap overflows
             link: /notes/heap-overflows
-          - title: Defenses
+          - title: Overflow defenses
+            link: /notes/overflow-defenses
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
