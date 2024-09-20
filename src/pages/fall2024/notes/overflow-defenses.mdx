@@ -23,15 +23,13 @@ layout: ../../../semesters/Fall2024Markdown.astro
 
 (3) address space layout randomization (ASLR)
 
-- prevents the attacker from knowing where code is located
-- position-independent execution (PIE) randomizes the code block
-
-(4) memory layout randomization (ASLR)
-
-- kernel protectino
+- kernel level
 - randomly positions the stack, heap, libraries
 - makes it more difficult for an attacker to predict where code is loaded when a
   buffer is overflowed
+- prevents the attacker from knowing where code is located
+- position-independent execution (PIE) randomizes the code block
+
 - depends on the implementation being properly randomized -- see
   [The Illusion of Randomness: An Empirical Analysis of Address Space Layout Randomization Implementations](https://arxiv.org/abs/2408.15107)
 
