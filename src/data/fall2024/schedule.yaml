@@ -80,7 +80,9 @@ units:
       - day: Fri
         date: Sep 20
         lectures:
-          - title: Heap overflows and Defenses
+          - title: Heap overflows
+            link: /notes/heap-overflows
+          - title: Defenses
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
