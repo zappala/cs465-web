@@ -95,7 +95,8 @@ units:
       - day: Mon
         date: Sep 23
         lectures:
-          - title: Shell code and Privilege escalation
+          - title: Shellcode and privilege escalation
+            link: /notes/shellcode
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
