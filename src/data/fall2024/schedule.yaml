@@ -105,6 +105,7 @@ units:
         date: Sep 25
         lectures:
           - title: Malware
+            link: /notes/malware
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
