@@ -1,0 +1,78 @@
+---
+layout: ../../../semesters/Fall2024Markdown.astro
+---
+
+# Learning Rust 1
+
+## Introductions
+
+- introductions of two students
+
+## Learning Rust
+
+We are using [The Rust Programming Language](https://doc.rust-lang.org/book/)
+and [rustlings](https://github.com/rust-lang/rustlings).
+
+### Basics
+
+- Use cargo to initialize a new project (1.3)
+- Review the guessing game to see functions, I/O, mutable variables
+- Review section 3.1 for mutability and shadowing
+- Review section 3.2 for data types
+- Review section 3.3 for functions, parameters, and returning values
+- Review section 3.5 for `if`, `loop`, loop labels, `while`, `for`
+
+Complete exercises for sections 0-3, plus the first quiz.
+
+### Ownership
+
+- understand ownership
+
+> Each value in Rust has an owner.
+
+> There can only be one owner at a time.
+
+> When the owner goes out of scope, the value will be dropped.
+
+- variables and scope, stack vs heap
+
+```rust
+let x = 5;
+let y = x;
+```
+
+- this works because both variables are on the stack
+
+```rust
+let s1 = String::from("hello");
+let s2 = s1;
+```
+
+- `s1` is no longer in scope!
+
+```rust
+let s1 = String::from("hello");
+let s2 = s1.clone();
+```
+
+- due to the `clone()`, `s1` is still in scope
+
+- functions and scope
+
+  - see listings under Ownership and Functions in 4.1
+
+- review references and mutable references
+
+> At any given time, you can have either one mutable reference or any number of
+> immutable references.
+
+> References must always be valid.
+
+- complete exercises for section 4, on primitive types. Complete exercises for
+  section 6, on move semantics.
+
+### Structs
+
+- review structs from section 5
+
+- complete exerises for section 7, on structs.

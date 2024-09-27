@@ -117,6 +117,15 @@ units:
         date: Sep 27
         lectures:
           - title: Learning Rust
+            link: /notes/learning-rust-1
+        readings:
+          - title: The Rust Programming Language
+            link: https://doc.rust-lang.org/book/
+            sections: 1-5
+        homework:
+          title: Rust Practice 1
+          link: /homework/rust-practice-1
+          due: Sep 30
       - day: Mon
         date: Sep 30
         lectures:
