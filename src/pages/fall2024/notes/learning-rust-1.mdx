@@ -8,25 +8,155 @@ layout: ../../../semesters/Fall2024Markdown.astro
 
 - introductions of two students
 
-## Learning Rust
+## Learning Rust, Sections 1 - 3
 
 We are using [The Rust Programming Language](https://doc.rust-lang.org/book/)
 and [rustlings](https://github.com/rust-lang/rustlings).
 
-### Basics
+> Rust is all about memory safety.
 
-- Use cargo to initialize a new project (1.3)
-- Review the guessing game to see functions, I/O, mutable variables
-- Review section 3.1 for mutability and shadowing
-- Review section 3.2 for data types
-- Review section 3.3 for functions, parameters, and returning values
-- Review section 3.5 for `if`, `loop`, loop labels, `while`, `for`
+### Cargo
 
-Complete exercises for sections 0-3, plus the first quiz.
+Rust comes with `cargo` to build code and manage dependencies:
+
+- `cargo new PROJECT`
+- `cargo build`
+- `cargo build --release`
+- `cargo run`
+- `cargo check`
+
+### Mutability
+
+You must declare variables to be
+[mutable](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html#variables-and-mutability).
+This doesn't work:
+
+```rust
+fn main() {
+    let x = 5;
+    println!("The value of x is: {x}");
+    x = 6;
+    println!("The value of x is: {x}");
+}
+```
+
+This does:
+
+```rust
+fn main() {
+    let mut x = 5;
+    println!("The value of x is: {x}");
+    x = 6;
+    println!("The value of x is: {x}");
+}
+```
+
+### Shadowing
+
+You can
+[shadow](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html#shadowing)
+a variable by redeclaring it. Curly brackets create a new scope, and variable
+declarations go away when they are out of scope. So the below code prints `12`
+for the inner scope and `6` for the outer scope.
+
+```rust
+fn main() {
+    let x = 5;
+
+    let x = x + 1;
+
+    {
+        let x = x * 2;
+        println!("The value of x in the inner scope is: {x}");
+    }
+
+    println!("The value of x is: {x}");
+}
+```
+
+### Namespaces
+
+The `::` accesses elements of a namespace. `std` is the
+[Rust standard libary](https://doc.rust-lang.org/std/index.html), and is always
+available through a `use` statement. `std::io` is the
+[io module](https://doc.rust-lang.org/std/io/index.html) of the standard lbrary.
+The syntax `io::stdin()` accesses standard input in the `io` module.
+
+```rust
+use std::io;
+
+fn main() {
+    println!("Guess the number!");
+
+    println!("Please input your guess.");
+
+    let mut guess = String::new();
+
+    io::stdin()
+        .read_line(&mut guess)
+        .expect("Failed to read line");
+
+    println!("You guessed: {}", guess);
+}
+```
+
+### Data types and integer overflow
+
+Rust will
+[infer data types](https://doc.rust-lang.org/book/ch03-02-data-types.html#data-types)
+where possible, but you must explicitly use type annotation where Rust cannot
+infer. In the below example, the `guess` variables needs a type annotation
+because `parse()` doesn't know what type it should be converting to.
+
+```rust
+let guess: u32 = "42".parse().expect("Not a number!");
+```
+
+Rust has:
+
+- 8-bit to 128-bit signed and unsigned integers, e.g. `i16`, `u32`
+- floating-point types, e.g. `f32`, `f64`
+- boolean type, `bool`, which can be `true` or `false`
+- character type, `char`
+
+Rust also has
+
+- tuples
+- arrays
+
+For
+[integer overflow](https://doc.rust-lang.org/book/ch03-02-data-types.html#integer-overflow),
+Rust provides wrappers for:
+
+- `wrapping_` -- wraps
+- `checked_` -- returns None if overflow
+- `overflowing` -- returns the value and True if overflow
+- `saturating` -- caps at max or min value
+
+### Return values
+
+Rust will return the value of the last expression (leave off the semicolon!):
+
+```rust
+fn plus_one(x: i32) -> i32 {
+    x + 1
+}
+```
+
+You can also use an explicit `return`.
+
+### Exercises
+
+At this point, you are ready to complete exercises for sections 0-3, plus the
+first quiz.
+
+## Learning Rust, Section 4
 
 ### Ownership
 
-- understand ownership
+To preserve memory safety, Rust uses a set of
+[ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#what-is-ownership)
+rules.
 
 > Each value in Rust has an owner.
 
@@ -34,46 +164,271 @@ Complete exercises for sections 0-3, plus the first quiz.
 
 > When the owner goes out of scope, the value will be dropped.
 
-- variables and scope, stack vs heap
+This is OK, because the variables are on the stack:
 
 ```rust
 let x = 5;
 let y = x;
 ```
 
-- this works because both variables are on the stack
+There are two variables, and each have the value 5.
+
+This is not OK, because Rust does not want two references to the same memory on
+the heap:
 
 ```rust
 let s1 = String::from("hello");
 let s2 = s1;
 ```
 
-- `s1` is no longer in scope!
+When `s1` and `s2` go out of scope, Rust would try to free the memory twice,
+resulting in a
+[double free](https://owasp.org/www-community/vulnerabilities/Doubly_freeing_memory)
+error.
+
+So, to solve this problem, Rust declares that `s1` is no longer in scope. Thus
+only `s2` is valid.
+
+If your code really needs two pointers to two copies of the same string, use
+`clone()`:
 
 ```rust
 let s1 = String::from("hello");
 let s2 = s1.clone();
 ```
 
-- due to the `clone()`, `s1` is still in scope
+### Ownership and functions
 
-- functions and scope
+When a value is passed to a function, its
+[ownership is moved into the function](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#ownership-and-functions),
+unless the type is one that can be copied. Types that can be copied: integers,
+floats, booleans (true and false), and char.
 
-  - see listings under Ownership and Functions in 4.1
+```rust
+fn main() {
+    let s = String::from("hello");  // s comes into scope
 
-- review references and mutable references
-  - see mutable references and preventing data races in 4.2
+    takes_ownership(s);             // s's value moves into the function...
+                                    // ... and so is no longer valid here
+
+    let x = 5;                      // x comes into scope
+
+    makes_copy(x);                  // x would move into the function,
+                                    // but i32 is Copy, so it's okay to still
+                                    // use x afterward
+
+} // Here, x goes out of scope, then s. But because s's value was moved, nothing
+  // special happens.
+
+fn takes_ownership(some_string: String) { // some_string comes into scope
+    println!("{some_string}");
+} // Here, some_string goes out of scope and `drop` is called. The backing
+  // memory is freed.
+
+fn makes_copy(some_integer: i32) { // some_integer comes into scope
+    println!("{some_integer}");
+} // Here, some_integer goes out of scope. Nothing special happens.
+```
+
+### Return values and scope
+
+Rust functions can take ownership and
+[return ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#return-values-and-scope).
+
+```rust
+fn main() {
+    let s1 = gives_ownership();         // gives_ownership moves its return
+                                        // value into s1
+
+    let s2 = String::from("hello");     // s2 comes into scope
+
+    let s3 = takes_and_gives_back(s2);  // s2 is moved into
+                                        // takes_and_gives_back, which also
+                                        // moves its return value into s3
+} // Here, s3 goes out of scope and is dropped. s2 was moved, so nothing
+  // happens. s1 goes out of scope and is dropped.
+
+fn gives_ownership() -> String {             // gives_ownership will move its
+                                             // return value into the function
+                                             // that calls it
+
+    let some_string = String::from("yours"); // some_string comes into scope
+
+    some_string                              // some_string is returned and
+                                             // moves out to the calling
+                                             // function
+}
+
+// This function takes a String and returns one
+fn takes_and_gives_back(a_string: String) -> String { // a_string comes into
+                                                      // scope
+
+    a_string  // a_string is returned and moves out to the calling function
+}
+```
+
+Notice how you do not need to call a function to free memory! Scoping rules take
+care of it for you.
+
+### References
+
+Use a
+[reference](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#references-and-borrowing)
+when you want to allow a function to use a variable without claiming ownership
+of it. This is called _borrowing_.
+
+```rust
+fn main() {
+    let s1 = String::from("hello");
+
+    let len = calculate_length(&s1);
+
+    println!("The length of '{s1}' is {len}.");
+}
+
+fn calculate_length(s: &String) -> usize {
+    s.len()
+}
+```
+
+A reference is like a pointer, but _guaranteed_ to be valid.
+
+A function cannot modify a reference:
+
+```rust
+fn main() {
+    let s = String::from("hello");
+
+    change(&s);
+}
+
+fn change(some_string: &String) {
+    some_string.push_str(", world");
+}
+```
+
+You can make a reference _mutable_:
+
+```rust
+fn main() {
+    let mut s = String::from("hello");
+
+    change(&mut s);
+}
+
+fn change(some_string: &mut String) {
+    some_string.push_str(", world");
+}
+```
+
+> If you have a mutable reference to a value, you can have no other references
+> to that value.
+
+So this is not allowed:
+
+```rust
+ let mut s = String::from("hello");
+
+let r1 = &mut s;
+let r2 = &mut s;
+
+println!("{}, {}", r1, r2);
+```
+
+This prevents _data races_! The Rust book has a good definition of when data
+races occur:
+
+- Two or more pointers access the same data at the same time.
+- At least one of the pointers is being used to write to the data.
+- There is no mechanism being used to synchronize access to the data.
+
+Rust will refuse to compile code with data races.
 
 > At any given time, you can have either one mutable reference or any number of
 > immutable references.
 
 > References must always be valid.
 
-- complete exercises for section 4, on primitive types. Complete exercises for
-  section 6, on move semantics.
+### Exercises
+
+At this point, you are ready to complete exercises for section 4, on primitive
+types and section 6, on move semantics.
+
+## Learning Rust, Section 5
 
 ### Structs
 
-- review structs from section 5
+Structs let you define custom types:
 
-- complete exerises for section 7, on structs.
+```rust
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
+}
+```
+
+Here is how you initialize a struct:
+
+```rust
+fn main() {
+    let user1 = User {
+        active: true,
+        username: String::from("someusername123"),
+        email: String::from("someone@example.com"),
+        sign_in_count: 1,
+    };
+}
+```
+
+See the book for additional details.
+
+You can also
+[define methods on structs](https://doc.rust-lang.org/book/ch05-03-method-syntax.html#defining-methods)
+using `impl`:
+
+```rust
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+}
+
+fn main() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+
+    println!(
+        "The area of the rectangle is {} square pixels.",
+        rect1.area()
+    );
+}
+```
+
+You can also define
+[associated functions](https://doc.rust-lang.org/book/ch05-03-method-syntax.html#associated-functions)
+on structs. These are functions that don't take a struct, but return one.
+
+```rust
+impl Rectangle {
+    fn square(size: u32) -> Self {
+        Self {
+            width: size,
+            height: size,
+        }
+    }
+}
+```
+
+### Exerises
+
+Complete exerises for section 7, on structs.

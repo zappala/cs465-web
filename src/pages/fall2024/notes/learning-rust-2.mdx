@@ -1,0 +1,293 @@
+---
+layout: ../../../semesters/Fall2024Markdown.astro
+---
+
+# Learning Rust 2
+
+## Introductions
+
+- introductions of two students
+
+## Learning Rust, Section 6
+
+We are using [The Rust Programming Language](https://doc.rust-lang.org/book/)
+and [rustlings](https://github.com/rust-lang/rustlings).
+
+### Enums
+
+You can declare enumerated types:
+
+```rust
+enum IpAddrKind {
+    V4,
+    V6,
+}
+```
+
+...and then create instances of those types:
+
+```rust
+let four = IpAddrKind::V4;
+let six = IpAddrKind::V6;
+```
+
+You can include data in enumerated types:
+
+```rust
+enum IpAddr {
+    V4(String),
+    V6(String),
+}
+
+let home = IpAddr::V4(String::from("127.0.0.1"));
+
+let loopback = IpAddr::V6(String::from("::1"));
+```
+
+You can even mix types:
+
+```rust
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(i32, i32, i32),
+}
+```
+
+### Option
+
+`Option` is an numerated type in the standard library, letting you define a
+variable as being something or nothing.
+
+```rust
+enum Option<T> {
+    None,
+    Some(T),
+}
+```
+
+See this amazing quote from Tony Hoare, who invented `null`:
+
+> I call it my billion-dollar mistake. At that time, I was designing the first
+> comprehensive type system for references in an object-oriented language. My
+> goal was to ensure that all use of references should be absolutely safe, with
+> checking performed automatically by the compiler. But I couldn’t resist the
+> temptation to put in a null reference, simply because it was so easy to
+> implement. This has led to innumerable errors, vulnerabilities, and system
+> crashes, which have probably caused a billion dollars of pain and damage in
+> the last forty years.
+
+```rust
+let some_number = Some(5);
+let some_char = Some('e');
+
+let absent_number: Option<i32> = None;
+```
+
+> Rust forces you to allow for the possibility that something may be null, and
+> then handle the case when it is null.
+
+### match
+
+The `match` expression lets you handle different cases for an enumerated type:
+
+```rust
+enum Coin {
+    Penny,
+    Nickel,
+    Dime,
+    Quarter,
+}
+
+fn value_in_cents(coin: Coin) -> u8 {
+    match coin {
+        Coin::Penny => 1,
+        Coin::Nickel => 5,
+        Coin::Dime => 10,
+        Coin::Quarter => 25,
+    }
+}
+```
+
+### Exercises
+
+You are now ready to do the `rustlings` for section 8.
+
+## Learning Rust, Section 7
+
+### Packages and Crates
+
+- A crate can be a binary crate or a library crate.
+
+- A package contains one or more crates.
+
+- A package can contain/create many binary crates but only one library crate.
+
+### Modules
+
+See the
+[modules cheat sheet](https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html#modules-cheat-sheet)
+to see how Rust uses modules to organize source code.
+
+- Code within a module is private from its parent modules by default.
+- You can declare modules and functions public.
+
+```rust
+mod front_of_house {
+    pub mod hosting {
+        pub fn add_to_waitlist() {}
+    }
+}
+
+pub fn eat_at_restaurant() {
+    // Absolute path
+    crate::front_of_house::hosting::add_to_waitlist();
+
+    // Relative path
+    front_of_house::hosting::add_to_waitlist();
+}
+```
+
+Note, you need to declare the `hosting` module public and the
+`add_to_waitlist()` function public so that you can use them in the parent
+module.
+
+### Use keyword
+
+The `use` keyword brings paths into scope:
+
+```rust
+mod front_of_house {
+    pub mod hosting {
+        pub fn add_to_waitlist() {}
+    }
+}
+
+use crate::front_of_house::hosting;
+
+pub fn eat_at_restaurant() {
+    hosting::add_to_waitlist();
+}
+```
+
+The above is the _idiomatic_ way to bring in a module -- keep the module name
+instead of bringing the function into scope.
+
+Here is the _idiomatic_ way to bring in a struct:
+
+```rust
+use std::collections::HashMap;
+
+fn main() {
+    let mut map = HashMap::new();
+    map.insert(1, 2);
+}
+```
+
+### External packages
+
+To use an external package, list the package in your `Cargo.toml`:
+
+```rust
+rand = "0.8.5"
+```
+
+Then use it:
+
+```rust
+use rand::Rng;
+
+fn main() {
+    let secret_number = rand::thread_rng().gen_range(1..=100);
+}
+```
+
+### Separating modules
+
+You can
+[separate modules in to different file](https://doc.rust-lang.org/book/ch07-05-separating-modules-into-different-files.html#separating-modules-into-different-files)
+and follow some Rust conventions. For example:
+
+`src/lib.rs`:
+
+```rust
+mod front_of_house;
+
+pub use crate::front_of_house::hosting;
+
+pub fn eat_at_restaurant() {
+    hosting::add_to_waitlist();
+}
+```
+
+`src/front_of_house.rs`:
+
+```rust
+pub mod hosting {
+    pub fn add_to_waitlist() {}
+}
+```
+
+### Exercises
+
+You are now ready to do the `rustlings` for section 10.
+
+## Learning Rust, Section 9
+
+### Vectors
+
+Rust has support for vectors:
+
+```rust
+let mut v = Vec::new();
+
+v.push(5);
+v.push(6);
+v.push(7);
+v.push(8);
+```
+
+You can iterate over them:
+
+```rust
+let mut v = vec![100, 32, 57];
+for i in &mut v {
+    *i += 50;
+}
+```
+
+### Strings
+
+A variety of ways to initialize a string:
+
+```rust
+let data = "initial contents";
+
+let s = data.to_string();
+
+// the method also works on a literal directly:
+let s = "initial contents".to_string();
+
+// this also works
+let s = String::from("initial contents");
+```
+
+You can add to a string:
+
+```rust
+let mut s = String::from("foo");
+s.push_str("bar");
+```
+
+Strings can store UTF-8 characters:
+
+```
+let hello = "Здравствуйте";
+```
+
+This means a string is not just a simple storage of one byte per character.
+
+### Exercises
+
+You are now ready to do the `rustlings` for sections 5 and 9.
