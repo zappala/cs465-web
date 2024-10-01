@@ -139,6 +139,11 @@ units:
         date: Oct 2
         lectures:
           - title: Learning Rust
+            link: /notes/learning-rust-3
+        homework:
+          title: Rust Practice 3
+          link: /homework/rust-practice-3
+          due: Oct 4
       - day: Fri
         date: Oct 4
         lectures:
