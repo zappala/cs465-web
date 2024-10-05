@@ -75,3 +75,17 @@ signing uses encryption and verifying uses decryption.
   requires you to keep your private key safe and to have a reliable way to
   distribute your public key to others. These are _key management_ issues.
 
+## Extra reading
+
+- The [Marvin attack](https://people.redhat.com/~hkario/marvin/)
+  - _**Stop using RSA PKCS#1 v1.5 encryption!** On the TLS level, only servers
+    that enable RSA encryption are affected. Most modern clients support the use
+    of Elliptic Curve Diffie Hellman, thus disabling ciphersuites that use RSA
+    encryption is the recommended way to fix this vulnerability._
+
+## Class exercises
+
+We are using the [Rust Crypto](https://github.com/RustCrypto) crates.
+
+See the [Rust Cryptography](https://github.com/BYU-CS465/rust-cryptography) repo
+for [RSA](https://docs.rs/rsa/latest/rsa/index.html) code examples.
