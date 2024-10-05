@@ -1,51 +1,53 @@
 ---
-layout: ../../../semesters/Winter2024Markdown.astro
+layout: ../../../semesters/Fall2024Markdown.astro
 ---
 
 # Hashing and message authentication
 
-## Ungraded Quiz
+## Introductions
 
-- Properties of a cryptographic hash function:
+- introductions of two students
 
-  - preimage resistance
-  - second preimage resistance
-  - collision resistance
+## Questions on the readings
 
-- You want to store hashed passwords in a database. What properties do you need?
+The readings today are from
+[Computer Security and the Internet](https://people.scs.carleton.ca/~paulv/toolsjewels.html),
+[Chapter 2](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch2-rev1.pdf),
+sections 2.5, 2.6
 
-- You want to compute a digital signature of a hash. What attack can be stopped
-  by a hash functon that has second preimage resistance? What attack can be
-  stopped by a hash function that has collision resistance?
+## Cryptographic hash functions
 
-## Key concepts
+![cryptographic hash function](/images/notes/cryptographic-hash-function.png)
 
-### Cryptographic hash functions
+A cryptographic hash function takes an arbitrary length string as input and
+produces a fixed length hash as an output. The output is also called a message
+digest or fingerprint in some applications.
 
-- [Figure 2.10](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch2-rev1.pdf)
-  shows a cryptographic hash function
+![cryptographic hash function](/images/security-book/figure-2.10.png)
 
 - desirable properties:
 
   - _one-way_ or _preimage resistance_: For any given value h, it is
     computationally infeasible to find x such that H(x) = h
+
     - there are actually many inputs that map to a single output (since the
       output is fixed size), but it is still comptuationally infeasible to find
       them
 
-  * _second preimage resistance_: For any given block x, it is computationally
+  - _second preimage resistance_: For any given block x, it is computationally
     infeasible to find y ≠ x with H(y) = H(x)
-  * _collision resistance_ : it is computationally infeasible to find any pair
+  - _collision resistance_ : it is computationally infeasible to find any pair
     (x, y) such that H(x) = H(y)
 
-- common cryptographic hash functions -- see
-  [Table 2.1, page 44](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch2-rev1.pdf)
+- Schneier (Secrets and Lies): _"They are probably the single most useful tool
+  in a cryptographer's toolbox"_
+
+![common cryptographic hash functions](/images/security-book/table-2.1.png)
 
 - MD5 is deprecated
 
   - shown to not be collision resistant, so not suitable for digital signatures
     or TLS certificates
-  - also it is fast, which is a bad property for password hashing
 
 - SHA-1 is also deprecated -- discontinued by web browsers in 2017, by Microsoft
   for Windows Update in 2020
@@ -57,52 +59,50 @@ layout: ../../../semesters/Winter2024Markdown.astro
 
 - SHA-2 and SHA-3 are considered secure
 
-- Digital signatures
+## Digital signatures
 
-  - typically sign a hash instead of the original message or file
-  - hash needs to be collision resistant
-  - see
-    [Figure 2.11, page 45](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch2-rev1.pdf)
+When we use digital signatures, we typically sign a hash instead of the original
+message or file.
 
-- More info on hash functions
+![digital signature used to sign a hash of a message](/images/security-book/figure-2.11.png)
 
-  - see
-    [Secure Hash Algorithms](https://cryptobook.nakov.com/cryptographic-hash-functions/secure-hash-algorithms)
-  - see [Hash Functions](https://joyofcryptography.com/pdf/chap11.pdf)
+- hash needs to be collision resistant
 
-### Message authentication
+## Message authentication
 
-- covers both integrity of the data and the identity of the party that sent the
-  message
+A message authentication code covers both the integrity of the data and the
+identity of the party that sent the message (since the other party is the only
+one that shares a secret key).
+
+![message authentication with a MAC](/images/security-book/figure-2.12.png)
+
 - sender computes and sends a message authentication code (MAC), which the
   receiver verifies
 - does not provide non-repudiation since either party could have created the
   message and MAC using the shared key
-- see [Figure 2.12, page
-  46)(https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch2-rev1.pdf)
 
 - HMAC builds a MAC from a hash function, e.g. HMAC-SHA256
 
-### Authenticated encryption
+  - H((K’ ⊕ opad) || H((K’ ⊕ ipad) || m))
+    - H: a cryptographic hash function
+    - m: the message to be authenticated
+    - K’: H(K) if K is larger than the block size, otherwise K
+    - opad: 0x5c5c5c...5c5c, one-block-long constant
+    - ipad: 0x363636...3636, one-block-long constant
+    - ⊕: XOR
+    - ||: concatenation
 
-- _authenticated encryption_: provides both confidentiality and integrity
-  (protecting against message modification and injection that an active attacker
-  may try)
-- _authenticated encryption with associated data_: provides additional
-  associated data that is authenticated but not encrypted -- see
-  [Figure 2.13, page 48](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch2-rev1.pdf)
-- use a special algorithm -- see
-  [Table 2.2, page 49](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch2-rev1.pdf)
-  -- typically AEAD_AES_128_GCM
+- recommendation
+  - if you need just a MAC, use HMAC
+  - if you need encryption and a MAC, use AEAD, e.g. AES-GCM
 
-## Hybrid encryption with integrity
+## Extra Reading
 
-![hybrid encryption with integrity](/images/notes/hybrid-encryption-with-integrity.png)
-
-- A digital signature of a hash of the message ensures Bob knows the message
-  came from Alice the message hasn't been altered.
-- AES with GCM provides integrity and, assuming only Alice and Bob know the
-  symmetric key, then assures Bob that Alice sent the message.
-- Getting all the pieces right is tricky. See
-  [Defective Sign & Encrypt in S/MIME, PKCS\#7, MOSS, PEM, PGP, and XML](https://theworld.com/~dtd/sign_encrypt/sign_encrypt7.html).
-  Use TLS where possible.
+- [Secure Hash Algorithms](https://cryptobook.nakov.com/cryptographic-hash-functions/secure-hash-algorithms)
+- [Hash Functions](https://joyofcryptography.com/pdf/chap11.pdf)
+- breaking SHA
+  - from 2005,
+    [Chinese researchers discovered first SHA-1 collisions faster than brute force (2^69)](https://www.schneier.com/blog/archives/2005/02/cryptanalysis_o.html)
+  - from 2017,
+    [Google can generate PDF files with the same SHA-1 hash 100,000 times faster than brute force](https://security.googleblog.com/2017/02/announcing-first-sha1-collision.html)
+- [Why I hate CBC-MAC](https://blog.cryptographyengineering.com/2013/02/15/why-i-hate-cbc-mac/)

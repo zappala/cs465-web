@@ -75,6 +75,18 @@ signing uses encryption and verifying uses decryption.
   requires you to keep your private key safe and to have a reliable way to
   distribute your public key to others. These are _key management_ issues.
 
+## Hybrid encryption with integrity
+
+![hybrid encryption with integrity](/images/notes/hybrid-encryption-with-integrity.png)
+
+- A digital signature of a hash of the message ensures Bob knows the message
+  came from Alice the message hasn't been altered.
+- AES with GCM provides integrity and, assuming only Alice and Bob know the
+  symmetric key, then assures Bob that Alice sent the message.
+- Getting all the pieces right is tricky. See
+  [Defective Sign & Encrypt in S/MIME, PKCS\#7, MOSS, PEM, PGP, and XML](https://theworld.com/~dtd/sign_encrypt/sign_encrypt7.html).
+  Use TLS where possible.
+
 ## Extra reading
 
 - The [Marvin attack](https://people.redhat.com/~hkario/marvin/)
