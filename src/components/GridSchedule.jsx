@@ -168,6 +168,21 @@ export default function GridSchedule(props) {
           , {reading.sections}
         </li>
       );
+    } else if (reading.link && !reading.sections) {
+      return (
+        <li
+          className={`inline ${after_content} ${after_last_content} after:text-xs`}
+          key={index}
+        >
+          <a
+            className="underline decoration-lightblue"
+            href={reading.link}
+            target={target}
+          >
+            {reading.title}
+          </a>
+        </li>
+      );
     } else if (!reading.link) return <>{reading.title}</>;
   };
 

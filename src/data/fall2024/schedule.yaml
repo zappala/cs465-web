@@ -171,13 +171,19 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 2.5 - 2.6
-        project:
-          title: Encrypted Communication
-          due: Oct 21
       - day: Fri
         date: Oct 11
         lectures:
-          - title: Password Managers
+          - title: Elliptic Curve Cryptography
+            link: /notes/elliptic-curve-cryptography
+        readings:
+          - title:
+              A (Relatively Easy To Understand) Primer on Elliptic Curve
+              Cryptography
+            link: https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/
+        project:
+          title: Encrypted Communication
+          due: Nov 1
       - day: Mon
         date: Oct 14
         holiday: ACM CCS
@@ -212,9 +218,6 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 10.3 - 10.5
-        project:
-          title: Encrypted Vault
-          due: Oct 21
       - day: Fri
         date: Oct 25
         lectures:
@@ -254,8 +257,8 @@ units:
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 3.0 - 3.2, 3.6, 3.8
         project:
-          title: Web Authentication
-          due: Nov 15
+          title: Encrypted Vault
+          due: Nov 18
       - day: Mon
         date: Nov 4
         lectures:
