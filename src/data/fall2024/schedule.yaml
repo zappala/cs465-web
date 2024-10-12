@@ -183,6 +183,7 @@ units:
             link: https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/
         project:
           title: Encrypted Communication
+          link: /projects/encrypted-communication
           due: Nov 1
       - day: Mon
         date: Oct 14
