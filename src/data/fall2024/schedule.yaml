@@ -192,64 +192,36 @@ units:
         date: Oct 16
         holiday: ACM CCS
 
-  - title: Network Security
+  - title: Key Exchange and Authentication
     days:
       - day: Fri
         date: Oct 18
         lectures:
-          - title: Networking background
-            link: /notes/networking-background
+          - title: Diffie-Hellman key exchange
         readings:
-          - title: TBD
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 4.0 - 4.3
       - day: Mon
         date: Oct 21
         lectures:
-          - title: Firewalls
-            link: /notes/firewalls
+          - title: TLS
+            link: /notes/tls
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 10.0 - 10.2
+            sections: 9.2
       - day: Wed
         date: Oct 23
         lectures:
-          - title: SSH, VPNs, IPsec
-            link: /notes/ssh-vpns-ipsec
+          - title: Certificates
+            link: /notes/certificates
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 10.3 - 10.5
+            sections: 8.0 - 8.2, 8.5
       - day: Fri
         date: Oct 25
-        lectures:
-          - title: Intrusion detection and scanners
-            link: /notes/intrusion-detection-and-scanners
-        readings:
-          - title: Computer Security and the Internet
-            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 11.0 - 11.3
-      - day: Mon
-        date: Oct 28
-        lectures:
-          - title: DOS, address resolution attacks
-            link: /notes/dos-and-address-resolution-attacks
-        readings:
-          - title: Computer Security and the Internet
-            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 11.4 - 11.5
-
-  - title: Web Security
-    days:
-      - day: Wed
-        date: Oct 30
-        lectures:
-          - title: Web background
-        readings:
-          - title: Computer Security and the Internet
-            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 9.0 - 9.1, 9.3
-      - day: Fri
-        date: Nov 1
         lectures:
           - title: Password authentication
             link: /notes/password-authentication
@@ -257,11 +229,8 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 3.0 - 3.2, 3.6, 3.8
-        project:
-          title: Encrypted Vault
-          due: Nov 18
       - day: Mon
-        date: Nov 4
+        date: Oct 28
         lectures:
           - title: Account recovery, CAPTCHAs, SSO
             link: /notes/account-recovery-captchas-sso
@@ -270,7 +239,7 @@ units:
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 3.3, 3.7, 4.7
       - day: Wed
-        date: Nov 6
+        date: Oct 30
         lectures:
           - title: Multi-factor authentication
             link: /notes/multi-factor-authentication
@@ -278,34 +247,21 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 3.4 - 3.5
+  - title: Web Security
+    days:
       - day: Fri
-        date: Nov 8
+        date: Nov 1
         lectures:
-          - title: Certificates
-            link: /notes/certificates
+          - title: Web background
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 8.0 - 8.2, 8.5
+            sections: 9.0 - 9.1, 9.3
+        project:
+          title: Encrypted Vault
+          due: Nov 15
       - day: Mon
-        date: Nov 11
-        lectures:
-          - title: Authentication and key establishment
-        readings:
-          - title: Computer Security and the Internet
-            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 4.0 - 4.3
-      - day: Wed
-        date: Nov 13
-        lectures:
-          - title: TLS
-            link: /notes/tls
-        readings:
-          - title: Computer Security and the Internet
-            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 9.2
-      - day: Fri
-        date: Nov 15
+        date: Nov 4
         lectures:
           - title: Same-origin policy and malicious scripts
             link: /notes/same-origin-policy-and-malicious-scripts
@@ -313,8 +269,8 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 9.4 - 9.5
-      - day: Mon
-        date: Nov 18
+      - day: Wed
+        date: Nov 6
         lectures:
           - title: XSS, SQL injection
             link: /notes/xss-and-sql-injection
@@ -322,11 +278,8 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 9.6 - 9.7
-        project:
-          title: Web Exploit and Patch
-          due: Dec 6
-      - day: Wed
-        date: Nov 20
+      - day: Fri
+        date: Nov 8
         lectures:
           - title: Phishing
             link: /notes/phishing
@@ -334,7 +287,54 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 9.8
-
+  - title: Network Security
+    days:
+      - day: Mon
+        date: Nov 11
+        lectures:
+          - title: Networking background
+            link: /notes/networking-background
+        readings:
+          - title: TBD
+      - day: Wed
+        date: Nov 13
+        lectures:
+          - title: Firewalls
+            link: /notes/firewalls
+        readings:
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 10.0 - 10.2
+      - day: Fri
+        date: Nov 15
+        lectures:
+          - title: SSH, VPNs, IPsec
+            link: /notes/ssh-vpns-ipsec
+        readings:
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 10.3 - 10.5
+        project:
+          title: Web Exploit and Patch
+          due: Dec 6
+      - day: Mon
+        date: Nov 18
+        lectures:
+          - title: Intrusion detection and scanners
+            link: /notes/intrusion-detection-and-scanners
+        readings:
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 11.0 - 11.3
+      - day: Wed
+        date: Nov 20
+        lectures:
+          - title: DOS, address resolution attacks
+            link: /notes/dos-and-address-resolution-attacks
+        readings:
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 11.4 - 11.5
   - title: Threat Modeling
     days:
       - day: Fri
