@@ -15,7 +15,7 @@ The readings today are from
 [Chapter 3](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch3-rev1.pdf)
 and
 [Chapter 4](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch4-rev1.pdf),
-sections 3.3, 3.5, 3.7, 4.7.
+sections 3.3, 3.7, 4.7.
 
 ## Account recovery
 
@@ -43,28 +43,6 @@ recovery"**
 - can use as an alternative to rate limiting
 - susceptible to AI, human labor pools
 - reCAPTCHA ("I am not a robot") measures human interaction with the webpage
-
-## Biometrics
-
-- "something you are" instead of "something you know" or "something you have"
-- should never be used for remote login
-  - biometrics are not secret -- can easily be captured by someone
-  - need a trusted input channel or can be easily spoofed
-  - if biometric patterns are stored remotely, then they can be stolen
-  - biometrics can't be changed if stolen
-- useful for local login
-  - unlocking a smartphone or laptop
-  - unlocking a password manager or banking app
-- system must be tuned based on false accepts and false rejects
-
-![tuning a biometric system baed on false rejects and false accepts](/images/security-book/figure-3.6.png)
-
-- usually require a fallback in case of failure (e.g. a password)
-
-- a variety of attacks possible (from
-  [Biometrics: a tool for information security](https://ieeexplore.ieee.org/document/1634356))
-
-![possible attacks on a biometric system](/images/notes/jain-figure9.png)
 
 ## Single Sign-On (SSO)
 
@@ -185,38 +163,6 @@ the security, usability, and compatibility point of view. Finally, an assessment
 of the open issues, challenges, and opportunities for further study is provided,
 paving the road toward the design of the next-generation secure and
 user-friendly CAPTCHA schemes._
-
-### Biometrics
-
-- see
-  [An Introduction to Biometric Recognition](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=1262027),
-  Jain, Ross, Prabhakar, IEEE Transactions on Circuits and Systems for Video
-  Technology, 2004 for an overview of the technology
-
-- see
-  [Liveness is Not Enough: Enhancing Fingerprint Authentication with Behavioral Biometrics to Defeat Puppet Attacks](https://www.usenix.org/system/files/sec20-wu.pdf),
-  Wu, He, Chen, Zhao, and Du, USENIX Security 2019.
-
-_Fingerprint authentication has gained increasing popularity on mobile devices
-in recent years. However, it is vulnerable to presentation attacks, which
-include that an attacker spoofs with an artificial replica. Many liveness
-detection solutions have been proposed to defeat such presentation attacks;
-however, they all fail to defend against a particular type of presentation
-attack, namely puppet attack, in which an attacker places an unwilling victim’s
-finger on the fingerprint sensor. In this paper, we propose FINAUTH, an
-effective and efficient software-only solution, to complement fingerprint
-authentication by defeating both synthetic spoofs and puppet attacks using
-fingertip-touch characteristics. FINAUTH characterizes intrinsic fingertip-touch
-behaviors including the acceleration and the rotation angle of mobile devices
-when a legitimate user authenticates. FINAUTH only utilizes common sensors
-equipped on mobile devices and does not introduce extra usability burdens on
-users. To evaluate the effectiveness of FINAUTH, we carried out experiments on
-datasets collected from 90 subjects after the IRB approval. The results show
-that FINAUTH can achieve the average balanced accuracy of 96.04% with 5 training
-data points and 99.28% with 100 training data points. Security experiments also
-demonstrate that FINAUTH is resilient against possible attacks. In addition, we
-report the usability analysis results of FINAUTH, including user authentication
-delay and overhead._
 
 ### OAUTH2
 

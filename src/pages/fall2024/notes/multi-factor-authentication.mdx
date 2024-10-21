@@ -1,65 +1,115 @@
 ---
-layout: ../../../semesters/Winter2024Markdown.astro
+layout: ../../../semesters/Fall2024Markdown.astro
 ---
 
 # Multi-factor authentication
 
-### One-time passwords
+## Introductions
+
+- introductions of two students
+
+## Questions on the readings
+
+The readings today are from
+[Computer Security and the Internet](https://people.scs.carleton.ca/~paulv/toolsjewels.html),
+[Chapter 3](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch3-rev1.pdf),
+sections 3.4, 3.5
+
+## One-time passwords
 
 - generate a list of passwords, each good for one time only
-- useful for recovery codes
-- can generate and print/save
-- can send via text messages
-  - SMS is vulnerable to SIM swapping
-- vulnerable to pre-play attacks
-- vulnerable to phishing and MITM attacks
+  - useful for recovery codes
+  - can generate and print/save
+  - can send via text messages
+    - SMS is vulnerable to SIM swapping
+- disadvantages
+  - vulnerable to pre-play attacks
+  - vulnerable to phishing and MITM attacks
 
-#### Lamport hash chains
+## Lamport hash chains
 
-- developed by [Leslie Lamport](https://en.wikipedia.org/wiki/Leslie_Lamport), also the inventor of LaTeX, the Paxos consensus algorithm, lots of other stuff
-- see [Figure 3.3 and Equation 3.4, page 67](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch3-rev1.pdf)
+- developed by [Leslie Lamport](https://en.wikipedia.org/wiki/Leslie_Lamport),
+  also the inventor of LaTeX, the Paxos consensus algorithm, lots of other stuff
+
+![Lamport hash chains](/images/security-book/figure-3.3.png)
+
+![Lamport hash chain details](/images/security-book/equation-3.4.png)
+
 - must be seeded with a shared random number
-- work backward from t repeated hashes
-- an intercepted password doesn't help the attacker know subsequent passwords because the hash is one-way
+- work backward from _t_ repeated hashes
+- an intercepted password doesn't help the attacker know subsequent passwords
+  because the hash is one-way
 
-#### Passcode generators and TOTP
+## Passcode generators and TOTP
 
-- see [Figure 3.4, page 69](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch3-rev1.pdf)
+![passcode generators](/images/security-book/figure-3.4.png)
+
 - requires a secret to be shared
 - used as input to a function, along with a challenge
-- if the challenge is the current time, this is a time-based one-time password (TOTP) -- very commonly used as a second factor, e.g. Duo, Google Authenticator
-  - be sure your TOTP generator backs up the shared secrets, otherwise if you replace your phone, you will have a hard time accessing your accounts!
-  - see [RFC 6238](https://datatracker.ietf.org/doc/html/rfc6238) for the TOTP spec
+- if the challenge is the current time, this is a time-based one-time password
+  (TOTP) -- very commonly used as a second factor, e.g. Duo, Google
+  Authenticator
+  - be sure your TOTP generator backs up the shared secrets, otherwise if you
+    replace your phone, you will have a hard time accessing your accounts!
+  - see [RFC 6238](https://datatracker.ietf.org/doc/html/rfc6238) for the TOTP
+    spec
 - again, intercepting a password doesn't help the attacker know future passwords
 
-#### Hardware tokens
+## Hardware tokens
 
-- USB cards, sart cards, and other physical objects that can securely store secrets and generate tokens for use in a challenge-response protocol
+- USB cards, sart cards, and other physical objects that can securely store
+  secrets and generate tokens for use in a challenge-response protocol
 - e.g. can hold an RSA signature key pair
   - A tells B it wants to login using V<sub>A</sub>
   - B sends a random number r<sub>B</sub>
-  - A chooses random number r<sub>A</sub> and responds with signature S<sub>A</sub>(r<sub>A</sub>, r<sub>B</sub>)
-
-#### Multiple factors
-
-- see [Figure 3.5, page 70](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch3-rev1.pdf)
-- different categories are more likely to be independent
-- what if you use your phone for everything, including password manager, TOTP or Duo second factor? are you still using MFA?
-- when combining factors, their combined security should be stronger than each individually
-- when combining factors, inconvenience can add up
-- second factors can be triggered by a signal, such as a missing browser cookie, new IP address or location
+  - A chooses random number r<sub>A</sub> and responds with signature
+    S<sub>A</sub>(r<sub>A</sub>, r<sub>B</sub>)
 
 ## Biometric authentication
 
+- "something you are" instead of "something you know" or "something you have"
+
+![types of biometric authentication](/images/security-book/table-3.2.png)
+
 - advantages -- nothing to carry, no cognitive burden, ease of use, scalability
-- disadvantages -- can be compelled or done while sleeping, can't be changed/revoked, can be "stolen", false accepts and rejects
-- what you are vs how you act
-- not secret! rely on a trusted input channel
-- see [Table 3.2, page 72](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch3-rev1.pdf)
-- enrollment involves identifying features
-- login involves creating a matching score, and a threshold
-- see [Figure 3.6, page 74](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch3-rev1.pdf)
-- understand [Figure 3.7, page 75](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch3-rev1.pdf)
+- disadvantages -- can be compelled or done while sleeping, can't be
+  changed/revoked, can be "stolen", false accepts and rejects
+
+- should never be used for remote login
+  - biometrics are not secret -- can easily be captured by someone
+  - need a trusted input channel or can be easily spoofed
+  - if biometric patterns are stored remotely, then they can be stolen
+  - biometrics can't be changed if stolen
+- useful for local login
+  - unlocking a smartphone or laptop
+  - unlocking a password manager or banking app
+- system must be tuned based on false accepts and false rejects
+
+![tuning a biometric system baed on false rejects and false accepts](/images/security-book/figure-3.6.png)
+
+- usually require a fallback in case of failure (e.g. a password)
+
+- a variety of attacks possible (from
+  [Biometrics: a tool for information security](https://ieeexplore.ieee.org/document/1634356))
+
+![possible attacks on a biometric system](/images/notes/jain-figure9.png)
+
+### Multiple factors
+
+![multi-factor authentication](/images/security-book/figure-3.5.png)
+
+- important principles
+
+  - different categories are more likely to be independent
+  - when combining factors, their combined security should be stronger than each
+    individually
+  - when combining factors, inconvenience can add up
+
+- second factors can be triggered by a signal, such as a missing browser cookie,
+  new IP address or location
+
+- what if you use your phone for everything, including password manager, TOTP or
+  Duo second factor? are you still using MFA?
 
 ## Passwordless FIDO2
 
@@ -70,13 +120,50 @@ layout: ../../../semesters/Winter2024Markdown.astro
 
 - Passkeys
 
-  - same technology, but keypairs are encrypted and stored in a cloud account, e.g. Apple Keychain
+  - same technology, but keypairs are encrypted and stored in a cloud account,
+    e.g. Apple Keychain
   - similar to a password manager, but for cryptographic keys
   - Apple requires 2FA on your account if you are going to store Passkeys there
 
   - see [Google](https://safety.google/authentication/passkey/)
-  - see [Apple](https://developer.apple.com/passkeys/) and [About the security of passkeys](https://support.apple.com/en-us/102195)
-  - see [Microsoft](https://support.microsoft.com/en-us/windows/passkeys-in-windows-301c8944-5ea2-452b-9886-97e4d2ef4422)
+  - see [Apple](https://developer.apple.com/passkeys/) and
+    [About the security of passkeys](https://support.apple.com/en-us/102195)
+  - see
+    [Microsoft](https://support.microsoft.com/en-us/windows/passkeys-in-windows-301c8944-5ea2-452b-9886-97e4d2ef4422)
   - see [1Password](https://1password.com/product/passkeys)
 
 - Both are resistant to phishing, brute force attacks, password breaches
+
+## Extra Reading
+
+### Biometrics
+
+- see
+  [An Introduction to Biometric Recognition](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=1262027),
+  Jain, Ross, Prabhakar, IEEE Transactions on Circuits and Systems for Video
+  Technology, 2004 for an overview of the technology
+
+- see
+  [Liveness is Not Enough: Enhancing Fingerprint Authentication with Behavioral Biometrics to Defeat Puppet Attacks](https://www.usenix.org/system/files/sec20-wu.pdf),
+  Wu, He, Chen, Zhao, and Du, USENIX Security 2019.
+
+_Fingerprint authentication has gained increasing popularity on mobile devices
+in recent years. However, it is vulnerable to presentation attacks, which
+include that an attacker spoofs with an artificial replica. Many liveness
+detection solutions have been proposed to defeat such presentation attacks;
+however, they all fail to defend against a particular type of presentation
+attack, namely puppet attack, in which an attacker places an unwilling victim’s
+finger on the fingerprint sensor. In this paper, we propose FINAUTH, an
+effective and efficient software-only solution, to complement fingerprint
+authentication by defeating both synthetic spoofs and puppet attacks using
+fingertip-touch characteristics. FINAUTH characterizes intrinsic fingertip-touch
+behaviors including the acceleration and the rotation angle of mobile devices
+when a legitimate user authenticates. FINAUTH only utilizes common sensors
+equipped on mobile devices and does not introduce extra usability burdens on
+users. To evaluate the effectiveness of FINAUTH, we carried out experiments on
+datasets collected from 90 subjects after the IRB approval. The results show
+that FINAUTH can achieve the average balanced accuracy of 96.04% with 5 training
+data points and 99.28% with 100 training data points. Security experiments also
+demonstrate that FINAUTH is resilient against possible attacks. In addition, we
+report the usability analysis results of FINAUTH, including user authentication
+delay and overhead._

@@ -242,7 +242,7 @@ units:
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 3.3, 3.5, 3.7, 4.7
+            sections: 3.3, 3.7, 4.7
       - day: Wed
         date: Oct 30
         lectures:
