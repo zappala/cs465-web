@@ -1,0 +1,99 @@
+---
+layout: ../../../semesters/Fall2024Markdown.astro
+---
+
+# TLS
+
+## Introductions
+
+- introductions of two students
+
+## Questions on the readings
+
+The readings today are from
+[Computer Security and the Internet](https://people.scs.carleton.ca/~paulv/toolsjewels.html),
+[Chapter 9](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch9-rev1.pdf),
+sections 9.2
+
+## SSL and TLS hsitory
+
+![TLS history](/images/notes/tls-history.png)
+
+Source of image: SSL and TLS, Rescorla
+
+## SSL record structure
+
+![SSL records](/images/notes/SSL-records.png)
+
+Source of image: Network and Security Essentials, Stallings
+
+## TLS handshake and DH key exchange
+
+- the main purpose of the TLS handshake is to etablish a shared key
+- note this shows Diffie-Hellman, but there are a variety of ways to complete
+  the handshake
+
+![TLS handshake and key exchange](/images/notes/tls-handshake-dh.png)
+
+- parts of the handshake
+
+  - Client Hello
+    - Random client: random number used later to derive shared key
+    - Cipher Suites: zero or more
+    - Session ID: can be used to update or resume a connection
+  - Server Hello
+    - Random server: random number used later to dervice shared key
+    - Cipher Suite: the single cipher suite selected from the client's list (or
+      the connection is closed if none is available)
+    - Session ID: can indicate a resumed connection or a new connection
+  - Server Certificate
+    - a chain of certificates that authenticate the server to the client
+  - Server Key Exchange
+    - random client from above
+    - random server from above
+    - signed Diffie-Hellman parameters
+  - Server Hello Done
+    - empty, signals end of key exchange messages
+    - note, this is needed because, e.g. Server Key Exchange message may not be
+      needed
+  - Client Key Exchange
+    - public Diffie Hellman message
+  - Change Cipher Spec
+    - potentially multiple messages to change the cipher suite
+  - Finished
+
+    - sent after cipher change messages
+    - verifies the key exchange and authentication was successful
+    - contains some data to verify the previous exchanges -- HMAC of master
+      secret, a text string, hash of hasndshake messages
+    - first message protected with the negotiated algorithms, keys, and secrets
+    - after this message, the peers can exchange data
+
+  - everything after the key exchange is encrypted and protected with a MAC
+    (unless AES GCM mode used) -- this means an attacker cannot modify
+    algorithms chosen
+  - can use a _pre-shared key_, meaning a key from a previous session
+  - Diffie-Hellman keys are ephemeral -- erased after use
+
+## TLS Cipher Suites
+
+- defines the algorithms used during the TLS connection
+
+  - key exchange algorithm -- for exchanging/creating a symmetric encryption key
+  - authentication algorithm -- for digital signatures
+  - bulk encryption algorithm -- for encrypting the data
+  - MAC algorithm -- for security
+
+- example: _ECDHE-ECDSA-AES128-GCM-SHA256_
+
+  - ECDHE:
+    [Elliptic-curve Diffie-Hellman](https://en.wikipedia.org/wiki/Elliptic-curve_Diffie–Hellman)
+  - ECDSA -- Elliptic-curve Digital Signature Algorithm
+  - AES 128 -- AES with 128-bit key
+  - GCM -- Galois/Counter Mode -- block cipher with high performance
+    (parallelizable) and patent-free
+  - SHA256 -- MAC algorithm
+
+## Class Exercise
+
+- https://www.ssllabs.com/ssltest/analyze.html?d=www2.pnwx.com
