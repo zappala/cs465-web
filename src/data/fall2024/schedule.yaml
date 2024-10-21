@@ -206,21 +206,25 @@ units:
       - day: Mon
         date: Oct 21
         lectures:
+          - title: Certificates
+            link: /notes/certificates
+        readings:
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 8.0 - 8.3, 8.5
+      - day: Wed
+        date: Oct 23
+        lectures:
           - title: TLS
             link: /notes/tls
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 9.2
-      - day: Wed
-        date: Oct 23
-        lectures:
-          - title: Certificates
-            link: /notes/certificates
-        readings:
-          - title: Computer Security and the Internet
-            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 8.0 - 8.2, 8.5
+        homework:
+          title: Certificates and TLS
+          link: /homework/certificates-and-tls
+          due: Oct 28
       - day: Fri
         date: Oct 25
         lectures:
