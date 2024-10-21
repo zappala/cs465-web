@@ -1,3 +1,71 @@
+---
+layout: ../../../semesters/Fall2024Markdown.astro
+---
+
+# TLS
+
+## Introductions
+
+- introductions of two students
+
+## Questions on the readings
+
+The reading today is
+
+## TLS
+
+#### SSL and TLS hsitory
+
+![TLS history](/images/notes/tls-history.png)
+
+Source of image: SSL and TLS, Rescorla
+
+#### SSL record structure
+
+![SSL records](/images/notes/SSL-records.png)
+
+Source of image: Network and Security Essentials, Stallings
+
+#### TLS handshake and DH key exchange
+
+![TLS handshake and key exchange](/images/notes/tls-handshake-dh.png)
+
+- one of the main purpose of the TLS handshake is to etablish a shared key
+
+  - notice how everything after the key exchange is encrypted and protected with
+    a MAC -- this means an attacker cannot modify algorithms chosen
+  - can use a _pre-shared key_, meaning a key from a previous session
+  - Diffie-Hellman keys are ephemeral -- erased after use
+
+- also need to authenticate the server by having it sign something
+
+- encryption uses _authenticated encryption_ with a MAC
+
+#### Cipher Suite
+
+- defines the algorithms used during the TLS connection
+
+  - key exchange algorithm -- for exchanging/creating a symmetric encryption key
+  - authentication algorithm -- for digital signatures
+  - bulk encryption algorithm -- for encrypting the data
+  - MAC algorithm -- for security
+
+- example: _ECDHE-ECDSA-AES128-GCM-SHA256_
+
+  - ECDHE:
+    [Elliptic-curve Diffie-Hellman](https://en.wikipedia.org/wiki/Elliptic-curve_Diffie–Hellman)
+    -- based on [elliptic
+    curves](https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography
+    instead of discrete log
+  - ECDSA -- Elliptic-curve Digital Signature Algorithm
+  - AES 128 -- AES with 128-bit key
+  - GCM -- Galois/Counter Mode -- block cipher with high performance
+    (parallelizable) and patent-free
+  - SHA256 -- MAC algorithm
+
+- elliptic curve cryptography -- higher security with shorter length keys (but
+  not quantum safe)
+
 ### Obtaining a certificate for a website
 
 - It used to be expensive to get a certificate for a website
