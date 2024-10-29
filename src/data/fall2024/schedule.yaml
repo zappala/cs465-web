@@ -263,7 +263,8 @@ units:
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 9.0 - 9.1, 9.3
         project:
-          title: Encrypted Vault
+          title: Cracking Password vaults
+          link: /projects/cracking-password-vaults
           due: Nov 15
       - day: Mon
         date: Nov 4
