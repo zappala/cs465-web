@@ -300,8 +300,6 @@ units:
         lectures:
           - title: Networking background
             link: /notes/networking-background
-        readings:
-          - title: TBD
       - day: Wed
         date: Nov 13
         lectures:
