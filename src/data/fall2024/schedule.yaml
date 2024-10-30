@@ -258,6 +258,7 @@ units:
         date: Nov 1
         lectures:
           - title: Web background
+            link: /notes/web-background
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
