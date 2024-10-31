@@ -42,8 +42,8 @@ The client and server communicate using the following protocol:
     key, the nonce, and the encrypted message
 - The server responds to an Encrypted Message with a Server Response that
   includes:
-  - the same nonce
-  - the same encrypted message
+  - a new nonce
+  - the message, encrypted with the same key but the new nonce
 
 ## Implementing the Client
 
