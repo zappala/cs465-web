@@ -270,8 +270,8 @@ units:
       - day: Mon
         date: Nov 4
         lectures:
-          - title: Same-origin policy and malicious scripts
-            link: /notes/same-origin-policy-and-malicious-scripts
+          - title: Same-origin policy and CSRF attacks
+            link: /notes/same-origin-policy-and-CSRF-attacks
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html

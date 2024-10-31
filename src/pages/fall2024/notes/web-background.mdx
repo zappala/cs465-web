@@ -37,11 +37,30 @@ layout: ../../../semesters/Fall2024Markdown.astro
 
 ![Document Object Model](/images/notes/DOM.png)
 
+## Cookies
+
+- cookies
+  - HTTP is stateless (every request is independent)
+  - cookies provide the state
+- cookies are `(key, value)` pairs
+  - can be stored in browser memory or persistently
+  - set in the `SetCookie` header
+- open the browser developer tools, network tab to examine cookies
+- important attributes
+  - `Max-Age` or `Expires` -- controls lifetime
+  - `Domain` -- hosts the cookie is valid for (can't be as broad as a TLD)
+  - `Path` -- the file paths the cookie should be used for
+  - `Secure` -- cookie will only be sent over HTTPS
+  - `HttpOnly` -- only accessible over HTTP(S) and not via DOM through
+    JavaScript on the page
+
 ## JavaScript
 
 - runs on the client's computer in the browser
 - can manipulate the document object model (DOM)!
   - any script can go through the DOM and change any elements in it
+  - `window.document` -- gives you the DOM
+  - `window.location` -- gives you the URL
 - can be embedded in a web page or loaded as a separate resource
 
 - when a page is loaded, the browser executes JavaScript found in the DOM using
