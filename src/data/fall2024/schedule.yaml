@@ -276,6 +276,10 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 9.4 - 9.5
+        homework:
+          title: Burp Suite
+          link: /homework/burp-suite
+          due: Nov 8
       - day: Wed
         date: Nov 6
         lectures:
