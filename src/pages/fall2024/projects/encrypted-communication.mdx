@@ -44,6 +44,7 @@ The client and server communicate using the following protocol:
   includes:
   - a new nonce
   - the message, encrypted with the same key but the new nonce
+- The client decrypts and prints each Encrypted Message the server sends it
 
 ## Implementing the Client
 
@@ -199,10 +200,25 @@ You can see the
 [Rust Cryptography](https://github.com/BYU-CS465/rust-cryptography) examples we
 covered in class as examples of how to use these libraries.
 
-Please note, to create a verifying key, you can use:
+### Rust Tips
+
+(1) This code uses a nonce that is 32 bytes long. You can generate this with:
+
+```rust
+let mut nonce = [0u8; 32];
+thread_rng().fill_bytes(&mut nonce);
+```
+
+(2) To create a verifying key, you can use:
 
 ```rust
 VerifyingKey::<Sha256>::from_public_key_pem()
+```
+
+(3) To import a nonce from the server, you can use:
+
+```rust
+let nonce = Nonce::from_slice(&nonce_vec[..]);
 ```
 
 ## Grading Rubric
