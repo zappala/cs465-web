@@ -1,0 +1,31 @@
+---
+import Layout from "./Front.astro";
+import NavBar from "../menu/NavBar.astro";
+
+import LoadSemester from "../components/LoadSemester.jsx";
+
+// get the semester from the file path
+const url = Astro.url;
+const dirs = url.pathname.split("/");
+let semester_dir = "fall2024";
+if (dirs.length >= 2) {
+  semester_dir = dirs[1];
+}
+const prefix = "/" + semester_dir;
+
+const menu = LoadSemester(prefix);
+
+const semester = menu.semester;
+const items = menu.items;
+---
+
+<Layout>
+  <NavBar semester={semester} prefix={prefix} items={items} />
+  <div class="sm:bg-blue-300 min-h-screen pt-0 lg:pt-5 pb-5">
+    <div
+      class="bg-white ml-5 mr-5 sm:px-[75px] sm:ml-auto sm:mr-auto py-3 max-w-5xl rounded-lg"
+    >
+      <slot />
+    </div>
+  </div>
+</Layout>

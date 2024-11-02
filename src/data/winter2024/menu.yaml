@@ -1,0 +1,9 @@
+menu:
+  semester: Winter 2024
+  items:
+    - title: Home
+      url: /
+    - title: Staff
+      url: /staff
+    - title: Syllabus
+      url: /syllabus
