@@ -289,6 +289,10 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 9.6 - 9.7
+        homework:
+          title: Web vulnerabilities
+          link: /homework/web-vulnerabilities
+          due: Nov 15
       - day: Fri
         date: Nov 8
         lectures:
