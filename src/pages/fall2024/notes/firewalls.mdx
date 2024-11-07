@@ -4,17 +4,30 @@ layout: ../../../layouts/SemesterMarkdown.astro
 
 # Firewalls
 
+## Questions on the readings
+
+The readings today are from
+[Computer Security and the Internet](https://people.scs.carleton.ca/~paulv/toolsjewels.html),
+[Chapter 10](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf),
+sections 10.0 - 10.2.
+
+## Firewall basics
+
 - Defensive technology
 - Designed to screen out incoming traffic at the perimeter of an organization's
   network and also authorize outbound traffic
 
   - but also can be on individual machines
 
-- see
-  [Figure 10.1, page 283](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf)
-
 - note an organization may want to inspect outgoing traffic to ensure sensitive
   data isn't exfiltrated
+
+![basic firewall diagram](/images/security-book/figure-10.1.png)
+
+- basic idea is that by default, no traffic comes in unless explicitly
+  authorized
+- outgoing traffic is allowed, along with any return traffic on the same
+  connection
 
 ## Packet-filter firewall
 
@@ -30,29 +43,46 @@ layout: ../../../layouts/SemesterMarkdown.astro
   - protocol
 
 - may also use ICMP type and code
+
 - _stateless_ filters vs _stateful_ filters
 
-  - e.g. can track TCP connection states, treat packets belonging to an accepted
-    TCP connection different from new connections
+  - a stateless filter examines each packet independently
+  - a stateful filter can track TCP connection states, and thus treat packets
+    belonging to an accepted TCP connection different from new connections
 
-- see
-  [Table 10.1, page 285](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf),
-  and the text above it explaining each type of rule
+![example packet-filter firewall rules](/images/security-book/table-10.1.png)
 
-- the "perimeter" doesn't take into account personal devices, USB drives, phones
+- example rules:
 
-- limitations:
-  [see list on page 286](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf)
+  - Rules 1-2 stop spoofed source IP addresses
+  - Rule 3 denies packets from a known spam server
+  - Rules 4-7 are for mail traffic -- allow incoming connections to a mail
+    server (port 25) and responses, outgoing mail connections and responses
+  - Rules 8-A allow outbound HTTP onnection requests, inbound responses, but
+    reject inbound HTTP connection requests
+  - Rules B-D are for DNS traffic -- outgoing queries, incoming queries and
+    responsees
+  - Rules E-H allow incoming and outgoing pings
+  - Rule Z is to deny traffic by default when no other rules match
 
-- advantages of dedicated firewalls:
-  [see list on page 287](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf)
+- limitations of firewalls
+
+  - assumes a true perimeter exists -- now we have personal devices, USB drives,
+    phones making the network defense more complicated
+  - vulnerable to malicious insiders
+  - trusted users may make bad connections
+  - can be transited with tunnelling (e.g. a VPN)
+  - can't screen encrypted content
 
 ## Proxy firewalls
 
 - _circuit-level proxy firewalls_: relay an entire connection, either allow or
   deny, and then relay bytes
 
-  - [see Figure 10.2, page 289](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf)
+![circuit-level proxy firewall](/images/security-book/figure-10.2.png)
+
+- circuit-level proxy firewall
+
   - uses a socket daemon, _sockd_, on the firewall, and the SOCKS protocol to
     communicate
   - user --- sockd --- Internet site
@@ -62,15 +92,18 @@ layout: ../../../layouts/SemesterMarkdown.astro
   - connection is allowed or disallowed
 
 - _application-level proxy firewalls_: relay application-specific traffic
-  - [see Figure 10.3, page 290](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf)
+
+![application-level proxy firewall](/images/security-book/figure-10.3.png)
+
+- application-level proxy firewall
   - able to inspect contents of packets since they have knowledge of the
     protocol
   - can remove malicious JavaScript, emails, etc.
 
 ## Enterprise firewall architectures
 
-- see
-  [Figure 10.4, page 292](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf)
+![enterprise firewall architecture](/images/security-book/figure-10.4.png)
+
 - the firewall (3) is exposed to the hostile newtork, so it maybe called a
   _bastion host_
 - the web server and DNS server are public-facing, so they sit on a network
