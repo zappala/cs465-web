@@ -329,6 +329,7 @@ units:
             sections: 10.3 - 10.5
         project:
           title: Web Exploit and Patch
+          link: /projects/web-exploit-and-patch
           due: Dec 6
       - day: Mon
         date: Nov 18
