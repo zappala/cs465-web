@@ -292,7 +292,7 @@ units:
         homework:
           title: Web vulnerabilities
           link: /homework/web-vulnerabilities
-          due: Nov 20
+          due: Nov 25
       - day: Fri
         date: Nov 8
         lectures:
