@@ -375,6 +375,7 @@ units:
           - title: Threat modeling practice
         project:
           title: Threat modeling
+          link: /projects/threat-modeling
           due: Dec 11
   - title: Additional Topics
     days:
