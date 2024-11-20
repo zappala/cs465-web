@@ -343,7 +343,7 @@ units:
       - day: Wed
         date: Nov 20
         lectures:
-          - title: DOS, address resolution attacks
+          - title: DoS, address resolution attacks
             link: /notes/dos-and-address-resolution-attacks
         readings:
           - title: Computer Security and the Internet
@@ -354,35 +354,30 @@ units:
       - day: Fri
         date: Nov 22
         lectures:
-          - title: Concepts and principles
-            link: /notes/concepts-and-principles
-        readings:
-          - title: Computer Security and the Internet
-            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 1.0 - 1.2, 1.4
-      - day: Mon
-        date: Nov 25
-        lectures:
           - title: Threat modeling
             link: /notes/threat-modeling
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 1.5 - 1.8
-        project:
-          title: Threat modeling
-          due: Dec 11
+            sections: 1.0 - 1.2, 1.4 - 1.8
+      - day: Mon
+        date: Nov 25
+        holiday: Thanksgiving
       - day: Wed
         date: Nov 27
         holiday: Thanksgiving
       - day: Fri
         date: Nov 29
         holiday: Thanksgiving
-
-  - title: Usable Security and Privacy
-    days:
       - day: Mon
         date: Dec 2
+        lectures:
+          - title: Threat modeling practice
+        project:
+          title: Threat modeling
+          due: Dec 11
+  - title: Additional Topics
+    days:
       - day: Wed
         date: Dec 4
       - day: Fri

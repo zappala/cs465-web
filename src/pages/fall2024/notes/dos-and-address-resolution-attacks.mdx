@@ -4,12 +4,19 @@ layout: ../../../layouts/SemesterMarkdown.astro
 
 # Denial of Service and address resolution attacks
 
-## Denial of Service
+## Questions on the readings
 
-- deny legitimate users access to a service by degrading performance or causing
-  failure
-- floding attacks exhaust resources -- network bandwidth, CPU, memory, disk
-  space
+The readings today are from
+[Computer Security and the Internet](https://people.scs.carleton.ca/~paulv/toolsjewels.html),
+[Chapter 11](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch11-rev1.pdf),
+sections 11.4 - 11.5.
+
+## Denial of Service (DoS) attacks
+
+- an attacker denies legitimate users access to a service by degrading
+  performance or causing failure
+  - _flooding attacks_ exhaust resources -- network bandwidth, CPU, memory, disk
+    space
 - motives
 
   - financial gain via extortion
@@ -24,19 +31,45 @@ layout: ../../../layouts/SemesterMarkdown.astro
   - may use a botnet
   - may spoof source addresses
 
-- [see examples, page 321](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch11-rev1.pdf),
-  covering DoS by poison packets, SYN flooding
+- historical examples: malformed packets can trigger implementation errors that
+  terminate a process or crash the operating system
 
-- see description of UDP and ICMP floods
-- [see example of smurf attack](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch11-rev1.pdf)
+  - Ping of Death was a ping (ICMP echo request) sent as packet fragments whose
+    total length exceeds the 65,535-byte maximum IP packet size -- crashed
+    numerous TCP/IP stack implementations circa 1996 by overflowing allocated
+    storage
+  - Teardrop sent an IP packet in fragments with fragment offset fields set so
+    that reassembly resulted in overlapping pieces—crashing TCP/IP reassembly
+    code in some implementations, exhausting resources in others
+  - LAND sent a SYN packet with source address and port equal to destination
+    address and port, crashing some implementations that sent responses to
+    themselves repeatedly
 
-- key concept: amplification
+- historical example: spoofing
+
+  - SYN flooding is an attack where a client sends a SYN packet to open a TCP
+    connection but never completes the connection. Older TCP implementations
+    kept the connection in "half open" state in this case. If an attacker sent
+    many SYN packets, they could fill this resource, causing the operating
+    system to reject any subsequent TCP connections.
+  - PING (ICMP echo request) flooding
+  - UDP flooding
+  - A _smurf flood_ sends a ping (ICMP echo request) to the broadcast address of
+    a network. Listening hosts all send an ICMP echo reply. Can also be launched
+    from a compromised host in a network. Note this is an _amplification_
+    attack, which is particularly useful for an attacker.
+
+- note that any Internet host can send any of these packets
+- high impact, but easily fixed
 
 ## Defenses
 
 - ingress filtering and egress filtering
   - e.g. drop packets sent to broadcast addresses
   - e.g. filter out packets not originating from accepted hosts
+
+![illustration of ingress and egress filtering](/images/security-book/figure-11.6.png)
+
 - disabling unused services
 - rate limiting of ICMP responses
 - patching software that is vulnerable
@@ -44,9 +77,9 @@ layout: ../../../layouts/SemesterMarkdown.astro
 
 ## DNS attacks
 
-- affects both DNS and ARP
-- [see Figure 11.7, page 326](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch11-rev1.pdf))
-  for an example of a DNS query resolution
+- DNS translates host names into IP addresses
+
+![How DNS works](/images/security-book/figure-11.7.png)
 
 - pharming attack -- falsifies name to address resolution
 - attack vectors
@@ -61,17 +94,23 @@ layout: ../../../layouts/SemesterMarkdown.astro
   - an attacker who can guess an ID (e.g. if not properly randomized) can send a
     response to a cache, e.g. using a spoofed source address, and get the DNS
     cache to cache the bad response
-- a general defense is DNSSEC, but its deployment has been slow
+- a general defense is DNSSEC, but its
+  [deployment has been slow](https://stats.labs.apnic.net/dnssec)
+  - see also
+    [Verisign DNSSEC Scoreboard](https://www.verisign.com/en_US/company-information/verisign-labs/internet-security-tools/dnssec-scoreboard/index.xhtml)
 
 ## ARP attacks
 
-- [see Figure 11.8, page 328](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch11-rev1.pdf)
-  for an overview of an ARP attack
+- ARP spoofing
+
+![ARP Spoofing Attack](/images/security-book/figure-11.8.png)
+
+- attack
 
   - false ARP replies that are cached
   - the problem is that replies are not authenticated
 
 - defense
   - static, read-only tables
-  - cross-checking ARP responses
-  - firewalls
+  - switches that inspect ARP responses and block suspicious ones
+  - long-term it would be nice to improve ARP itself
