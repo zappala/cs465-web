@@ -381,17 +381,36 @@ units:
     days:
       - day: Wed
         date: Dec 4
+        lectures:
+          - title:
+              "Academic and Industry Talks: IoT Vulnerabilities, Social
+              Engineering"
+            link: /notes/academic-and-industry-talks
       - day: Fri
         date: Dec 6
+        lectures:
+          - title:
+              "Academic and Industry Talks: Jailbreaking LLMs, Exploiting Video
+              Decoders, Invisible Vulnerabilities"
+            link: /notes/academic-and-industry-talks
       - day: Mon
         date: Dec 9
+        lectures:
+          - title:
+              "Academic and Industry Talks: Protective Technology, Reverse
+              Engineering"
+            link: /notes/academic-and-industry-talks
       - day: Wed
         date: Dec 11
+        lectures:
+          - title: "Academic and Industry Talks: Usable Security and Privacy"
+            link: /notes/academic-and-industry-talks
 
   - title: Final Project
     days:
-      - day: TBD
-        date: TBD
+      - day: Wed
+        date: Dec 13
         project:
           title: Final Project
-          due: TBD
+          link: /projects/final-project
+          due: Dec 18
