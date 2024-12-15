@@ -2,6 +2,12 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import figure_6_3 from "@/images/security-book/figure-6.3.png";
+import figure_6_4 from "@/images/security-book/figure-6.4.png";
+import figure_6_5 from "@/images/security-book/figure-6.5.png";
+
+
 # Stack Overflows
 
 ## Introductions
@@ -22,7 +28,7 @@ sections 6.3
 
 - Understand memory layout of a process: Figure 6.3, page 166
 
-![Common memory layout](/images/security-book/figure-6.3.png)
+<Image alt="Common memory layout" src={figure_6_3} />
 
 - Data = initialized global variables
 - BSS = block starting symbol, where unitialized global memory is stored, eg. in
@@ -33,7 +39,7 @@ sections 6.3
 
 - Understand how a process uses the stack: Figure 6.4, page 167
 
-![Function call sequence](/images/security-book/figure-6.4.png)
+<Image alt="Function call sequence" src={figure_6_4} />
 
 - In a stack overflow, the attacker tries to write code to the stack and get the
   OS to execute it
@@ -41,7 +47,7 @@ sections 6.3
 - Understand the basics of a buffer overflow attack: Example, _Buffer Overflow_,
   page 167, Figure 6.5, page 168
 
-![Stack overflow attack](/images/security-book/figure-6.5.png)
+<Image alt="Stack overflow attack" src={figure_6_5} />
 
 - Note, this example assumes 4-byte memory words, but it works regardless of
   word size

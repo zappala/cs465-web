@@ -2,6 +2,14 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import cryptographic_hash_function from "@/images/notes/cryptographic-hash-function.png";
+import figure_2_10 from "@/images/security-book/figure-2.10.png";
+import table_2_1 from "@/images/security-book/table-2.1.png";
+import figure_2_11 from "@/images/security-book/figure-2.11.png";
+import figure_2_12 from "@/images/security-book/figure-2.12.png";
+
+
 # Hashing and message authentication
 
 ## Introductions
@@ -17,13 +25,13 @@ sections 2.5, 2.6
 
 ## Cryptographic hash functions
 
-![cryptographic hash function](/images/notes/cryptographic-hash-function.png)
+<Image alt="cryptographic hash function" src={cryptographic_hash_function} />
 
 A cryptographic hash function takes an arbitrary length string as input and
 produces a fixed length hash as an output. The output is also called a message
 digest or fingerprint in some applications.
 
-![cryptographic hash function](/images/security-book/figure-2.10.png)
+<Image alt="cryptographic hash function" src={figure_2_10} />
 
 - desirable properties:
 
@@ -42,7 +50,7 @@ digest or fingerprint in some applications.
 - Schneier (Secrets and Lies): _"They are probably the single most useful tool
   in a cryptographer's toolbox"_
 
-![common cryptographic hash functions](/images/security-book/table-2.1.png)
+<Image alt="common cryptographic hash functions" src={table_2_1} />
 
 - MD5 is deprecated
 
@@ -64,7 +72,7 @@ digest or fingerprint in some applications.
 When we use digital signatures, we typically sign a hash instead of the original
 message or file.
 
-![digital signature used to sign a hash of a message](/images/security-book/figure-2.11.png)
+<Image alt="digital signature used to sign a hash of a message" src={figure_2_11} />
 
 - hash needs to be collision resistant
 
@@ -74,7 +82,7 @@ A message authentication code covers both the integrity of the data and the
 identity of the party that sent the message (since the other party is the only
 one that shares a secret key).
 
-![message authentication with a MAC](/images/security-book/figure-2.12.png)
+<Image alt="message authentication with a MAC" src={figure_2_12} />
 
 - sender computes and sends a message authentication code (MAC), which the
   receiver verifies

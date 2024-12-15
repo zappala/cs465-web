@@ -2,6 +2,19 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import table_10_2 from "@/images/security-book/table-10.2.png";
+import figure_10_5 from "@/images/security-book/figure-10.5.png";
+import figure_10_6 from "@/images/security-book/figure-10.6.png";
+import figure_10_7 from "@/images/security-book/figure-10.7.png";
+import figure_10_8 from "@/images/security-book/figure-10.8.png";
+import figure_10_9 from "@/images/security-book/figure-10.9.png";
+import figure_10_10 from "@/images/security-book/figure-10.10.png";
+import figure_10_11 from "@/images/security-book/figure-10.11.png";
+import figure_10_12 from "@/images/security-book/figure-10.12.png";
+import figure_10_13 from "@/images/security-book/figure-10.13.png";
+
+
 # SSH, VPNs, and IPSec
 
 ## Questions on the readings
@@ -21,11 +34,11 @@ sections 10.3 - 10.5.
 - we used to have cleartext utilities for working with remote hosts, and now
   there are encrypted equivalents:
 
-![encrypted equivalents](/images/security-book/table-10.2.png)
+<Image alt="encrypted equivalents" src={table_10_2} />
 
 - high level overview of ssh:
 
-![high level overview of ssh](/images/security-book/figure-10.5.png)
+<Image alt="high level overview of ssh" src={figure_10_5} />
 
 - protocols
 
@@ -59,7 +72,7 @@ sections 10.3 - 10.5.
       independent channel -- not done in practice
   - in enterprises, use a CA model, with a CA managed by the enterprise
 
-![SSH port forwarding](/images/security-book/figure-10.6.png)
+<Image alt="SSH port forwarding" src={figure_10_6} />
 
 - you are used to using `ssh` to manually make a connection, but it can also be
   set up as a tunnel:
@@ -73,7 +86,7 @@ sections 10.3 - 10.5.
 
 - How scp works:
 
-![how scp works](/images/security-book/figure-10.7.png)
+<Image alt="how scp works" src={figure_10_7} />
 
 - old model of trusted logins illustrates the dangers of transited trust
   - used to have a file of trusted hosts in `/etc/hosts.equiv`
@@ -87,11 +100,11 @@ sections 10.3 - 10.5.
 - want to extend a private network (home or enterprise) to other locations with
   an encrypted tunnel:
 
-![encrypted tunnel](/images/security-book/figure-10.8.png)
+<Image alt="encrypted tunnel" src={figure_10_8} />
 
 - can use hosts or gateways as endpoints:
 
-![types of VPNs](/images/security-book/figure-10.9.png)
+<Image alt="types of VPNs" src={figure_10_9} />
 
 - encrypted tunnels make it difficult for an enterprise to filter malicious
   content, catch data exfiltration, block unwanted protocols or sites
@@ -100,7 +113,7 @@ sections 10.3 - 10.5.
 
 - provide security at the network layer:
 
-![where IPsec fits in the network stack](/images/security-book/figure-10.10.png)
+<Image alt="where IPsec fits in the network stack" src={figure_10_10} />
 
 - used for VPNs
 
@@ -112,7 +125,7 @@ sections 10.3 - 10.5.
 
 - Authentication Header (AH)
 
-![Authentication Header](/images/security-book/figure-10.11.png)
+<Image alt="Authentication Header" src={figure_10_11} />
 
 - used for authentication only (no encryption)
 
@@ -124,7 +137,7 @@ sections 10.3 - 10.5.
 
 - Encapsulating Security Payload (ESP)
 
-![Encapsulating Security Payload](/images/security-book/figure-10.12.png)
+<Image alt="Encapsulating Security Payload" src={figure_10_12} />
 
 - used for confidentiality in addition to authentication
 
@@ -132,7 +145,7 @@ sections 10.3 - 10.5.
 
 - small differences in transport mode vs tunnel mode:
 
-![transport mode vs tunnel mode](/images/security-book/figure-10.13.png)
+<Image alt="transport mode vs tunnel mode" src={figure_10_13} />
 
 - note that in tunnel mode, the IPsec payload includes an IP header -- this is
   to send the packet to the host after exiting the tunnel, which terminates at a

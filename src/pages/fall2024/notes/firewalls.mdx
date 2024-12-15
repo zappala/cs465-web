@@ -2,6 +2,14 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import figure_10_1 from "@/images/security-book/figure-10.1.png";
+import table_10_1 from "@/images/security-book/table-10.1.png";
+import figure_10_2 from "@/images/security-book/figure-10.2.png";
+import figure_10_3 from "@/images/security-book/figure-10.3.png";
+import figure_10_4 from "@/images/security-book/figure-10.4.png";
+
+
 # Firewalls
 
 ## Questions on the readings
@@ -22,7 +30,7 @@ sections 10.0 - 10.2.
 - note an organization may want to inspect outgoing traffic to ensure sensitive
   data isn't exfiltrated
 
-![basic firewall diagram](/images/security-book/figure-10.1.png)
+<Image alt="basic firewall diagram" src={figure_10_1} />
 
 - basic idea is that by default, no traffic comes in unless explicitly
   authorized
@@ -50,7 +58,7 @@ sections 10.0 - 10.2.
   - a stateful filter can track TCP connection states, and thus treat packets
     belonging to an accepted TCP connection different from new connections
 
-![example packet-filter firewall rules](/images/security-book/table-10.1.png)
+<Image alt="example packet-filter firewall rules" src={table_10_1} />
 
 - example rules:
 
@@ -79,7 +87,7 @@ sections 10.0 - 10.2.
 - _circuit-level proxy firewalls_: relay an entire connection, either allow or
   deny, and then relay bytes
 
-![circuit-level proxy firewall](/images/security-book/figure-10.2.png)
+<Image alt="circuit-level proxy firewall" src={figure_10_2} />
 
 - circuit-level proxy firewall
 
@@ -93,7 +101,7 @@ sections 10.0 - 10.2.
 
 - _application-level proxy firewalls_: relay application-specific traffic
 
-![application-level proxy firewall](/images/security-book/figure-10.3.png)
+<Image alt="application-level proxy firewall" src={figure_10_3} />
 
 - application-level proxy firewall
   - able to inspect contents of packets since they have knowledge of the
@@ -102,7 +110,7 @@ sections 10.0 - 10.2.
 
 ## Enterprise firewall architectures
 
-![enterprise firewall architecture](/images/security-book/figure-10.4.png)
+<Image alt="enterprise firewall architecture" src={figure_10_4} />
 
 - the firewall (3) is exposed to the hostile newtork, so it maybe called a
   _bastion host_

@@ -2,6 +2,16 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import figure_3_3 from "@/images/security-book/figure-3.3.png";
+import equation_3_4 from "@/images/security-book/equation-3.4.png";
+import figure_3_4 from "@/images/security-book/figure-3.4.png";
+import table_3_2 from "@/images/security-book/table-3.2.png";
+import figure_3_6 from "@/images/security-book/figure-3.6.png";
+import jain_figure9 from "@/images/notes/jain-figure9.png";
+import figure_3_5 from "@/images/security-book/figure-3.5.png";
+
+
 # Multi-factor authentication
 
 ## Introductions
@@ -31,9 +41,9 @@ sections 3.4, 3.5
 - developed by [Leslie Lamport](https://en.wikipedia.org/wiki/Leslie_Lamport),
   also the inventor of LaTeX, the Paxos consensus algorithm, lots of other stuff
 
-![Lamport hash chains](/images/security-book/figure-3.3.png)
+<Image alt="Lamport hash chains" src={figure_3_3} />
 
-![Lamport hash chain details](/images/security-book/equation-3.4.png)
+<Image alt="Lamport hash chain details" src={equation_3_4} />
 
 - must be seeded with a shared random number
 - work backward from _t_ repeated hashes
@@ -42,7 +52,7 @@ sections 3.4, 3.5
 
 ## Passcode generators and TOTP
 
-![passcode generators](/images/security-book/figure-3.4.png)
+<Image alt="passcode generators" src={figure_3_4} />
 
 - requires a secret to be shared
 - used as input to a function, along with a challenge
@@ -69,7 +79,7 @@ sections 3.4, 3.5
 
 - "something you are" instead of "something you know" or "something you have"
 
-![types of biometric authentication](/images/security-book/table-3.2.png)
+<Image alt="types of biometric authentication" src={table_3_2} />
 
 - advantages -- nothing to carry, no cognitive burden, ease of use, scalability
 - disadvantages -- can be compelled or done while sleeping, can't be
@@ -85,18 +95,18 @@ sections 3.4, 3.5
   - unlocking a password manager or banking app
 - system must be tuned based on false accepts and false rejects
 
-![tuning a biometric system baed on false rejects and false accepts](/images/security-book/figure-3.6.png)
+<Image alt="tuning a biometric system baed on false rejects and false accepts" src={figure_3_6} />
 
 - usually require a fallback in case of failure (e.g. a password)
 
 - a variety of attacks possible (from
   [Biometrics: a tool for information security](https://ieeexplore.ieee.org/document/1634356))
 
-![possible attacks on a biometric system](/images/notes/jain-figure9.png)
+<Image alt="possible attacks on a biometric system" src={jain_figure9} />
 
 ### Multiple factors
 
-![multi-factor authentication](/images/security-book/figure-3.5.png)
+<Image alt="multi-factor authentication" src={figure_3_5} />
 
 - important principles
 

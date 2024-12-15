@@ -2,6 +2,10 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import encrypted_communication_v1_protocol from "@/images/projects/encrypted-communication/v1/encrypted-communication-v1-protocol.png";
+
+
 # Project: Encrypted Communication
 
 ## Objectives
@@ -27,7 +31,7 @@ has been compiled for Linux.
 
 The client and server communicate using the following protocol:
 
-![encryption project](/images/projects/encrypted-communication/v1/encrypted-communication-v1-protocol.png)
+<Image alt="encryption project" src={encrypted_communication_v1_protocol} />
 
 - The client sends the server a Hello Message containing a nonce
 - The server responds with a Hello Message that includes its RSA public key (in

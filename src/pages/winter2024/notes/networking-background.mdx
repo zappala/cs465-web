@@ -2,9 +2,33 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import worldBlack from "@/images/notes/worldBlack.jpg";
+import fig01_01 from "@/images/notes/fig01_01.png";
+import fig01_11 from "@/images/notes/fig01_11.png";
+import internet_structure from "@/images/notes/internet-structure.png";
+import fig01_08 from "@/images/notes/fig01_08.png";
+import fig01_10 from "@/images/notes/fig01_10.png";
+import fig01_19 from "@/images/notes/fig01_19.png";
+import fig01_20 from "@/images/notes/fig01_20.png";
+import fig02_19 from "@/images/notes/fig02_19.png";
+import fig02_21 from "@/images/notes/fig02_21.png";
+import fig03_07 from "@/images/notes/fig03_07.png";
+import fig03_28 from "@/images/notes/fig03_28.png";
+import fig03_31 from "@/images/notes/fig03_31.png";
+import fig03_34 from "@/images/notes/fig03_34.png";
+import fig03_35 from "@/images/notes/fig03_35.png";
+import fig03_36 from "@/images/notes/fig03_36.png";
+import fig03_39 from "@/images/notes/fig03_39.png";
+import fig03_29 from "@/images/notes/fig03_29.png";
+import fig04_13 from "@/images/notes/fig04_13.png";
+import fig04_24 from "@/images/notes/fig04_24.png";
+import fig05_16 from "@/images/notes/fig05_16.png";
+
+
 # Networking background
 
-![high level map of the Internet](/images/notes/worldBlack.jpg)
+<Image alt="high level map of the Internet" src={worldBlack} />
 
 ## Internet components and structure
 
@@ -14,20 +38,20 @@ The Internet is:
 - composed of networks
 - composed of routers, links, a wide variety of edge devices
 
-![Internet components](/images/notes/fig01_01.png)
+<Image alt="Internet components" src={fig01_01} />
 
 - networks connect using customer-provider relationships (usually in a
   contract!)
 - tier-1 ISPs provide international coverage, treat each other as peers
 
-![Internet components](/images/notes/fig01_11.png)
+<Image alt="Internet components" src={fig01_11} />
 
 - [Lumen's network map](https://www.lumen.com/en-us/resources/network-maps.html)
   shows what a Tier 1 ISP looks like
 
 - the Internet is only roughly hierarchical:
 
-![Internet structure](/images/notes/internet-structure.png)
+<Image alt="Internet structure" src={internet_structure} />
 
 - _PoP (Point of Presence)_: router(s) in the provider's network where customer
   ISPs can connect
@@ -59,11 +83,11 @@ The Internet is:
 
 circuit switching:
 
-![circuit switching](/images/notes/fig01_08.png)
+<Image alt="circuit switching" src={fig01_08} />
 
 packet switching:
 
-![packet switching](/images/notes/fig01_10.png)
+<Image alt="packet switching" src={fig01_10} />
 
 - makes Internet routers very simple, with complexity at the edges
 - see
@@ -86,7 +110,7 @@ packet switching:
 
 ## Internet architecture
 
-![networking stack](/images/notes/fig01_19.png)
+<Image alt="networking stack" src={fig01_19} />
 
 - layering helps to build complex systems
 
@@ -96,7 +120,7 @@ packet switching:
 
 - encapsulation vs decapsulation
 
-![encapsulation vs decapsulation](/images/notes/fig01_20.png)
+<Image alt="encapsulation vs decapsulation" src={fig01_20} />
 
 ### Why is the Internet so vulnerable to attacks?
 
@@ -134,8 +158,8 @@ packet switching:
   - example: cs.byu.edu
   - may be 127 levels deep, 63 characters per label, 255 characters per name
 
-![DNS hierarchy](/images/notes/fig02_19.png)
-![DNS hierarchy](/images/notes/fig02_21.png)
+<Image alt="DNS hierarchy" src={fig02_19} />
+<Image alt="DNS hierarchy" src={fig02_21} />
 
 - resolver contacts root name server if it doesn't have the mapping
 - each server that doesn't know the mapping tells the local name server the
@@ -152,7 +176,7 @@ packet switching:
   - no congestion control (won't slow down, you can send as much and as fast as
     you want)
 
-![UDP header](/images/notes/fig03_07.png)
+<Image alt="UDP header" src={fig03_07} />
 
 - defined in [RFC 768, from 1980](https://www.ietf.org/rfc/rfc768.txt)
 
@@ -165,14 +189,14 @@ packet switching:
 
 ## TCP
 
-![TCP segmentation](/images/notes/fig03_28.png)
+<Image alt="TCP segmentation" src={fig03_28} />
 
 - _pipelining_: multiple data segments outstanding at once
 - VERY important to use the high bandwidth available on the Internet
 - uses congestion control to slow down when the network is overloaded, converge
   to a roughly fair allocation of bandwidth among compeeting flows
 
-![TCP sequence numbers](/images/notes/fig03_31.png)
+<Image alt="TCP sequence numbers" src={fig03_31} />
 
 - sequence number: byte number of this segment within the byte stream
 - ACK number: sequence number of **next** byte expected from sender
@@ -186,17 +210,17 @@ packet switching:
 
 ### TCP retransmission scenarios
 
-![TCP retransmission scenario](/images/notes/fig03_34.png)
-![TCP retransmission scenario](/images/notes/fig03_35.png)
-![TCP retransmission scenario](/images/notes/fig03_36.png)
+<Image alt="TCP retransmission scenario" src={fig03_34} />
+<Image alt="TCP retransmission scenario" src={fig03_35} />
+<Image alt="TCP retransmission scenario" src={fig03_36} />
 
 ### TCP handshake
 
-![TCP handshake](/images/notes/fig03_39.png)
+<Image alt="TCP handshake" src={fig03_39} />
 
 ### TCP header
 
-![TCP header](/images/notes/fig03_29.png)
+<Image alt="TCP header" src={fig03_29} />
 
 - _sequence and ACK number_: count in terms of bytes
 - flags
@@ -214,7 +238,7 @@ packet switching:
 - very simple
 - has lasted nearly years (since ~1978!)
 
-![IPv4 header](/images/notes/fig04_13.png)
+<Image alt="IPv4 header" src={fig04_13} />
 
 - source IP address (easily spoofed)
 - destination IP address
@@ -236,7 +260,7 @@ packet switching:
 
 ## IPv6
 
-![IPv6 header](/images/notes/fig04_24.png)
+<Image alt="IPv6 header" src={fig04_24} />
 
 - simplified
 - result of negotiation
@@ -251,7 +275,7 @@ packet switching:
 
 ## Link layer
 
-![LAN](/images/notes/fig05_16.png)
+<Image alt="LAN" src={fig05_16} />
 
 - MAC addresses
 

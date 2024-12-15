@@ -2,6 +2,11 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import entity_authentication from "@/images/notes/entity-authentication.png";
+import mutual_entity_authentication from "@/images/notes/mutual-entity-authentication.png";
+
+
 # Entity Authentication
 
 ## Key Concepts
@@ -19,11 +24,11 @@ layout: ../../../layouts/SemesterMarkdown.astro
 
 - Unilateral: Alice wants Bob to prove he has the secret
 
-![entity authentication](/images/notes/entity-authentication.png)
+<Image alt="entity authentication" src={entity_authentication} />
 
 - Mutual: Alice and Bob prove to each other they have the secret
 
-![mutual-entity authentication](/images/notes/mutual-entity-authentication.png)
+<Image alt="mutual-entity authentication" src={mutual_entity_authentication} />
 
 ### Key Establishment
 

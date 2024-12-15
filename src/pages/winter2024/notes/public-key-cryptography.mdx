@@ -2,6 +2,11 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import public_key_cryptography from "@/images/notes/public-key-cryptography.png";
+import digital_signatures from "@/images/notes/digital-signatures.png";
+
+
 # Public Key Encryption
 
 ## Ungraded Quiz
@@ -14,7 +19,7 @@ layout: ../../../layouts/SemesterMarkdown.astro
 
 ### Public Key Cryptography
 
-![public key cryptography](/images/notes/public-key-cryptography.png)
+<Image alt="public key cryptography" src={public_key_cryptography} />
 
 - Each party creates a separate _key pair_, (public key, private key).
 - If Alice knows Bob's public key, she can encrypt a message using his public
@@ -45,7 +50,7 @@ layout: ../../../layouts/SemesterMarkdown.astro
 
 ### Digital Signatures
 
-![digital signatures](/images/notes/digital-signatures.png)
+<Image alt="digital signatures" src={digital_signatures} />
 
 - Alice can sign (encrypt) a message with her private key (s<sub>A</sub>). Bob
   can verify (decrypt) the message with Alice's public key (v<sub>A</sub>).

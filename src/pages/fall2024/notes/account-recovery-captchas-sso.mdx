@@ -2,6 +2,11 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import rfc6749_figure_1 from "@/images/notes/rfc6749-figure-1.png";
+import oauth_authorization_authlete2017 from "@/images/notes/oauth-authorization-authlete2017.webp";
+
+
 # Account recovery, CAPTCHAs, and SSO
 
 ## Introductions
@@ -59,14 +64,14 @@ recovery"**
 
 ### OAUTH2
 
-![abstract picture of OAUTH2 authorization flow](/images/notes/rfc6749-figure-1.png)
+<Image alt="abstract picture of OAUTH2 authorization flow" src={rfc6749_figure_1} />
 
 - when logging into a relying party (website), redirected to identity provider
 - user authenticates to identity provider, given a token, and redirected back to
   original relying party
 - relying party accepts token from identity provider as authenticating the user
 
-![more detailed OAUTH2 authorization flow](/images/notes/oauth-authorization-authlete2017.webp)
+<Image alt="more detailed OAUTH2 authorization flow" src={oauth_authorization_authlete2017} />
 
 - complex authentication flow, so easy for websites to make mistakes (see extra
   reading)

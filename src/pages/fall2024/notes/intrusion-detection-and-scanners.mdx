@@ -2,6 +2,12 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import figure_11_1 from "@/images/security-book/figure-11.1.png";
+import table_11_1 from "@/images/security-book/table-11.1.png";
+import figure_11_3 from "@/images/security-book/figure-11.3.png";
+
+
 # Intrusion detection and scanners
 
 ## Questions on the readings
@@ -39,7 +45,7 @@ sections 11.0 - 11.3.
   - examines events on a system, such as application logs, filesystem changes,
     system calls, CPU usage
 
-![IDS event outcomes](/images/security-book/figure-11.1.png)
+<Image alt="IDS event outcomes" src={figure_11_1} />
 
 - true positive, false positive (false alarm)
 - true negative, false negative (intrusion missed)
@@ -58,7 +64,7 @@ sections 11.0 - 11.3.
 
 ## Approaches to intrusion detection
 
-![approaches to intrusion detection](/images/security-book/table-11.1.png)
+<Image alt="approaches to intrusion detection" src={table_11_1} />
 
 - signature-based
   - signatures usually automatically updated from vendor
@@ -81,7 +87,7 @@ sections 11.0 - 11.3.
 - helpful even outside of intrusion detection
 - also used by attackers!
 
-![hub vs switch](/images/security-book/figure-11.3.png)
+<Image alt="hub vs switch" src={figure_11_3} />
 
 - because a hub broadcasts traffic, every host on the LAN sees all the traffic
 

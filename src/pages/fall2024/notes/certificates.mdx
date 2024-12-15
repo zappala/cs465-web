@@ -2,6 +2,14 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import table_8_1 from "@/images/security-book/table-8.1.png";
+import figure_8_7 from "@/images/security-book/figure-8.7.png";
+import figure_8_2 from "@/images/security-book/figure-8.2.png";
+import figure_8_1 from "@/images/security-book/figure-8.1.png";
+import signal_key_verification from "@/images/notes/signal-key-verification.png";
+
+
 # Certificates
 
 ## Introductions
@@ -27,7 +35,7 @@ sections 8.0-8.3, 8.5.
 - we typically use a set of standards from the International Telecommunication
   Union (ITU) -- X.509
 
-![Table 8.1 fields in a certificate](/images/security-book/table-8.1.png)
+<Image alt="Table 8.1 fields in a certificate" src={table_8_1} />
 
 ## Issuing a certificate
 
@@ -62,7 +70,7 @@ sections 8.0-8.3, 8.5.
   - but it won't necessarily be trusted!
 - the web uses a CA-based trust model:
 
-![Browser trust model](/images/security-book/figure-8.7.png)
+<Image alt="Browser trust model" src={figure_8_7} />
 
 - we use a trust model that assumes some trust anchors (trusted certificates)
   are shipped with browsers and operating systems
@@ -70,7 +78,7 @@ sections 8.0-8.3, 8.5.
 - each CA can forms a root of trust
 - other trust models are possible! the book covers some of them
 
-![verifying a certificate](/images/security-book/figure-8.2.png)
+<Image alt="verifying a certificate" src={figure_8_2} />
 
 - Validating a certificate chain
 
@@ -158,7 +166,7 @@ sections 8.0-8.3, 8.5.
 - _public key infrastructure_ (PKI) is used for managing public keys, private
   keys, and their use
 
-![elements of a PKI](/images/security-book/figure-8.1.png)
+<Image alt="elements of a PKI" src={figure_8_1} />
 
 - includes all aspects of using public key cryptography, from generation, to
   bootstrapping session keys, certificates, revocation
@@ -178,7 +186,7 @@ sections 8.0-8.3, 8.5.
   - verify public keys using an out-of-band channel
   - most users have no idea this exists or what it is for
 
-![signal key verification screens](/images/notes/signal-key-verification.png)
+<Image alt="signal key verification screens" src={signal_key_verification} />
 
 - Web of Trust / PGP
 

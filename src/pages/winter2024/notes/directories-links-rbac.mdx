@@ -2,13 +2,17 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import unix_filesystem from "@/images/notes/unix-filesystem.png";
+
+
 # Directories, links, and role-based access Control
 
 ## Key concepts
 
 ### Directories
 
-![UNIX file system hierarchy](/images/notes/unix-filesystem.png)
+<Image alt="UNIX file system hierarchy" src={unix_filesystem} />
 
 - remember, everything is a file
 - this means a directory entry is a file

@@ -2,6 +2,10 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import encryption_protocol from "@/images/projects/encryption-protocol.png";
+
+
 # Encryption
 
 ## Objectives
@@ -141,7 +145,7 @@ your client with your server, using encryption, with no issues.
 
 The protocol you will build should do the following:
 
-![encryption project](/images/projects/encryption-protocol.png)
+<Image alt="encryption project" src={encryption_protocol} />
 
 - The server generates an RSA key pair, (S, V)
 - The client sends the server a Hello message

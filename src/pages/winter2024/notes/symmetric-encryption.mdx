@@ -2,6 +2,19 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import symmetric_key_encryption from "@/images/notes/symmetric-key-encryption.png";
+import caesar_cipher from "@/images/notes/caesar-cipher.png";
+import ecb_mode_encryption from "@/images/notes/ecb-mode-encryption.png";
+import ecb_mode_decryption from "@/images/notes/ecb-mode-decryption.png";
+import ecb_mode_patterns from "@/images/notes/ecb-mode-patterns.png";
+import cbc_mode_encryption from "@/images/notes/cbc-mode-encryption.png";
+import cbc_mode_decryption from "@/images/notes/cbc-mode-decryption.png";
+import ctr_mode_encryption from "@/images/notes/ctr-mode-encryption.png";
+import ctr_mode_decryption from "@/images/notes/ctr-mode-decryption.png";
+import supernova from "@/images/notes/supernova.png";
+
+
 # Symmetric Encryption
 
 ## Ungraded Quiz
@@ -68,11 +81,11 @@ Symmetric encryption allows one party to send encrypted data to another party,
 provided they have a _shared key_. It is called symmetric encryption because the
 same key is used for decryption and encryption.
 
-![symmetric key encryption](/images/notes/symmetric-key-encryption.png)
+<Image alt="symmetric key encryption" src={symmetric_key_encryption} />
 
 Caesar cipher with a shift of 23:
 
-![caesar cipher with a shift of 23](/images/notes/caesar-cipher.png)
+<Image alt="caesar cipher with a shift of 23" src={caesar_cipher} />
 
 - Plaintext: THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
 - Ciphertext: QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD
@@ -123,9 +136,9 @@ Vernam cipher: see
 - Electronic Code Book
 - Not recommended due to its weaknesses
 
-![ECB mode encryption](/images/notes/ecb-mode-encryption.png)
-![ECB mode decryption](/images/notes/ecb-mode-decryption.png)
-![ECB mode patterns](/images/notes/ecb-mode-patterns.png)
+<Image alt="ECB mode encryption" src={ecb_mode_encryption} />
+<Image alt="ECB mode decryption" src={ecb_mode_decryption} />
+<Image alt="ECB mode patterns" src={ecb_mode_patterns} />
 
 ### CBC mode
 
@@ -136,8 +149,8 @@ Vernam cipher: see
 - encryption must be done sequentially by block
 - message must be padded to a multiple of the block size
 
-![CBC mode encryption](/images/notes/cbc-mode-encryption.png)
-![CBC mode decryption](/images/notes/cbc-mode-decryption.png)
+<Image alt="CBC mode encryption" src={cbc_mode_encryption} />
+<Image alt="CBC mode decryption" src={cbc_mode_decryption} />
 
 ### CTR mode
 
@@ -151,8 +164,8 @@ Vernam cipher: see
   individually XORed with the encrypted counter
 - encryption and decryption can be done in parallel
 
-![CTR mode encryption](/images/notes/ctr-mode-encryption.png)
-![CTR mode decryption](/images/notes/ctr-mode-decryption.png)
+<Image alt="CTR mode encryption" src={ctr_mode_encryption} />
+<Image alt="CTR mode decryption" src={ctr_mode_decryption} />
 
 ## The strength of cryptography
 
@@ -174,4 +187,4 @@ Vernam cipher: see
   - a supernova produces about 10<sup>51</sup> ergs
     - enough to cycle through a 219-bit counter
 
-![supernova](/images/notes/supernova.png)
+<Image alt="supernova" src={supernova} />

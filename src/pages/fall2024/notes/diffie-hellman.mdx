@@ -2,6 +2,11 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import diffie_hellman_wikipedia from "@/images/notes/diffie-hellman-wikipedia.png";
+import figure_4_4 from "@/images/security-book/figure-4.4.png";
+
+
 # Key Establishment
 
 ## Introductions
@@ -53,7 +58,7 @@ layout: ../../../layouts/SemesterMarkdown.astro
   - A: computes _K = (g<sup>b</sup>)<sup>a</sup> mod p_
   - depends on _g<sup>ab</sup> = g<sup>ba</sup>_
 
-![diffie-hellman](/images/notes/diffie-hellman-wikipedia.png)
+<Image alt="diffie-hellman" src={diffie_hellman_wikipedia} />
 
 - Computing a from g<sup>a</sup> and public parameters _g_ and _p_ is called the
   discrete logarithm problem -- computationally difficult if _p_ is chosen with
@@ -64,7 +69,7 @@ layout: ../../../layouts/SemesterMarkdown.astro
 
 - Textbook DH is unauthenticated -- an active attacker can easily subvert it.
 
-![subverting unauthenticated Diffie-Hellman](/images/security-book/figure-4.4.png)
+<Image alt="subverting unauthenticated Diffie-Hellman" src={figure_4_4} />
 
 - The STS protocol, discussed in the book, adds digital signatures to DH. We
   will later see DH in TLS.

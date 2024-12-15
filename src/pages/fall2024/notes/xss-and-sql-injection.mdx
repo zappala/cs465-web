@@ -2,6 +2,10 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import figure_9_6 from "@/images/security-book/figure-9.6.png";
+import figure_9_7 from "@/images/security-book/figure-9.7.png";
+
 # XSS and SQL injection
 
 ## Questions on the readings
@@ -62,7 +66,7 @@ File-not-found:
 - this sends the user to `bad.com`, and the attacker also gets the user's
   cookies for the good site
 
-![XSS attacks](/images/security-book/figure-9.6.png)
+<Image src={figure_9_6} alt="XSS attacks" />
 
 ### XSS impacts
 
@@ -101,7 +105,7 @@ File-not-found:
   - unauthorized account access
   - denial of service
 
-![web architecture](/images/security-book/figure-9.7.png)
+<Image src={figure_9_7} alt="web architecture" />
 
 ### Example attacks
 

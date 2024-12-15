@@ -2,6 +2,10 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import risk_matrix from "@/images/risk-matrix.svg";
+
+
 # Concepts and Principles
 
 ## Ungraded Quiz
@@ -75,7 +79,7 @@ Talk to your neighbor:
 
 - Alternative:
 
-![risk matrix](/images/risk-matrix.svg)
+<Image alt="risk matrix" src={risk_matrix} />
 
 ### Modeling Adversaries
 

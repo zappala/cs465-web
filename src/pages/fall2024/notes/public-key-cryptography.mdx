@@ -2,6 +2,14 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import public_key_cryptography from "@/images/notes/public-key-cryptography.png";
+import figure_2_8 from "@/images/security-book/figure-2.8.png";
+import digital_signatures from "@/images/notes/digital-signatures.png";
+import figure_2_9 from "@/images/security-book/figure-2.9.png";
+import hybrid_encryption_with_integrity from "@/images/notes/hybrid-encryption-with-integrity.png";
+
+
 # Public Key Cryptography
 
 ## Introductions
@@ -17,7 +25,7 @@ sections 2.3, 2.4
 
 ## Public Key Cryptography
 
-![public key cryptography](/images/notes/public-key-cryptography.png)
+<Image alt="public key cryptography" src={public_key_cryptography} />
 
 - Each party creates a separate _key pair_, (public key, private key). These are
   also called the encryption key and decryption key.
@@ -39,7 +47,7 @@ Usually, we use public key cryptography to _bootstrap_ a shared, symmetric key.
 This is because encrypting and decrypting with a symmetric key is much faster
 than encrypting and decrypting with public key cryptography.
 
-![hybrid encryption](/images/security-book/figure-2.8.png)
+<Image alt="hybrid encryption" src={figure_2_8} />
 
 - Alice chooses a symmetric key, then encrypts it with Bob's public key and
   sends it to him. Now they both have a symmetric key they can use to encrypt
@@ -53,7 +61,7 @@ We can also use public key cryptography to implement digital signatures. Here,
 private key is used to sign and the public key is used to verify. Note that
 signing uses encryption and verifying uses decryption.
 
-![digital signatures](/images/notes/digital-signatures.png)
+<Image alt="digital signatures" src={digital_signatures} />
 
 - Alice signs (encrypts) a message with her private key (s<sub>A</sub>). Bob can
   verify (decrypt) the message with Alice's public key (v<sub>A</sub>). Here we
@@ -61,7 +69,7 @@ signing uses encryption and verifying uses decryption.
 - Be sure to use separate keys for encryption/decryption and signing/verifying.
   signing/verifying.
 
-![digital signatures vs encryption](/images/security-book/figure-2.9.png)
+<Image alt="digital signatures vs encryption" src={figure_2_9} />
 
 - Digital signatures provide:
 
@@ -77,7 +85,7 @@ signing uses encryption and verifying uses decryption.
 
 ## Hybrid encryption with integrity
 
-![hybrid encryption with integrity](/images/notes/hybrid-encryption-with-integrity.png)
+<Image alt="hybrid encryption with integrity" src={hybrid_encryption_with_integrity} />
 
 - A digital signature of a hash of the message ensures Bob knows the message
   came from Alice the message hasn't been altered.

@@ -2,6 +2,12 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import tls_history from "@/images/notes/tls-history.png";
+import SSL_records from "@/images/notes/SSL-records.png";
+import tls_handshake_dh from "@/images/notes/tls-handshake-dh.png";
+
+
 # TLS and cookies
 
 ## Key Concepts
@@ -10,19 +16,19 @@ layout: ../../../layouts/SemesterMarkdown.astro
 
 #### SSL and TLS hsitory
 
-![TLS history](/images/notes/tls-history.png)
+<Image alt="TLS history" src={tls_history} />
 
 Source of image: SSL and TLS, Rescorla
 
 #### SSL record structure
 
-![SSL records](/images/notes/SSL-records.png)
+<Image alt="SSL records" src={SSL_records} />
 
 Source of image: Network and Security Essentials, Stallings
 
 #### TLS handshake and DH key exchange
 
-![TLS handshake and key exchange](/images/notes/tls-handshake-dh.png)
+<Image alt="TLS handshake and key exchange" src={tls_handshake_dh} />
 
 - one of the main purpose of the TLS handshake is to etablish a shared key
 

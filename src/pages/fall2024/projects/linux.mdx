@@ -2,6 +2,11 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import linux_dojo from "@/images/projects/linux-dojo.png";
+import access_control_dojo from "@/images/projects/access-control-dojo.png";
+
+
 # Project: Linux and Access Control
 
 For this project, complete the
@@ -18,12 +23,12 @@ dojo first.
 There are 84 total challenges in the Linux Luminarium. Turn in a screenshot
 showing your progress:
 
-![Linux Lumnarium modules](/images/projects/linux-dojo.png)
+<Image alt="Linux Lumnarium modules" src={linux_dojo} />
 
 Do the _first 12 challenges_ in the Access control dojo. Turn in a screenshot
 showing your progrss:
 
-![Access control modules](/images/projects/access-control-dojo.png)
+<Image alt="Access control modules" src={access_control_dojo} />
 
 Your score will be the total number of challenges you have completed.
 

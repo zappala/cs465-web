@@ -2,6 +2,10 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import table_9_3 from "@/images/security-book/table-9.3.png";
+
+
 # Phishing
 
 The readings today are from
@@ -100,7 +104,7 @@ misunderstandings that plague the lock icon._
 
 - a small selection of lessons learned from usable security research:
 
-![lessons from usable security research](/images/security-book/table-9.3.png)
+<Image alt="lessons from usable security research" src={table_9_3} />
 
 - see SOUPS for examples of research in usable security and privacy
   - browse through the titles and some selected abstracts

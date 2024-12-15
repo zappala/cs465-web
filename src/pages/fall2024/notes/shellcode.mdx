@@ -2,6 +2,11 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import basic_overflow from "@/images/notes/basic-overflow.png";
+import injecting_code from "@/images/notes/injecting-code.png";
+
+
 # Shellcode and privilege escalation
 
 ## Introductions
@@ -18,7 +23,7 @@ execute some functionality that was not intended. In our toy examples this code
 would print out a congratulations message or a flag, but a more dangerous piece
 of code might grant the user administrative privileges.
 
-![basic buffer overflow, overwriting the return address with a pointer into the code block](/images/notes/basic-overflow.png)
+<Image alt="basic buffer overflow, overwriting the return address with a pointer into the code block" src={basic_overflow} />
 
 ### Injecting code onto the stack
 
@@ -27,7 +32,7 @@ address to point to that code. The attack code could come before or after the
 return address. In case the return address doesn't point exactly to the start of
 the injected code, the attacker can add a NOP sled in front of the code.
 
-![buffer overflow that injects code onto the stack](/images/notes/injecting-code.png)
+<Image alt="buffer overflow that injects code onto the stack" src={injecting_code} />
 
 The injected code could execute:
 

@@ -2,21 +2,15 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
-import { Image } from "astro:assets";
-import figure_9_1 from "@/images/security-book/figure-9.1.png";
-import figure_9_2 from "@/images/security-book/figure-9.2.png";
-import DOM from "@/images/notes/DOM.png";
-
-
 # Web Background
 
 ## URLS
 
-<Image alt="parts of a URL" src={figure_9_1} />
+![parts of a URL](/images/security-book/figure-9.1.png)
 
 ## HTTP
 
-<Image alt="HTTP protocol" src={figure_9_2} />
+![HTTP protocol](/images/security-book/figure-9.2.png)
 
 - HTTP consists of request messages and responses messages
 
@@ -41,7 +35,7 @@ import DOM from "@/images/notes/DOM.png";
 
 - the browser interprets the HTML as a Document Object Model (DOM)
 
-<Image alt="Document Object Model" src={DOM} />
+![Document Object Model](/images/notes/DOM.png)
 
 ## Cookies
 

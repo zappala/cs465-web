@@ -2,6 +2,12 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import figure_6_6 from "@/images/security-book/figure-6.6.png";
+import figure_6_7 from "@/images/security-book/figure-6.7.png";
+import figure_6_8 from "@/images/security-book/figure-6.8.png";
+
+
 # Heap Overflows
 
 ## Introductions
@@ -20,11 +26,11 @@ sections 6.4.
 - Dangerous when the heap is both writeable and executable
 - see Figure 6.6 to understand why an attacker writing to the heap is dangerous
 
-![heap-based buffer overflow](/images/security-book/figure-6.6.png)
+<Image alt="heap-based buffer overflow" src={figure_6_6} />
 
 - see Figure 6.7 for an example of overwriting a function pointer:
 
-![corrupting a function pointer](/images/security-book/figure-6.7.png)
+<Image alt="corrupting a function pointer" src={figure_6_7} />
 
 - understand the types of state that can be corrupted
   - jump table -- see below
@@ -50,7 +56,7 @@ MyJump(int c)
 
 - understand elements of a heap spraying attack -- see Figure 6.8:
 
-![heap spraying attack](/images/security-book/figure-6.8.png)
+<Image alt="heap spraying attack" src={figure_6_8} />
 
 ## Class exercises
 

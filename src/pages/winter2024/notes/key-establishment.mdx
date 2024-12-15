@@ -2,6 +2,10 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import diffie_hellman from "@/images/notes/diffie-hellman.png";
+
+
 # Key Establishment
 
 ## Ungraded Quiz
@@ -42,7 +46,7 @@ layout: ../../../layouts/SemesterMarkdown.astro
 - Be able to understand and follow the DH protocol,
   [explained on page 101](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch4-rev1.pdf)
 
-![diffie-hellman](/images/notes/diffie-hellman.png)
+<Image alt="diffie-hellman" src={diffie_hellman} />
 
 - Computing a from g<sup>a</sup> and public parameters _g_ and _p_ is called the
   discrete logarithm problem -- computationally difficult if _p_ is chosen with

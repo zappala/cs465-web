@@ -2,6 +2,12 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import figure_11_6 from "@/images/security-book/figure-11.6.png";
+import figure_11_7 from "@/images/security-book/figure-11.7.png";
+import figure_11_8 from "@/images/security-book/figure-11.8.png";
+
+
 # Denial of Service and address resolution attacks
 
 ## Questions on the readings
@@ -68,7 +74,7 @@ sections 11.4 - 11.5.
   - e.g. drop packets sent to broadcast addresses
   - e.g. filter out packets not originating from accepted hosts
 
-![illustration of ingress and egress filtering](/images/security-book/figure-11.6.png)
+<Image alt="illustration of ingress and egress filtering" src={figure_11_6} />
 
 - disabling unused services
 - rate limiting of ICMP responses
@@ -79,7 +85,7 @@ sections 11.4 - 11.5.
 
 - DNS translates host names into IP addresses
 
-![How DNS works](/images/security-book/figure-11.7.png)
+<Image alt="How DNS works" src={figure_11_7} />
 
 - pharming attack -- falsifies name to address resolution
 - attack vectors
@@ -103,7 +109,7 @@ sections 11.4 - 11.5.
 
 - ARP spoofing
 
-![ARP Spoofing Attack](/images/security-book/figure-11.8.png)
+<Image alt="ARP Spoofing Attack" src={figure_11_8} />
 
 - attack
 

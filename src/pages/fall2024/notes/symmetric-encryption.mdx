@@ -2,6 +2,23 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import figure_2_1 from "@/images/security-book/figure-2.1.png";
+import symmetric_key_encryption from "@/images/notes/symmetric-key-encryption.png";
+import caesar_cipher from "@/images/notes/caesar-cipher.png";
+import figure_2_2 from "@/images/security-book/figure-2.2.png";
+import figure_2_3 from "@/images/security-book/figure-2.3.png";
+import ecb_mode_encryption from "@/images/notes/ecb-mode-encryption.png";
+import ecb_mode_decryption from "@/images/notes/ecb-mode-decryption.png";
+import ecb_mode_patterns from "@/images/notes/ecb-mode-patterns.png";
+import cbc_mode_encryption from "@/images/notes/cbc-mode-encryption.png";
+import cbc_mode_decryption from "@/images/notes/cbc-mode-decryption.png";
+import ctr_mode_encryption from "@/images/notes/ctr-mode-encryption.png";
+import ctr_mode_decryption from "@/images/notes/ctr-mode-decryption.png";
+import aes_gcm_wikipedia from "@/images/notes/aes-gcm-wikipedia.png";
+import supernova from "@/images/notes/supernova.png";
+
+
 # Symmetric Encryption
 
 ## Introductions
@@ -30,7 +47,7 @@ sections 2.0 - 2.2
 
 You should become accustomed to cryptographic notation such as is used below.
 
-![cryptographic notation](/images/security-book/figure-2.1.png)
+<Image alt="cryptographic notation" src={figure_2_1} />
 
 The importance of notation is that it cleary expresses a set of cryptographic
 operations. As you read academic papers or cryptography websites, you will find
@@ -72,20 +89,20 @@ Symmetric encryption allows one party to send encrypted data to another party,
 provided they have a _shared key_. It is called symmetric encryption because the
 same key is used for decryption and encryption.
 
-![symmetric key encryption](/images/notes/symmetric-key-encryption.png)
+<Image alt="symmetric key encryption" src={symmetric_key_encryption} />
 
 ### Caesar Cipher
 
 Caesar cipher with a shift of 23:
 
-![caesar cipher with a shift of 23](/images/notes/caesar-cipher.png)
+<Image alt="caesar cipher with a shift of 23" src={caesar_cipher} />
 
 - Plaintext: THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
 - Ciphertext: QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD
 
 ### Vernam cipher
 
-![Vernam cipher](/images/security-book/figure-2.2.png)
+<Image alt="Vernam cipher" src={figure_2_2} />
 
 - If using a random stream of bits for the key, and never reuse the same key,
   this is a _one-time pad_.
@@ -108,7 +125,7 @@ Caesar cipher with a shift of 23:
 
 AES is the most common block cipher.
 
-![AES cipher](/images/security-book/figure-2.3.png)
+<Image alt="AES cipher" src={figure_2_3} />
 
 - 128-bit block
 - 128, 192, or 256 bit key
@@ -127,9 +144,9 @@ where AES fits in
 - Electronic Code Book
 - Not recommended due to its weaknesses
 
-![ECB mode encryption](/images/notes/ecb-mode-encryption.png)
-![ECB mode decryption](/images/notes/ecb-mode-decryption.png)
-![ECB mode patterns](/images/notes/ecb-mode-patterns.png)
+<Image alt="ECB mode encryption" src={ecb_mode_encryption} />
+<Image alt="ECB mode decryption" src={ecb_mode_decryption} />
+<Image alt="ECB mode patterns" src={ecb_mode_patterns} />
 
 ### CBC mode
 
@@ -140,8 +157,8 @@ where AES fits in
 - encryption must be done sequentially by block
 - message must be padded to a multiple of the block size
 
-![CBC mode encryption](/images/notes/cbc-mode-encryption.png)
-![CBC mode decryption](/images/notes/cbc-mode-decryption.png)
+<Image alt="CBC mode encryption" src={cbc_mode_encryption} />
+<Image alt="CBC mode decryption" src={cbc_mode_decryption} />
 
 ### CTR mode
 
@@ -155,8 +172,8 @@ where AES fits in
   individually XORed with the encrypted counter
 - encryption and decryption can be done in parallel
 
-![CTR mode encryption](/images/notes/ctr-mode-encryption.png)
-![CTR mode decryption](/images/notes/ctr-mode-decryption.png)
+<Image alt="CTR mode encryption" src={ctr_mode_encryption} />
+<Image alt="CTR mode decryption" src={ctr_mode_decryption} />
 
 ### Padding
 
@@ -176,7 +193,7 @@ data (e.g. message header). Integrity covers the associated data as well.
 
 AES-GCM (Galois Counter Mode) is used in TLS, SSH, IPSec, OpenVPN.
 
-![AES GCM Wikipedia block diagram](/images/notes/aes-gcm-wikipedia.png)
+<Image alt="AES GCM Wikipedia block diagram" src={aes_gcm_wikipedia} />
 
 - notice that this is identical to CTR mode, with the Associated Data (called
   Auth Data here) added in later
@@ -208,7 +225,7 @@ AES-GCM (Galois Counter Mode) is used in TLS, SSH, IPSec, OpenVPN.
   - a supernova produces about 10<sup>51</sup> ergs
     - enough to cycle through a 219-bit counter
 
-![supernova](/images/notes/supernova.png)
+<Image alt="supernova" src={supernova} />
 
 ## Class exercises
 

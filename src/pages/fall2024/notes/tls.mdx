@@ -2,6 +2,12 @@
 layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
+import { Image } from "astro:assets";
+import tls_history from "@/images/notes/tls-history.png";
+import SSL_records from "@/images/notes/SSL-records.png";
+import tls_handshake_dh from "@/images/notes/tls-handshake-dh.png";
+
+
 # TLS
 
 ## Introductions
@@ -17,13 +23,13 @@ sections 9.2
 
 ## SSL and TLS hsitory
 
-![TLS history](/images/notes/tls-history.png)
+<Image alt="TLS history" src={tls_history} />
 
 Source of image: SSL and TLS, Rescorla
 
 ## SSL record structure
 
-![SSL records](/images/notes/SSL-records.png)
+<Image alt="SSL records" src={SSL_records} />
 
 Source of image: Network and Security Essentials, Stallings
 
@@ -33,7 +39,7 @@ Source of image: Network and Security Essentials, Stallings
 - note this shows Diffie-Hellman, but there are a variety of ways to complete
   the handshake
 
-![TLS handshake and key exchange](/images/notes/tls-handshake-dh.png)
+<Image alt="TLS handshake and key exchange" src={tls_handshake_dh} />
 
 - parts of the handshake
 
