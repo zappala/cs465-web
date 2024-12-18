@@ -1,5 +1,7 @@
 ---
 import "../assets/base.css";
+import { Image } from "astro:assets";
+import BYU_logo from "@/images/BYU-monogram-navy.svg";
 ---
 
 <!doctype html>
@@ -37,10 +39,10 @@ import "../assets/base.css";
     <header>
       <div class="bg-white text-byu pl-2 md:pl-7 pr-0 py-2 flex items-center">
         <a href="https://www.byu.edu"
-          ><img
-            class="h-8 md:h-10 pt-1"
+          ><Image
+            class="w-24 h-8 md:h-10 pt-1"
             alt="BYU logo"
-            src="/images/BYU-monogram-navy.svg"
+            src={BYU_logo}
           /></a
         >
         <a href="https://cs.byu.edu"

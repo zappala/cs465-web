@@ -7,13 +7,15 @@ export function Cards(props) {
 }
 
 export function Card(props) {
+  let alt_text = "Photo of " + props.name;
+  let src_text = "/images" + props.image;
   return (
     <div className="w-full md:flex shadow-lg p-3 border-t border-gray-200 dark:bg-gray-900 mb-3">
       {props.image && (
         <img
           className="w-28 h-28 rounded-full mr-8 ml-5"
-          src={"/images/" + props.image}
-          alt={"Photo of " + props.name}
+          src={src_text}
+          alt={alt_text}
         />
       )}
       <div className="md:mt-10 mr-5 ml-5">{Instructor(props)}</div>
