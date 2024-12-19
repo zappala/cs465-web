@@ -1,0 +1,181 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+import { Image } from "astro:assets";
+import figure_9_5 from "@/images/security-book/figure-9.5.png";
+
+
+# Same origin policy and CSRF attacks
+
+## Questions on the readings
+
+The readings today are from
+[Computer Security and the Internet](https://people.scs.carleton.ca/~paulv/toolsjewels.html),
+[Chapter 9](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch9-rev1.pdf),
+sections 9.4, 9.5.
+
+## Same origin policy
+
+Goals:
+
+1. Prevent JavaScript from one site interfering with a web page from another
+   site
+
+- without this, a malicious site could load JavaScript to read your credit card
+  details on another site that you have loaded
+
+2. Allow friendly domains to share scripts
+
+- e.g. two divisions of the same company, ads from third parties
+
+--
+
+- background info
+  - origin = (scheme, host, port)
+  - sharing scripts is possible with
+
+```javascript
+<script src="https://domain2/script.js" />
+```
+
+Same origin policy
+
+- lets a site load scripts, images, documents, etc from a different origin
+- but prevents the site from _reading_ the script, image, document, etc that is
+  loaded
+- origin must match scheme, host, port
+
+Rules
+
+- cookies: browser can only access cookies for the same origin as the current
+  page, but port is excluded from matching rules
+- LocalStorage/SessionStorage: browser can only access storage for the same
+  origin
+- DOM: A script from origin A can't access the DOM of a page from origin B
+- fetch requests: A script from origin A can't fetch data from origin B unless
+  explicitly allowed by the server for origin B
+
+<Image alt="Figure 9.5, showing how the same origin policy works" src={figure_9_5} />
+
+See also
+[a good, brief explanation](https://portswigger.net/web-security/cors/same-origin-policy)
+from PortSwigger
+
+- [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) -- Cross-origin
+  Resource Sharing allows a _server_ to set policy for which origins may request
+  its content via a fetch
+- the book discusses relaxing the same-origin policy by manipulating
+  `document.domain`.
+  [This is now disallowed by browsers.](https://developer.chrome.com/blog/immutable-document-domain)
+
+  - [see also MDN docs](https://developer.mozilla.org/en-US/docs/Web/API/Document/domain)
+
+## Authentication cookies
+
+- used to identify a session _after_ login
+
+  - `Set-Cookie: sessionID=abcd12345`
+  - should be sufficiently random and thus not easy to guess
+  - should have an expiration time
+
+- cookie theft
+
+  - need to avoid sending cookies to malicious sites
+    - `HttpOnly` -- only accessible over HTTP(S) and not via DOM through
+      JavaScript on the page
+  - need to avoid malicious HTTP proxies
+    - `Secure` -- cookie will only be sent over HTTPS
+  - other vulnerabilities
+    - non-script client-side malware (e.g. keylogger, malicious browser
+      extension)
+    - access to cookie storage on client side
+
+- sensitive data in cookies should be encrypted and protected with a MAC (e.g.
+  authenticated encryption) or encrypted and signed
+
+## CSRF: Cross-Site Request Forgery
+
+- goal of the attacker is to control what is sent in a request that is
+  authorized by an authentication cookie
+  - all the attacker needs to do is include the `Cookie` header with an
+    appropriate sessionID in its request
+
+### Example
+
+- A bank allows funds to be transferred via a `POST` request:
+
+```http
+POST http://mybank.com/fundxfer.php HTTP/1.1
+... to=Bob&value=2500
+```
+
+- or with a `GET` request:
+
+```http
+GET http://mybank.com/fundxfer.php?to=Bob&value=2500 HTTP/1.1
+```
+
+- An attacker just needs Alice to visit their site, which contains:
+
+```html
+<a href="http://mybank.com/fundxfer.php?to=Charlie&value=2500">
+  Click here...shocking news!!!</a
+>
+```
+
+- Alternatively, the attacker can send Alice an email with this 0x0 "hidden"
+  image:
+
+```html
+<img
+  width="0"
+  height="0"
+  border="0"
+  src="http://mybank.com/fundxfer.php?to=Charlie&value=2500"
+/>
+```
+
+- Yet another attack, have Alice visit a page that has a hidden form, plus a
+  browser event handler (`onload`) that causes the form to be submitted with the
+  apprpriate POST request to Alice's bank
+
+> In all cases, since Alice's browser is sending the request to the bank, it
+> includes Alice's session ID for the bank in a `Cookie` header, assuming Alice
+> is still logged in with her bank.
+
+- Attacks can be more subtle -- e.g. a POST request that changes Alice's email
+  address, which can then be used for account recovery at Alice's bank.
+
+- CSRF is a form of a _confused deputy_ problem -- an entity that doesn't have
+  permission to perform an action can coerce a more-privileged entity to perform
+  the action
+
+- notes
+
+  - can't rely on checking IP addresses, since the request comes from the victim
+  - requires a current session -- hence financial sites regularly log you out
+
+- CRSF mitigation: CSRF tokens
+
+  - generate a unique, secret, random token
+  - give token to user in response header for a GET request for the page where a
+    form is located
+  - when the user submits the form, the POST request includes the token in a
+    request header
+  - server must maintain state for the token and check that it matches
+  - this prevents the CSRF attack because the malicious POST request won't have
+    a valid token
+
+- CSRF mitigation: Double-Submit cookie pattern
+
+  - generate a signed CSRF token and store it in a cookie
+  - also put the CSRF token in a hidden form field on the requested page
+  - when the user submits the form and sends a POST request, it includes the
+    cookie in the HTTP header and in the submitted form (in the POST body) --
+    these must match and be signed by the server
+  - server does not need to store any state
+  - attacker request will have a cookie but not the hidden form field
+
+- see also the
+  [OWASP CSRF prevention cheat sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)

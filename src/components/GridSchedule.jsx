@@ -74,6 +74,8 @@ export default function GridSchedule(props) {
         </div>
         <div className="w-3/12 bg-gray-200 mb-1 mr-1 p-2">
           {render_homework(prefix, day.homework)}
+          {day.homework && day.service && <br />}
+          {render_service(prefix, day.service)}
           {render_project(prefix, day.project)}
         </div>
       </div>
@@ -208,6 +210,32 @@ export default function GridSchedule(props) {
           {" "}
           <span>&nbsp;</span>
           <Label>{homework.due}</Label>
+        </>
+      );
+    return result;
+  };
+
+  const render_service = (prefix, service) => {
+    if (!service) return <></>;
+    let result = [];
+    result.push("Service: ");
+    if (!service.link) result.push(service.title);
+    else
+      result.push(
+        <a
+          key="service"
+          className="underline decoration-lightblue"
+          href={prefix + service.link}
+        >
+          {service.title}
+        </a>
+      );
+    if (service.due)
+      result.push(
+        <>
+          {" "}
+          <span>&nbsp;</span>
+          <Label>{service.due}</Label>
         </>
       );
     return result;

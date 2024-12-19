@@ -1,0 +1,50 @@
+---
+layout: ../../layouts/SemesterMarkdown.astro
+---
+
+import { Cards, Card } from "../../components/Card.jsx";
+
+<article
+    class="prose prose-blockquote:not-italic prose-blockquote:font-normal prose-blockquote:text-base prose-blockquote:bg-blue-200 prose-blockquote:border-l-0 prose-blockquote:px-4 prose-blockquote:py-1 prose-blockquote:rounded-lg pb-8 text-lg">
+
+# Staff
+
+## Office Hours
+
+| Staff          | Position   | Location  | Hours |
+| -------------- | ---------- | --------- | ----- |
+| Fred Clift     | Instructor | --        | TBD   |
+| Jason Brown    | TA         | 3325 TMCB | TBD   |
+| Brennan Duncan | TA         | 3325 TMCB | TBD   |
+
+## Instructor
+
+<Card name="Fred Clift" image="/staff/fred_clift.jpg" email="fred@clift.org">
+  TBD.
+</Card>
+
+## TAs
+
+<Card
+  name="Jason Brown"
+  image="/staff/jason-brown-square.jpg"
+  email="jasbrown@student.byu.edu"
+>
+  Hello! I am a CS student finishing up my bachelor's degree and am planning on
+  going into cybersecurity after I graduate. My hobbies include tennis, video
+  games and game design. I am excited to work with yall going forward.
+</Card>
+
+<Card
+  name="Brennan Duncan"
+  image="/staff/brennan-duncan.jpg"
+  email="bkduncan@student.byu.edu"
+>
+  Hello, I am a Computer Science major in my junior year, with a focus on
+  computer security. I'm currently part of a team researching a backup method
+  for hardware security keys. I have an interest in cybersecurity, privacy, and
+  cryptography. My hobbies include hiking, reading, and linux distro hopping.
+  I'm excited to be a TA for this class!
+</Card>
+
+</article>

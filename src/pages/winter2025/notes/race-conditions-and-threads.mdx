@@ -1,0 +1,108 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+# Race Conditions and Threads
+
+## Introductions
+
+- introductions of two students
+
+## Questions on the readings
+
+The readings today are from
+[Computer Security and the Internet](https://people.scs.carleton.ca/~paulv/toolsjewels.html),
+[Chapter 6](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch6-rev1.pdf),
+sections 6.0 - 6.1.
+
+## Key Concepts
+
+- understand why software security is important -- your most likely
+  security-related role if you will be a developer
+- the importance of thinking like an attacker if you are a defender
+- we study C because it is filled with security vulnerabilities, these are still
+  prevalent, and we see them plague other languages as well
+
+### Race Conditions
+
+- time-of-check, time-of-use (TOCTOU) race
+
+  - see
+    [Figure 6.1, page 157](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch6-rev1.pdf)
+  - see the subsequent example
+  - walk through example in Figure 6.2
+
+- the book walks through various approaches and discusses pros and cons -- this
+  is useful to understanding offensive and defensive thinking
+
+### Threads
+
+- Creating a thread: see
+  [pthread_create() man page](https://man7.org/linux/man-pages/man3/pthread_create.3.html).
+
+```c
+// initialize a thread
+pthread_t thread;
+// create a thread
+//  1. pointer to a thread
+//  2. thread attributes (can define stack size, scheduling priority, etc)
+//  3. pointer to a function that the thread will run,
+//     takes a void pointer as its only argument and returns a void pointer
+//  4. pointer to the argument for the above function
+pthread_create(&thread, NULL, &doit, &p);
+```
+
+- Waiting for a child thread to finish: see
+  [pthread_join() man page](https://man7.org/linux/man-pages/man3/pthread_join.3.html)
+
+```c
+// wait for a child thread to finish
+//   1. pointer to a thread
+//   2. pointer for the return value
+pthread_join(&thread, NULL);
+```
+
+- Printing a thread identifier: see
+  [pthread_self() man page](https://man7.org/linux/man-pages/man3/pthread_self.3.html)
+
+```c
+cout << pthread_self()
+```
+
+- See the `threads-example` program in the class exercises
+
+### Mutexes
+
+- Provides a way for a thread to lock access to shared memory
+- A thread locks and then unlocks a mutex
+  - The area between the lock/unlock is called a critical section
+- See the
+  [pthread_mutex_init() man page](https://man7.org/linux/man-pages/man3/pthread_mutex_init.3p.html),
+  [this Stack Overflow description of mutex attributes](https://stackoverflow.com/questions/4252005/what-is-the-attribute-of-a-pthread-mutex),
+  and the
+  [pthread_mutex_lock() man page](https://man7.org/linux/man-pages/man3/pthread_mutex_lock.3p.html).
+
+```c
+// declare the mutex
+pthread_mutex_t mutex;
+// initialize the mutex
+//   1. a pointer to a mutex
+//   2. attributes for the mutex
+pthread_mutex_init(&mutex, NULL);
+// lock the mutex
+pthread_mutex_lock(&mutex);
+// unlock the mutex
+pthread_mutex_unlock(&mutex)
+```
+
+## Class Exercises
+
+See the [software security repo](https://github.com/BYU-CS465/software-security)
+for code we will use:
+
+- In `race` we will see an example of threads using `thread-example`
+- In `race` we will run an `inventory` program with a vulnerability, then fix it
+  with mutexes in `inventory-fixed`. We will then show a monitor-like solution
+  to provide better scalability and reliability in `inventory-monitor`.
+- For both of these we will explain the Docker and Makefile setup that
+  accompanies this code.
