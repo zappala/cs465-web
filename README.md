@@ -2,7 +2,8 @@
 
 ## 🧞 Commands
 
-All commands are run from the root of the project, from a terminal:
+This project uses the [astro](https://astro.build) framework. All commands are
+run from the root of the project, from a terminal:
 
 | Command                   | Action                                           |
 | :------------------------ | :----------------------------------------------- |
