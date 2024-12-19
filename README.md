@@ -1,4 +1,4 @@
-# CS 464 Website
+# CS 465 Website
 
 ## 🧞 Commands
 
