@@ -1,6 +1,11 @@
 units:
   - title: Operating System Security
     days:
+      - day: Tue
+        date: Jan 7
+        homework:
+           title: Slack and Current Events in Security
+           link:  /homework/slack-and-current-events
       - day: Thu
         date: Jan 9
         lectures:
@@ -12,10 +17,6 @@ units:
           - title: Linux Journey
             link: https://linuxjourney.com/
             sections: Text-Fu, User Management, Permissions, Processes
-        homework:
-           title: Linux Practice
-           link: /homework/linux-practice
-             #due: Jan 16
       - day: Tue
         date: Jan 14
         lectures:
@@ -25,10 +26,9 @@ units:
           - title: "Operating Systems: Three Easy Pieces"
             link: https://pages.cs.wisc.edu/~remzi/OSTEP/
             sections: "4. Processes, 7. CPU Scheduling, 13. Address spaces"
-        service:
-          title: "Service #1"
-          link: /homework/service
-          due: Feb 6
+        homework:
+           title: Linux Practice
+           link: /homework/linux-practice
       - day: Thu
         date: Jan 16
         lectures:
@@ -38,10 +38,11 @@ units:
           - title: "Operating Systems: Three Easy Pieces"
             link: https://pages.cs.wisc.edu/~remzi/OSTEP/
             sections: "53. Intro Security, 55. Access Control"
+      - day: Mon
+        date: Jan 20
         project:
           title: Linux and Access Control
           link: /projects/linux
-          due: Feb 4
 
   - title: "Software Security: Vulnerabilities and Malware"
     days:
@@ -54,6 +55,9 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 6.0 - 6.1
+        homework:
+           title: TBD
+           link: 
       - day: Thu
         date: Jan 23
         lectures:
@@ -68,10 +72,6 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 6.3
-        homework:
-          title: Vulnerability Practice
-          link: /homework/vulnerability-practice
-          due: Jan 30
       - day: Tue
         date: Jan 28
         lectures:
@@ -83,6 +83,9 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 6.4, 6.6
+        homework:
+          title: Vulnerability Practice
+          link: /homework/vulnerability-practice
       - day: Thu
         date: Jan 30
         lectures:
@@ -92,6 +95,9 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 6.7, 6.8
+        service:
+          title: "Service #1"
+          link: /homework/service
       - day: TBD - will be updated later
 
 
