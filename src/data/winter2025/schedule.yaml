@@ -27,7 +27,7 @@ units:
             link: https://pages.cs.wisc.edu/~remzi/OSTEP/
             sections: "4. Processes, 7. CPU Scheduling, 13. Address spaces"
         homework:
-           title: Linux Practice
+           title: Linux Practice (due date relaxed to thursday)
            link: /homework/linux-practice
       - day: Thu
         date: Jan 16
