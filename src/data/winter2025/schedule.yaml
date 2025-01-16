@@ -38,12 +38,6 @@ units:
           - title: "Operating Systems: Three Easy Pieces"
             link: https://pages.cs.wisc.edu/~remzi/OSTEP/
             sections: "53. Intro Security, 55. Access Control"
-      - day: Mon
-        date: Jan 20
-        project:
-          title: Linux and Access Control
-          link: /projects/linux
-
   - title: "Software Security: Vulnerabilities and Malware"
     days:
       - day: Tue
@@ -55,9 +49,6 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 6.0 - 6.1
-        homework:
-           title: TBD
-           link: 
       - day: Thu
         date: Jan 23
         lectures:
@@ -72,6 +63,9 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 6.3
+        project:
+          title: Linux and Access Control
+          link: /projects/linux
       - day: Tue
         date: Jan 28
         lectures:
