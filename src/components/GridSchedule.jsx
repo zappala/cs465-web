@@ -37,7 +37,7 @@ export default function GridSchedule(props) {
   // render a day or a separator
   const render_day = (prefix, day, index) => {
     if (day.separator) {
-      return <></>;
+      return <>{day.separator}</>;
     }
     if (day.holiday) {
       return (

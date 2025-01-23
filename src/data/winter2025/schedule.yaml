@@ -1,6 +1,7 @@
 units:
   - title: Operating System Security
     days:
+      - day:
       - day: Tue
         date: Jan 7
         homework:
@@ -17,6 +18,7 @@ units:
           - title: Linux Journey
             link: https://linuxjourney.com/
             sections: Text-Fu, User Management, Permissions, Processes
+      - day:
       - day: Tue
         date: Jan 14
         lectures:
@@ -66,6 +68,7 @@ units:
         project:
           title: Linux and Access Control
           link: /projects/linux
+      - day:
       - day: Tue
         date: Jan 28
         lectures:
@@ -93,23 +96,21 @@ units:
           title: "Service #1"
           link: /homework/service
       - day: TBD - will be updated later
+      - day:
+      - day: Tue
+        date: Feb 4
+        lectures:
+          - title: Malware
+            link: /notes/malware
+        readings:
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 7 (skim)
+        project:
+          title: Exploit and Patch
+          link: /projects/exploit-and-patch
 
-
-#      - day: Tue
-#        date: Feb 4
-#        lectures:
-#          - title: Malware
-#            link: /notes/malware
-#        readings:
-#          - title: Computer Security and the Internet
-#            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-#            sections: 7 (skim)
-#        project:
-#          title: Exploit and Patch
-#          link: /projects/exploit-and-patch
-#          due: Mar 4
-#
-#  - title: "Software Security: Rust and Cryptography"
+#  - title: TBD Tennatively "Software Security: Rust and Cryptography"
 #    days:
 #      - day: Thu
 #        date: Feb 6
