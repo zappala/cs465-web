@@ -2,6 +2,7 @@ units:
   - title: Operating System Security
     days:
       - day:
+        separator: "Week 1"  
       - day: Tue
         date: Jan 7
         homework:
@@ -19,6 +20,7 @@ units:
             link: https://linuxjourney.com/
             sections: Text-Fu, User Management, Permissions, Processes
       - day:
+        separator: "Week 2"  
       - day: Tue
         date: Jan 14
         lectures:
@@ -42,6 +44,8 @@ units:
             sections: "53. Intro Security, 55. Access Control"
   - title: "Software Security: Vulnerabilities and Malware"
     days:
+      - day:
+        separator: "Week 3"
       - day: Tue
         date: Jan 21
         lectures:
@@ -69,6 +73,7 @@ units:
           title: Linux and Access Control
           link: /projects/linux
       - day:
+        separator: "Week 4"
       - day: Tue
         date: Jan 28
         lectures:
@@ -95,8 +100,8 @@ units:
         service:
           title: "Service #1"
           link: /homework/service
-      - day: TBD - will be updated later
       - day:
+        separator: "Week 5"
       - day: Tue
         date: Feb 4
         lectures:
@@ -110,81 +115,103 @@ units:
           title: Exploit and Patch
           link: /projects/exploit-and-patch
 
-#  - title: TBD Tennatively "Software Security: Rust and Cryptography"
-#    days:
-#      - day: Thu
-#        date: Feb 6
-#        lectures:
-#          - title: Learning Rust
-#            link: /notes/learning-rust-1
-#        readings:
-#          - title: The Rust Programming Language
-#            link: https://doc.rust-lang.org/book/
-#            sections: 1-5
-#        homework:
-#          title: Rust Practice 1
-#          link: /homework/rust-practice-1
-#          due: Feb 11
-#        service:
-#          title: "Service #2"
-#          link: /homework/service
-#          due: Mar 6
-#      - day: Tue
-#        date: Feb 11
-#        readings:
-#          - title: The Rust Programming Language
-#            link: https://doc.rust-lang.org/book/
-#            sections: 6-8
-#        lectures:
-#          - title: Learning Rust
-#            link: /notes/learning-rust-2
-#        homework:
-#          title: Rust Practice 2
-#          link: /homework/rust-practice-2
-#          due: Feb 13
-#      - day: Thu
-#        date: Feb 13
-#        readings:
-#          - title: The Rust Programming Language
-#            link: https://doc.rust-lang.org/book/
-#            sections: 9-10
-#        lectures:
-#          - title: Learning Rust
-#            link: /notes/learning-rust-3
-#        homework:
-#          title: Rust Practice 3
-#          link: /homework/rust-practice-3
-#          due: Feb 20
-#      - day: Tue
-#        date: Feb 18
-#        holiday: Monday Instruction
-#      - day: Thu
-#        date: Feb 20
-#        lectures:
-#          - title: Symmetric encryption
-#            link: /notes/symmetric-encryption
-#        readings:
-#          - title: Computer Security and the Internet
-#            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-#            sections: 2.0 - 2.2
-#      - day: Tue
-#        date: Feb 25
-#        lectures:
-#          - title: Public key cryptography
-#            link: /notes/public-key-cryptography
-#        readings:
-#          - title: Computer Security and the Internet
-#            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-#            sections: 2.3 - 2.4
-#      - day: Thu
-#        date: Feb 27
-#        lectures:
-#          - title: Hashing and message authentication
-#            link: /notes/hashing-and-message-authentication
-#        readings:
-#          - title: Computer Security and the Internet
-#            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-#            sections: 2.5 - 2.6
+  - title: "Software Security: Rust and Cryptography"
+    days:
+      - day: Thu
+        date: Feb 6
+        lectures:
+          - title: Learning Rust
+            link: /notes/learning-rust-1
+        readings:
+          - title: The Rust Programming Language
+            link: https://doc.rust-lang.org/book/
+            sections: 1-5
+      - day: 
+        separator: "Week 6"  
+      - day: Tue
+        date: Feb 11
+        readings:
+          - title: The Rust Programming Language
+            link: https://doc.rust-lang.org/book/
+            sections: 6-8
+        lectures:
+          - title: Learning Rust
+            link: /notes/learning-rust-2
+        homework:
+          title: Rust Practice 1
+          link: /homework/rust-practice-1
+      - day: Thu
+        date: Feb 13
+        readings:
+          - title: The Rust Programming Language
+            link: https://doc.rust-lang.org/book/
+            sections: 9-10
+        lectures:
+          - title: Learning Rust
+            link: /notes/learning-rust-3
+        homework:
+          title: Rust Practice 2
+          link: /homework/rust-practice-2
+      - day: Fri
+        date: Feb 14
+        exam: Midterm Exam/Project Opens (Feb 14 - 19) Details Annouced Later
+      - day:
+        separator: "Week 7"
+      - day: Tue
+        date: Feb 18
+        holiday: Monday Instruction
+      - day: 
+        homework:
+          title: Rust Practice 3
+          link: /homework/rust-practice-3
+          due: Feb 18
+      - day: Fri
+        date: Feb 19
+        exam: Midterm Exam/Project Closes (Feb 14 - 19) Details Annouced Later
+      - day: Thu
+        date: Feb 20
+        lectures:
+          - title: Symmetric encryption
+            link: /notes/symmetric-encryption
+        readings:
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 2.0 - 2.2
+      - day:
+        separator: "Week 8"
+      - day: Tue
+        date: Feb 25
+        lectures:
+          - title: Public key cryptography
+            link: /notes/public-key-cryptography
+        readings:
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 2.3 - 2.4
+        homework:
+          title: TBD
+          link: 
+      - day: Thu
+        date: Feb 27
+        lectures:
+          - title: Hashing and message authentication
+            link: /notes/hashing-and-message-authentication
+        readings:
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 2.5 - 2.6
+      - day: Fri
+        date: Feb 28
+        project:
+          title: TBD
+
+      - day:
+        separator: "Week 9"
+      - day: Thu
+        date: Mar 6
+        service:
+          title: "Service #2"
+          link: /homework/service
 #      - day: Tue
 #        date: Mar 4
 #        lectures:
