@@ -146,6 +146,9 @@ units:
           - title: The Rust Programming Language
             link: https://doc.rust-lang.org/book/
             sections: 9-10
+          - title: Exam 1 / Video Presentation
+            link: https://docs.google.com/document/d/1qiI3WLbl_Fpi0cozc920DS2OIsoDX0KjsrmbsYBtlxk/edit?usp=sharing
+
         lectures:
           - title: Learning Rust
             link: /notes/learning-rust-3
