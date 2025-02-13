@@ -154,7 +154,7 @@ units:
           link: /homework/rust-practice-2
       - day: Fri
         date: Feb 14
-        exam: Midterm Exam/Project Opens (Feb 14 - 19) Details Annouced Later
+        exam: Midterm Exam/Project Opens (Feb 15 - 19) - prompts in exam 1 on learningsuite
       - day:
         separator: "Week 7"
       - day: Tue
@@ -167,7 +167,7 @@ units:
           due: Feb 18
       - day: Fri
         date: Feb 19
-        exam: Midterm Exam/Project Closes (Feb 14 - 19) Details Annouced Later
+        exam: Midterm Exam/Project Closes (Feb 15 - 19)
       - day: Thu
         date: Feb 20
         lectures:
