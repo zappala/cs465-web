@@ -1,0 +1,48 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+
+# Homework Assignment: MAC then Encrypt, or Encrypt then MAC?
+
+## Objective
+In modern cryptographic systems, both encryption (for confidentiality) and message authentication (for integrity) are often required. However, there is an important design question: **Should you MAC (Message Authentication Code) and then encrypt, or encrypt first and then apply the MAC?** Your goal is to analyze this question, explain the issues at hand, and present a well-reasoned recommendation.
+
+---
+
+## Instructions
+
+1. **Read the following resources:**
+
+   - [*The Cryptographic Doom Principle*](https://moxie.org/2011/12/13/the-cryptographic-doom-principle.html) by Moxie Marlinspike  
+   - [Crypto StackExchange: Should we MAC then encrypt or encrypt then MAC?](https://crypto.stackexchange.com/questions/202/should-we-mac-then-encrypt-or-encrypt-then-mac)
+
+   - [NOT REQUIRED, but see this paper if you're interested in reading in-depth](https://iacr.org/archive/crypto2001/21390309.pdf)
+
+2. **Write a short paper (no more than two pages) that addresses the following:**
+   - **Overview of the problem:** Clearly state the question of ordering—what it means to “MAC then encrypt” versus “encrypt then MAC.”  
+   - **Technical considerations:** Discuss potential vulnerabilities, security goals, and any cryptographic principles relevant to choosing one method over the other.  
+   - **Recommendation:** Choose the order you would implement in a system requiring both encryption and message authentication. Provide clear reasons to persuade a technically inclined but non-cryptographic specialist (think a future boss or grant funder) to accept your design choice.  
+   - **Pros and cons:** Briefly address the strengths and weaknesses of each approach to show you have considered alternatives.
+
+3. **Style and Audience:**
+   - Keep your language accessible to someone with general technical knowledge, but who may not be an expert in cryptography.  
+   - Your writing should be organized, concise, and persuasive.
+
+4. **Submission Details:**
+   - Maximum length: **2 pages** (12-point font, double-spaced).  
+   - Cite or reference any external sources you use beyond the required readings.  
+   - Be prepared to discuss your arguments in class.
+
+---
+
+## Evaluation Criteria
+- Clarity and accuracy in explaining the core concepts.  
+- Analysis and understanding of cryptographic implications.  
+- Persuasiveness and logical coherence of your recommendation.  
+- Overall quality of writing, organization, and adherence to the page limit.
+
+---
+
+**P.S.** In many practical applications, we rely on *AEAD (Authenticated Encryption with Associated Data)* constructions to abstract away the details of encryption and message authentication. These high-level cryptographic primitives handle both confidentiality and integrity internally. Whenever possible, you should use the highest-level cryptographic abstraction that makes sense for your system design.
+

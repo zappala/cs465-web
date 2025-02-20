@@ -174,12 +174,12 @@ units:
       - day: Thu
         date: Feb 20
         lectures:
-          - title: Public key cryptography
-            link: /notes/public-key-cryptography
+          - title: Hashing and message authentication
+            link: /notes/hashing-and-message-authentication
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 2.3 - 2.4
+            sections: 2.5 - 2.6
       - day: Fri
         date: Feb 21 
         exam: Midterm Exam/Project Closes (Feb 15 - 21)
@@ -188,12 +188,15 @@ units:
       - day: Tue
         date: Feb 25
         lectures:
-          - title: Hashing and message authentication
-            link: /notes/hashing-and-message-authentication
+          - title: Public key cryptography
+            link: /notes/public-key-cryptography
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 2.5 - 2.6
+            sections: 2.3 - 2.4
+        homework:
+          title: Mac And Encryption Order Report
+          link: /homework/mac-encrypt
       - day: Thu
         date: Feb 27
         lectures:
