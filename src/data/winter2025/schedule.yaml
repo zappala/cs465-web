@@ -98,7 +98,7 @@ units:
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 6.7, 6.8
         service:
-          title: "Service #1"
+          title: "Project: Service #1"
           link: /homework/service
       - day:
         separator: "Week 5"
@@ -115,7 +115,7 @@ units:
           title: Exploit and Patch
           link: /projects/exploit-and-patch
 
-  - title: "Software Security: Rust and Cryptography"
+  - title: "Software Security: Intro to Rust "
     days:
       - day: Thu
         date: Feb 6
@@ -133,31 +133,34 @@ units:
         readings:
           - title: The Rust Programming Language
             link: https://doc.rust-lang.org/book/
-            sections: 6-8
+            sections: 6-10
         lectures:
-          - title: Learning Rust
+          - title: Learning Rust 2
             link: /notes/learning-rust-2
+          - title: Learning Rust 3
+            link: /notes/learning-rust-3
         homework:
           title: Rust Practice 1
           link: /homework/rust-practice-1
+  - title: "Encryption, Hashing, and Message Authentication"
+    days:
       - day: Thu
         date: Feb 13
-        readings:
-          - title: The Rust Programming Language
-            link: https://doc.rust-lang.org/book/
-            sections: 9-10
-          - title: Exam 1 / Video Presentation
-            link: https://docs.google.com/document/d/1qiI3WLbl_Fpi0cozc920DS2OIsoDX0KjsrmbsYBtlxk/edit?usp=sharing
-
         lectures:
-          - title: Learning Rust
-            link: /notes/learning-rust-3
+          - title: Symmetric encryption
+            link: /notes/symmetric-encryption
+        readings:
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 2.0 - 2.2
+          - title: Exam 1 / Video Presentation review
+            link: https://docs.google.com/document/d/1qiI3WLbl_Fpi0cozc920DS2OIsoDX0KjsrmbsYBtlxk/edit?usp=sharing
         homework:
           title: Rust Practice 2
           link: /homework/rust-practice-2
       - day: Fri
         date: Feb 14
-        exam: Midterm Exam/Project Opens (Feb 15 - 19) - prompts in exam 1 on learningsuite
+        exam: Midterm Exam/Project Opens (Feb 15 - 21) - prompts in exam 1 on learningsuite
       - day:
         separator: "Week 7"
       - day: Tue
@@ -168,22 +171,8 @@ units:
           title: Rust Practice 3
           link: /homework/rust-practice-3
           due: Feb 18
-      - day: Fri
-        date: Feb 19
-        exam: Midterm Exam/Project Closes (Feb 15 - 19)
       - day: Thu
         date: Feb 20
-        lectures:
-          - title: Symmetric encryption
-            link: /notes/symmetric-encryption
-        readings:
-          - title: Computer Security and the Internet
-            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 2.0 - 2.2
-      - day:
-        separator: "Week 8"
-      - day: Tue
-        date: Feb 25
         lectures:
           - title: Public key cryptography
             link: /notes/public-key-cryptography
@@ -191,11 +180,13 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 2.3 - 2.4
-        homework:
-          title: TBD
-          link: 
-      - day: Thu
-        date: Feb 27
+      - day: Fri
+        date: Feb 21 
+        exam: Midterm Exam/Project Closes (Feb 15 - 21)
+      - day:
+        separator: "Week 8"
+      - day: Tue
+        date: Feb 25
         lectures:
           - title: Hashing and message authentication
             link: /notes/hashing-and-message-authentication
@@ -203,70 +194,73 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 2.5 - 2.6
-      - day: Fri
-        date: Feb 28
-        project:
-          title: TBD
-
+      - day: Thu
+        date: Feb 27
+        lectures:
+          - title: Elliptic Curve Cryptography
+            link: /notes/elliptic-curve-cryptography
+        readings:
+          - title:
+              A (Relatively Easy To Understand) Primer on Elliptic Curve
+              Cryptography
+            link: https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/
       - day:
         separator: "Week 9"
+  - title: Key Exchange and Authentication
+    days:
+      - day: Tue
+        date: Mar 4
+        lectures:
+          - title: Diffie-Hellman key exchange
+            link: /notes/diffie-hellman
+        readings:
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 4.0 - 4.3
       - day: Thu
         date: Mar 6
+        lectures:
+          - title: Certificates
+            link: /notes/certificates
+        readings:
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 8.0 - 8.3, 8.5
         service:
-          title: "Service #2"
+          title: "Project: Service #2"
           link: /homework/service
-#      - day: Tue
-#        date: Mar 4
-#        lectures:
-#          - title: Elliptic Curve Cryptography
-#            link: /notes/elliptic-curve-cryptography
-#        readings:
-#          - title:
-#              A (Relatively Easy To Understand) Primer on Elliptic Curve
-#              Cryptography
-#            link: https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/
-#        project:
-#          title: Encrypted Communication
-#          link: /projects/encrypted-communication
-#          due: Mar 20
+      - day:
+        separator: "Week 10"
+      - day: Tue
+        date: Mar 11
+        lectures:
+          - title: TLS
+            link: /notes/tls
+        readings:
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 9.2
+      - day: Thu
+        date: Mar 13
+        homework:
+          title: Certificates and TLS
+          link: /homework/certificates-and-tls
+        lectures:
+          - title: TBD
+      - day: Fri
+        date: Mar 14
+        project:
+          title: Encrypted Communication
+          link: /projects/encrypted-communication
 #
-#  - title: Key Exchange and Authentication
-#    days:
-#      - day: Thu
-#        date: Mar 6
-#        lectures:
-#          - title: Diffie-Hellman key exchange
-#            link: /notes/diffie-hellman
-#        readings:
-#          - title: Computer Security and the Internet
-#            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-#            sections: 4.0 - 4.3
+
 #        service:
 #          title: "Service #3"
 #          link: /homework/service
 #          due: Apr 8
-#      - day: Tue
-#        date: Mar 11
-#        lectures:
-#          - title: Certificates
-#            link: /notes/certificates
-#        readings:
-#          - title: Computer Security and the Internet
-#            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-#            sections: 8.0 - 8.3, 8.5
-#      - day: Thu
-#        date: Mar 13
-#        lectures:
-#          - title: TLS
-#            link: /notes/tls
-#        readings:
-#          - title: Computer Security and the Internet
-#            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-#            sections: 9.2
-#        homework:
-#          title: Certificates and TLS
-#          link: /homework/certificates-and-tls
-#          due: Mar 18
+#
+#
+#
 #      - day: Tue
 #        date: Mar 18
 #        lectures:
