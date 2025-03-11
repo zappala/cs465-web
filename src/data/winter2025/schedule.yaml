@@ -249,13 +249,35 @@ units:
           title: Certificates and TLS
           link: /homework/certificates-and-tls
         lectures:
-          - title: TBD
+          - title: Password authentication and account recovery
+            link: /notes/password-authentication
+        readings:
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 3.0 - 3.3, 3.6, 3.8
       - day: Fri
         date: Mar 14
         project:
           title: Encrypted Communication
           link: /projects/encrypted-communication
-#
+      - day:
+        separator: "Week 11"
+      - day: Tue 
+        date: Mar 18 
+        lectures:
+          - title: Multi-factor authentication
+            link: /notes/multi-factor-authentication
+        readings:
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 3.4 - 3.5
+      - day:
+        separator: "Week 12"
+      - day: Fri
+        date: Mar 28
+        project:
+          title: Cracking Password vaults
+          link: /projects/cracking-password-vaults
 
 #        service:
 #          title: "Service #3"
@@ -264,28 +286,6 @@ units:
 #
 #
 #
-#      - day: Tue
-#        date: Mar 18
-#        lectures:
-#          - title: Password authentication and account recovery
-#            link: /notes/password-authentication
-#        readings:
-#          - title: Computer Security and the Internet
-#            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-#            sections: 3.0 - 3.3, 3.6, 3.8
-#      - day: Thu
-#        date: Mar 20
-#        lectures:
-#          - title: Multi-factor authentication
-#            link: /notes/multi-factor-authentication
-#        readings:
-#          - title: Computer Security and the Internet
-#            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-#            sections: 3.4 - 3.5
-#        project:
-#          title: Cracking Password vaults
-#          link: /projects/cracking-password-vaults
-#          due: Apr 3
 #  - title: Web Security
 #    days:
 #      - day: Tue
