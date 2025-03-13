@@ -265,7 +265,7 @@ units:
       - day: Tue 
         date: Mar 18 
         lectures:
-          - title: Multi-factor authentication
+          - title: (Passwords continued) and Multi-factor authentication
             link: /notes/multi-factor-authentication
         readings:
           - title: Computer Security and the Internet
