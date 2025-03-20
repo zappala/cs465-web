@@ -271,14 +271,6 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 3.4 - 3.5
-      - day:
-        separator: "Week 12"
-      - day: Fri
-        date: Mar 28
-        project:
-          title: Cracking Password vaults
-          link: /projects/cracking-password-vaults
-
 #        service:
 #          title: "Service #3"
 #          link: /homework/service
@@ -286,39 +278,49 @@ units:
 #
 #
 #
-#  - title: Web Security
-#    days:
-#      - day: Tue
-#        date: Mar 25
-#        lectures:
-#          - title: Web background
-#            link: /notes/web-background
-#        readings:
-#          - title: Computer Security and the Internet
-#            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-#            sections: 9.0 - 9.1, 9.3
-#      - day: Thu
-#        date: Mar 27
-#        lectures:
-#          - title: XSS, SQL injection
-#            link: /notes/xss-and-sql-injection
-#        readings:
-#          - title: Computer Security and the Internet
-#            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-#            sections: 9.6 - 9.7
-#        homework:
-#          title: Web vulnerabilities
-#          link: /homework/web-vulnerabilities
-#          due: Apr 3
-#      - day: Tue
-#        date: Apr 1
-#        lectures:
-#          - title: Same-origin policy and CSRF attacks
-#            link: /notes/same-origin-policy-and-CSRF-attacks
-#        readings:
-#          - title: Computer Security and the Internet
-#            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-#            sections: 9.4 - 9.5
+  - title: Web Security
+    days:
+      - day: Thu
+        date: Mar 20
+        lectures:
+          - title: Web background
+            link: /notes/web-background
+        readings:
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 9.0 - 9.1, 9.3
+      - day:
+        separator: "Week 12"
+      - day: Tue
+        date: Mar 25
+        lectures:
+          - title: XSS, SQL injection
+            link: /notes/xss-and-sql-injection
+        readings:
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 9.6 - 9.7
+      - day: Thu
+        date: Mar 27
+        lectures:
+          - title: Same-origin policy and CSRF attacks
+            link: /notes/same-origin-policy-and-CSRF-attacks
+        readings:
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 9.4 - 9.5
+      - day: Fri
+        date: Mar 28
+        project:
+          title: Cracking Password vaults
+          link: /projects/cracking-password-vaults
+      - day:
+        separator: "Week 13"
+      - day: Tue
+        date: Apr 1
+        homework:
+          title: Web vulnerabilities
+          link: /homework/web-vulnerabilities
 #      - day: Thu
 #        date: Apr 3
 #        lectures:
