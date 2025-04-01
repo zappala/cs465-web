@@ -318,54 +318,84 @@ units:
         separator: "Week 13"
       - day: Tue
         date: Apr 1
+        lectures:
+          - title: SQLI, Same-origin policy and CSRF attacks, continued
+            link: /notes/same-origin-policy-and-CSRF-attacks
+        readings:
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 9.4 - 9.7
+      - day: Thu
+        date: Apr 3
+        lectures:
+          - title: Phishing
+            link: /notes/phishing
+        readings:
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 9.8
+      - day:
+        separator: "Week 14"
+  - title: Threat Modeling
+    days:
+      - day: Tue
+        date: Apr 8
+        lectures:
+          - title: Threat modeling
+            link: /notes/threat-modeling
+        readings:
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 1.0 - 1.2, 1.4 - 1.8
+      - day: Wed
+        date: Apr 9
         homework:
           title: Web vulnerabilities
           link: /homework/web-vulnerabilities
-#      - day: Thu
-#        date: Apr 3
-#        lectures:
-#          - title: Phishing
-#            link: /notes/phishing
-#        readings:
-#          - title: Computer Security and the Internet
-#            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-#            sections: 9.8
-#        project:
-#          title: Web Exploit and Patch
-#          link: /projects/web-exploit-and-patch
-#          due: Apr 15
+
+
+
+  - title: Academic and Industry Talks
+    days:
+      - day: Thu
+        date: Apr 10
+        lectures:
+          - title:
+              "Academic and Industry Talks: IoT Vulnerabilities, Social
+              Engineering, Exploiting Video Decoders"
+            link: /notes/academic-and-industry-talks
+      - day:
+        separator: "Week 15"
+      - day: Tue
+        date: Apr 12
+        lectures:
+          - title:
+              "Academic and Industry Talks: Invisible Vulnerabilities, Reverse
+              Engineering, Glaze, Non-consensual image generation"
+            link: /notes/academic-and-industry-talks
+
+      - day: Wed (last day of classes)
+        date: Apr 16
+        project:
+          title: Web Exploit and Patch
+          link: /projects/web-exploit-and-patch
+
+      - day: Wed (last day of classes)
+        date: Apr 16
+        project:
+          title: Extra Credit - social engineering
+          link: /projects/phishing-ec
+
+
 #
-#  - title: Threat Modeling
-#    days:
-#      - day: Tue
-#        date: Apr 8
-#        lectures:
-#          - title: Threat modeling
-#            link: /notes/threat-modeling
-#        readings:
-#          - title: Computer Security and the Internet
-#            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-#            sections: 1.0 - 1.2, 1.4 - 1.8
+#      - day: placeholder
 #        project:
 #          title: Threat modeling
 #          link: /projects/threat-modeling
 #          due: Apr 21
-#  - title: Academic and Industry Talks
-#    days:
-#      - day: Thu
-#        date: Apr 10
-#        lectures:
-#          - title:
-#              "Academic and Industry Talks: IoT Vulnerabilities, Social
-#              Engineering, Exploiting Video Decoders"
-#            link: /notes/academic-and-industry-talks
-#      - day: Tue
-#        date: Apr 15
-#        lectures:
-#          - title:
-#              "Academic and Industry Talks: Invisible Vulnerabilities, Reverse
-#              Engineering, Glaze, Non-consensual image generation"
-#            link: /notes/academic-and-industry-talks
+#
+
+
 #
 #  - title: Final Project
 #    days:
