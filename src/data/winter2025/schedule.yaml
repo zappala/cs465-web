@@ -377,8 +377,8 @@ units:
       - day: Wed (last day of classes)
         date: Apr 16
         project:
-          title: Web Exploit and Patch
-          link: /projects/web-exploit-and-patch
+          title: Final Project 
+          link: /projects/final-project
 
       - day: Wed (last day of classes)
         date: Apr 16
@@ -387,13 +387,11 @@ units:
           link: /projects/phishing-ec
 
 
-#
-#      - day: placeholder
-#        project:
-#          title: Threat modeling
-#          link: /projects/threat-modeling
-#          due: Apr 21
-#
+
+      - day: Finals Week
+        project:  
+          title: Final Video Exam submission (beginning of finals through scheduled exam date/time)
+
 
 
 #
