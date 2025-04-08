@@ -328,7 +328,7 @@ units:
       - day: Thu
         date: Apr 3
         lectures:
-          - title: Phishing
+          - title: Social Engineering/Phishing
             link: /notes/phishing
         readings:
           - title: Computer Security and the Internet
