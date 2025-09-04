@@ -76,6 +76,7 @@ export default function GridSchedule(props) {
           {render_homework(prefix, day.homework)}
           {day.homework && day.service && <br />}
           {render_service(prefix, day.service)}
+          {render_ethics(prefix, day.ethics)}
           {render_project(prefix, day.project)}
         </div>
       </div>
@@ -236,6 +237,32 @@ export default function GridSchedule(props) {
           {" "}
           <span>&nbsp;</span>
           <Label>{service.due}</Label>
+        </>
+      );
+    return result;
+  };
+
+  const render_ethics = (prefix, ethics) => {
+    if (!ethics) return <></>;
+    let result = [];
+    result.push("Ethics: ");
+    if (!ethics.link) result.push(ethics.title);
+    else
+      result.push(
+        <a
+          key="ethics"
+          className="underline decoration-lightblue"
+          href={prefix + ethics.link}
+        >
+          {ethics.title}
+        </a>
+      );
+    if (ethics.due)
+      result.push(
+        <>
+          {" "}
+          <span>&nbsp;</span>
+          <Label>{ethics.due}</Label>
         </>
       );
     return result;

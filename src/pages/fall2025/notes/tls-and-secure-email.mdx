@@ -1,0 +1,116 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+## Ungraded Quiz
+
+- What is the difference between a DV and an EV certificate?
+- What are some basic differences between PGP and S/MIME?
+
+## Key Concepts
+
+### TLS
+
+- _TLS_ = Transport Layer security
+  - Predecesser called SSL (Secure Sockets Layer)
+  - add security to any TCP connection
+- TLS certificates associate public keys with domains
+- DV (Domain Validated) certificates
+  - demonstrate control of the domain, which could be responding to email sent to `admin@domain.com`
+  - inexpensive or free
+- OV (Organization Validated) certificates
+  - manual checks to certify ownership of a real-world organization
+- EV (Extended Validation) certificates verify
+  - real-world existance of a legal entity in the `Subject`
+  - registration in government-recognized databases
+  - physical existence matching location in certificate
+  - identity of person requesting certificate and their relationship to the organization
+  - control of the domain
+- IV (Individual validated) certificates
+  - user decided to trust them (e.g. self-signed certificates)
+- users don't know the difference between DV, OV, and EV
+
+  - the author was on a team that [proposed design changes that could show the different levels of validation](https://dl.acm.org/doi/pdf/10.1145/1655008.1655012), but there were no significant differences in user actions between DV and EV certificates
+  - [An Evaluation of Extended Validation and Picture-in-Picture Phishing Attacks](https://www.adambarth.com/papers/2007/jackson-simon-tan-barth.pdf) -- study showing Internet Explorer EV certificate interface didn't help users identify phishing attacks
+  - can't prove a CA takes these validation steps anyway
+
+  - [Rethinking Connection Security Indicators](https://www.usenix.org/system/files/conference/soups2016/soups2016-paper-porter-felt.pdf) -- if you want to see justification for Chrome's designs
+
+- explore browser interfaces for certificates
+- any CA can create a certificate for any website
+- attacks on certificates
+  - rogue certificates -- see [Hackers spied on 300,000 Iranians using fake Google certificate](https://www.computerworld.com/article/2510951/hackers-spied-on-300-000-iranians-using-fake-google-certificate.html), 2011
+  - TLS stripping attacks -- block the signal to upgrade from HTTP to HTTPS
+    - see website configuration below
+    - use browser tools to see the redirect
+    - see HTTPS Everywhere browser extension
+  - revocation failures can be exploited
+- difficulties with browser trust model
+  - poor trust agility -- users are given root certs and it is up to the browser or OS vendor to decide who is trusted
+  - intermediate CAs are unaccountable -- can only remove root CAs
+- certificate transparency helps expose rogue certificates
+  - for details, see [Certificate Transparency](https://dl.acm.org/doi/pdf/10.1145/2659897)
+- a bug in TLS affects massive amounts of ecommerce
+  - see [Heartbleed 101](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=6876249) and the included xkcd comic
+- the widespread use of CDNs for content delivery means CDNs have wbesite private keys
+  - see [Content Delivery Network](https://learn.microsoft.com/en-us/power-pages/configure/configure-cdn) for a good picture of a CDN
+  - see [Measurement and Analysis of
+    Private Key Sharing in the HTTPS Ecosystem](https://dl.acm.org/doi/pdf/10.1145/2976749.2978301)
+  - see [When HTTPS Meets CDN: A Case of Authentication in Delegated Service](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6956557)
+
+#### Common website configuration
+
+```
+server {
+  if ($host = cs465.byu.edu) {
+    return 301 https://$host$request_uri;
+  }
+  listen 80 default_server;
+  listen [::]:80 default_server;
+  server_name cs465.byu.edu;
+  return 404; # managed by Certbot
+}
+```
+
+### Let's Encrypt
+
+- It used to be expensive to get a certificate for a website
+  - You can now get one free with Let's Encrypt
+  - It uses a protocol called ACME to automatically verify you own a domain
+  - For example, you contact an ACME server to request a certificate, and it
+    gives you a file to serve from your website, once it verifies that you are
+    serving it, then it issues you the certificate
+  - see [Let's Encrypt Stats](https://letsencrypt.org/stats/)
+
+Extra reading:
+
+- [Let’s Encrypt: An Automated Certificate Authority to Encrypt the Entire Web](https://dl.acm.org/doi/pdf/10.1145/3319535.3363192)
+  -- describes how Let's Encrypt was built,the ACME protocol, lessons learned
+
+### Secure email
+
+- goal is to have end-to-end encryption of messages between communicating parties
+  - intermediate servers can't read the message
+  - really straightforward security but email is VERY old and was built with no security
+  - any encryption of email content means a server processing your email can't help you search for emails or scan for malware
+- PEM (Privacy-Enhanced Email)
+  - historic (1990 - 1995), one-root PKI hierarchy
+- PGP (Pretty Good Privacy)
+  - ad hoc trust management
+  - you decide which keys you trust for which users
+- S/MIME (Secure MIME)
+  - centralized certificate management
+  - used by companies and governments
+- see [Figure 8.12, page 235](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch8-rev1.pdf) as an illustration of how mail transfer works
+- see [Figure 8.13, page 236](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch8-rev1.pdf) to show how security is added to plaintext email
+- see [FIgure 8.14, page 237](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch8-rev1.pdf) for key distribution options
+  - WhatsApp uses a centralized server
+  - S/MIME uses a certificate model
+- difficulties with email certificates
+  - hard to map email addresses to people (and thus know who to trust)
+  - need to handle revocation
+- Proton Mail
+  - web-based
+  - exchanges PGP email between users on their system
+  - allows you to choose a password to encrypt emails to non-Proton Mail users
+  - no interoperability with other services using PGP except through manual addition of keys

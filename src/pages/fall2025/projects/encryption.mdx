@@ -1,0 +1,268 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+import { Image } from "astro:assets";
+import encryption_protocol from "@/images/projects/encryption-protocol.png";
+
+
+# Encryption
+
+## Objectives
+
+In this project, you will gain experience using cryptographic primitives
+including symmetric encryption, public-key encryption, message authentication
+codes, and digital signatures. You will use these together to implement a
+hybrid-encryption scheme, a scheme that you could find in the real world.
+
+In addition to teaching about cryptography, this lesson also serves to improve
+your familiarity with enterprise-development languages and practices. This
+includes introducing you to C#, containerized development, and reading through
+online document. These are important real-world skills and practicing them in
+this class will help give you an advantage when you enter the workforce.
+
+## Project Setup
+
+These instructions will walk you through the steps you need to take to develop
+code for this project. When you dowload software, be sure to choose the right
+version for your machine:
+
+- Windows
+  - Intel processors: `x64`
+  - AMD processors: `Arm64`
+- MacOS
+  - M1, M2, or M3 processors: `Arm64` or `Apple Silicon` or `Apple Chip`
+  - Intel processors: `x64` or `Intel chip`
+
+### Install Visual Studio code
+
+Use the
+[Visual Studio Code download page](https://code.visualstudio.com/download) to
+find the distribution for your machine. Download and install the package.
+
+### Install Docker Desktop
+
+Use the
+[Docker Desktop download page](https://www.docker.com/products/docker-desktop/)
+find the distribution for your machine. Download and install the package.
+
+### Install a terminal
+
+If you are using MacOS, no special steps are needed.
+
+If you are using Windows:
+
+1. [Install Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/install)
+
+1. Install the WSL extension in Visual Studio Code. Go to `Extensions` in VSCode
+   by using the icon on the left toolbar. Search for and install the `WSL`
+   extension.
+
+### Setup DotNet
+
+1. Download and unzip the [handout file](/code/encryption-handout.zip).
+2. Open this folder using Visual Studio Code.
+3. If you are using Windows, press `F1` and then run
+   `WSL: Reopen Folder in WSL`.
+4. Open a terminal in VSCode, and run:
+
+```bash
+chmod +x dotnet-install.sh
+./dotnet-install.sh --version latest
+```
+
+### Install VSCode Extensions
+
+Go to `Extensions` in VSCode by using the icon on the left toolbar.
+
+1. Search for and install the `Docker` extension.
+1. Search for and install the `Dev Containers` extension.
+
+### Open a Dev Container
+
+Type `F1` to open the command pallette. Run the following command:
+`Dev Containers: Open Folder in Container`. VSCode should restart automatically.
+Once you have the container opened, VSCode will tell you that dependencies are
+missing. Make sure you click yes!
+
+## Requirements
+
+In this project you will be implementing an encrypted echo client and server.
+
+An echo server receives strings from clients and simply echos those strings back
+to the clients. An echo client reads input from the terminal, sends that input
+to the echo server, and prints to the terminal anything it receives from the
+server.
+
+I have provided you a working echo server and client that you will enhance to
+secure communication using hybrid encryption. To complete this project, you will
+need to modify the `EncryptedEchoServer.cs` and `EncryptedEchoClient.cs` files
+to support hybrid encryption. Do not add, edit, or delete any other source
+files.
+
+When implementing the required functionality, make sure you use the same block
+modes, padding, and hashing algorithms on the client and server, otherwise it
+won't work. Use the ones indicated in this writeup and in the source code, or
+your submission won't pass the autograder.
+
+### Building and running the code
+
+To build and run the code, do the following:
+
+1. Open a terminal in VSCode. In this terminal, type `dotnet run server`. This
+   runs the echo server.
+1. Open a _second_ terminal in VSCode. In that terminal, type
+   `dotnet run client`. This runs the echo client.
+
+The code, as provided, functions as an _unencrypted_ echo client and server.
+Type anything you want at the terminal for the client, and it sends this string
+to the server, which sends the same string back. The client then outputs the
+string on the terminal. So you should see:
+
+```
+hello who is this?
+hello who is this?
+I'm Sarah
+I'm Sarah
+what a coincidence
+what a coincidence
+```
+
+To aid you in testing your code, I've provided an `echo-test` binary. It
+contains a working encrypted echo server and client. Run them using
+`./echo-test server` and `./echo-test client`, respectively. This can be used to
+test your own implementations. For example, run your server with the echo-test
+client, or run your client with the echo-test server. If you can run against
+these tools without any issue, you should receive full credit on passoff (unless
+you cut corners around key generation). If you are using an arm device (like the
+mac M1/M2) use `echo-test-arm` in the above commands.
+
+Note that this allows you to write code for just the client, test and debug it,
+before writing the code for the server. You should eventually be able to run
+your client with your server, using encryption, with no issues.
+
+### Client-Server Protocol
+
+The protocol you will build should do the following:
+
+<Image alt="encryption project" src={encryption_protocol} />
+
+- The server generates an RSA key pair, (S, V)
+- The client sends the server a Hello message
+- The server response includes its RSA public key, V
+- The client creates a symmetric encryption key K and an HMAC key H
+- The client sends a message that includes:
+  - E<sub>V</sub>(K) -- the key K, encrypted with V
+  - IV -- the AES initialization vector
+  - E<sub>K</sub>(message) -- a message, encrypted with key K
+  - E<sub>V</sub>(H) -- the key H, encrypted with V
+  - HMAC<sub>H</sub>(message) -- the HMAC of the message, using key H
+- The server responds with a message that includes:
+  - message -- not encrypted
+  - E<sub>S</sub>(SHA256(message)) -- a signature of the SHA256 hash of the
+    message, using key S
+
+### Echo Client
+
+Start by writing the client and testing it with the solution server. On the
+client you will implement three methods:
+
+1. `ProcessServerHello`: This method will read a RSA public key sent by the
+   server when the client first connects. This key will be encoded using Base64.
+2. `TransformOutgoingMessage`: This method will be responsible for applying
+   hybrid encryption to the messages typed into the console:
+   1. You will need to generate an AES, message encryption key. You will use
+      this key to encrypt the message using CBC mode and PKCS7 padding. You
+      should use a different key each time you encrypt a message.
+   2. You will need to generate an HMAC for your plaintext message. Use the
+      SHA256 variant of the HMAC algorithm. Generate a random key each time you
+      generate a HMAC.
+   3. Encrypt the two keys you generated using RSA. Use the OAEP padding scheme
+      with SHA256.
+3. `TransformIncomingMessage`: This method will be responsible for processing
+   messages sent by the echo server and validating their digital signatures.
+   Make sure to use PSS padding with SHA256.
+
+### Echo Server
+
+After your client works with the solution server, write your server and test it
+with the solution client. Your server will need to generate an RSA key upon
+starting. It will also need to implement three methods:
+
+1. `GetServerHello`: Returns the server's RSA public key encoded using Base64.
+2. `TransformIncomingMessage`: This method will be responsible for applying
+   hybrid encryption to the messages typed into the console:
+   1. Decrypt the message encryption and HMAC keys using the server's RSA key.
+   2. Decrypt the message with AES using CBC mode and PKCS7 padding.
+   3. Verify the HMAC of the received message. Use the SHA256 variant of the
+      HMAC algorithm.
+3. `TransformOutgoingMessage`: This method will be responsible for using the
+   server's RSA key to digitally sign messages being sent by the server. Make
+   sure to use PSS padding with SHA256.
+
+## Cryptographic Library
+
+The cryptographic primitives needed in this project can all be found in the
+`System.Security.Cryptography` namespace. You will need the `AES`, `RSA`,
+`HMACSHA256`, and `RandomNubmerGenerator` classes to complete this lab. Read up
+on how they work. Be sure to look at the _methods_ for these classes. Don't use
+the example code. Instead, find and learn to use each of the appropriate
+methods.
+
+## Resources
+
+C# as a language sits between C/C++ and Java. Like Java, it is a high-level
+language, that abstracts many details about memory management and types. Like
+C/C++ it allows low-level access to hardware. You will only need a basic
+understanding of C# to complete this lab. The following are some resources to
+get you started about C# and its libraries:
+
+- [A tour of the C# language](https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/)
+- [System.Security.Cryptography](https://learn.microsoft.com/en-us/dotnet/api/system.security.cryptography?view=net-7.0)
+  documentation. You can find documentation for any security functionality you
+  will need on linked from this page. Some items you may want to look at
+  include,
+  - RandomNumberGenerator
+  - RSA
+  - AES
+  - HMACSHA256
+  - CryptographicException
+- [System.Text.Encoding](https://learn.microsoft.com/en-us/dotnet/api/system.text.encoding?view=net-7.0)
+  for converting between text and bytes.
+- [System.Convert](https://learn.microsoft.com/en-us/dotnet/api/system.convert?view=net-7.0)
+  for Base64 encodings.
+
+## Grading Rubric
+
+- Echo client (200 points)
+  - 10 points for properly retrieving the server's public key from the sever's
+    hello message.
+  - 50 points for correctly implementing hybrid encryption.
+  - 20 points for not reusing the message encryption key.
+  - 50 points for correctly implementing message authentication using an HMAC.
+  - 20 points for not reusing the HMAC key.
+  - 20 points for using distinct keys for the message encryption and HMAC keys.
+  - 30 points for properly verifying signed messages from the server.
+- Echo server (180 points)
+  - 25 points for generating a new RSA key each time a new server is created.
+  - 25 points for returning the same RSA key in each hello message from the same
+    server.
+  - 50 points for correctly implementing hybrid decryption.
+  - 30 points for correctly checking the message's HMAC.
+  - 50 points for correctly generating a digital signature on messages returned
+    from the echo server.
+
+## Handout
+
+[Handout file](/code/encryption-handout.zip)
+
+## Submission
+
+Use the `tar` command to zip your files:
+
+```
+tar czf byuNetID.tar dirNametozip
+```
+
+Submit your tar file on Learning Suite. Make sure that you do not change the
+names of the `.cs` files.

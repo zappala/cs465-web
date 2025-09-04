@@ -1,0 +1,9 @@
+menu:
+  semester: Fall 2025
+  items:
+    - title: Home
+      url: /
+    - title: Staff
+      url: /staff
+    - title: Syllabus
+      url: /syllabus

