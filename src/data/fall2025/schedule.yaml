@@ -1,13 +1,13 @@
 units:
-  - title: Operating System Security
+  - title: Introduction
     days:
       - day: Thu
         date: Sep 4
         lectures:
           - title: Introduction
             link: /notes/introduction
-          - title: VMs, Kali, and the Linux Command Line
-            link: /notes/vms-kali-and-linux
+          - title: Linux
+            link: /notes/linux
         readings:
           - title: Linux Journey
             link: https://linuxjourney.com/
@@ -19,34 +19,20 @@ units:
       - day: Tue
         date: Sep 9
         lectures:
+          - title: Access control
+            link: /notes/access-control
           - title: Operating systems background
             link: /notes/operating-systems-background
         readings:
           - title: "Operating Systems: Three Easy Pieces"
             link: https://pages.cs.wisc.edu/~remzi/OSTEP/
-            sections: "4. Processes, 7. CPU Scheduling, 13. Address spaces"
-        ethics:
-          title: "Ethics #1"
-          link: /homework/ethics-1
-          due: Oct 28
-      - day: Thu
-        date: Sep 11
-        lectures:
-          - title: Access control
-            link: /notes/access-control
-        readings:
-          - title: "Operating Systems: Three Easy Pieces"
-            link: https://pages.cs.wisc.edu/~remzi/OSTEP/
-            sections: "53. Intro Security, 55. Access Control"
+            sections: "53. Intro Security, 55. Access Control, (Optional background if needed: 4. Processes, 7. CPU Scheduling, 13. Address spaces)"
         project:
           title: Linux and Access Control
           link: /projects/linux
           due: Oct 2
-
-  - title: Threat Modeling
-    days:
-      - day: Tue
-        date: Sep 16
+      - day: Thu
+        date: Sep 11
         lectures:
           - title: Threat modeling
             link: /notes/threat-modeling
@@ -61,8 +47,8 @@ units:
 
   - title: "Software Security: Vulnerabilities and Malware"
     days:
-      - day: Thu
-        date: Sep 18
+      - day: Tue
+        date: Sep 16
         lectures:
           - title: Race conditions and threads
             link: /notes/race-conditions-and-threads
@@ -70,8 +56,12 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 6.0 - 6.1
-      - day: Tue
-        date: Sep 23
+        ethics:
+          title: "Ethics #1"
+          link: /homework/ethics-1
+          due: Oct 28
+      - day: Thu
+        date: Sep 18
         lectures:
           - title: Integer Vulnerabilities
             link: /notes/integer-vulnerabilities
@@ -87,9 +77,9 @@ units:
         homework:
           title: Vulnerability Practice
           link: /homework/vulnerability-practice
-          due: Sep 25
-      - day: Thu
-        date: Sep 25
+          due: Sep 23
+      - day: Tue
+        date: Sep 23
         lectures:
           - title: Heap overflows
             link: /notes/heap-overflows
@@ -99,8 +89,8 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 6.4, 6.6
-      - day: Tue
-        date: Sep 30
+      - day: Thu
+        date: Sep 25
         lectures:
           - title: Shellcode and privilege escalation
             link: /notes/shellcode
@@ -108,6 +98,10 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 6.7, 6.8
+      - day: Tue
+        date: Sep 30
+        lectures:
+          - title: TBD
       - day: Thu
         date: Oct 2
         lectures:
