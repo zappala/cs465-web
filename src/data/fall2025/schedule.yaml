@@ -177,6 +177,10 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 2.5 - 2.6
+        homework:
+          title: Mac And Encryption Order
+          link: /homework/mac-and-encryption-Order
+          due: Oct 21
       - day: Tue
         date: Oct 21
         lectures:
@@ -301,6 +305,9 @@ units:
         date: Nov 25
         lectures:
           - title: "Social Engineering"
+      - day: Thu
+        date: Nov 27
+        holiday: Thanksgiving
 
   - title: Advanced Topics
     days:
