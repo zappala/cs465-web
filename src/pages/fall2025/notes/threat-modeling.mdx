@@ -10,7 +10,6 @@ import data_flow_diagram_online_banking_application from "@/images/notes/data-fl
 import figure_1_7 from "@/images/security-book/figure-1.7.png";
 import figure_1_9 from "@/images/security-book/figure-1.9.png";
 
-
 # Threat modeling
 
 ## Questions on the readings
@@ -20,12 +19,40 @@ The readings today are from
 [Chapter 1](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch1-rev1.pdf),
 sections 1.0 - 1.2, 1.4 - 1.8
 
+## Review
+
+Some important material that may not be in the book (see below notes):
+
+- Threat Modeling Manifesto
+- OWASP
+- attackers: examples of adversaries
+- strategies: card games
+
+## Exercises
+
+Consider this example of an online banking application:
+
+<Image
+  alt="online banking application"
+  src={data_flow_diagram_online_banking_application}
+/>
+
+- What can go wrong?
+  - identify an issue
+- What are we going to do about it?
+  - identify a fix
+- Repeat for as much time as we have
+- This exercise is designed to help you develop a security mindset
+
 ## Fundamental goals of security
 
 - Ultimate goal: Help users complete their desired task safely and without
   short- or long-term risk
 
-<Image alt="confidentiality, integrity, availability, authentication, authorization, accounting" src={figure_1_1} />
+<Image
+  alt="confidentiality, integrity, availability, authentication, authorization, accounting"
+  src={figure_1_1}
+/>
 
 - CIA triad
 
@@ -101,10 +128,6 @@ Items included in a threat model, from OWASP:
 - identify where information is stored in the system and how access is granted
   to that information
 - identify flows of control
-
-- example of an online banking application:
-
-<Image alt="online banking application" src={data_flow_diagram_online_banking_application} />
 
 - example of password flow:
 
@@ -209,13 +232,13 @@ Examples:
 
 - Consider Figure 1.9 again -- what about a malicious browser extension?
 
-## Exercises
+## After-class Exercises
 
 - watch [How to Play Cornucopia](https://www.youtube.com/watch?v=XXTPXozIHow) to
   learn more about threat modeling
 
-- divide into teams of 4 to 5 and build a threat model for a modern automobile
-  that
+- Find a group of 4 to 5 friends and build a threat model for a modern
+  automobile that
 
   - runs a sophisticated software system that controls all aspects of the car
   - is connected at all times via a satellite system
