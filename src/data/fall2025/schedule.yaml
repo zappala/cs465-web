@@ -26,7 +26,9 @@ units:
         readings:
           - title: "Operating Systems: Three Easy Pieces"
             link: https://pages.cs.wisc.edu/~remzi/OSTEP/
-            sections: "53. Intro Security, 55. Access Control, (Optional background if needed: 4. Processes, 7. CPU Scheduling, 13. Address spaces)"
+            sections:
+              "53. Intro Security, 55. Access Control, (Optional background if
+              needed: 4. Processes, 7. CPU Scheduling, 13. Address spaces)"
         project:
           title: Linux and Access Control
           link: /projects/linux
@@ -42,7 +44,7 @@ units:
             sections: 1.0 - 1.2, 1.4 - 1.8
         project:
           title: Threat modeling
-          link: /projects/threat-modeling
+          link: /projects/TBD
           due: Sep 23
 
   - title: "Software Security: Vulnerabilities and Malware"
@@ -181,7 +183,8 @@ units:
           - title: Elliptic Curve Cryptography
             link: /notes/elliptic-curve-cryptography
         readings:
-          - title: A (Relatively Easy To Understand) Primer on Elliptic Curve
+          - title:
+              A (Relatively Easy To Understand) Primer on Elliptic Curve
               Cryptography
             link: https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/
         project:
