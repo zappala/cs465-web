@@ -59,8 +59,8 @@ units:
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 6.0 - 6.1
         ethics:
-          title: "Ethics #1"
-          link: /homework/ethics-1
+          title: "Ethics and Discipleship: Ethical Hacking"
+          link: /homework/ethical-hacking
           due: Oct 28
       - day: Thu
         date: Sep 18
@@ -183,8 +183,7 @@ units:
           - title: Elliptic Curve Cryptography
             link: /notes/elliptic-curve-cryptography
         readings:
-          - title:
-              A (Relatively Easy To Understand) Primer on Elliptic Curve
+          - title: A (Relatively Easy To Understand) Primer on Elliptic Curve
               Cryptography
             link: https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/
         project:
