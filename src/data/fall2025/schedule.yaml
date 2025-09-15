@@ -44,7 +44,7 @@ units:
             sections: 1.0 - 1.2, 1.4 - 1.8
         project:
           title: Threat modeling
-          link: /projects/TBD
+          link: /projects/threat-modeling
           due: Sep 23
 
   - title: "Software Security: Vulnerabilities and Malware"
