@@ -7,7 +7,6 @@ import figure_6_6 from "@/images/security-book/figure-6.6.png";
 import figure_6_7 from "@/images/security-book/figure-6.7.png";
 import figure_6_8 from "@/images/security-book/figure-6.8.png";
 
-
 # Heap Overflows
 
 ## Introductions
@@ -67,3 +66,13 @@ for code we will use:
   overflow problem. In the first case we will try to change the role of a user,
   and in the second case we will try to change a function pointer. We'll use the
   `exploit.py` script to help create the overflow and accomplish our goal.
+
+Notes on the heap exploits:
+
+- The first exploit is trivial.
+- For the second exploit, you need to figure out how many bytes to write before
+  you corrupt the function pointer. To do this, insert a break, overwrite the
+  buffer, and then print the value of the function pointer to see what it
+  contains. Once you have this value, you can use the same method as with a
+  buffer overflow using `gef` and the `pattern search` command. Once you find
+  the offset, then the rest of the method is the same.
