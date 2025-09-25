@@ -98,6 +98,8 @@ units:
         lectures:
           - title: Shellcode and privilege escalation
             link: /notes/shellcode
+          - title: Shellcode walkthrough
+            link: /notes/shellcode-walkthrough
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html

