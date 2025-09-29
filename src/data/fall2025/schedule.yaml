@@ -107,7 +107,7 @@ units:
       - day: Tue
         date: Sep 30
         lectures:
-          - title: TBD
+          - title: Disciple Scholar lecture, Jared Spataro, Microsoft, 1170 TMCB
       - day: Thu
         date: Oct 2
         lectures:
@@ -187,7 +187,8 @@ units:
           - title: Elliptic Curve Cryptography
             link: /notes/elliptic-curve-cryptography
         readings:
-          - title: A (Relatively Easy To Understand) Primer on Elliptic Curve
+          - title:
+              A (Relatively Easy To Understand) Primer on Elliptic Curve
               Cryptography
             link: https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/
         project:
