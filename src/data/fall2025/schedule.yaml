@@ -128,7 +128,7 @@ units:
         date: Oct 7
         lectures:
           - title: Learning Rust
-            link: /notes/learning-rust-1
+            link: /notes/learning-rust
           - title: Learning Rust Abbreviated
             link: /notes/learning-rust-abbreviated
         readings:
