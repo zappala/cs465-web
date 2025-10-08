@@ -145,24 +145,22 @@ units:
           - title: Questions from Rust Practice 1
           - title: Symmetric encryption
             link: /notes/symmetric-encryption
+          - title: Public key cryptography
+            link: /notes/public-key-cryptography
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 2.0 - 2.2
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 2.3 - 2.4
         homework:
           title: Rust Practice 2
           link: /homework/rust-practice-2
           due: Oct 14
       - day: Tue
         date: Oct 14
-        lectures:
-          - title: Questions from Rust Practice 2
-          - title: Public key cryptography
-            link: /notes/public-key-cryptography
-        readings:
-          - title: Computer Security and the Internet
-            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 2.3 - 2.4
+        holiday: No Class
         homework:
           title: Rust Practice 3
           link: /homework/rust-practice-3
@@ -170,6 +168,7 @@ units:
       - day: Thu
         date: Oct 16
         lectures:
+          - title: Questions from Rust Practice 2
           - title: Questions from Rust Practice 3
           - title: Hashing and message authentication
             link: /notes/hashing-and-message-authentication
@@ -187,8 +186,7 @@ units:
           - title: Elliptic Curve Cryptography
             link: /notes/elliptic-curve-cryptography
         readings:
-          - title:
-              A (Relatively Easy To Understand) Primer on Elliptic Curve
+          - title: A (Relatively Easy To Understand) Primer on Elliptic Curve
               Cryptography
             link: https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/
         project:
