@@ -127,8 +127,6 @@ units:
       - day: Tue
         date: Oct 7
         lectures:
-          - title: Learning Rust
-            link: /notes/learning-rust
           - title: Learning Rust Abbreviated
             link: /notes/learning-rust-abbreviated
         readings:
@@ -161,10 +159,12 @@ units:
       - day: Tue
         date: Oct 14
         holiday: No Class
+      - day: Wed
+        date: Oct 15
         homework:
           title: Rust Practice 3
           link: /homework/rust-practice-3
-          due: Oct 14
+          due: Oct 16
       - day: Thu
         date: Oct 16
         lectures:
@@ -186,7 +186,8 @@ units:
           - title: Elliptic Curve Cryptography
             link: /notes/elliptic-curve-cryptography
         readings:
-          - title: A (Relatively Easy To Understand) Primer on Elliptic Curve
+          - title:
+              A (Relatively Easy To Understand) Primer on Elliptic Curve
               Cryptography
             link: https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/
         project:
