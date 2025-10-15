@@ -178,16 +178,15 @@ units:
             sections: 2.5 - 2.6
         homework:
           title: Mac And Encryption Order
-          link: /homework/mac-and-encryption-Order
-          due: Oct 21
+          link: /homework/mac-and-encryption-order
+          due: Oct 23
       - day: Tue
         date: Oct 21
         lectures:
           - title: Elliptic Curve Cryptography
             link: /notes/elliptic-curve-cryptography
         readings:
-          - title:
-              A (Relatively Easy To Understand) Primer on Elliptic Curve
+          - title: A (Relatively Easy To Understand) Primer on Elliptic Curve
               Cryptography
             link: https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/
         project:
