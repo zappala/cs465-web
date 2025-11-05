@@ -218,8 +218,8 @@ units:
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 8.0 - 8.3, 8.5
         ethics:
-          title: "Ethics #2"
-          link: /homework/ethics-2
+          title: "Ethics and the Vulnerability Disclosure Process"
+          link: /homework/vulnerability-disclosure
           due: Dec 2
       - day: Thu
         date: Oct 30
