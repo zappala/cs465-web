@@ -6,7 +6,7 @@ import { Image } from "astro:assets";
 import figure_9_1 from "@/images/security-book/figure-9.1.png";
 import figure_9_2 from "@/images/security-book/figure-9.2.png";
 import DOM from "@/images/notes/DOM.png";
-
+import cookie_consent from "@/images/notes/cookie-consent-preferred-design.png";
 
 # Web Background
 
@@ -133,3 +133,48 @@ Location: url
 
 - If you need to learn JavaScript, use
   [Eloquent JavaScript](https://eloquentjavascript.net/)
+
+## Related Research
+
+### Cookies
+
+- [Do Cookie Banners Respect my Choice? : Measuring Legal Compliance of Banners from IAB Europe’s Transparency and Consent Framework](https://ieeexplore.ieee.org/abstract/document/9152617),
+  2020 IEEE Symposium on Security and Privacy
+
+  - crawled websites with cookie consent banners to evaluate violations
+  - some websites register positive consent even if the user has not made their
+    choice
+  - some websites nudge users towards accepting consent by pre-selecting options
+  - some websites store a positive consent even if the user has explicitly opted
+    out
+  - found at least one suspected violation in 54% of websites
+  - provide a browser extension for manual detection of suspected violations
+
+- [Do Cookie Banners Respect My Browsing Privacy? Measuring the Effectiveness of Cookie Rejection for Limiting Behavioral Advertising](https://ieeexplore.ieee.org/document/10747344)
+
+  - rejecting all cookies reduces the number of third-party tracking cookie
+    hosts by 70% but still shows ads related to user interests (some level of
+    profiling continues)
+
+- [“Okay, whatever”: An Evaluation of Cookie Consent Interfaces](https://dl.acm.org/doi/pdf/10.1145/3491102.3501985)
+
+  - studies a variety of cookie consent interfaces to see what users prefer
+
+- [What Cookie Consent Notices Do Users Prefer: A Study In The Wild](https://dl.acm.org/doi/10.1145/3549015.3555675)
+  - had users rank popular cookie consent UI designs
+  - users prefer the slider design
+
+<Image alt="slider cookie consent design" src={cookie_consent} />
+
+- [Automating Cookie Consent and GDPR Violation Detection](https://www.usenix.org/conference/usenixsecurity22/presentation/bollinger),
+  USENIX Security 2022
+
+  - develops a browser extension to automatically categorize cookies and block
+    cookies
+  - filters 90% of privacy-invasive cookies without impairing website
+    functionality
+
+- [Online Tracking: A 1-million-site Measurement and Analysis](https://www.cs.princeton.edu/~arvindn/publications/OpenWPM_1_million_site_tracking_measurement.pdf),
+  CCS 2016
+  - crawls 1 million websites to identify how online tracking is done
+  - identifies sophisticated fingerprinting techniques
