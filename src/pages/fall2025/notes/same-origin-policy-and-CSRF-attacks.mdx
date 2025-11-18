@@ -5,7 +5,6 @@ layout: ../../../layouts/SemesterMarkdown.astro
 import { Image } from "astro:assets";
 import figure_9_5 from "@/images/security-book/figure-9.5.png";
 
-
 # Same origin policy and CSRF attacks
 
 ## Questions on the readings
@@ -41,22 +40,32 @@ Goals:
 
 Same origin policy
 
-- lets a site load scripts, images, documents, etc from a different origin
-- but prevents the site from _reading_ the script, image, document, etc that is
-  loaded
-- origin must match scheme, host, port
+- a collection of policies, really
 
-Rules
+- DOM
 
-- cookies: browser can only access cookies for the same origin as the current
-  page, but port is excluded from matching rules
-- LocalStorage/SessionStorage: browser can only access storage for the same
+  - A script from origin A can't access the DOM of a page from origin B
+  - origin must match scheme, host, port
+
+  - cookies - browser can only access cookies for the same origin as the current
+    page, but port is excluded from matching rules
+
+  - LocalStorage/SessionStorage: browser can only access storage for the same
   origin
-- DOM: A script from origin A can't access the DOM of a page from origin B
-- fetch requests: A script from origin A can't fetch data from origin B unless
+
+  - images, stylesheets may be loaded from other origins
+
+  - scripts
+    - origin A may load scripts from other origin B, but they operate in the context of origin A,
+      origin A can't read the contents of the script from origin B
+    - fetch requests: A script from origin A can't fetch data from origin B unless
   explicitly allowed by the server for origin B
 
-<Image alt="Figure 9.5, showing how the same origin policy works" src={figure_9_5} />
+
+<Image
+  alt="Figure 9.5, showing how the same origin policy works"
+  src={figure_9_5}
+/>
 
 See also
 [a good, brief explanation](https://portswigger.net/web-security/cors/same-origin-policy)
