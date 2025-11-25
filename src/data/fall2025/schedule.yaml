@@ -309,7 +309,12 @@ units:
       - day: Tue
         date: Nov 25
         lectures:
-          - title: "Social Engineering"
+          - title: Social Engineering (no class, watch video)
+        readings:
+          - title:
+              Chris Pritchard - The Basics of Social Engineering - DEF CON 27
+              Social Engineering Village
+            link: https://www.youtube.com/watch?v=tCRT3QFzwm8
       - day: Thu
         date: Nov 27
         holiday: Thanksgiving
