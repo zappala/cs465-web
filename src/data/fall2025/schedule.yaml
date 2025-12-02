@@ -323,7 +323,9 @@ units:
     days:
       - day: Tue
         date: Dec 2
-
+        lectures:
+          - title: "Academic and Industry Talks: Usable Security and Privacy"
+            link: /notes/academic-and-industry-talks
       - day: Thu
         date: Dec 4
         lectures:
