@@ -1,0 +1,183 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+import { Image } from "astro:assets";
+import figure_11_1 from "@/images/security-book/figure-11.1.png";
+import table_11_1 from "@/images/security-book/table-11.1.png";
+import figure_11_3 from "@/images/security-book/figure-11.3.png";
+
+
+# Intrusion detection and scanners
+
+## Questions on the readings
+
+The readings today are from
+[Computer Security and the Internet](https://people.scs.carleton.ca/~paulv/toolsjewels.html),
+[Chapter 10](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf),
+sections 11.0 - 11.3.
+
+## Intrusion detection
+
+- try to identify unauthorized or malicious traffic
+- _intrusion detection system_
+
+  - monitors events
+  - logs related data
+  - analyzes data
+  - reports events requiring human attention
+
+- _intrusion prevention system_
+
+  - includes active responses
+  - alter packets, strip out malware, reset TCP connections, terminate processes
+  - real-time
+
+- may monitor processes, programs, commands, data at rest, network packets
+- need to collect evidence for a forensic process
+
+- network-based IDS
+
+  - examines packets, e.g. at a router
+
+- host-based IDS
+
+  - examines events on a system, such as application logs, filesystem changes,
+    system calls, CPU usage
+
+<Image alt="IDS event outcomes" src={figure_11_1} />
+
+- true positive, false positive (false alarm)
+- true negative, false negative (intrusion missed)
+
+- example
+  - imagine we have 100 packets that are OK
+    - if system has a false positive for 1 out of 100, then FPR = 1/100 = 1%
+    - we could say this system is 99% accurate
+  - imagine that out of 100,000 packets we expect 1 to be malicious
+    - given FPR of 1%, then there will be 1,000 false positives and 1 true
+      positive
+    - would you now say the system is 99% accurate?
+  - precision = TP/(TP + FP) = 1/(1,000 + 1) = 0.1%
+    - 99.9% of alarms are false alarms
+    - exploring false alarms steals expert time
+
+## Approaches to intrusion detection
+
+<Image alt="approaches to intrusion detection" src={table_11_1} />
+
+- signature-based
+  - signatures usually automatically updated from vendor
+  - may look at behavior (effects of the attack) as well
+- specification-based
+  - define what is allowed for a protocol or application
+- anomaly-based
+  - measure normal behavior
+  - classify anything else as an anomaly
+  - often uses machine learning
+  - challenges
+    - feature selection
+    - intruder-free training
+    - session creep (intruders slowly adding themselves)
+
+## Sniffers
+
+- to look at network traffic, need to capture packets and examine them at line
+  speed
+- helpful even outside of intrusion detection
+- also used by attackers!
+
+<Image alt="hub vs switch" src={figure_11_3} />
+
+- because a hub broadcasts traffic, every host on the LAN sees all the traffic
+
+- network cards can be put into promiscuous mode to sniff traffic
+
+## Vulnerability assessment tools
+
+- explore weaknesses in your systems so that you can modify / update them for
+  increased security
+
+  - vulnerability assessment -- examines systems for vulnerability
+  - penetration testing -- tries to exploit a vulnerability
+  - can be used for both defense and offense
+
+- **make sure you get authorization to do any kind of vulnerabilty assessment or
+  penetration testing**
+- **make sure you follow responsible disclosure when finding a vulnerability**
+
+  - see below
+
+- port scanning is a common assessment tool
+- remote OS fingerprint is also a common assessment tool
+
+- some of what `nmap` can do:
+
+  - finding IP addresses of live hosts within a target network;
+  - OS classification of each live host (OS fingerprinting, above);
+  - identifying open ports on each live host (port scanning);
+  - version detection (for open ports, identifying the service listening, and
+    version)
+  - network mapping (building a network topology—hosts and how they are
+    connected)
+
+- some of what `Nessus` can do:
+  - remote vulnerability scanning
+  - has a library of CVEs it checks for
+
+## Vulnerability disclosure process
+
+- [Coordinated Vulnerability Disclosure Process](https://www.cisa.gov/coordinated-vulnerability-disclosure-process)
+
+- Read the
+  [OWASP Vulnerability Disclosure Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Vulnerability_Disclosure_Cheat_Sheet.html)
+
+- USENIX Security 2025 ethics statement regarding vulnerability disclosure:
+
+> Disclosures. Vulnerabilities, if known to adversaries, can expose people to
+> negative outcomes, such as harms or rights violations. Publicly disclosing
+> vulnerabilities before they have been privately disclosed to the responsible
+> parties, and hence before they have been mitigated, can therefore expose
+> people to negative outcomes. Adversaries or others can also independently
+> discover vulnerabilities. The potential for independent adversary discovery
+> means that knowing about vulnerabilities but not disclosing them to the
+> responsible parties can also result in exposing people to negative outcomes.
+> Additionally, in some cases it can take the responsible parties time to
+> develop mitigations. Therefore, once a vulnerability has been discovered, it
+> is important to initiate the mitigation process as early as possible.
+> Specifically, absent strong and convincing reasons otherwise, we expect
+> researchers to disclose vulnerabilities as soon as they are discovered. If the
+> researchers believe that a different timeline is the most ethical in their
+> situation, they should present clear and convincing arguments for that
+> different timeline. The arguments should clearly articulate why a delayed
+> disclosure is in the best interest of users or people in general, e.g., most
+> supportive of these people's wellbeing or least likely to violate their
+> rights. Submissions that fail to disclose prior to submission and that do not
+> present convincing ethical arguments for delaying disclosure may be rejected
+> or may receive a revision decision.
+
+> Often, the most direct path for vulnerability mitigation is to disclose the
+> vulnerability to the responsible party, e.g. the manufacturer. In some cases,
+> for example when the vulnerability is widespread or the mitigation process
+> involves coordination with many organizations, the most ethical course of
+> action may be to leverage organizations that coordinate vulnerability
+> disclosure, such as the CISA in the United States, rather than or in addition
+> to disclosing to affected parties directly.
+
+- Read
+  [a case study in responsible disclosure](https://enigma0x3.net/2018/10/23/cve-2018-8414-a-case-study-in-responsible-disclosure/)
+
+## Extra Reading
+
+- [99% False Positives: A Qualitative Study of SOC Analysts' Perspectives on Security Alarms](https://www.usenix.org/system/files/sec22-alahmadi.pdf)
+  -- interviews with analysts, discussing burnout from false alarms, with most
+  alarms caused by legitimate behavior.
+
+- [Matched and Mismatched SOCs: A Qualitative Study on Security Operations Center Issues](https://dl.acm.org/doi/pdf/10.1145/3319535.3354239)
+  -- interview study with analysts identifying a wide range of technical and
+  non-technical issues in SOCs.
+
+- Watch
+  [Can Vulnerability Disclosure Processes Be Responsible, Rational, and Effective?](https://www.usenix.org/conference/lisa11/can-vulnerability-disclosure-processes-be-responsible-rational-and-effective)
+
+- [Ethical Hacking for Boosting IoT Vulnerability Management: A First Look into Bug Bounty Programs and Responsible Disclosure](https://dl.acm.org/doi/pdf/10.1145/3357767.3357774)

@@ -1,0 +1,121 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+import { Image } from "astro:assets";
+import figure_10_1 from "@/images/security-book/figure-10.1.png";
+import table_10_1 from "@/images/security-book/table-10.1.png";
+import figure_10_2 from "@/images/security-book/figure-10.2.png";
+import figure_10_3 from "@/images/security-book/figure-10.3.png";
+import figure_10_4 from "@/images/security-book/figure-10.4.png";
+
+
+# Firewalls
+
+## Questions on the readings
+
+The readings today are from
+[Computer Security and the Internet](https://people.scs.carleton.ca/~paulv/toolsjewels.html),
+[Chapter 10](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch10-rev1.pdf),
+sections 10.0 - 10.2.
+
+## Firewall basics
+
+- Defensive technology
+- Designed to screen out incoming traffic at the perimeter of an organization's
+  network and also authorize outbound traffic
+
+  - but also can be on individual machines
+
+- note an organization may want to inspect outgoing traffic to ensure sensitive
+  data isn't exfiltrated
+
+<Image alt="basic firewall diagram" src={figure_10_1} />
+
+- basic idea is that by default, no traffic comes in unless explicitly
+  authorized
+- outgoing traffic is allowed, along with any return traffic on the same
+  connection
+
+## Packet-filter firewall
+
+- inspects individual packets using rules
+  - often a "match first rule" system
+  - actions are ACCEPT, DROP (no notice), REJECT (provide error), LOG
+- filter rules usually based on:
+
+  - source IP address
+  - source port
+  - destinaton IP address
+  - destination port
+  - protocol
+
+- may also use ICMP type and code
+
+- _stateless_ filters vs _stateful_ filters
+
+  - a stateless filter examines each packet independently
+  - a stateful filter can track TCP connection states, and thus treat packets
+    belonging to an accepted TCP connection different from new connections
+
+<Image alt="example packet-filter firewall rules" src={table_10_1} />
+
+- example rules:
+
+  - Rules 1-2 stop spoofed source IP addresses
+  - Rule 3 denies packets from a known spam server
+  - Rules 4-7 are for mail traffic -- allow incoming connections to a mail
+    server (port 25) and responses, outgoing mail connections and responses
+  - Rules 8-A allow outbound HTTP onnection requests, inbound responses, but
+    reject inbound HTTP connection requests
+  - Rules B-D are for DNS traffic -- outgoing queries, incoming queries and
+    responsees
+  - Rules E-H allow incoming and outgoing pings
+  - Rule Z is to deny traffic by default when no other rules match
+
+- limitations of firewalls
+
+  - assumes a true perimeter exists -- now we have personal devices, USB drives,
+    phones making the network defense more complicated
+  - vulnerable to malicious insiders
+  - trusted users may make bad connections
+  - can be transited with tunnelling (e.g. a VPN)
+  - can't screen encrypted content
+
+## Proxy firewalls
+
+- _circuit-level proxy firewalls_: relay an entire connection, either allow or
+  deny, and then relay bytes
+
+<Image alt="circuit-level proxy firewall" src={figure_10_2} />
+
+- circuit-level proxy firewall
+
+  - uses a socket daemon, _sockd_, on the firewall, and the SOCKS protocol to
+    communicate
+  - user --- sockd --- Internet site
+  - separate TCP connections!
+  - application -> intercepted by SOCKS library -> SOCKS protocol to sockd ->
+    internet
+  - connection is allowed or disallowed
+
+- _application-level proxy firewalls_: relay application-specific traffic
+
+<Image alt="application-level proxy firewall" src={figure_10_3} />
+
+- application-level proxy firewall
+  - able to inspect contents of packets since they have knowledge of the
+    protocol
+  - can remove malicious JavaScript, emails, etc.
+
+## Enterprise firewall architectures
+
+<Image alt="enterprise firewall architecture" src={figure_10_4} />
+
+- the firewall (3) is exposed to the hostile newtork, so it maybe called a
+  _bastion host_
+- the web server and DNS server are public-facing, so they sit on a network
+  right after the firewall, in a _demilitarized zone_ or DMZ
+- there is a second internal firewall (4) that protects internal assets
+- routers (1) and (2) provide connectivity
+- provides defense in depth

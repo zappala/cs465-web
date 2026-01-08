@@ -1,0 +1,119 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+import { Image } from "astro:assets";
+import table_9_3 from "@/images/security-book/table-9.3.png";
+
+# Phishing
+
+The readings today are from
+[Computer Security and the Internet](https://people.scs.carleton.ca/~paulv/toolsjewels.html),
+[Chapter 9](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch9-rev1.pdf),
+sections 9.8.
+
+## Types of Phishing Attacks
+
+- _phishing_: tricks a person into visiting a fraudulent version of a legitimate
+  website, with the goal of obtaining sensitive information -- passwords,
+  banking information, credit card details
+
+- _spear phishing_: targeted to a particular individual or organization
+
+  - can be more convincing since it is targeting an individual
+  - attacker will research the target in advance
+  - can purport to come from a known contact or include reference to known
+    information
+
+- _whaling_: targeted to higher-level management
+
+- [see Crowdstrike explanation and examples](https://www.crowdstrike.com/cybersecurity-101/phishing/spear-phishing/)
+
+## Phishing enablers
+
+- _mental model_: a person's understanding of how a system works and what it
+  does
+
+  - influences a person's security-related decisions / threat model
+  - phishing may exploit flaws in a person's mental model
+  - software developers (especially working in security) should try to align
+    their software with mental models
+
+- URLs by design hide the actual link
+- typosquatting
+- redirects
+- web design that looks like the authentic website or "looks trustworthy"
+- copycat domains, like `paypal-security.com` or `pay.pal.com`
+- misunderstanding that the lock icon means a site is "safe"
+
+## Phishing defenses
+
+- spam filtering
+- domain filtering
+- user education
+
+- notes of interest
+  - transient phishing sites are a problem
+  - once users are on a fraudulent site, even experts have a hard time detecting
+    this
+
+## Security indicators
+
+- a closed padlock icon or warnings (Not Secure)
+
+  - visit [badssl.com http site](http://http.badssl.com/) to see what different
+    browsers do with plain HTTP websites these days
+
+- this aspect alone has been studied for decades
+
+  - see for example
+    [Rethinking Connection Security Indicators](https://www.usenix.org/system/files/conference/soups2016/soups2016-paper-porter-felt.pdf)
+    if you want to see older justification for Chrome's designs
+
+- read
+  [Google's justification for removing the lock icon](https://blog.chromium.org/2023/05/an-update-on-lock-icon.html)
+
+_Replacing the lock icon with a neutral indicator prevents the misunderstanding
+that the lock icon is associated with the trustworthiness of a page, and
+emphasizes that security should be the default state in Chrome. Our research has
+also shown that many users never understood that clicking the lock icon showed
+important information and controls. We think the new icon helps make permission
+controls and additional security information more accessible, while avoiding the
+misunderstandings that plague the lock icon._
+
+- lock icon dates from 1990s
+- meant to indicate HTTPS (secure connection)
+- in a study of 1880 participants,
+  [only 11% of participants correctly understood the meaning of the lock icon](https://research.google/pubs/it-builds-trust-with-the-customers-exploring-user-perceptions-of-the-padlock-icon-in-browser-ui/)
+- lots of [previous research](https://ieeexplore.ieee.org/document/4223213)
+  showing similar misunderstandings
+- nearly all phishing sites use HTTPS, so the lock doesn't indicate
+  trustworthiness
+- new icon
+  - does not imply "trustworthy"
+  - is more obviously clickable
+  - is commonly associated with settings
+
+## Usable security
+
+- area of research that combines human factors and security
+
+  - merges two areas of CS (HCI, security)
+  - frequently uses theories and methods from psychology and sociology
+
+- a small selection of lessons learned from usable security research:
+
+<Image alt="lessons from usable security research" src={table_9_3} />
+
+- see SOUPS for examples of research in usable security and privacy
+  - browse through the titles and some selected abstracts
+  - [SOUPS 2024 Technical Sessions](https://www.usenix.org/conference/soups2024/technical-sessions)
+  - [SOUPS 2023 Technical Sessions](https://www.usenix.org/conference/soups2023/technical-sessions)
+  - [SOUPS 2022 Technical Sessions](https://www.usenix.org/conference/soups2022/technical-sessions)
+
+## Extra reading on phishing
+
+- [SoK: Still Plenty of Phish in the Sea — A Taxonomy of User-Oriented Phishing Interventions and Avenues for Future Research](https://www.usenix.org/system/files/soups2021-franz.pdf)
+  -- SOUPS 2021
+- [SoK: A Comprehensive Reexamination of Phishing Research From the Security Perspective](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8924660)
+  -- IEEE Communications Surveys & Tutorials, 2020

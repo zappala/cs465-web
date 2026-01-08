@@ -1,0 +1,85 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+# Homework: Linux Practice
+
+For this homework, you're going to practice using the Linux command line.
+
+If you have a Windows PC or a Mac with an Intel chip, the easiest way to do this
+is with a VM, such as by using VMWare or VirtualBox. If you have a Mac with
+Apple silicon, then you can do this the same way for this assignment, but
+subsequent assignments will require you to use a VPS so that you can use an
+x86-compatible chip. You're welcome to start early with a VPS now.
+
+## VM setup
+
+(1) Install VM software
+
+- One option is
+  [VMWare Fusion](https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion?pubDate=20250617)
+  for Mac or
+  [VMWare Worksation](https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion?pubDate=20250617)
+  for PC. VmWare is generally regarded as the best performing VM software. But
+  you do need to register for an account to download it, and their login and
+  download system is clunky.
+
+- Another option is [Virtualbox](https://www.virtualbox.org/wiki/Downloads) for
+  Mac, Windows, or Linux. No account registration needed.
+
+- For Windows you can try
+  [Hyper-V](https://techcommunity.microsoft.com/blog/educatordeveloperblog/step-by-step-enabling-hyper-v-for-use-on-windows-11/3745905).
+
+(2) Set up Kali
+
+- Download a
+  [Kali Pre-built VM](https://www.kali.org/get-kali/#kali-virtual-machines)
+- Open and run
+
+## Alternative VPS Setup
+
+You can use any VPS provider, such as AWS. I personally find Digital Ocean to be
+easy and cheap, and they offer monthly payment plans so you can easily use a VPS
+for just a few assignments and then tear it down.
+
+## Linux command line
+
+Use the [Linux Journey](https://linuxjourney.com/) site to complete the
+following sections:
+
+- Command Line
+- Text-Fu
+- User Management
+- Permissions
+- Processes
+
+For each section, run all the commands they show you, and play around. Create
+directories and files. Add a new user. Change permissions on files.
+
+Note, the following commands will not work:
+
+- man: because man pages are not installed
+- whatis: because man pages are not installed
+- sudo: use root account instead
+
+You can use Google to find the appropriate man pages as needed.
+
+Finally, I recommend using `useradd` to add an account as shown. Try using `ssh`
+to connect to that account with the password you create. What happens? Then
+create an account using `useradd -m -s /bin/bash arwen`. Why does this work
+better?
+
+## Turn In
+
+Submit a screenshot showing you running the history command on the Linux image from this homework.
+
+## Grading
+
+Homework is graded on a participation basis. Turn in this homework if you:
+
+- Have a VPN or VPS to practice Linux.
+- Have run at least 80% of the commands given
+
+Note, if you are already a master with Linux (e.g. you have used it for several
+years on a personal machine), then review all the material but you may skip
+anything you already know. If you haven't set up a VM or used a VPS, be sure to at least try at least one of those.

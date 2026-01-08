@@ -1,0 +1,60 @@
+---
+layout: ../../layouts/SemesterMarkdown.astro
+---
+
+import { Cards, Card } from "../../components/Card.jsx";
+
+<article
+    class="prose prose-blockquote:not-italic prose-blockquote:font-normal prose-blockquote:text-base prose-blockquote:bg-blue-200 prose-blockquote:border-l-0 prose-blockquote:px-4 prose-blockquote:py-1 prose-blockquote:rounded-lg pb-8 text-lg">
+
+# Staff
+
+## Office Hours
+
+| Staff          | Position   | Location  | Hours                                                      |
+| -------------- | ---------- | --------- | ---------------------------------------------------------- |
+| Fred Clift     | Instructor |           | Make an appoitnment with me                                |
+| Isaac Teichert | TA         | TMCB 1066 | see below                       |
+
+Isaac's Hours:
+
+```
+| Time |  Mon        |  Tue |  Wed        |  Thu        |  Fri |
+|------|-------------|------|-------------|-------------|------|
+| 9:00 |             |  X   |             |             |      |
+|10:00 |             |  X   |             |             |      |
+|11:00 |             |      |             |             |  X   |
+|12:00 |  X          |      |  X          |             |  X   |
+| 1:00 |  X          |      |  X          |             |  X   |
+| 2:00 |  X          |      |  X          |             |  X   |
+| 3:00 |  X till 3:15|      |  X till 3:15|             |  X   |
+| 4:00 |             |      |             |             |  X   |
+| 5:00 |  (online)   |      |  (online)   |  (online)   |      |
+| 6:00 |  (online)   |      |  (online)   |(online till 6:15)|   |
+
+```
+
+
+
+## Instructor
+
+
+<Card name="Fred Clift" image="/staff/fred_clift.jpg" email="fmclift@byu.edu">
+  Hello! CS 465 continues to evolve -- we're fine-tuning some assignments this
+  year.
+
+  I dont have an assigned office. You can find me on slack, most of the time.
+  If we need to meet I can reserve a space for us.  Please contact me to
+  schedule an appoitnment. You can call or text me during normal hours at
+  (utah's primary areacode) 376-0305  - slack is better most of the time though
+</Card>
+
+## TAs
+
+<Card
+  name="Isaac Teichert"
+  image="/staff/isaac.jpg"
+  email="isaact@student.byu.edu "
+></Card>
+
+</article>

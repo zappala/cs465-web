@@ -1,0 +1,11 @@
+menu:
+  semester: Winter 2026
+  items:
+    - title: Home
+      url: /
+    - title: Staff
+      url: /staff
+    - title: Syllabus
+      url: /syllabus
+    - title: Slack
+      url: /slack
