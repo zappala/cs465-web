@@ -51,7 +51,7 @@ units:
         project:
           title: Threat modeling
           link: /projects/threat-modeling
-          due: Jan 26
+          due: Jan 30
 
   - title: "Software Security: Vulnerabilities and Malware"
     days:
