@@ -67,7 +67,7 @@ units:
         ethics:
           title: "Ethics and Discipleship: Ethical Hacking"
           link: /homework/ethical-hacking
-          due: Feb 27
+          due: Mar 6
       - day: Thu
         date: Jan 22
         lectures:
@@ -181,7 +181,7 @@ units:
         homework:
           title: Mac And Encryption Order
           link: /homework/mac-and-encryption-order
-          due: Feb 26
+          due: Feb 27
       - day: Sat
         date: Feb 21
         exam: Mid-Term Exam  (Saturday 21 - Tuesday 24th 11:59 PM)
