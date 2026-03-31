@@ -343,13 +343,12 @@ units:
           - title: "Academic and Industry Talks: Usable Security and Privacy"
             link: /notes/academic-and-industry-talks
 
-  - title: Extra Credit Project (details forthcoming)
+  - title: Spear-Phish Me!  extra credit homework
     days:
       - day: 
         date:
         project:
-          title: Extra Credit Project
-            #link: /projects/final-project
+          title: Extra Credit homework  (see details in Canvas)
           due: Apr 15
 
 
