@@ -317,7 +317,9 @@ units:
         date: Mar 31
         lectures:
           - title: Social Engineering 
-            link: https://cs465.byu.edu/static/lectures/f22/social_engineering.pdf
+            #            link: /notes/social_engineering.pdf
+            type: static
+            link: /public/lectures/w2026/social_engineering.pdf
         readings:
           - title:
               Chris Pritchard - The Basics of Social Engineering - DEF CON 27
@@ -325,12 +327,17 @@ units:
             link: https://www.youtube.com/watch?v=tCRT3QFzwm8
           
 
-  - title: Advanced Topics
+  - title: Misc
     days:
       - day: Thu
         date: April 2
         lectures:
-          - title: TBD
+          - title: TLS and secure email
+            link: /notes/tls-and-secure-email
+        readings: 
+          - title: Computer Security and the Internet
+            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
+            sections: 8.5 - 8.6 
       - day: Tue
         date: April 7
         lectures:

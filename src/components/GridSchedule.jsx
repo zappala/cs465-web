@@ -111,6 +111,9 @@ export default function GridSchedule(props) {
       target = "_blank";
       icon = <></>;
     }
+    if (lecture.type === "static") {
+        prefix = "";
+    }
     if (lecture.type === "zip") {
       icon = <img className="w-5 inline" src="/icons/zip.png" />;
       after_content = `after:content-[',_']`;
