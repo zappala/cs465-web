@@ -337,6 +337,9 @@ units:
             link: /public/lectures/w2026/SecureEmail.pdf
           - title: TLS and secure email (some revisiting)
             link: /notes/tls-and-secure-email
+          - title: test
+            type: static
+            link: /notes/test.txt
         readings: 
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
