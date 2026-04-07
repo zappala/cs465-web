@@ -327,7 +327,7 @@ units:
             link: https://www.youtube.com/watch?v=tCRT3QFzwm8
           
 
-  - title: Misc
+  - title: Deeper Dive Into Interesting Topics
     days:
       - day: Thu
         date: April 2
@@ -344,16 +344,22 @@ units:
       - day: Tue
         date: April 7
         lectures:
-          - title: TBD
+          - title: MAC's revisited / Length Extension Attacks, or why we use HMAC
+            type: static
+            link: /lectures/w2026/SecureEmail.pdf
+        readings:
+           - title: (not really a reading, but for the lecture) Length Extension Discussion
+             link: https://docs.google.com/presentation/d/19HfSDfiPJxaC-snRp-C2gw466UzeYlOtPEpeh2679CE/edit?usp=sharing
+
       - day: Thu 
         date: April 9
         lectures: 
-          - title: Course Review and Overview
-      - day: Thu 
-        date: April 14
-        lectures: 
           - title: "Academic and Industry Talks: Usable Security and Privacy"
             link: /notes/academic-and-industry-talks
+      - day: Tue
+        date: April 14
+        lectures: 
+          - title: Course Review and Overview
 
   - title: Spear-Phish Me!  extra credit homework
     days:
