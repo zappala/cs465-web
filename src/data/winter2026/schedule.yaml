@@ -360,6 +360,9 @@ units:
         date: April 14
         lectures: 
           - title: Course Review and Overview
+        readings:
+          - title: slides for course review
+            link: https://docs.google.com/presentation/d/1st8QVZGVeGipW-DJsB2PqwoAbrPq-lXe9Ow4Dy6dX1Q/edit?usp=sharing
 
   - title: Spear-Phish Me!  extra credit homework
     days:
