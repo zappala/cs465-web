@@ -1,0 +1,204 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+import { Image } from "astro:assets";
+import rfc6749_figure_1 from "@/images/notes/rfc6749-figure-1.png";
+import oauth_authorization_authlete2017 from "@/images/notes/oauth-authorization-authlete2017.webp";
+
+
+# Account recovery, CAPTCHAs, and SSO
+
+## Introductions
+
+- introductions of two students
+
+## Questions on the readings
+
+The readings today are from
+[Computer Security and the Internet](https://people.scs.carleton.ca/~paulv/toolsjewels.html),
+[Chapter 3](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch3-rev1.pdf)
+and
+[Chapter 4](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch4-rev1.pdf),
+sections 3.3, 3.7, 4.7.
+
+## Account recovery
+
+**_Never_ store passwords in the clear so that you can offer "password
+recovery"**
+
+- recovery link or code sent via email
+
+  - must inclue some randomized code in the link to avoid replay attacks
+  - difficulty: compromised email account can be used to take over other
+    accounts
+
+- one-time code sent via SMS
+  - difficulty: phones subject to targeted SIM cloning attacks
+- challenge questions
+  - difficulty: users may forget answers, answers may be easily guessed, likely
+    stored in plaintext so can be leaked
+  - not recommended
+
+## CAPTCHA
+
+- used to prevent mass creation of free accounts, spam on discussion boards
+- often based on character recognition, audio recognition, image recognition, or
+  cognitive games
+- can use as an alternative to rate limiting
+- susceptible to AI, human labor pools
+- reCAPTCHA ("I am not a robot") measures human interaction with the webpage
+
+## Single Sign-On (SSO)
+
+- uses an identity provider to issue access tokens for an account held at a
+  relying party
+- centralized login, but also concentrated risk
+
+- types of systems
+
+  - credential manager (including password managers)
+  - enterprise SSO -- typically used in a corporate environment, e.g. Kerberos,
+    Central Authentication Services (CAS)
+  - Federated Identity -- e.g. OAuth2, Kerberos
+
+### OAUTH2
+
+<Image alt="abstract picture of OAUTH2 authorization flow" src={rfc6749_figure_1} />
+
+- when logging into a relying party (website), redirected to identity provider
+- user authenticates to identity provider, given a token, and redirected back to
+  original relying party
+- relying party accepts token from identity provider as authenticating the user
+
+<Image alt="more detailed OAUTH2 authorization flow" src={oauth_authorization_authlete2017} />
+
+- complex authentication flow, so easy for websites to make mistakes (see extra
+  reading)
+
+### Kerberos
+
+- uses a centralized key distribution center (KDC), called T
+- enables mutual authentication between client A and server B
+
+  - A authenticates to ticket server T, receives an encrypted ticket it can give
+    to B, plus a secret key for communicating with B, k<sub>s</sub>. The ticket
+    contains the secret key, but encrypted for B.
+  - A can now give the ticket to B, plus prove that it knows the secret key
+    k<sub>s</sub>
+  - B then authenticates to A that it knows the secret key k<sub>s</sub>
+
+- this is a simplified version of Kerberos, there are _many_ more details
+
+## Extra Reading
+
+### Account Recovery
+
+- see
+  [Email as a Master Key: Analyzing Account Recovery in the Wild](https://ieeexplore.ieee.org/abstract/document/8486017),
+  Li, Wang, and Sun, IEEE INFOCOM 2018
+
+_Account recovery (usually through a password reset) on many websites has mainly
+relied on accessibility to a registered email due to its favorable deployability
+and usability. However, it makes a user’s online accounts vulnerable to a single
+point of failure when the registered email account is compromised. While
+previous research focuses on strengthening user passwords, the security risk
+imposed by email-based account recovery has not yet been well studied. In this
+paper, we investigate the possibility of mounting an email-based account
+recovery attack. Specifically, we examine the account authentication and
+recovery protocols in 239 traffic-heavy websites, confirming that most of them
+use emails for account recovery. We further scrutinize the security policy of
+major email service providers and show that a significant portion of them take
+no or marginal effort to protect user email accounts, leaving compromised email
+accounts readily available for mounting account recovery attacks. Then, we
+conduct case studies to assess potential losses caused by such attacks. Finally,
+we propose a lightweight email security enhancement called Secure Email Account
+Recovery (SEAR) to defend against account recovery attacks as an extra layer of
+protection to account recovery emails._
+
+- see
+  [Secrets, Lies, and Account Recovery: Lessons from the Use of Personal Knowledge Questions at Google](https://dl.acm.org/doi/abs/10.1145/2736277.2741691)
+
+_We examine the first large real-world data set on personal knowledge question's
+security and memorability from their deployment at Google. Our analysis confirms
+that secret questions generally offer a security level that is far lower than
+user-chosen passwords. It turns out to be even lower than proxies such as the
+real distribution of surnames in the population would indicate. Surprisingly, we
+found that a significant cause of this insecurity is that users often don't
+answer truthfully. A user survey we conducted revealed that a significant
+fraction of users (37%) who admitted to providing fake answers did so in an
+attempt to make them "harder to guess" although on aggregate this behavior had
+the opposite effect as people "harden" their answers in the same and predictable
+way. On the usability side, we show that secret answers have surprisingly poor
+memorability despite the assumption that their reliability motivates their
+continued deployment. From millions of account recovery attempts we observed a
+significant fraction of users (e.g 40% of our English-speaking US users) were
+unable to recall their answers when needed. This is lower than the success rate
+of alternative recovery mechanisms such as SMS reset codes (over 80%). Comparing
+question strength and memorability reveals that the questions that are
+potentially the most secure (e.g what is your first phone number) are also the
+ones with the worst memorability. We conclude that it appears next to impossible
+to find secret questions that are both secure and memorable. Secret questions
+continue have some use when combined with other signals, but they should not be
+used alone and best practice should favor more reliable alternatives._
+
+### CAPTCHA
+
+- see
+  [Gotta CAPTCHA 'Em All: A Survey of 20 Years of the Human-or-computer Dilemma](https://dl.acm.org/doi/pdf/10.1145/3477142),
+  Guerar, Verdarame, Migliardi, Palmieri, Merlo, ACM Computing Surveys (CSUR),
+  2021
+
+_A recent study has found that malicious bots generated nearly a quarter of
+overall website traffic in 2019. These malicious bots perform activities such as
+price and content scraping, account creation and takeover, credit card fraud,
+denial of service, and so on. Thus, they represent a serious threat to all
+businesses in general, but are especially troublesome for e-commerce, travel,
+and financial services. One of the most common defense mechanisms against bots
+abusing online services is the introduction of Completely Automated Public
+Turing test to tell Computers and Humans Apart (CAPTCHA), so it is extremely
+important to understand which CAPTCHA schemes have been designed and their
+actual effectiveness against the ever-evolving bots. To this end, this work
+provides an overview of the current state-of-the-art in the field of CAPTCHA
+schemes and defines a new classification that includes all the emerging schemes.
+In addition, for each identified CAPTCHA category, the most successful attack
+methods are summarized by also describing how CAPTCHA schemes evolved to resist
+bot attacks, and discussing the limitations of different CAPTCHA schemes from
+the security, usability, and compatibility point of view. Finally, an assessment
+of the open issues, challenges, and opportunities for further study is provided,
+paving the road toward the design of the next-generation secure and
+user-friendly CAPTCHA schemes._
+
+### OAUTH2
+
+- see
+  [Towards Automated Auditing for Account and Session Management Flaws in Single Sign-On Deployments](https://ieeexplore.ieee.org/abstract/document/9833753),
+  Ghasemisharif, Kanich, and Polakis, IEEE Symposium on Security & Privacy, 2022
+
+_Single Sign-On (SSO) is both a core and critical component of user
+authentication and authorization on the modern web, as it is often offered by
+web and mobile applications alongside credentia-based authentication to
+facilitate the account creation and login process. However, the interplay
+between local account management and SSO functionality in the backend leads to
+flaws that enable or magnify account hijacking attacks. These flaws are not
+baked into the actual SSO protocols, but manifest due to the complexity of
+supporting separate but intermingling authentication paths. As a result, these
+types of flaws cannot be detected by the SSO protocol or implementation
+verification tools proposed in prior work. In this paper we introduce SAAT, a
+fully automated modular framework that assesses whether relying parties (RPs)
+that use Facebook as the IdP comply with secure practices and guidelines, and
+uncovers flaws in account and session management that stem from or are affected
+by the interplay of SSO and local functionality. We conduct a large-scale
+exploration of authentication and session practices in Facebook’s RPs, revealing
+a volatile ecosystem where SSO support can be suddenly dropped and 17.6% of the
+tested RPs exhibit non-functional SSO implementations. This highlights the need
+for the continuous and systematic testing of the SSO ecosystem made possible by
+SAAT. More critically, we find that security measures are often missing and
+official guidelines are routinely overlooked or misconfigured, with only 0.8% of
+the RPs fully enabling re-authentication which can prevent compromise from
+hijacked identity provider (IdP) cookies. Our study also shows that less than 2%
+of RPs correctly react to SSO revocation and 67% continue to allow account
+access even 10 days after revocation. Overall, we envision our framework as a
+tool for enabling and guiding widespread remediation efforts by major SSO
+identity providers, which were previously infeasible due to the sheer scale and
+inherent mutability of this ecosystem._

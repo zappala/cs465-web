@@ -1,0 +1,40 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+# Homework: Certificates and TLS
+
+For this homework, you're going to examine certificates and TLS settings.
+
+## Part 1: Certificates
+
+Use your web browser to inspect the certificates for _two_ websites of your
+choice. You can inspect the certificate in Chrome by clicking on the settings
+icon directly to the left of the website name in the URL bar.
+
+For each website, list the following:
+
+- for each certificate in the certificate chain
+  - name of the organization given in the `Certificate Hierarchy`
+  - validity period (starting date, ending date) and calculate the total time
+    (in years and months)
+  - public key algorithm
+  - certificate key usage
+  - certificate key basic constraints
+
+## Part 2: TLS
+
+For this part of the project, you will be investigating TLS settings using SSL
+Lab's [SSL test tool](https://www.ssllabs.com/ssltest/). Use this tool to
+examine _two_ websites of your choice. For each website, report:
+
+- overall grade
+- any flaws detected
+- supported TLS protocols
+- supported TLS cipher suites
+
+See if you can find a website with less than an A grade!
+
+## Grading
+
+Homework is graded on a participation basis. Turn in a PDF of your report.

@@ -1,0 +1,103 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+import { Image } from "astro:assets";
+import diffie_hellman_wikipedia from "@/images/notes/diffie-hellman-wikipedia.png";
+import figure_4_4 from "@/images/security-book/figure-4.4.png";
+
+
+# Key Establishment
+
+## Introductions
+
+- introductions of two students
+
+## Key Establishment
+
+- Important question -- how do Bob and Alice create a key that they share?
+
+- They could share the key in person, e.g. using a USB drive.
+- Alice could generate a key and then encrypt it with Bob's public key
+
+  - If someone records the conversation and then steals Bob's private key, they
+    can decrypt everything
+
+  - If you do have a shared key, it is important to prove ownership
+    - encrypt a random number
+    - encrypt a sequence number
+    - encrypt a timestamp
+  - All of these prevent a replay attack
+
+- _Key agreement protocol_ -- both parties contribute some information to derive
+  a shared key
+  - the generated key is ephemeral -- used only for a short time, destroyed
+    after use
+  - no long term secrets -- so even if an attacker steals Bob's private key and
+    has a record of the conversation, they can't compute the derived key
+
+## Diffie Hellman
+
+- "allows two parties with no prior contact nor any pre-shared keying material,
+  to establish a shared secret by exchanging numbers over a channel readable by
+  everyone else." Pretty amazing!
+
+- Diffie-Hellman protocol
+  - _g_ and _p_ are fixed and known for all users
+    - _p_ is prime
+    - _g_ is a
+      [primitive root modulo _p_](https://en.wikipedia.org/wiki/Primitive_root_modulo_n)
+    - for every integer _a_ in _g_ that is coprime to _p_, there is some integer
+      _k_ for which _g<sup>k</sup> ≡ a (mod p)_
+    - _g_ is a generator of the multiplicative group of integers modulo _p_
+  - A : chooses a private value, _a_ in the range [1, p - 2]
+  - A → B : g<sup>a</sup> mod p
+  - B : chooses a private value _b_ in the range [1, p - 2], computes _K =
+    (g<sup>a</sup>)<sup>b</sup> mod p_
+  - B → A : g<sup>b</sup> mod p
+  - A: computes _K = (g<sup>b</sup>)<sup>a</sup> mod p_
+  - depends on _g<sup>ab</sup> = g<sup>ba</sup>_
+
+<Image alt="diffie-hellman" src={diffie_hellman_wikipedia} />
+
+- Computing a from g<sup>a</sup> and public parameters _g_ and _p_ is called the
+  discrete logarithm problem -- computationally difficult if _p_ is chosen with
+  certain properties
+
+- Once you derive DH key K, you put it into a _key derivation function_ to get
+  the actual key used.
+
+- Textbook DH is unauthenticated -- an active attacker can easily subvert it.
+
+<Image alt="subverting unauthenticated Diffie-Hellman" src={figure_4_4} />
+
+- The STS protocol, discussed in the book, adds digital signatures to DH. We
+  will later see DH in TLS.
+
+## Key authentication properties and goals
+
+- forward secrecy -- disclosure of a long-term secret does not compromise the
+  secrecy of session keys used for earlier sessions
+
+- known-key security -- compromised session keys do not allow later
+  impersonation or compromise future session keys
+
+- entity authentication and liveness -- if you verify an entity is actively
+  participating in a protocol, this gives you _liveness_
+
+- key-use confirmation -- you can verify a party has a session key without
+  verifying who they are
+
+- implicit authentication -- encrypting a session key using RSA -- you know the
+  other party is the only one that can get the session key, but you don't know
+  if they have received it
+
+- implicit authentication + key-use confirmation = explicit authentication
+
+- if you want to see details, study the STS implementation details, then read
+  through the informal explanation of the properties provided
+
+## Additional reading
+
+- Textbook DH is
+  [susceptible to small subgroup attacks](https://github.com/ashutosh1206/Crypton/blob/master/Diffie-Hellman-Key-Exchange/Attack-Small-Subgroup-Confinement/README.md)

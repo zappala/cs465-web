@@ -1,0 +1,88 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+# Hashing and message authentication
+
+## Introductions
+
+- introductions of two students
+
+## Questions on the readings
+
+The reading today is
+[A (Relatively Easy To Understand) Primer on Elliptic Curve Cryptography](https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/).
+
+## RSA
+
+- The computational security of RSA depends on a _trapdoor function_, meaning a
+  function that is easy to compute in one direction but computationally
+  infeasible in the other direction.
+
+- RSA parameters
+  - m: message
+  - e: public exponent
+  - d: private exponent
+  - n: modulus
+  - c: ciphertext
+- RSA encryption, in simplified form, is c = m<sup>e</sup> (mod n)
+- RSA decryption, in simplified form, is m = c<sup>d</sup> (mod n)
+
+- Process to choose a public and private key
+
+  - The receiver chooses two large prime numbers, _p_, and _q_. Compute their
+    product, _n = pq_.
+  - The receiver calculates _ϕ(pq) = (p - 1)(q - 1)_.
+  - The receiver chooses a number _e_ relatively prime to _ϕ(pq)_. In practice,
+    _e_ may be 2<sup>16</sup> +1 = 65537.
+  - The public key is _(e, n)_.
+  - The receiver calculates the modular inverse _d_ of _e modulo ϕ(n)_. This
+    means _de = 1 (mod ϕ(n))_.
+  - The private key is _d_.
+
+- Attacking RSA
+  - Attacker knows _n_, but factoring into _p_ and _q_ is a known hard problem.
+  - Attacker does not know _ϕ(n)_, so it cannot use knowledge of _e_ to
+    calculate _d_. The only way to get _ϕ(n)_ is to factor _n_ into its primes.
+
+## Elliptic curve cryptography
+
+- elliptic curves provide a better trapdoor function
+- curves have a form similar to y = x<sup>3</sup> + ax + b
+
+- _An elliptic curve cryptosystem can be defined by picking a prime number as a
+  maximum, a curve equation and a public point on the curve. A private key is a
+  number priv, and a public key is the public point dotted with itself priv
+  times. Computing the private key from the public key in this kind of
+  cryptosystem is called the elliptic curve discrete logarithm function. This
+  turns out to be the Trapdoor Function we were looking for._
+
+- elliptic curves are much more efficient for the same level of security
+
+| RSA key size (bits) | ECC key size (bits) |
+| ------------------- | ------------------- |
+| 1024                | 160                 |
+| 2048                | 224                 |
+| 3072                | 256                 |
+| 7680                | 384                 |
+| 15360               | 521                 |
+
+## Extra Reading
+
+- more math details:
+  [Elliptic Curve Cryptography: a gentle introduction](https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/)
+
+- cracking elliptic curve seeds:
+  [Announcing the $12k NIST Elliptic Curves Seeds Bounty](https://words.filippo.io/dispatches/seeds-bounty/)
+
+- [Did NSA Put a Secret Backdoor in New Encryption Standard?](https://www.wired.com/2007/11/securitymatters-1115/)
+- [How the NSA (may have) put a backdoor in RSA’s cryptography: A technical primer](https://blog.cloudflare.com/how-the-nsa-may-have-put-a-backdoor-in-rsas-cryptography-a-technical-primer/)
+- [Dual EC: A Standardized Back Door](https://eprint.iacr.org/2015/767.pdf)
+
+## Class exercises
+
+We are using the [Rust Crypto](https://github.com/RustCrypto) crates.
+
+See the [Rust Cryptography](https://github.com/BYU-CS465/rust-cryptography) repo
+for
+[ecdsa signatures using the p256 curve](https://docs.rs/p256/latest/p256/ecdsa/index.html).

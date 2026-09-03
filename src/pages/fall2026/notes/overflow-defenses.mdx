@@ -1,0 +1,64 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+# Overflow defenses
+
+## Various defenses
+
+- note, attackers may find ways around some of these -- see advanced reading
+
+(1) make stack and heap non-executable
+
+- default with `gcc` -- must turn off with `-z execstack`
+- [Windows allows you to turn on Data Execution Prevention](https://support.microsoft.com/en-us/topic/what-is-data-execution-prevention-dep-60dabc2b-90db-45fc-9b18-512419135817)
+- [details on how DEP works](https://learn.microsoft.com/en-us/windows/win32/memory/data-execution-prevention)
+
+(2) stack canary
+
+- insert a randomly-chosen integer on the stack when a function is called
+- check that the canary is intact before examining the return pointer
+- can also use a heap canary
+- default with `gcc` -- must turn off with `-fno stack-protector`
+
+(3) address space layout randomization (ASLR)
+
+- kernel level
+- randomly positions the stack, heap, libraries
+- makes it more difficult for an attacker to predict where code is loaded when a
+  buffer is overflowed
+- prevents the attacker from knowing where code is located
+- position-independent execution (PIE) randomizes the code block
+
+- depends on the implementation being properly randomized -- see
+  [The Illusion of Randomness: An Empirical Analysis of Address Space Layout Randomization Implementations](https://arxiv.org/abs/2408.15107)
+
+(5) position-independent execution (PIE)
+
+- the binary is compiled so that each memory region has an offset from a fixed
+  address, and the fixed address can change each time the binary is run
+- PIE enables the text and data positions to be randomly positioned by ALSR
+
+(6) type-safe languages
+
+- [see NIST safer languages](https://www.nist.gov/itl/ssd/software-quality-group/safer-languages)
+- [type safety in Rust](https://doc.rust-lang.org/nomicon/meet-safe-and-unsafe.html)
+
+(7) other
+
+- compiler bounds checking
+- safe C libraries
+- static analysis tools -- tools that analyze your code and warn you
+
+### Adoption Barriers
+
+- no governing body
+- backwards compatibility
+- incomplete solutions
+
+### Advanced Reading
+
+- [Return-Oriented Programming: Systems, Languages, and Applications](https://dl.acm.org/doi/10.1145/2133375.2133377)
+- [tutorial on return-oriented programming](https://codearcana.com/posts/2013/05/28/introduction-to-return-oriented-programming-rop.html)
+- [Practical Timing Side Channel Attacks against Kernel Space ASLR](https://ieeexplore.ieee.org/document/6547110?denied=)
+- [Position-Independent Code Reuse: On the Effectiveness of ASLR in the Absence of Information Disclosure](https://ieeexplore.ieee.org/document/8406602)

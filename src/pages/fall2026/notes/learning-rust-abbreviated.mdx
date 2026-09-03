@@ -1,0 +1,710 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+# Learning Rust
+
+These notes are an abbreviated version of what is covered in [The Rust Programming Language](https://doc.rust-lang.org/book/). This may make it easier to reference the material in the book.
+
+> Rust is all about memory safety.
+
+## Sections 1 - 3
+
+### Cargo
+
+Rust comes with `cargo` to build code and manage dependencies:
+
+- `cargo new PROJECT`
+- `cargo build`
+- `cargo build --release`
+- `cargo run`
+- `cargo check`
+
+### Mutability
+
+You must declare variables to be
+[mutable](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html#variables-and-mutability).
+This doesn't work:
+
+```rust
+fn main() {
+    let x = 5;
+    println!("The value of x is: {x}");
+    x = 6;
+    println!("The value of x is: {x}");
+}
+```
+
+This does:
+
+```rust
+fn main() {
+    let mut x = 5;
+    println!("The value of x is: {x}");
+    x = 6;
+    println!("The value of x is: {x}");
+}
+```
+
+### Shadowing
+
+You can
+[shadow](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html#shadowing)
+a variable by redeclaring it. Curly brackets create a new scope, and variable
+declarations go away when they are out of scope. So the below code prints `12`
+for the inner scope and `6` for the outer scope.
+
+```rust
+fn main() {
+    let x = 5;
+
+    let x = x + 1;
+
+    {
+        let x = x * 2;
+        println!("The value of x in the inner scope is: {x}");
+    }
+
+    println!("The value of x is: {x}");
+}
+```
+
+### Namespaces
+
+The `::` accesses elements of a namespace. `std` is the
+[Rust standard libary](https://doc.rust-lang.org/std/index.html), and is always
+available through a `use` statement. `std::io` is the
+[io module](https://doc.rust-lang.org/std/io/index.html) of the standard lbrary.
+The syntax `io::stdin()` accesses standard input in the `io` module.
+
+```rust
+use std::io;
+
+fn main() {
+    println!("Guess the number!");
+
+    println!("Please input your guess.");
+
+    let mut guess = String::new();
+
+    io::stdin()
+        .read_line(&mut guess)
+        .expect("Failed to read line");
+
+    println!("You guessed: {}", guess);
+}
+```
+
+### Data types and integer overflow
+
+Rust will
+[infer data types](https://doc.rust-lang.org/book/ch03-02-data-types.html#data-types)
+where possible, but you must explicitly use type annotation where Rust cannot
+infer. In the below example, the `guess` variables needs a type annotation
+because `parse()` doesn't know what type it should be converting to.
+
+```rust
+let guess: u32 = "42".parse().expect("Not a number!");
+```
+
+Rust has:
+
+- 8-bit to 128-bit signed and unsigned integers, e.g. `i16`, `u32`
+- floating-point types, e.g. `f32`, `f64`
+- boolean type, `bool`, which can be `true` or `false`
+- character type, `char`
+
+Rust also has
+
+- tuples
+- arrays
+
+For
+[integer overflow](https://doc.rust-lang.org/book/ch03-02-data-types.html#integer-overflow),
+Rust provides wrappers for:
+
+- `wrapping_` -- wraps
+- `checked_` -- returns None if overflow
+- `overflowing` -- returns the value and True if overflow
+- `saturating` -- caps at max or min value
+
+### Return values
+
+Rust will return the value of the last expression (leave off the semicolon!):
+
+```rust
+fn plus_one(x: i32) -> i32 {
+    x + 1
+}
+```
+
+You can also use an explicit `return`.
+
+### Exercises
+
+At this point, you are ready to complete [rustlings](https://github.com/rust-lang/rustlings) exercises for sections 0-3, plus the
+first quiz.
+
+## Section 4
+
+### Ownership
+
+To preserve memory safety, Rust uses a set of
+[ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#what-is-ownership)
+rules.
+
+> Each value in Rust has an owner.
+
+> There can only be one owner at a time.
+
+> When the owner goes out of scope, the value will be dropped.
+
+This is OK, because the variables are on the stack:
+
+```rust
+let x = 5;
+let y = x;
+```
+
+There are two variables, and each have the value 5.
+
+This is not OK, because Rust does not want two references to the same memory on
+the heap:
+
+```rust
+let s1 = String::from("hello");
+let s2 = s1;
+```
+
+When `s1` and `s2` go out of scope, Rust would try to free the memory twice,
+resulting in a
+[double free](https://owasp.org/www-community/vulnerabilities/Doubly_freeing_memory)
+error.
+
+So, to solve this problem, Rust declares that `s1` is no longer in scope. Thus
+only `s2` is valid.
+
+If your code really needs two pointers to two copies of the same string, use
+`clone()`:
+
+```rust
+let s1 = String::from("hello");
+let s2 = s1.clone();
+```
+
+### Ownership and functions
+
+When a value is passed to a function, its
+[ownership is moved into the function](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#ownership-and-functions),
+unless the type is one that can be copied. Types that can be copied: integers,
+floats, booleans (true and false), and char.
+
+```rust
+fn main() {
+    let s = String::from("hello");  // s comes into scope
+
+    takes_ownership(s);             // s's value moves into the function...
+                                    // ... and so is no longer valid here
+
+    let x = 5;                      // x comes into scope
+
+    makes_copy(x);                  // x would move into the function,
+                                    // but i32 is Copy, so it's okay to still
+                                    // use x afterward
+
+} // Here, x goes out of scope, then s. But because s's value was moved, nothing
+  // special happens.
+
+fn takes_ownership(some_string: String) { // some_string comes into scope
+    println!("{some_string}");
+} // Here, some_string goes out of scope and `drop` is called. The backing
+  // memory is freed.
+
+fn makes_copy(some_integer: i32) { // some_integer comes into scope
+    println!("{some_integer}");
+} // Here, some_integer goes out of scope. Nothing special happens.
+```
+
+### Return values and scope
+
+Rust functions can take ownership and
+[return ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html#return-values-and-scope).
+
+```rust
+fn main() {
+    let s1 = gives_ownership();         // gives_ownership moves its return
+                                        // value into s1
+
+    let s2 = String::from("hello");     // s2 comes into scope
+
+    let s3 = takes_and_gives_back(s2);  // s2 is moved into
+                                        // takes_and_gives_back, which also
+                                        // moves its return value into s3
+} // Here, s3 goes out of scope and is dropped. s2 was moved, so nothing
+  // happens. s1 goes out of scope and is dropped.
+
+fn gives_ownership() -> String {             // gives_ownership will move its
+                                             // return value into the function
+                                             // that calls it
+
+    let some_string = String::from("yours"); // some_string comes into scope
+
+    some_string                              // some_string is returned and
+                                             // moves out to the calling
+                                             // function
+}
+
+// This function takes a String and returns one
+fn takes_and_gives_back(a_string: String) -> String { // a_string comes into
+                                                      // scope
+
+    a_string  // a_string is returned and moves out to the calling function
+}
+```
+
+Notice how you do not need to call a function to free memory! Scoping rules take
+care of it for you.
+
+### References
+
+Use a
+[reference](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html#references-and-borrowing)
+when you want to allow a function to use a variable without claiming ownership
+of it. This is called _borrowing_.
+
+```rust
+fn main() {
+    let s1 = String::from("hello");
+
+    let len = calculate_length(&s1);
+
+    println!("The length of '{s1}' is {len}.");
+}
+
+fn calculate_length(s: &String) -> usize {
+    s.len()
+}
+```
+
+A reference is like a pointer, but _guaranteed_ to be valid.
+
+A function cannot modify a reference:
+
+```rust
+fn main() {
+    let s = String::from("hello");
+
+    change(&s);
+}
+
+fn change(some_string: &String) {
+    some_string.push_str(", world");
+}
+```
+
+You can make a reference _mutable_:
+
+```rust
+fn main() {
+    let mut s = String::from("hello");
+
+    change(&mut s);
+}
+
+fn change(some_string: &mut String) {
+    some_string.push_str(", world");
+}
+```
+
+> If you have a mutable reference to a value, you can have no other references
+> to that value.
+
+So this is not allowed:
+
+```rust
+ let mut s = String::from("hello");
+
+let r1 = &mut s;
+let r2 = &mut s;
+
+println!("{}, {}", r1, r2);
+```
+
+This prevents _data races_! The Rust book has a good definition of when data
+races occur:
+
+- Two or more pointers access the same data at the same time.
+- At least one of the pointers is being used to write to the data.
+- There is no mechanism being used to synchronize access to the data.
+
+Rust will refuse to compile code with data races.
+
+> At any given time, you can have either one mutable reference or any number of
+> immutable references.
+
+> References must always be valid.
+
+### Exercises
+
+At this point, you are ready to complete [rustlings](https://github.com/rust-lang/rustlings) exercises for section 4, on primitive
+types and section 6, on move semantics.
+
+## Section 5
+
+### Structs
+
+Structs let you define custom types:
+
+```rust
+struct User {
+    active: bool,
+    username: String,
+    email: String,
+    sign_in_count: u64,
+}
+```
+
+Here is how you initialize a struct:
+
+```rust
+fn main() {
+    let user1 = User {
+        active: true,
+        username: String::from("someusername123"),
+        email: String::from("someone@example.com"),
+        sign_in_count: 1,
+    };
+}
+```
+
+See the book for additional details.
+
+You can also
+[define methods on structs](https://doc.rust-lang.org/book/ch05-03-method-syntax.html#defining-methods)
+using `impl`:
+
+```rust
+#[derive(Debug)]
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+}
+
+fn main() {
+    let rect1 = Rectangle {
+        width: 30,
+        height: 50,
+    };
+
+    println!(
+        "The area of the rectangle is {} square pixels.",
+        rect1.area()
+    );
+}
+```
+
+You can also define
+[associated functions](https://doc.rust-lang.org/book/ch05-03-method-syntax.html#associated-functions)
+on structs. These are functions that don't take a struct, but return one.
+
+```rust
+impl Rectangle {
+    fn square(size: u32) -> Self {
+        Self {
+            width: size,
+            height: size,
+        }
+    }
+}
+```
+
+### Exerises
+
+Complete [rustlings](https://github.com/rust-lang/rustlings) exercises for section 7, on structs.
+
+## Section 6
+
+### Enums
+
+You can declare enumerated types:
+
+```rust
+enum IpAddrKind {
+    V4,
+    V6,
+}
+```
+
+...and then create instances of those types:
+
+```rust
+let four = IpAddrKind::V4;
+let six = IpAddrKind::V6;
+```
+
+You can include data in enumerated types:
+
+```rust
+enum IpAddr {
+    V4(String),
+    V6(String),
+}
+
+let home = IpAddr::V4(String::from("127.0.0.1"));
+
+let loopback = IpAddr::V6(String::from("::1"));
+```
+
+You can even mix types:
+
+```rust
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(i32, i32, i32),
+}
+```
+
+### Option
+
+`Option` is an numerated type in the standard library, letting you define a
+variable as being something or nothing.
+
+```rust
+enum Option<T> {
+    None,
+    Some(T),
+}
+```
+
+See this amazing quote from Tony Hoare, who invented `null`:
+
+> I call it my billion-dollar mistake. At that time, I was designing the first
+> comprehensive type system for references in an object-oriented language. My
+> goal was to ensure that all use of references should be absolutely safe, with
+> checking performed automatically by the compiler. But I couldn’t resist the
+> temptation to put in a null reference, simply because it was so easy to
+> implement. This has led to innumerable errors, vulnerabilities, and system
+> crashes, which have probably caused a billion dollars of pain and damage in
+> the last forty years.
+
+```rust
+let some_number = Some(5);
+let some_char = Some('e');
+
+let absent_number: Option<i32> = None;
+```
+
+> Rust forces you to allow for the possibility that something may be null, and
+> then handle the case when it is null.
+
+### match
+
+The `match` expression lets you handle different cases for an enumerated type:
+
+```rust
+enum Coin {
+    Penny,
+    Nickel,
+    Dime,
+    Quarter,
+}
+
+fn value_in_cents(coin: Coin) -> u8 {
+    match coin {
+        Coin::Penny => 1,
+        Coin::Nickel => 5,
+        Coin::Dime => 10,
+        Coin::Quarter => 25,
+    }
+}
+```
+
+### Exercises
+
+You are now ready to do the [rustlings](https://github.com/rust-lang/rustlings) exercises for section 8.
+
+## Section 7
+
+### Packages and Crates
+
+- A crate can be a binary crate or a library crate.
+
+- A package contains one or more crates.
+
+- A package can contain/create many binary crates but only one library crate.
+
+### Modules
+
+See the
+[modules cheat sheet](https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html#modules-cheat-sheet)
+to see how Rust uses modules to organize source code.
+
+- Code within a module is private from its parent modules by default.
+- You can declare modules and functions public.
+
+```rust
+mod front_of_house {
+    pub mod hosting {
+        pub fn add_to_waitlist() {}
+    }
+}
+
+pub fn eat_at_restaurant() {
+    // Absolute path
+    crate::front_of_house::hosting::add_to_waitlist();
+
+    // Relative path
+    front_of_house::hosting::add_to_waitlist();
+}
+```
+
+Note, you need to declare the `hosting` module public and the
+`add_to_waitlist()` function public so that you can use them in the parent
+module.
+
+### Use keyword
+
+The `use` keyword brings paths into scope:
+
+```rust
+mod front_of_house {
+    pub mod hosting {
+        pub fn add_to_waitlist() {}
+    }
+}
+
+use crate::front_of_house::hosting;
+
+pub fn eat_at_restaurant() {
+    hosting::add_to_waitlist();
+}
+```
+
+The above is the _idiomatic_ way to bring in a module -- keep the module name
+instead of bringing the function into scope.
+
+Here is the _idiomatic_ way to bring in a struct:
+
+```rust
+use std::collections::HashMap;
+
+fn main() {
+    let mut map = HashMap::new();
+    map.insert(1, 2);
+}
+```
+
+### External packages
+
+To use an external package, list the package in your `Cargo.toml`:
+
+```rust
+rand = "0.8.5"
+```
+
+Then use it:
+
+```rust
+use rand::Rng;
+
+fn main() {
+    let secret_number = rand::thread_rng().gen_range(1..=100);
+}
+```
+
+### Separating modules
+
+You can
+[separate modules in to different file](https://doc.rust-lang.org/book/ch07-05-separating-modules-into-different-files.html#separating-modules-into-different-files)
+and follow some Rust conventions. For example:
+
+`src/lib.rs`:
+
+```rust
+mod front_of_house;
+
+pub use crate::front_of_house::hosting;
+
+pub fn eat_at_restaurant() {
+    hosting::add_to_waitlist();
+}
+```
+
+`src/front_of_house.rs`:
+
+```rust
+pub mod hosting {
+    pub fn add_to_waitlist() {}
+}
+```
+
+### Exercises
+
+You are now ready to do the [rustlings](https://github.com/rust-lang/rustlings) exercises for section 10.
+
+## Section 9
+
+### Vectors
+
+Rust has support for vectors:
+
+```rust
+let mut v = Vec::new();
+
+v.push(5);
+v.push(6);
+v.push(7);
+v.push(8);
+```
+
+You can iterate over them:
+
+```rust
+let mut v = vec![100, 32, 57];
+for i in &mut v {
+    *i += 50;
+}
+```
+
+### Strings
+
+A variety of ways to initialize a string:
+
+```rust
+let data = "initial contents";
+
+let s = data.to_string();
+
+// the method also works on a literal directly:
+let s = "initial contents".to_string();
+
+// this also works
+let s = String::from("initial contents");
+```
+
+You can add to a string:
+
+```rust
+let mut s = String::from("foo");
+s.push_str("bar");
+```
+
+Strings can store UTF-8 characters:
+
+```
+let hello = "Здравствуйте";
+```
+
+This means a string is not just a simple storage of one byte per character.
+
+### Exercises
+
+You are now ready to do the [rustlings](https://github.com/rust-lang/rustlings) exercises for sections 5 and 9.

@@ -1,0 +1,261 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+# Learning Rust 3
+
+## Introductions
+
+- introductions of two students
+
+## Learning Rust, Section 9
+
+We are using [The Rust Programming Language](https://doc.rust-lang.org/book/)
+and [rustlings](https://github.com/rust-lang/rustlings).
+
+### Error handling
+
+Rust does _not_ have exceptions. Instead, it has:
+
+- `Result<T, E>` for recoverable errors
+- panic! for unrecoverable errors
+
+### Panic
+
+[Panic](https://doc.rust-lang.org/book/ch09-01-unrecoverable-errors-with-panic.html)
+prints a failure message, unwinds (cleans up the stack), and quits. You can
+display the call stack by setting an environment variable.
+
+```rust
+fn main() {
+    panic!("crash and burn");
+}
+```
+
+This will cause a panic:
+
+```rust
+fn main() {
+    let v = vec![1, 2, 3];
+
+    v[99];
+}
+```
+
+### Errors
+
+Rust includes a
+[Result enum](https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html):
+
+```
+enum Result<T, E> {
+    Ok(T),
+    Err(E),
+}
+```
+
+Here is an example of how to use it:
+
+```rust
+use std::fs::File;
+
+fn main() { let greeting_file_result = File::open("hello.txt");
+
+    let greeting_file = match greeting_file_result {
+        Ok(file) => file,
+        Err(error) => panic!("Problem opening the file: {error:?}"),
+    };
+
+}
+```
+
+Note, instead of a panic, here, you could have an interface that asks the user
+to choose a different file.
+
+### Exercises
+
+Complete the rustlings exercises for section 13, numbers 1-3. Numbers 4-6
+contain advanced material.
+
+## Learning Rust, Section 10
+
+### Generic data types
+
+Rust has
+[generic data types](https://doc.rust-lang.org/book/ch10-01-syntax.html), which
+allow a function to operate on a type that is not known in advance.
+
+For example, this function can find the largest value in vector of numbers or
+characters:
+
+```rust
+fn largest<T>(list: &[T]) -> &T {
+    let mut largest = &list[0];
+
+    for item in list {
+        if item > largest {
+            largest = item;
+        }
+    }
+
+    largest
+}
+
+fn main() {
+    let number_list = vec![34, 50, 25, 100, 65];
+
+    let result = largest(&number_list);
+    println!("The largest number is {result}");
+
+    let char_list = vec!['y', 'm', 'a', 'q'];
+
+    let result = largest(&char_list);
+    println!("The largest char is {result}");
+}
+```
+
+You can also use generics when defining types, such as a `Point` that can handle
+integer and floating point coordinates, and each coordinate can have a different
+type:
+
+```rust
+struct Point<T, U> {
+    x: T,
+    y: U,
+}
+
+fn main() {
+    let both_integer = Point { x: 5, y: 10 };
+    let both_float = Point { x: 1.0, y: 4.0 };
+    let integer_and_float = Point { x: 5, y: 4.0 };
+}
+```
+
+Likewise, you can use generics in methods:
+
+```rust
+struct Point<T> {
+    x: T,
+    y: T,
+}
+
+impl<T> Point<T> {
+    fn x(&self) -> &T {
+        &self.x
+    }
+}
+
+fn main() {
+    let p = Point { x: 5, y: 10 };
+
+    println!("p.x = {}", p.x());
+}
+```
+
+Here, the function `x()` is defined on `Point` and it returns a reference to
+`x`, which is of type `T`.
+
+### Traits
+
+Rust uses [traits](https://doc.rust-lang.org/book/ch10-02-traits.html) to
+constrain types in a generic definition to ensure they implement some desired
+functionality. For example, this `Summary` trait indicates that a type should
+have a `summarize()` function:
+
+```rust
+pub trait Summary {
+    fn summarize(&self) -> String;
+}
+```
+
+Now we can define different types (as structs) that implement the `Summary`
+trait:
+
+```rust
+pub struct NewsArticle {
+    pub headline: String,
+    pub location: String,
+    pub author: String,
+    pub content: String,
+}
+
+impl Summary for NewsArticle {
+    fn summarize(&self) -> String {
+        format!("{}, by {} ({})", self.headline, self.author, self.location)
+    }
+}
+
+pub struct Tweet {
+    pub username: String,
+    pub content: String,
+    pub reply: bool,
+    pub retweet: bool,
+}
+
+impl Summary for Tweet {
+    fn summarize(&self) -> String {
+        format!("{}: {}", self.username, self.content)
+    }
+}
+```
+
+Assuming the above is in a library crate called `aggregator`, we can use it in
+our main function:
+
+```rust
+use aggregator::{Summary, Tweet};
+
+fn main() {
+    let tweet = Tweet {
+        username: String::from("horse_ebooks"),
+        content: String::from(
+            "of course, as you probably already know, people",
+        ),
+        reply: false,
+        retweet: false,
+    };
+
+    println!("1 new tweet: {}", tweet.summarize());
+}
+```
+
+### Binding traits
+
+You can require a type implement a trait. For example, the `notify()` function
+below requires an item that implements the `Summary` trait:
+
+```rust
+pub fn notify(item: &impl Summary) {
+    println!("Breaking news! {}", item.summarize());
+}
+```
+
+You can do this with a longer-form notation as well:
+
+```rust
+pub fn notify<T: Summary>(item: &T) {
+    println!("Breaking news! {}", item.summarize());
+}
+```
+
+These are equivalent!
+
+You can specify multiple traits this way:
+
+```rust
+fn some_function<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {
+```
+
+or with a `where` clause:
+
+```rust
+fn some_function<T, U>(t: &T, u: &U) -> i32
+where
+    T: Display + Clone,
+    U: Clone + Debug,
+{
+```
+
+### Exercises
+
+You are now ready to do rustlings section 14 on generics and 15 on traits.

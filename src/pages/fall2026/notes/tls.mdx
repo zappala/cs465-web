@@ -1,0 +1,189 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+import { Image } from "astro:assets";
+import tls_history from "@/images/notes/tls-history.png";
+import SSL_records from "@/images/notes/SSL-records.png";
+import tls_handshake_dh from "@/images/notes/tls-handshake-dh.png";
+
+
+# TLS
+
+## Introductions
+
+- introductions of two students
+
+## Questions on the readings
+
+The readings today are from
+[Computer Security and the Internet](https://people.scs.carleton.ca/~paulv/toolsjewels.html),
+[Chapter 9](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch9-rev1.pdf),
+sections 9.2
+
+## SSL and TLS hsitory
+
+<Image alt="TLS history" src={tls_history} />
+
+Source of image: SSL and TLS, Rescorla
+
+## SSL record structure
+
+<Image alt="SSL records" src={SSL_records} />
+
+Source of image: Network and Security Essentials, Stallings
+
+## TLS handshake and DH key exchange
+
+- the main purpose of the TLS handshake is to etablish a shared key
+- note this shows Diffie-Hellman, but there are a variety of ways to complete
+  the handshake
+
+<Image alt="TLS handshake and key exchange" src={tls_handshake_dh} />
+
+- parts of the handshake
+
+  - Client Hello
+    - Random client: random number used later to derive shared key
+    - Cipher Suites: zero or more
+    - Session ID: can be used to update or resume a connection
+  - Server Hello
+    - Random server: random number used later to dervice shared key
+    - Cipher Suite: the single cipher suite selected from the client's list (or
+      the connection is closed if none is available)
+    - Session ID: can indicate a resumed connection or a new connection
+  - Server Certificate
+    - a chain of certificates that authenticate the server to the client
+  - Server Key Exchange
+    - random client from above
+    - random server from above
+    - signed Diffie-Hellman parameters
+  - Server Hello Done
+    - empty, signals end of key exchange messages
+    - note, this is needed because, e.g. Server Key Exchange message may not be
+      needed
+  - Client Key Exchange
+    - public Diffie Hellman message
+  - Change Cipher Spec
+    - potentially multiple messages to change the cipher suite
+  - Finished
+
+    - sent after cipher change messages
+    - verifies the key exchange and authentication was successful
+    - contains some data to verify the previous exchanges -- HMAC of master
+      secret, a text string, hash of hasndshake messages
+    - first message protected with the negotiated algorithms, keys, and secrets
+    - after this message, the peers can exchange data
+
+  - everything after the key exchange is encrypted and protected with a MAC
+    (unless AES GCM mode used) -- this means an attacker cannot modify
+    algorithms chosen
+  - can use a _pre-shared key_, meaning a key from a previous session
+  - Diffie-Hellman keys are ephemeral -- erased after use
+
+## TLS Cipher Suites
+
+- defines the algorithms used during the TLS connection
+
+  - key exchange algorithm -- for exchanging/creating a symmetric encryption key
+  - authentication algorithm -- for digital signatures
+  - bulk encryption algorithm -- for encrypting the data
+  - MAC algorithm -- for security
+
+- example: _ECDHE-ECDSA-AES128-GCM-SHA256_
+
+  - ECDHE:
+    [Elliptic-curve Diffie-Hellman](https://en.wikipedia.org/wiki/Elliptic-curve_Diffie–Hellman)
+  - ECDSA -- Elliptic-curve Digital Signature Algorithm
+  - AES 128 -- AES with 128-bit key
+  - GCM -- Galois/Counter Mode -- block cipher with high performance
+    (parallelizable) and patent-free
+  - SHA256 -- MAC algorithm
+
+## Organization and Extended Validation certificates
+
+types of certificates
+
+- DV (Domain Validated) certificates
+  - demonstrate control of the domain, which could be responding to email sent
+    to `admin@domain.com`
+  - inexpensive or free
+- OV (Organization Validated) certificates
+  - manual checks to certify ownership of a real-world organization
+- EV (Extended Validation) certificates verify
+  - real-world existance of a legal entity in the `Subject`
+  - registration in government-recognized databases
+  - physical existence matching location in certificate
+  - identity of person requesting certificate and their relationship to the
+    organization
+  - control of the domain
+- IV (Individual validated) certificates
+
+  - user decided to trust them (e.g. self-signed certificates)
+
+- **users don't know the difference between DV, OV, and EV**
+
+  - thus not very useful
+
+  - see
+    [An Evaluation of Extended Validation and Picture-in-Picture Phishing Attacks](https://www.adambarth.com/papers/2007/jackson-simon-tan-barth.pdf)
+    -- study showing Internet Explorer EV certificate interface didn't help
+    users identify phishing attacks
+  - can't prove a CA takes these validation steps anyway
+
+## Attacks on TLS
+
+- rogue certificates -- see
+  [Hackers spied on 300,000 Iranians using fake Google certificate](https://www.computerworld.com/article/2510951/hackers-spied-on-300-000-iranians-using-fake-google-certificate.html),
+  2011
+
+- TLS stripping attacks -- block the signal to upgrade from HTTP to HTTPS
+
+  - see website configuration below
+  - use browser tools to see the redirect
+  - see HTTPS Everywhere browser extension
+  - revocation failures can be exploited
+
+- difficulties with browser trust model
+
+  - how do users or browsers decide who is trustworthy and who is not?
+  - poor trust agility -- no system to dynamically add/remove certificates from
+    the root store, it's up to the OS or browser vendor
+  - intermediate CAs are unaccountable -- can only remove root CAs
+
+- certificate transparency helps expose rogue certificates
+
+  - this uses a blockchain to track all certificates
+  - an attacker can avoid putting a rogue certificate into the blockchain, but
+    then browsers will reject it as not valid
+  - an attacker can put the rogue certificate into the blockchain, and then once
+    caught the signing CA will be banned
+  - so the system helps shorten the lifetime of attacks
+  - for details, see
+    [Certificate Transparency](https://dl.acm.org/doi/pdf/10.1145/2659897)
+
+## Other TLS topics
+
+- TLS flaws are serious
+
+  - a bug in TLS affects massive amounts of ecommerce
+  - see
+    [Heartbleed 101](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=6876249)
+    and the included xkcd comic
+  - see
+    [TLS Security 6: Examples of TLS Vulnerabilities and Attacks](https://www.acunetix.com/blog/articles/tls-vulnerabilities-attacks-final-part/)
+    for a decent overview of past attacks
+
+- the widespread use of CDNs for content delivery means CDNs have wbesite
+  private keys
+  - see
+    [Content Delivery Network](https://learn.microsoft.com/en-us/power-pages/configure/configure-cdn)
+    for a good picture of a CDN
+  - see
+    [Measurement and Analysis of Private Key Sharing in the HTTPS Ecosystem](https://dl.acm.org/doi/pdf/10.1145/2976749.2978301)
+  - see
+    [When HTTPS Meets CDN: A Case of Authentication in Delegated Service](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=6956557)
+
+## Class Exercise
+
+- https://www.ssllabs.com/ssltest/analyze.html?d=www2.pnwx.com

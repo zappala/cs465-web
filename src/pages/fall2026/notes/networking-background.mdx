@@ -1,0 +1,215 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+import { Image } from "astro:assets";
+import worldBlack from "@/images/notes/worldBlack.jpg";
+import fig01_01 from "@/images/notes/fig01_01.png";
+import fig01_11 from "@/images/notes/fig01_11.png";
+import fig01_19 from "@/images/notes/fig01_19.png";
+import fig01_20 from "@/images/notes/fig01_20.png";
+import fig05_16 from "@/images/notes/fig05_16.png";
+import fig04_13 from "@/images/notes/fig04_13.png";
+import fig04_24 from "@/images/notes/fig04_24.png";
+import routing from "@/images/notes/routing.png";
+import fig03_07 from "@/images/notes/fig03_07.png";
+import fig03_28 from "@/images/notes/fig03_28.png";
+import tcp_sequence_ack from "@/images/notes/tcp-sequence-ack.png";
+import tcp_congestion_control_question from "@/images/notes/tcp-congestion-control-question.png";
+import fig03_29 from "@/images/notes/fig03_29.png";
+
+
+# Networking background
+
+<Image alt="high level map of the Internet" src={worldBlack} />
+
+## Internet components and structure
+
+The Internet is:
+
+- roughly hierarchical
+- composed of networks
+- composed of routers, links, a wide variety of edge devices
+
+<Image alt="Internet components" src={fig01_01} />
+
+- networks connect using customer-provider relationships (usually in a
+  contract!)
+- tier-1 ISPs provide international coverage, treat each other as peers
+
+<Image alt="Internet components" src={fig01_11} />
+
+- [Lumen's network map](https://www.lumen.com/en-us/resources/network-maps.html)
+  shows what a Tier 1 ISP looks like
+
+- the Internet is only roughly hierarchical, there may be many connections among
+  peers and across levels
+
+## Internet architecture
+
+<Image alt="networking stack" src={fig01_19} />
+
+- layering helps to build complex systems
+
+  - split large system into smaller pieces
+  - identify each layer's functionality and interfaces
+  - can change a layer's implementation as long as interfaces remain the same
+
+- encapsulation is used when sending packets, decapsulation is used when
+  receiving packets
+
+<Image alt="encapsulation vs decapsulation" src={fig01_20} />
+
+## Link layer
+
+<Image alt="LAN" src={fig05_16} />
+
+- MAC addresses
+
+  - used to get frame from one interface to another physically-connected
+    interface (on the same network)
+  - most are 48 bits long, depends on link-layer protocol
+  - address burned into the adapter ROM
+  - broadcast address usually all ones (FF-FF-FF-FF-FF-FF)
+
+- address assignment administered by IEEE
+  - manufacturer buys portion of MAC address space (prefix)
+  - uses that prefix for all MAC addresses and ensures it does not reuse the
+    suffix
+  - uniqueness provides address portability
+
+## Network Layer
+
+- IP -- Internet Protocol
+- simplest definition of the Internet: _all the devices that speak IP_
+
+### IPv4
+
+- common protocol for all networks
+- very simple
+- has lasted nearly years (since ~1978!)
+
+<Image alt="IPv4 header" src={fig04_13} />
+
+- source IP address
+- destination IP address
+- TTL (hop count)
+- protocol: typically UDP or TCP
+
+- IP addresses
+
+  - 32 bits
+  - dotted decimal notation
+  - `byu.edu` is `128.187.16.184`
+
+- forwarding process: check the destination address
+  - _is this one of my addresses?_ send to next protocol specified in IP header
+  - _is this one of my subnets?_ send to link layer to forward to the
+    destination
+  - _do I have a route?_ send to link layer to forward to next IP hop
+  - _destination unknown!_ send an ICMP error to the source of the IP packet
+
+### IPv6
+
+<Image alt="IPv6 header" src={fig04_24} />
+
+- simplified
+- result of negotiation
+- _flow label_ and _traffic class_: used to map traffic into classes of service
+- _Next Header_: upper layer protocol or option
+
+- IPv6 addresses: 128 bits
+
+### Routing Protocols
+
+<Image alt="routing problem" src={routing} />
+
+- routing protocols decide which route should a packet at A take to reach B
+- different protocols for intra-network and inter-network routing -- see CS 460
+
+## Transport Layer
+
+### UDP
+
+- best-effort service
+  - connectionless: no state setup
+  - unreliable: lost packets are not re-sent • no flow control
+  - no congestion control (won't slow down, you can send as much and as fast as
+    you want)
+
+<Image alt="UDP header" src={fig03_07} />
+
+- defined in [RFC 768, from 1980](https://www.ietf.org/rfc/rfc768.txt)
+
+  - port numbers (16 bits each)
+  - length of UDP segment, including header (bytes)
+  - checksum: detect some bit errors in transmitted segment
+  - application data (sometimes called ADU)
+
+- well-known ports: FTP (21), SSH (22), SMTP (25), HTTP (80), HTTPS (443)
+
+- binary protocol
+
+### TCP
+
+<Image alt="TCP segmentation" src={fig03_28} />
+
+- _pipelining_: multiple data segments outstanding at once
+
+  - VERY important to use the high bandwidth available on the Internet
+
+- TCP has two primary functions
+
+  - reliability
+  - congestion control
+
+- _reliability_
+
+  - make sure every packet gets through
+  - every packet gets a sequence number
+  - resend any packets that are dropped
+
+<Image alt="tcp sequence number being acked by receiver" src={tcp_sequence_ack} />
+
+- _congestion control_
+
+  - control the rate at which packets are sent
+
+<Image alt="the sender has a 1 GB of packets ready to send, how many bytes should it send?" src={tcp_congestion_control_question} />
+
+- basic algorithm
+
+  - gradually increase rate
+  - any dropped packet means you sent too fast -- slow down
+  - then ramp back up again
+  - continually probe for more bandwidth, but slow down when loss occurs
+  - converges over time to a fair allocation of bandwidth among competing flows
+
+<Image alt="TCP header" src={fig03_29} />
+
+- _sequence and ACK number_: count in terms of bytes
+- flags
+  - `A`: ACK number is valid
+  - `R` (RST): reset connection
+  - `S` (SYN): establish connection
+  - `F` (FIN): close connection
+  - `U` (URG): urgent data, typically not used
+  - `P` (PSH): push (send) data immediately, used for TELNET
+- _receive window_: number of bytes receiver can accept (flow control)
+
+## Why is the Internet so vulnerable to attacks?
+
+[The Design Philosophy of the DARPA Internet Protocols](http://ccr.sigcomm.org/archive/1995/jan95/ccr-9501-clark.pdf)
+
+- fundamental goal: develop an internetwork for existing networks
+- second-level goals (in order of importance)
+  - survivability
+  - multiple types of service (delay vs bandwidth, reliable vs datagram)
+  - variety of networks
+  - distributed management
+  - cost effective
+  - host attachment with low effort
+  - accountable resources
+
+→ security was not considered
+[Brief History of the Internet](https://www.internetsociety.org/wp-content/uploads/2017/09/ISOC-History-of-the-Internet_1997.pdf)

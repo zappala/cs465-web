@@ -1,0 +1,245 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+import { Image } from "astro:assets";
+import table_8_1 from "@/images/security-book/table-8.1.png";
+import figure_8_7 from "@/images/security-book/figure-8.7.png";
+import figure_8_2 from "@/images/security-book/figure-8.2.png";
+import figure_8_1 from "@/images/security-book/figure-8.1.png";
+import signal_key_verification from "@/images/notes/signal-key-verification.png";
+
+
+# Certificates
+
+## Introductions
+
+- introductions of two students
+
+## Questions on the readings
+
+The readings today are from
+[Computer Security and the Internet](https://people.scs.carleton.ca/~paulv/toolsjewels.html),
+[Chapter 8](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch8-rev1.pdf),
+sections 8.0-8.3, 8.5.
+
+## Public key certificates
+
+- a _public key certificate_ associates a public key with an owner
+
+  - combination of Subject and public key signed by a Certification Authority
+    (CA)
+  - a _relying party_ relies on this certification authority and trusts its
+    signature
+
+- we typically use a set of standards from the International Telecommunication
+  Union (ITU) -- X.509
+
+<Image alt="Table 8.1 fields in a certificate" src={table_8_1} />
+
+## Issuing a certificate
+
+- _Certificate Authorities (CAs)_ can issue certificates for humans, computers
+
+  - web: issue to a web server to certify a public key is associated with a
+    hostname
+  - email: issue to a person to certify a public key is associated with an email
+    address
+  - code signing: issue to an organization to certify a public key is associated
+    with that organization (name, location, company officer)
+
+- evidence needed to issue a certificate include
+
+  - ownership of the key using challenge/response
+  - ownershp or control of the entity in the Subject field (email address, web
+    server, organization)
+  - affiliation with a named legal entity
+
+- can easily get a website certificate for free with
+  [Let's Encrypt](https://letsencrypt.org/)
+
+  - It uses a protocol called ACME to automatically verify you own a domain
+  - For example, you contact an ACME server to request a certificate, and it
+    gives you a file to serve from your website, once it verifies that you are
+    serving it, then it issues you the certificate
+  - see [Let's Encrypt Stats](https://letsencrypt.org/stats/)
+
+## Verifying a certificate
+
+- anyone can sign their own certificate, called a _self-signed certificate_
+  - but it won't necessarily be trusted!
+- the web uses a CA-based trust model:
+
+<Image alt="Browser trust model" src={figure_8_7} />
+
+- we use a trust model that assumes some trust anchors (trusted certificates)
+  are shipped with browsers and operating systems
+  - called a _trusted certificate store_ or _root store_
+- each CA can forms a root of trust
+- other trust models are possible! the book covers some of them
+
+<Image alt="verifying a certificate" src={figure_8_2} />
+
+- Validating a certificate chain
+
+  - obtain a certificate chain
+    - you may have only the leaf or you may be given a partial chain
+    - trace signatures back to a root and look up certificates as needed
+  - for each certificate
+    - check that it is not expired and is current
+    - check that it is not revoked (see below)
+    - check that the signature is valid using the signing CA's public key
+    - use is consitent with constraints (see below)
+    - subject name matches semantics
+      - hostname signed is the hostname the user is visiting in the browser
+      - email address that is signed is the email subject
+    - signing CA either has a public key that is trust anchor, or repeat above
+      steps until reaching a trust anchor
+
+- constraints
+  - basic constraints
+    - includes whether the public key is for a CA (and thus can sign other
+      certificates), otherwise it is a leaf certificate
+    - includes a chain length, 0 means the CA can only issue leaf certificates
+  - key usage
+    - allowed uses, e.g. for signatures, encyption, key agreement, revocation
+      list signatures, code signing
+  - subject alternate name
+    - various alternative aliases (other email addresses, other domain names or
+      IP addresses)
+  - name constraints
+    - constrains what a CA can sign for (e.g. only .com or only .byu.edu
+      domains)
+
+## Revoking a certificate
+
+- needed in case
+
+  - a private key is stolen
+  - a private key is lost
+  - changes to name or organization
+  - new key pair
+
+- Certificate Revocation List (CRL)
+
+  - issued by a CA
+  - contains a list of all unexpired but revoked certificates
+  - can be fetched by a browser / RP periodically
+  - major drawback is size, especially for mobile devices
+
+- Online Certificate Status Protocol (OCSP)
+
+  - allows a browser / RP to check the revocation status of a certificate
+  - major downside is privacy concern
+    - CAs now have knowledge of your browsing habits
+    - note, ISPs already have this
+  - another major concern is "failing open"
+    - if fetching OCSP status fails, the browser still visits the site
+      (otherwise users are unhappy)
+    - this makes it easy for an attacker to deny access to OCSP and thus carry
+      out an attack with a revoked certificate
+  - another concern is delay
+  - _OCSP stapling_
+    - a web server gets a signed, timestamped certificate of the validity of the
+      certificate
+    - provides this to the web browser when fetching its certificate
+    - eliminates the delay concern
+    - stapling can still be deleted/removed by an attacker, leading to the
+      "failing open" problem
+    - web sites can use "OCSP must staple" in their certificates, indicating
+      that if the staple is stripped, that is a problem
+    - attacker can still strip it and cause denial of service
+    - website owners can mess it up and cause outage for customers
+
+- current approach is to use compressed CRLs or CRL sets
+
+  - see [CRLsets](https://www.chromium.org/Home/chromium-security/crlsets/) from
+    Google
+  - see
+    [CRLite](https://blog.mozilla.org/security/2020/01/09/crlite-part-1-all-web-pki-revocations-compressed/)
+    from Mozilla
+
+- not clear whether mobile devices use revocation at all
+
+## PKI
+
+- _public key infrastructure_ (PKI) is used for managing public keys, private
+  keys, and their use
+
+<Image alt="elements of a PKI" src={figure_8_1} />
+
+- includes all aspects of using public key cryptography, from generation, to
+  bootstrapping session keys, certificates, revocation
+- several challenging elements
+
+  - long term storage of private keys is challenging
+    - particularly for individuals
+    - critical websites may use offline storage, but many use online storage
+    - backup and recovery typically needed
+  - revocation (see above)
+  - public key distribution and verification for people (websites use the CA
+    hierarchy)
+
+## Alternatives to the web model
+
+- Signal
+  - verify public keys using an out-of-band channel
+  - most users have no idea this exists or what it is for
+
+<Image alt="signal key verification screens" src={signal_key_verification} />
+
+- Web of Trust / PGP
+
+  - sign keys of people you meet and verify, perhaps at key signing parties
+  - pass these along to your friends
+  - decide individually who you trust
+    - just those you verified yourself
+    - friends of friends
+    - friends of friends of friends?
+  - generally a failure
+
+- Trust on First Use (TOFU)
+  - accept a public key the first time you get it
+  - look for _key continuity_, e.g. warn users if keys change so they can verify
+  - [autocrypt](https://autocrypt.org/index.html) appears to be making some
+    progress putting this into open source email systems
+  - TOFU is also often used with SSH servers
+
+## Class Exercise
+
+- use Chrome to inspect website certificates
+
+## Extra reading
+
+- Let's Encrypt
+- [Let’s Encrypt: An Automated Certificate Authority to Encrypt the Entire Web](https://dl.acm.org/doi/pdf/10.1145/3319535.3363192)
+
+- Certificate warnings
+
+  - [Alice in Warningland: A Large-Scale Field Study of Browser Security Warning Effectiveness](https://www.usenix.org/system/files/conference/usenixsecurity13/sec13-paper_akhawe.pdf),
+    2013
+  - [Improving SSL Warnings: Comprehension and Adherence](https://dl.acm.org/doi/pdf/10.1145/2702123.2702442),
+    2015
+  - [Rethinking Connection Security Indicators](https://www.usenix.org/system/files/conference/soups2016/soups2016-paper-porter-felt.pdf),
+    2016
+
+- Mistakes in certificate validation
+
+  - [The Most Dangerous Code in the World: Validating SSL Certificates in Non-Browser Software](https://dl.acm.org/doi/pdf/10.1145/2382196.2382204)
+
+- OCSP
+
+  - see
+    [Is the Web Ready for OCSP Must-Staple?](https://dl.acm.org/doi/10.1145/3278532.3278543)
+    for a good explanation of OCSP stapling issues
+
+  - see
+    [High-reliability OCSP stapling and why it matters](https://blog.cloudflare.com/high-reliability-ocsp-stapling/)
+    for Cloudflare's attempt to push OCSP stapling
+  - see
+    [Intent to End OCSP Service](https://letsencrypt.org/2024/07/23/replacing-ocsp-with-crls/)
+    for why Let's Encrypt ended support for OCSP in 2024
+
+- Revocation
+  - [Let's Revoke: Scalable Global Certificate Revocation](https://dev.ndss-symposium.org/wp-content/uploads/2020/02/24084-paper.pdf)
+  - [Leveraging locality of reference for certificate revocation](https://dl.acm.org/doi/pdf/10.1145/3359789.3359819)

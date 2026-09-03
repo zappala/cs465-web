@@ -1,0 +1,72 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+import { Image } from "astro:assets";
+import figure_6_3 from "@/images/security-book/figure-6.3.png";
+import figure_6_4 from "@/images/security-book/figure-6.4.png";
+import figure_6_5 from "@/images/security-book/figure-6.5.png";
+
+# Stack Overflows
+
+## Introductions
+
+- introductions of two students
+
+## Questions on the readings
+
+The readings today are from
+[Computer Security and the Internet](https://people.scs.carleton.ca/~paulv/toolsjewels.html),
+[Chapter 6](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch6-rev1.pdf),
+sections 6.3
+
+## Stack-based buffer overflow attacks
+
+- Stack overflow attacks are REALLY common -- see
+  [CVE list](https://www.cvedetails.com/vulnerability-list/opov-1/overflow.html)
+
+- Understand memory layout of a process: Figure 6.3, page 166
+
+<Image alt="Common memory layout" src={figure_6_3} />
+
+- Data = initialized global variables
+- BSS = block starting symbol, where unitialized global memory is stored, eg. in
+  C: `static int bufferX[4];`)
+- Heap = dynamically allocated memory, e.g. in C using `malloc()`
+- Stack = memory needed by the current function, e.g. parameters, local
+  variables, return address
+
+- Understand how a process uses the stack: Figure 6.4, page 167
+
+<Image alt="Function call sequence" src={figure_6_4} />
+
+- In a stack overflow, the attacker tries to write code to the stack and get the
+  OS to execute it
+
+- Understand the basics of a buffer overflow attack: Example, _Buffer Overflow_,
+  page 167, Figure 6.5, page 168
+
+<Image alt="Stack overflow attack" src={figure_6_5} />
+
+- Note, this example assumes 4-byte memory words, but it works regardless of
+  word size
+
+```c
+void myfunction(char *src) { /* src is a ptr to a char string */
+  int var1, var2; /* 1 stack word used per integer */
+  char var3[4]; /* also 1 word for 4-byte buffer */
+  strcpy(var3, src); /* template: strcpy(dst, src) */
+}
+```
+
+## Class exercises
+
+See the [software security repo](https://github.com/BYU-CS465/software-security)
+for code we will use:
+
+- In `buffer-overflow` we will run `stack`, which has an buffer overflow
+  problem. We'll use the `exploit.py` script to help create the overflow and
+  direct the program to a return address of our choosing. This code implements
+  the toy example from the book.
+
+Time permitting, we will also try the first exploits from the homework.

@@ -1,0 +1,78 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+import { Image } from "astro:assets";
+import figure_6_6 from "@/images/security-book/figure-6.6.png";
+import figure_6_7 from "@/images/security-book/figure-6.7.png";
+import figure_6_8 from "@/images/security-book/figure-6.8.png";
+
+# Heap Overflows
+
+## Introductions
+
+- introductions of two students
+
+## Questions on the readings
+
+The readings today are from
+[Computer Security and the Internet](https://people.scs.carleton.ca/~paulv/toolsjewels.html),
+[Chapter 6](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch6-rev1.pdf),
+sections 6.4.
+
+## Heap-based buffer overflow attacks
+
+- Dangerous when the heap is both writeable and executable
+- see Figure 6.6 to understand why an attacker writing to the heap is dangerous
+
+<Image alt="heap-based buffer overflow" src={figure_6_6} />
+
+- see Figure 6.7 for an example of overwriting a function pointer:
+
+<Image alt="corrupting a function pointer" src={figure_6_7} />
+
+- understand the types of state that can be corrupted
+  - jump table -- see below
+  - `setjump` -- seee
+    [Wikipedia page on setjump](https://en.wikipedia.org/wiki/Setjmp.h)
+
+```c
+MyJump(int c)
+{
+   switch(state)
+   {
+      case 0:
+         goto func0label;
+      case 1:
+         goto func1label;
+      case 2:
+         goto func2label;
+   }
+}
+```
+
+- understand exploit steps
+
+- understand elements of a heap spraying attack -- see Figure 6.8:
+
+<Image alt="heap spraying attack" src={figure_6_8} />
+
+## Class exercises
+
+See the [software security repo](https://github.com/BYU-CS465/software-security)
+for code we will use:
+
+- In `heap-overflow` we will run `heap` and `heap2`, which both have a heap
+  overflow problem. In the first case we will try to change the role of a user,
+  and in the second case we will try to change a function pointer. We'll use the
+  `exploit.py` script to help create the overflow and accomplish our goal.
+
+Notes on the heap exploits:
+
+- The first exploit is trivial.
+- For the second exploit, you need to figure out how many bytes to write before
+  you corrupt the function pointer. To do this, insert a break, overwrite the
+  buffer, and then print the value of the function pointer to see what it
+  contains. Once you have this value, you can use the same method as with a
+  buffer overflow using `gef` and the `pattern search` command. Once you find
+  the offset, then the rest of the method is the same.

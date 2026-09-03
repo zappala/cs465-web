@@ -1,0 +1,237 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+import { Image } from "astro:assets";
+import figure_2_1 from "@/images/security-book/figure-2.1.png";
+import symmetric_key_encryption from "@/images/notes/symmetric-key-encryption.png";
+import caesar_cipher from "@/images/notes/caesar-cipher.png";
+import figure_2_2 from "@/images/security-book/figure-2.2.png";
+import figure_2_3 from "@/images/security-book/figure-2.3.png";
+import ecb_mode_encryption from "@/images/notes/ecb-mode-encryption.png";
+import ecb_mode_decryption from "@/images/notes/ecb-mode-decryption.png";
+import ecb_mode_patterns from "@/images/notes/ecb-mode-patterns.png";
+import cbc_mode_encryption from "@/images/notes/cbc-mode-encryption.png";
+import cbc_mode_decryption from "@/images/notes/cbc-mode-decryption.png";
+import ctr_mode_encryption from "@/images/notes/ctr-mode-encryption.png";
+import ctr_mode_decryption from "@/images/notes/ctr-mode-decryption.png";
+import aes_gcm_wikipedia from "@/images/notes/aes-gcm-wikipedia.png";
+import supernova from "@/images/notes/supernova.png";
+
+
+# Symmetric Encryption
+
+## Introductions
+
+- introductions of two students
+
+## Questions on the readings
+
+The readings today are from
+[Computer Security and the Internet](https://people.scs.carleton.ca/~paulv/toolsjewels.html),
+[Chapter 2](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch2-rev1.pdf),
+sections 2.0 - 2.2
+
+## Cryptography basics
+
+### Important note
+
+- You should not design your own cryptographic algorithms and protocols (unless
+  you are doing PhD-level research or have become a cryptography expert)
+
+- [Kerckhoffs's principle](https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle),
+  as restated by Steven Bellovin -- "design your system assuming that your
+  opponents know it in detail"
+
+### Cryptographic notation
+
+You should become accustomed to cryptographic notation such as is used below.
+
+<Image alt="cryptographic notation" src={figure_2_1} />
+
+The importance of notation is that it cleary expresses a set of cryptographic
+operations. As you read academic papers or cryptography websites, you will find
+that there is no _standard_ notation -- instead, an author will often define
+their terms before using them.
+
+### Attacks on cryptography
+
+For any given encryption key, you can try to guess it by exhaustively trying all
+possible keys -- this is called an _exhaustive key search_ or a _brute force
+search_.
+
+- Example: DES keys, 56 bits
+- A keyspace of 56 bits provides 2 56 ≈ 7.2×10<sup>16</sup> possible keys. At a
+  rate of 10<sup>12</sup> keys per second it would take approximately
+  7.2×10<sup>4</sup> seconds or about 20 hours to try every key.
+- In January 1999, distributed.net and the Electronic Frontier Foundation
+  collaborated to publicly break a DES key in 22 hours and 15 minutes.
+
+Some common attacks:
+
+- A _ciphertext-only_ attack requires the attacker to guess the plaintext (or
+  the key) using only the ciphertext.
+- A _known-plaintext_ attack means the attacker has access to examples of both
+  plaintext and ciphertext.
+- A _chosen-plaintext_ attack means the attacker can choose a plaintext and see
+  the corresponding encrypted ciphertext.
+- A _chosen-chiphertext_ attack means the attacker can choose ciphertext and see
+  the corresponding decrypted plaintext.
+
+Some common adversaries:
+
+- A _passive_ adversary can only observe messages.
+- An _active_ adversary can inject or alter messages.
+
+## Symmetric Encryption
+
+Symmetric encryption allows one party to send encrypted data to another party,
+provided they have a _shared key_. It is called symmetric encryption because the
+same key is used for decryption and encryption.
+
+<Image alt="symmetric key encryption" src={symmetric_key_encryption} />
+
+### Caesar Cipher
+
+Caesar cipher with a shift of 23:
+
+<Image alt="caesar cipher with a shift of 23" src={caesar_cipher} />
+
+- Plaintext: THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
+- Ciphertext: QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD
+
+### Vernam cipher
+
+<Image alt="Vernam cipher" src={figure_2_2} />
+
+- If using a random stream of bits for the key, and never reuse the same key,
+  this is a _one-time pad_.
+- A one-time pad is information-theoretically secure for confidentiality: "even
+  given unlimited computing power and time, an attacker without the key cannot
+  recover plaintext from ciphertext".
+- Useful in theory! Try to approach its level of security.
+- In practice, we try to have _computational security_, meaning protection
+  against an attacker with fixed resources, unable to brute force keys chosen
+  from a large space.
+- Has no integrity.
+
+### Types of ciphers
+
+- stream cipher -- encrypt one bit or one character at a time
+- block cipher -- encrypt chunks of fixed size, e.g. 128 bits, pad smaller
+  blocks with a 1 and then zeroes.
+
+## AES
+
+AES is the most common block cipher.
+
+<Image alt="AES cipher" src={figure_2_3} />
+
+- 128-bit block
+- 128, 192, or 256 bit key
+
+### Block cipher modes
+
+Block cipher modes are used to encrypt variable-size pieces of data using a
+block cipher. Remember, AES can only encrypt 128 bits! Block cipher modes are
+what you use to encrypt larger sizes of data.
+
+Everywhere you see "block cipher encryption" in the below diagrams, that is
+where AES fits in
+
+### ECB Mode
+
+- Electronic Code Book
+- Not recommended due to its weaknesses
+
+<Image alt="ECB mode encryption" src={ecb_mode_encryption} />
+<Image alt="ECB mode decryption" src={ecb_mode_decryption} />
+<Image alt="ECB mode patterns" src={ecb_mode_patterns} />
+
+### CBC mode
+
+- Cipher Block Chaining
+- blocks are chained together
+- uses an Initialization Vector to make sure each message is unique, should be
+  random
+- encryption must be done sequentially by block
+- message must be padded to a multiple of the block size
+
+<Image alt="CBC mode encryption" src={cbc_mode_encryption} />
+<Image alt="CBC mode decryption" src={cbc_mode_decryption} />
+
+### CTR mode
+
+- CounTeR
+- uses a non-repeating counter
+- nonce is an initialization vectore
+- for a given AES key, do not re-use the same nonce
+- the counter is encrypted and then XORed with the plaintext to produce
+  ciphertext
+- turns a block cipher into a stream cipher, since each bit of the plaintext is
+  individually XORed with the encrypted counter
+- encryption and decryption can be done in parallel
+
+<Image alt="CTR mode encryption" src={ctr_mode_encryption} />
+<Image alt="CTR mode decryption" src={ctr_mode_decryption} />
+
+### Padding
+
+Block ciphers require that the plaintext be a multiple of the block size (ECB
+and CBC modes). Padding is used to make sure that all blocks are “full”. Both
+sides need to know the padding scheme.
+[PKCS #7](https://en.wikipedia.org/wiki/PKCS) is a common scheme.
+
+## AES with GCM
+
+Symmetric encryption offers confidentiality, but not integrity and authenticity.
+Securely combining separate confidentiality and authentication block cipher
+operation modes can be error prone and difficult. To solve this problem, we have
+_Authenticated Encryption with Associated Data (AEAD)_ algorithms, which provide
+confidentiality, integrity, and authentication with associated (unencrypted)
+data (e.g. message header). Integrity covers the associated data as well.
+
+AES-GCM (Galois Counter Mode) is used in TLS, SSH, IPSec, OpenVPN.
+
+<Image alt="AES GCM Wikipedia block diagram" src={aes_gcm_wikipedia} />
+
+- notice that this is identical to CTR mode, with the Associated Data (called
+  Auth Data here) added in later
+- to add in the associated data, GCM uses a combination of XOR and
+  mult<sub>H</sub>, which is finite field multiplication using a
+  [Galois Field](https://murshedsk135.medium.com/introduction-to-galois-fields-exploring-aes-fields-and-finite-field-arithmetic-10c5f5c30b76#:~:text=Galois%20Fields%2C%20also%20known%20as,most%20widely%20used%20block%20ciphers.)
+- fast, patent-free, on-line (don't need to know message length in advance), can
+  be parallelized
+- security depends on choosing a unique initialization vector for every
+  encryption performed with the same key
+
+## The strength of cryptography
+
+- Relies on the size of the key space. AES typically uses a key space of 256
+  bits = 2<sup>256</sup> possible keys
+- For comparison:
+  - 1 in 2<sup>61</sup> odds of winning the lottery and being hit by lightning
+    in the same day
+  - 2<sup>92</sup> atoms in the average human body
+- Thermodynamic limits
+  - physics: To set or clear a bit requires no less than 𝑘𝑇 "erg"
+    - 𝑘 is the Boltzman constant -- 1.38×10<sup>−16</sup> erg⁄°𝐾
+    - 𝑇 is the absolute temperature of the system
+  - assuming 𝑇=3.2°𝐾 (ambient temperature of universe)
+    - 𝑘𝑇=4.4×10<sup>−16</sup> ergs
+  - annual energy output of the sun is 1.21×10<sup>41</sup> ergs
+    - enough to cycle through a 187-bit counter in a year
+    - enough to cycle through a 192-bit counter after 32 years
+  - a supernova produces about 10<sup>51</sup> ergs
+    - enough to cycle through a 219-bit counter
+
+<Image alt="supernova" src={supernova} />
+
+## Class exercises
+
+We are going to be using the [Rust Crypto](https://github.com/RustCrypto)
+crates.
+
+See the [Rust Cryptography](https://github.com/BYU-CS465/rust-cryptography) repo
+for an [AES-GCM](https://github.com/RustCrypto/AEADs/tree/master/aes-gcm) code
+example.
