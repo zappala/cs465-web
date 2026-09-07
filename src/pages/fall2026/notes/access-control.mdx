@@ -8,7 +8,7 @@ layout: ../../../layouts/SemesterMarkdown.astro
 
 - introductions of two students
 
-## Questions on the readings
+## Reading Quiz
 
 The readings today are from
 [Operating Systems: Three Easy Pieces](https://pages.cs.wisc.edu/~remzi/OSTEP/),
@@ -26,7 +26,6 @@ an open source textbook. You shoud have read these sections:
   complex. So is the browser, which acts almost like a layer above the OS these
   days.
 - Recall, the OS can:
-
   - examine or alter any process’s memory
   - read, write, delete or corrupt any file on any writeable persistent
   - storage medium, including hard disks and flash drives
@@ -50,7 +49,6 @@ an open source textbook. You shoud have read these sections:
 
 - Important design principles from
   [The Protection of Information in Computer Systems](https://web.mit.edu/Saltzer/www/publications/protection/):
-
   - economy of mechanism: as small and simple as possible
   - fail-safe defaults: default to security
   - complete mediation: any time an action is going to be taken, check security
@@ -67,18 +65,15 @@ an open source textbook. You shoud have read these sections:
 ### Access control
 
 - Basic idea
-- Figure out if the request fits within the security policy.
-- If it does, perform the operation. If not, make sure it isn't done
-- For example
-
-- If a process wants to open a file for reading and writing, should the OS let
-  it? How does it know?
+  - Figure out if the request fits within the security policy.
+  - If it does, perform the operation. If not, make sure it isn't done
+  - For example
+    - If a process wants to open a file for reading and writing, should the OS let it? How does it know?
 
 - A reference monitor is the part of the OS that enforces policy when a
   `subject` requests `access` to an `object`
 - Two common methods: `access control lists`, `capabilities`
 - Access control list
-
   - for each object, list which subjects have a type of access
   - e.g. for a file, list which users have read access
   - ror UNIX/Linux, early designers chose to use 9 bits for each file
@@ -88,7 +83,6 @@ an open source textbook. You shoud have read these sections:
   - hard to find ALL of the resources a given user has access to
 
 - Capabilities
-
   - for each subject, list which objects they have access to
   - e.g. for a user, list which files they have read access to
   - think of a capability as a set of physical keys, giving a process access to
