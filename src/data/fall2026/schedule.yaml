@@ -83,9 +83,6 @@ units:
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 6.2
-          - title: Computer Security and the Internet
-            link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 6.3
         homework:
           title: Vulnerability Practice
