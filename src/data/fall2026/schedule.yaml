@@ -19,10 +19,13 @@ units:
       - day: Tue
         date: Sep 8
         lectures:
-          - title: Access control
-            link: /notes/access-control
           - title: Operating systems background
             link: /notes/operating-systems-background
+          - title: Access control
+            link: /notes/access-control
+        slides:
+          - title: Operating systems background and access control
+            link: /../public/lectures/f2026/Operating systems and access control.pdf
         readings:
           - title: "Operating Systems: Three Easy Pieces"
             link: https://pages.cs.wisc.edu/~remzi/OSTEP/

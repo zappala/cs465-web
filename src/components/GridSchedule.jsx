@@ -68,6 +68,7 @@ export default function GridSchedule(props) {
         </div>
         <div className="w-4/12 bg-gray-200 mb-1 mr-1 p-2">
           {render_lectures(prefix, day)}
+          {render_slides(prefix, day)}
         </div>
         <div className="w-3/12 bg-gray-200 mb-1 mr-1 p-2">
           {render_reading_or_readings(prefix, day)}
@@ -90,7 +91,7 @@ export default function GridSchedule(props) {
     return (
       <ul>
         {day.lectures.map((lecture, lecture_index) =>
-          render_lecture(prefix, lecture, lecture_index)
+          render_lecture(prefix, lecture, lecture_index),
         )}
       </ul>
     );
@@ -112,7 +113,7 @@ export default function GridSchedule(props) {
       icon = <></>;
     }
     if (lecture.type === "static") {
-        prefix = "";
+      prefix = "";
     }
     if (lecture.type === "zip") {
       icon = <img className="w-5 inline" src="/icons/zip.png" />;
@@ -138,6 +139,48 @@ export default function GridSchedule(props) {
     );
   };
 
+  // render any/all slides in a day
+  const render_slides = (prefix, day) => {
+    if (!day.slides) return <></>;
+    if (day.slides.constructor.name != "Array") return <></>;
+    return (
+      <span>
+        <br />
+        <b>Slides: </b>
+        <ul>
+          {day.slides.map((slide, slide_index) =>
+            render_slide(prefix, slide, slide_index),
+          )}
+        </ul>
+      </span>
+    );
+  };
+
+  // render a slide
+  const render_slide = (prefix, slide, index) => {
+    if (!slide.link) {
+      return <li key={index}>{slide.title}</li>;
+    }
+    let after_content = `after:content-[',_']`;
+    let after_last_content = "last:after:content-['']";
+    let target = "";
+    let icon = <></>;
+    return (
+      <li
+        className={`inline ${after_content} ${after_last_content} after:text-xs`}
+        key={index}
+      >
+        <a
+          className="underline decoration-lightblue"
+          href={prefix + slide.link}
+          target={target}
+        >
+          {slide.title}
+        </a>
+      </li>
+    );
+  };
+
   // render reading(s)
   const render_reading_or_readings = (prefix, day) => {
     if (day.reading) return <>{day.reading}</>;
@@ -146,7 +189,7 @@ export default function GridSchedule(props) {
     return (
       <ul>
         {day.readings.map((reading, reading_index) =>
-          render_reading(prefix, reading, reading_index)
+          render_reading(prefix, reading, reading_index),
         )}
       </ul>
     );
@@ -206,7 +249,7 @@ export default function GridSchedule(props) {
           href={prefix + homework.link}
         >
           {homework.title}
-        </a>
+        </a>,
       );
     if (homework.due)
       result.push(
@@ -214,7 +257,7 @@ export default function GridSchedule(props) {
           {" "}
           <span>&nbsp;</span>
           <Label>{homework.due}</Label>
-        </>
+        </>,
       );
     return result;
   };
@@ -232,7 +275,7 @@ export default function GridSchedule(props) {
           href={prefix + service.link}
         >
           {service.title}
-        </a>
+        </a>,
       );
     if (service.due)
       result.push(
@@ -240,7 +283,7 @@ export default function GridSchedule(props) {
           {" "}
           <span>&nbsp;</span>
           <Label>{service.due}</Label>
-        </>
+        </>,
       );
     return result;
   };
@@ -258,7 +301,7 @@ export default function GridSchedule(props) {
           href={prefix + ethics.link}
         >
           {ethics.title}
-        </a>
+        </a>,
       );
     if (ethics.due)
       result.push(
@@ -266,7 +309,7 @@ export default function GridSchedule(props) {
           {" "}
           <span>&nbsp;</span>
           <Label>{ethics.due}</Label>
-        </>
+        </>,
       );
     return result;
   };
@@ -285,7 +328,7 @@ export default function GridSchedule(props) {
           href={prefix + project.link}
         >
           {project.title}
-        </a>
+        </a>,
       );
     if (project.due)
       result.push(
@@ -293,7 +336,7 @@ export default function GridSchedule(props) {
           {" "}
           <span>&nbsp;</span>
           <Label>{project.due}</Label>
-        </>
+        </>,
       );
     return result;
   };
