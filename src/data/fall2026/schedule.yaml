@@ -54,6 +54,8 @@ units:
         lectures:
           - title: Race conditions and threads
             link: /notes/race-conditions-and-threads
+          - title: Integer Vulnerabilities
+            link: /notes/integer-vulnerabilities
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
@@ -65,8 +67,6 @@ units:
       - day: Thu
         date: Sep 17
         lectures:
-          - title: Integer Vulnerabilities
-            link: /notes/integer-vulnerabilities
           - title: Stack overflows
             link: /notes/stack-overflows
           - title: Stack overflow walkthrough
