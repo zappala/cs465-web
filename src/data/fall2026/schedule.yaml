@@ -59,7 +59,7 @@ units:
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
-            sections: 6.0 - 6.1
+            sections: 6.0 - 6.2
         ethics:
           title: "Ethics and Discipleship: Ethical Hacking"
           link: /homework/ethical-hacking
