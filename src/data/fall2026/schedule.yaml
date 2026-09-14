@@ -41,6 +41,9 @@ units:
         lectures:
           - title: Threat modeling
             link: /notes/threat-modeling
+        slides:
+          - title: Threat Modeling
+            link: /../public/lectures/f2026/Threat Modeling.pdf
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
@@ -59,6 +62,9 @@ units:
             link: /notes/race-conditions-and-threads
           - title: Integer Vulnerabilities
             link: /notes/integer-vulnerabilities
+        slides:
+          - title: Threads, Race Conditions, and Integer-based Vulnerabilities
+            link: /../public/lectures/f2026/Threads, Race Conditions, Integer-based Vulnerabilities.pdf
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
