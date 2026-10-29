@@ -25,8 +25,7 @@ units:
             link: /notes/access-control
         slides:
           - title: Operating systems background and access control
-            link:
-              /../public/lectures/f2026/Operating systems and access control.pdf
+            link: /lectures/f2026/Operating systems and access control.pdf
         readings:
           - title: "Operating Systems: Three Easy Pieces"
             link: https://pages.cs.wisc.edu/~remzi/OSTEP/
@@ -44,7 +43,7 @@ units:
             link: /notes/threat-modeling
         slides:
           - title: Threat Modeling
-            link: /../public/lectures/f2026/Threat Modeling.pdf
+            link: /lectures/f2026/Threat Modeling.pdf
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
@@ -66,7 +65,7 @@ units:
         slides:
           - title: Threads, Race Conditions, and Integer-based Vulnerabilities
             link:
-              /../public/lectures/f2026/Threads, Race Conditions, Integer-based
+              /lectures/f2026/Threads, Race Conditions, Integer-based
               Vulnerabilities.pdf
         readings:
           - title: Computer Security and the Internet
@@ -85,7 +84,7 @@ units:
             link: /notes/stack-overflow-walkthrough
         slides:
           - title: Stack overflows
-            link: /../public/lectures/f2026/Stack Overflows.pdf
+            link: /lectures/f2026/Stack Overflows.pdf
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
@@ -103,7 +102,7 @@ units:
             link: /notes/overflow-defenses
         slides:
           - title: Heap overflows
-            link: /../public/lectures/f2026/Heap Overflows.pdf
+            link: /lectures/f2026/Heap Overflows.pdf
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
@@ -120,8 +119,7 @@ units:
             link: /notes/shellcode-walkthrough
         slides:
           - title: Privilege escalation and shellcode
-            link:
-              /../public/lectures/f2026/Privilege Escalation and shellcode.pdf
+            link: /lectures/f2026/Privilege Escalation and shellcode.pdf
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
@@ -133,7 +131,7 @@ units:
             link: /notes/malware
         slides:
           - title: Malware
-            link: /../public/lectures/f2024/malware.pdf
+            link: /lectures/f2024/malware.pdf
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
@@ -166,6 +164,11 @@ units:
             link: /notes/symmetric-encryption
           - title: Public key cryptography
             link: /notes/public-key-cryptography
+        slides:
+          - title: Symmetric Encryption and Public Key Cryptography
+            link:
+              /lectures/f2026/Symmetric Encryption and Public Key
+              Cryptography.pdf
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
@@ -193,6 +196,9 @@ units:
           - title: Questions from Rust Practice 3
           - title: Hashing and message authentication
             link: /notes/hashing-and-message-authentication
+        slides:
+          - title: Hashing and message authentication
+            link: /lectures/f2026/Hashing and message authentication.pdf
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
@@ -207,6 +213,11 @@ units:
           - title: Elliptic Curve Cryptography
             link: /notes/elliptic-curve-cryptography
           - title: Post-Quantum Cryptography
+        slides:
+          - title: Elliptic Curve Cryptography and Post-Quantum Cryptography
+            link:
+              /lectures/f2026/Elliptic Curve Cryptography and Post-Quantum
+              Cryptography.pdf
         readings:
           - title:
               A (Relatively Easy To Understand) Primer on Elliptic Curve
@@ -232,11 +243,17 @@ units:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 4.0 - 4.3
+        slides:
+          - title: Key Establishment
+            link: /lectures/f2026/Key Establishment.pdf
       - day: Tue
         date: Oct 27
         lectures:
           - title: Certificates
             link: /notes/certificates
+        slides:
+          - title: Certificates
+            link: /lectures/f2026/Certificates.pdf
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
@@ -250,6 +267,9 @@ units:
         lectures:
           - title: TLS
             link: /notes/tls
+        slides:
+          - title: TLS
+            link: /lectures/f2026/TLS.pdf
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html

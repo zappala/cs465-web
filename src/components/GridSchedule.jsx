@@ -172,7 +172,7 @@ export default function GridSchedule(props) {
       >
         <a
           className="underline decoration-lightblue"
-          href={prefix + slide.link}
+          href={slide.link}
           target={target}
         >
           {slide.title}
