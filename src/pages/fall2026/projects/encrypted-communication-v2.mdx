@@ -206,7 +206,7 @@ For the Rust crypto, use:
   [PSS VerifyingKey](https://docs.rs/rsa/latest/rsa/pss/struct.VerifyingKey.html) --
   the client will need to convert a signature in bytes to a `Signature`
   (see the `try_from()` method) and verify it
-- [OAEP](https://docs.rs/rsa/latest/rsa/struct.Oaep.html) -- the padding to
+- [OAEP](https://docs.rs/rsa/latest/rsa/oaep/struct.Oaep.html) -- the padding to
   use when encrypting the symmetric key
 - [AES GCM](https://docs.rs/aes-gcm/latest/aes_gcm/) -- the client will need to
   generate a symmetric key, generate a nonce, and encrypt and decrypt
