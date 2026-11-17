@@ -2,6 +2,13 @@
 import "../assets/base.css";
 import { Image } from "astro:assets";
 import BYU_logo from "@/images/BYU-monogram-navy.svg";
+
+// `title` is the page's own title, e.g. "Public Key Cryptography"; pages without
+// one (such as the home page) get the full course name.
+const { title } = Astro.props;
+const fullTitle = title
+  ? `${title} · CS 465`
+  : "CS 465 Introduction to Security and Privacy";
 ---
 
 <!doctype html>
@@ -29,9 +36,7 @@ import BYU_logo from "@/images/BYU-monogram-navy.svg";
       href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap"
       rel="stylesheet"
     />
-    <meta name="generator" content={Astro.generator} /><title>
-      cs 465 Introduction to Security and Privacy
-    </title></head
+    <meta name="generator" content={Astro.generator} /><title>{fullTitle}</title></head
   >
 
   <body>
