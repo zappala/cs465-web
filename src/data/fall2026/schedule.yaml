@@ -173,6 +173,10 @@ units:
             link:
               /lectures/f2026/Symmetric Encryption and Public Key
               Cryptography.pdf
+          - title: Symmetric Encryption and Public Key Cryptography (updated)
+            link:
+              /lectures/f2026/Symmetric Encryption and Public Key
+              Cryptography (updated).pdf
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
