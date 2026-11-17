@@ -25,7 +25,7 @@ units:
             link: /notes/access-control
         slides:
           - title: Operating systems background and access control
-            link: /lectures/f2026/Operating systems and access control.pdf
+            link: /lectures/f2026/Operating Systems Background and Access Control.pdf
         readings:
           - title: "Operating Systems: Three Easy Pieces"
             link: https://pages.cs.wisc.edu/~remzi/OSTEP/
