@@ -1,0 +1,142 @@
+---
+layout: ../../../layouts/SemesterMarkdown.astro
+---
+
+import { Image } from "astro:assets";
+import VersionNotice from "../../../components/VersionNotice.jsx";
+import public_key_cryptography from "@/images/notes/public-key-cryptography.png";
+import figure_2_8 from "@/images/security-book/figure-2.8.png";
+import digital_signatures from "@/images/notes/digital-signatures.png";
+import figure_2_9 from "@/images/security-book/figure-2.9.png";
+import hybrid_encryption_with_integrity from "@/images/notes/hybrid-encryption-with-integrity.png";
+
+
+# Public Key Cryptography
+
+<VersionNotice kind="original" link="/fall2026/notes/public-key-cryptography">
+  It names the RSA padding schemes to use (OAEP for encryption and PSS for
+  signatures), explains why PKCS #1 v1.5 is no longer recommended, and matches
+  the updated Rust Cryptography examples.
+</VersionNotice>
+
+## Introductions
+
+- introductions of two students
+
+## Questions on the readings
+
+The readings today are from
+[Computer Security and the Internet](https://people.scs.carleton.ca/~paulv/toolsjewels.html),
+[Chapter 2](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch2-rev1.pdf),
+sections 2.3, 2.4
+
+## Public Key Cryptography
+
+<Image alt="public key cryptography" src={public_key_cryptography} />
+
+- Each party creates a separate _key pair_, (public key, private key). These are
+  also called the encryption key and decryption key.
+- If Alice knows Bob's public key, she can encrypt a message using his public
+  key (e<sub>B</sub>) and only Bob can decrypt the message using his private key
+  (d<sub>B</sub>).
+  - c = E<sub>e<sub>B</sub></sub>(m)
+  - m = D<sub>d<sub>B</sub></sub>(c)
+- Bob _must_ keep his private key secret, otherwise anybody could decrypt
+  private messages sent to him.
+- Standard public key cryptography algorithm is called RSA -- provides
+  computational security
+- Raw RSA is deterministic: the same message always encrypts the same way. RSA
+  is always used with a _padding scheme_ that adds randomness and structure.
+  - For encryption, use **RSA-OAEP** (from PKCS \#1 v2), e.g. with SHA-256.
+  - For signatures, use **RSA-PSS**, e.g. with SHA-256.
+  - The older **PKCS \#1 v1.5** padding is no longer recommended. Its
+    encryption padding is vulnerable to padding-oracle and timing attacks (see
+    the Marvin attack below). Its signatures are not broken, but PSS is the
+    recommended choice for new designs, and TLS 1.3 uses PSS.
+
+## Hybrid Encryption
+
+Usually, we use public key cryptography to _bootstrap_ a shared, symmetric key.
+This is because encrypting and decrypting with a symmetric key is much faster
+than encrypting and decrypting with public key cryptography.
+
+<Image alt="hybrid encryption" src={figure_2_8} />
+
+- Alice chooses a symmetric key, then encrypts it with Bob's public key and
+  sends it to him. Now they both have a symmetric key they can use to encrypt
+  and decrypt messages to each other.
+- Alice and Bob typically choose a new symmetric key each time they communicate,
+  so we call this a _session key_.
+
+## Digital Signatures
+
+We can also use public key cryptography to implement digital signatures. Here,
+the private key is used to sign and the public key is used to verify. With RSA,
+signing resembles encrypting with the private key, and verifying resembles
+decrypting with the public key.
+
+<Image alt="digital signatures" src={digital_signatures} />
+
+- Alice signs (encrypts) a message with her private key (s<sub>A</sub>). Bob can
+  verify (decrypt) the message with Alice's public key (v<sub>A</sub>). Here we
+  use (v, s) to represent the (public key, private key).
+- Be sure to use separate key pairs for encryption/decryption and
+  signing/verifying.
+
+<Image alt="digital signatures vs encryption" src={figure_2_9} />
+
+- Digital signatures provide:
+
+  - _data origin authentication_ -- we can verify who signed the message
+  - _data integrity_ -- we can verify whether the message is the same as what
+    was signed
+  - _non repudiation_ -- the signer can't claim they didn't sign the message
+    (unless someone stole their private key)
+
+- Use of public key cryptography by the general public is hard because it
+  requires you to keep your private key safe and to have a reliable way to
+  distribute your public key to others. These are _key management_ issues.
+- A valid signature does not prove _freshness_: an attacker can replay an old
+  signed message. Protocols prevent this by having the verifier choose a fresh
+  random nonce and checking that the signature covers that nonce, as in the
+  Encrypted Communication project.
+
+## Hybrid encryption with integrity
+
+<Image alt="hybrid encryption with integrity" src={hybrid_encryption_with_integrity} />
+
+- A digital signature of a hash of the message ensures Bob knows the message
+  came from Alice and that the message hasn't been altered.
+- AES with GCM provides integrity and, assuming only Alice and Bob know the
+  symmetric key, then assures Bob that Alice sent the message.
+- Getting all the pieces right is tricky. See
+  [Defective Sign & Encrypt in S/MIME, PKCS\#7, MOSS, PEM, PGP, and XML](https://theworld.com/~dtd/sign_encrypt/sign_encrypt7.html).
+  Use TLS where possible.
+
+## Extra reading
+
+- The [Marvin attack](https://people.redhat.com/~hkario/marvin/)
+  - _**Stop using RSA PKCS#1 v1.5 encryption!** On the TLS level, only servers
+    that enable RSA encryption are affected. Most modern clients support the use
+    of Elliptic Curve Diffie Hellman, thus disabling ciphersuites that use RSA
+    encryption is the recommended way to fix this vulnerability._
+  - The Rust `rsa` crate had this timing problem before version 0.10
+    ([RUSTSEC-2023-0071](https://rustsec.org/advisories/RUSTSEC-2023-0071)).
+    Version 0.10 fixes it by using constant-time arithmetic, and it only
+    offers PKCS \#1 v1.5 if you explicitly turn on its `pkcs1v15` feature.
+
+## Class exercises
+
+We are using the [Rust Crypto](https://github.com/RustCrypto) crates.
+
+See the [Rust Cryptography](https://github.com/BYU-CS465/rust-cryptography) repo
+for [RSA](https://docs.rs/rsa/latest/rsa/index.html) code examples. The
+`rsa-example` uses version 0.10 of the `rsa` crate (run `rustup update` to get
+Rust 1.98 or newer, as the Rust book uses):
+
+- encryption with OAEP and SHA-256 (`Oaep::<Sha256>`)
+- signatures with PSS and SHA-256 (`pss::SigningKey<Sha256>` and
+  `pss::VerifyingKey<Sha256>`)
+- public keys in PEM format (`to_public_key_pem` and `from_public_key_pem`)
+
+These are the same calls the updated Encrypted Communication project uses.

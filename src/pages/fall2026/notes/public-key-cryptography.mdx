@@ -3,6 +3,7 @@ layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
 import { Image } from "astro:assets";
+import VersionNotice from "../../../components/VersionNotice.jsx";
 import public_key_cryptography from "@/images/notes/public-key-cryptography.png";
 import figure_2_8 from "@/images/security-book/figure-2.8.png";
 import digital_signatures from "@/images/notes/digital-signatures.png";
@@ -11,6 +12,12 @@ import hybrid_encryption_with_integrity from "@/images/notes/hybrid-encryption-w
 
 
 # Public Key Cryptography
+
+<VersionNotice link="/fall2026/notes/public-key-cryptography-v2">
+  It names the RSA padding schemes to use (OAEP for encryption and PSS for
+  signatures), explains why PKCS #1 v1.5 is no longer recommended, and matches
+  the updated Rust Cryptography examples.
+</VersionNotice>
 
 ## Introductions
 
@@ -107,5 +114,8 @@ signing uses encryption and verifying uses decryption.
 
 We are using the [Rust Crypto](https://github.com/RustCrypto) crates.
 
-See the [Rust Cryptography](https://github.com/BYU-CS465/rust-cryptography) repo
-for [RSA](https://docs.rs/rsa/latest/rsa/index.html) code examples.
+See the [Rust Cryptography](https://github.com/BYU-CS465/rust-cryptography/tree/2024) repo
+for [RSA](https://docs.rs/rsa/0.9.6/rsa/index.html) code examples. (This links
+to an older version of the code, from 2024, that matches these notes. The
+[updated notes](/fall2026/notes/public-key-cryptography-v2) use the current
+version.)

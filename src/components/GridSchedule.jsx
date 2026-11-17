@@ -314,9 +314,14 @@ export default function GridSchedule(props) {
     return result;
   };
 
-  // render a project
+  // render a project, or a list of projects (e.g. an original and an updated
+  // version), one per line
   const render_project = (prefix, project) => {
     if (!project) return <></>;
+    if (Array.isArray(project))
+      return project.map((one, index) => (
+        <div key={index}>{render_project(prefix, one)}</div>
+      ));
     let result = [];
     result.push("Project: ");
     if (!project.link) result.push(project.title);

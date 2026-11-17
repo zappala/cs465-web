@@ -148,6 +148,8 @@ units:
         lectures:
           - title: Learning Rust Abbreviated
             link: /notes/learning-rust-abbreviated
+          - title: Learning Rust Abbreviated (updated)
+            link: /notes/learning-rust-abbreviated-v2
         readings:
           - title: The Rust Programming Language
             link: https://doc.rust-lang.org/book/
@@ -164,6 +166,8 @@ units:
             link: /notes/symmetric-encryption
           - title: Public key cryptography
             link: /notes/public-key-cryptography
+          - title: Public key cryptography (updated)
+            link: /notes/public-key-cryptography-v2
         slides:
           - title: Symmetric Encryption and Public Key Cryptography
             link:
@@ -228,9 +232,12 @@ units:
               cryptography"
             link: https://blog.cloudflare.com/lattice-crypto-primer/
         project:
-          title: Encrypted Communication
-          link: /projects/encrypted-communication
-          due: Nov 5
+          - title: Encrypted Communication
+            link: /projects/encrypted-communication
+            due: Nov 5
+          - title: Encrypted Communication (updated)
+            link: /projects/encrypted-communication-v2
+            due: Nov 5
 
   - title: Key Exchange and Authentication
     days:

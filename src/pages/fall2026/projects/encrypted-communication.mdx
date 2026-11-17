@@ -3,9 +3,15 @@ layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
 import { Image } from "astro:assets";
+import VersionNotice from "../../../components/VersionNotice.jsx";
 import encrypted_communication_v1_protocol from "@/images/projects/encrypted-communication/v1/encrypted-communication-v1-protocol.png";
 
 # Project: Encrypted Communication
+
+<VersionNotice link="/fall2026/projects/encrypted-communication-v2">
+  It uses the current Rust crypto libraries and the recommended RSA schemes
+  (OAEP and PSS), and runs without a Dev Container. You may do either version.
+</VersionNotice>
 
 ## Objectives
 
@@ -189,19 +195,23 @@ See the following for additional documentation:
 
 For the Rust crypto, use:
 
-- [Rsa](https://docs.rs/rsa/latest/rsa/) -- the client will need to convert the
+- [Rsa](https://docs.rs/rsa/0.9.6/rsa/) -- the client will need to convert the
   public key from the PEM format it receives, derive the verifying key from the
   public key, verify the `PKCS#1 v1.5` signature on the nonce, and encrypt the
   symmetric key with `Pkcs1v15Encrypt` padding
-- [PKCS #1 v1.5 Signature](https://docs.rs/rsa/latest/rsa/pkcs1v15/struct.Signature.html) -
+- [PKCS #1 v1.5 Signature](https://docs.rs/rsa/0.9.6/rsa/pkcs1v15/struct.Signature.html) -
   the client will need to convert a signature in bytes to a Signature struct,
   see the `try_from()` method
-- [AES GCM](https://docs.rs/aes-gcm/latest/aes_gcm/) -- the client will need to
+- [AES GCM](https://docs.rs/aes-gcm/0.10.3/aes_gcm/) -- the client will need to
   generate a symmetric key, generate a nonce, and encrypt plaintext
 
 You can see the
-[Rust Cryptography](https://github.com/BYU-CS465/rust-cryptography) examples we
-covered in class as examples of how to use these libraries.
+[Rust Cryptography](https://github.com/BYU-CS465/rust-cryptography/tree/2024) examples we
+covered in class as examples of how to use these libraries. (This links to an
+older version of the examples, from 2024, that uses the same library versions as
+this project. The
+[updated project](/fall2026/projects/encrypted-communication-v2) uses the
+current version.)
 
 ### Rust Tips
 
@@ -244,4 +254,4 @@ Use the `tar` command and your BYU netID to compress your files:
 tar --exclude=target --exclude=.git -czvf byuNetID.tar directory
 ```
 
-Submit your tar file on Learning Suite.
+Submit your tar file on Canvas.
