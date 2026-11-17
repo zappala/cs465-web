@@ -87,3 +87,9 @@ The browser-tab and home-screen icons in `public/` (`favicon.ico`,
 and run `src/scripts/make-icons.sh` (needs Google Chrome; uses macOS `sips`).
 The tags are in `src/layouts/Front.astro`, and `public/manifest.webmanifest`
 names the site for home-screen shortcuts.
+
+## Notes for future semesters
+
+- [docs/next-semester.md](docs/next-semester.md): when creating the next
+  semester, make the November 2026 updated crypto pages (`-v2`) the only
+  versions.
