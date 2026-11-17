@@ -78,3 +78,12 @@ files.
 
 See [the documentation](https://docs.astro.build) or jump into the
 [Discord server](https://astro.build/chat).
+
+## Site icons
+
+The browser-tab and home-screen icons in `public/` (`favicon.ico`,
+`apple-touch-icon.png`, `icon-192.png`, `icon-512.png`) are generated from
+`public/icon.svg` (the BYU "Y" on navy). To change the icon, edit `icon.svg`
+and run `src/scripts/make-icons.sh` (needs Google Chrome; uses macOS `sips`).
+The tags are in `src/layouts/Front.astro`, and `public/manifest.webmanifest`
+names the site for home-screen shortcuts.
