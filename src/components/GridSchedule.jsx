@@ -45,7 +45,7 @@ export default function GridSchedule(props) {
           <div className="w-2/12 bg-gray-200 mb-1 mr-1 p-2">
             {day.day} {day.date}
           </div>
-          <div className="w-10/12 bg-yellow-200 mb-1 mr-1 p-2">
+          <div className="w-10/12 bg-yellow/30 mb-1 mr-1 p-2">
             HOLIDAY - {day.holiday}
           </div>
         </div>
@@ -133,7 +133,8 @@ export default function GridSchedule(props) {
           target={target}
         >
           <Badge name={lecture.instructor} />
-          {lecture.title} {icon}
+          {lecture.title}
+          {lecture.type === "zip" && <> {icon}</>}
         </a>
       </li>
     );

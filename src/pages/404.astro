@@ -1,0 +1,18 @@
+---
+// Shown by Netlify for any URL that does not exist.
+import Layout from "../layouts/Home.astro";
+import Button from "../components/Button.jsx";
+---
+
+<Layout title="Page not found">
+  <h1>Page not found</h1>
+  <p>
+    Sorry, there is no page at this address. It may have moved, or the link
+    may be from an earlier semester.
+  </p>
+  <p>Try the current semester's schedule, or the course home page:</p>
+  <div class="flex gap-4 not-prose">
+    <Button link="/fall2026">Fall 2026 schedule</Button>
+    <Button link="/">Course home page</Button>
+  </div>
+</Layout>

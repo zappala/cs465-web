@@ -13,9 +13,12 @@ export function Card(props) {
     <div className="w-full md:flex shadow-lg p-3 border-t border-gray-200 dark:bg-gray-900 mb-3">
       {props.image && (
         <img
-          className="w-28 h-28 rounded-full mr-8 ml-5"
+          className="w-28 h-28 rounded-full object-cover mr-8 ml-5"
           src={src_text}
           alt={alt_text}
+          width="112"
+          height="112"
+          loading="lazy"
         />
       )}
       <div className="md:mt-10 mr-5 ml-5">{Instructor(props)}</div>

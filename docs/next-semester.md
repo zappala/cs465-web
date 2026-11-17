@@ -34,8 +34,9 @@ Use the real name of the new semester in place of `winter2027` / `w2027`.
    cp -R src/pages/fall2026 src/pages/winter2027
    cp -R src/data/fall2026 src/data/winter2027
    ```
-   Update `menu.yaml` (semester name), the dates in `schedule.yaml`, and the
-   "Current Semester" button in `src/pages/index.mdx`.
+   Update `menu.yaml` (semester name), the dates in `schedule.yaml`, the
+   "Current Semester" button in `src/pages/index.mdx`, and the current
+   semester link in `src/pages/404.astro`.
 
 2. **Replace each original page with its updated page** (`mv` overwrites the
    original, which is what we want):

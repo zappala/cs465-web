@@ -7,8 +7,12 @@ const Burger = (props) => {
   // transition: all 0.3s linear;
   return (
     <>
-      <div
+      <button
+        type="button"
         className="lg:hidden flex justify-around flex-nowrap flex-col w-7 h-7 fixed top-3 right-5 z-20"
+        aria-label={open ? "Close menu" : "Open menu"}
+        aria-expanded={open}
+        aria-controls="site-menu"
         onClick={() => setOpen(!open)}
       >
         <div className={open ? base + " rotate-45" : base + " rotate-0"} />
@@ -20,7 +24,7 @@ const Burger = (props) => {
           }
         />
         <div className={open ? base + " -rotate-45" : base + " rotate-0"} />
-      </div>
+      </button>
       <MenuBar prefix={props.prefix} items={props.items} open={open} />
     </>
   );
