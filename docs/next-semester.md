@@ -93,3 +93,13 @@ Use the real name of the new semester in place of `winter2027` / `w2027`.
    server binaries and the handout zip).
 
 8. `npm run build`, click through with `npm run dev`, then commit and push.
+
+## Also worth doing between semesters
+
+- **Major package upgrades** (noted 2026-11-17): the site is on Astro 5.18
+  and Tailwind 3.4 (the latest within those major versions). Astro 7 and
+  Tailwind 4 are current. The remaining `npm audit` advisories need these
+  upgrades. Tailwind 4 replaces `@astrojs/tailwind` with `@tailwindcss/vite`
+  and moves the config into CSS, so plan time for it. Before and after,
+  build the site and compare every page's text and links, and check the
+  schedule, a notes page, and the phone menu visually.
