@@ -275,6 +275,20 @@ let nonce = Nonce::<Aes256Gcm>::try_from(nonce_bytes.as_slice())?;
   - 20 points for using a new encryption key and nonce with every Encrypted
     Message
 
+### Checking your work
+
+The TAs will grade your client by running the server with `--grade`, and you
+can use the same method to check your work before you submit. Start the server
+for your computer with `--grade`, for example:
+
+```bash
+./binaries/server-macos-arm64 --grade
+```
+
+The server then prints each part of the protocol your client gets right, and a
+score out of 100 when your client exits. Send at least two messages so it can
+check that you use a new key and nonce for each one.
+
 ## Submission
 
 Use the `tar` command and your BYU netID to compress your files:
