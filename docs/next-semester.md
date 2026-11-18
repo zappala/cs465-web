@@ -172,3 +172,14 @@ Use the real name of the new semester in place of `winter2027` / `w2027`.
   ```sh
   grep -rln "tar.gz\|czvf\|tar --exclude\|tar file" src/pages public/code
   ```
+
+- **Add a "what you'll need" section to the syllabus plus a setup sheet** (noted
+  2026-11-17): the syllabus should list the technology students use during the
+  semester (a Linux environment — Codespaces / VM / VPS / department machines;
+  Rust via `rustup`; Docker for Juice Shop; a GitHub account, with student
+  verification for Codespaces; a browser with dev tools / Burp) and link a
+  single **setup sheet** they can follow before the semester to install and
+  verify everything early. Keep the setup sheet as the one place these
+  instructions live, and have the per-project pages link to it rather than
+  repeating setup steps. Coordinate with the environment rollout in
+  [exploit-env-plan.md](exploit-env-plan.md).
