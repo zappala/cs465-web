@@ -155,3 +155,20 @@ Use the real name of the new semester in place of `winter2027` / `w2027`.
   "Greedy Chatbot Manipulation" (difficulty 3). Adding one would also mean
   covering LLM security (prompt injection and related attacks) in class, plus
   updating the rubric and `submission.md`.
+
+- **Rework the Exploit and Patch project** (noted 2026-11-17): move it to
+  64-bit, replace the confusing problem 5 with a new heap-overflow problem, add
+  a shellcode extra-credit problem, and adopt a shared x86-64 Codespaces +
+  local-Docker devcontainer as the default environment. Full plan:
+  `~/Repos/cs465/exploit-and-patch-update-plan.md`; the environment analysis is
+  in [exploit-env-plan.md](exploit-env-plan.md).
+
+- **Switch all handouts and turn-ins to zip** (noted 2026-11-17): handouts are
+  zips now (Encrypted Communication, Cracking Password Vaults, and the Exploit
+  and Patch download already switched). For each remaining project, publish the
+  handout as `.zip` and update the page's download link and wording, and make
+  the Submission section ask for a `.zip` (see step 8 above for the student
+  command). Check for stragglers:
+  ```sh
+  grep -rln "tar.gz\|czvf\|tar --exclude\|tar file" src/pages public/code
+  ```
