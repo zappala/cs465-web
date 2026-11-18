@@ -119,7 +119,20 @@ Use the real name of the new semester in place of `winter2027` / `w2027`.
     the 3 breach vaults that can't be cracked (currently 40 points: 10 each
     for the practice vault and the 3 crackable breach vaults).
 
-11. `npm run build`, click through with `npm run dev`, then commit and push.
+11. **Pin the Juice Shop version** on the Web Exploit and Patch page, so a
+    new release can't change the challenges mid-semester. Find the newest
+    `vX.Y.Z` tag at https://hub.docker.com/r/bkimminich/juice-shop/tags, run
+    it, and check that the assigned challenges still exist (and which have
+    coding challenges, for the extra credit). Then change the command to, for
+    example:
+    ```bash
+    docker run --rm -p 127.0.0.1:3000:3000 -e NODE_ENV=unsafe bkimminich/juice-shop:v20.4.0
+    ```
+    (v20.4.0, released 2026-11-08, was checked on 2026-11-17: all 7
+    challenges present; all but Reflected XSS have coding challenges;
+    `NODE_ENV=unsafe` is still needed for Reflected XSS and API-only XSS.)
+
+12. `npm run build`, click through with `npm run dev`, then commit and push.
 
 ## Also worth doing between semesters
 
@@ -130,3 +143,10 @@ Use the real name of the new semester in place of `winter2027` / `w2027`.
   and moves the config into CSS, so plan time for it. Before and after,
   build the site and compare every page's text and links, and check the
   schedule, a notes page, and the phone menu visually.
+
+- **Consider an LLM security challenge in Web Exploit and Patch** (noted
+  2026-11-17): Juice Shop now has "Chatbot Prompt Injection" (difficulty 2:
+  trick the shop's chatbot into giving a coupon code its policy forbids) and
+  "Greedy Chatbot Manipulation" (difficulty 3). Adding one would also mean
+  covering LLM security (prompt injection and related attacks) in class, plus
+  updating the rubric and `submission.md`.
