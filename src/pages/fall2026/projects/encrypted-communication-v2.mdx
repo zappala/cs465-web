@@ -291,10 +291,17 @@ check that you use a new key and nonce for each one.
 
 ## Submission
 
-Use the `tar` command and your BYU netID to compress your files:
+Submit a zip file of your project, named with your BYU netID (for example,
+`byuNetID.zip`), on Canvas.
 
-```bash
-tar --exclude=target --exclude=.git -czvf byuNetID.tar directory
-```
+First run `cargo clean` in your project folder, so the zip doesn't include the
+large `target` folder. Then make the zip:
 
-Submit your tar file on Canvas.
+- **macOS or Linux:** from the folder that contains your project, run
+
+  ```bash
+  zip -r byuNetID.zip directory -x '*/target/*' '*/.git/*'
+  ```
+
+- **Windows:** right-click your project folder in File Explorer, choose
+  **Compress to ZIP file**, and rename the zip to your netID.

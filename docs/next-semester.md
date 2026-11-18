@@ -92,7 +92,16 @@ Use the real name of the new semester in place of `winter2027` / `w2027`.
    encrypted-communication if crates have new releases (then rebuild the
    server binaries and the handout zip).
 
-8. `npm run build`, click through with `npm run dev`, then commit and push.
+8. **Zip submissions:** handouts are zips now, so submissions should be too.
+   The Encrypted Communication v2 page already asks for a zip (`cargo clean`,
+   then `zip -r ... -x '*/target/*' '*/.git/*'` or Explorer's Compress to ZIP
+   file). Copy that Submission section to any other project page that still
+   says `tar`. Check:
+   ```sh
+   grep -rln "czvf\|tar --exclude\|tar file" src/pages/winter2027
+   ```
+
+9. `npm run build`, click through with `npm run dev`, then commit and push.
 
 ## Also worth doing between semesters
 
