@@ -183,3 +183,9 @@ Use the real name of the new semester in place of `winter2027` / `w2027`.
   instructions live, and have the per-project pages link to it rather than
   repeating setup steps. Coordinate with the environment rollout in
   [exploit-env-plan.md](exploit-env-plan.md).
+
+- **Update the lecture notes from the slides** (noted 2026-11-17): the slide
+  decks (`~/Dropbox/Teaching/cs465/slides`, exported to
+  `public/lectures/`) are more recent than the online notes in
+  `src/pages/<semester>/notes/*.mdx`. Between semesters, review the notes
+  against the current slides and bring anything out of date into line.
