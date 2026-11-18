@@ -4,25 +4,95 @@ layout: ../../../layouts/SemesterMarkdown.astro
 
 # Final Project
 
-For the final project, the goal is for you to explore the capabilities of AI systems to do the work for this class. You should spend 10 to 15 hours with an AI coding environment to do the exercises in this class and, time provided, to push beyond the class. I highly recommend purchasing a Claude Pro account for one month, but you are welcome to use other AI coding tools.
+For the final project, spend 10 to 15 hours on one of these two options:
 
-For this assignment only, you are at level 4 of the BYU CS [AI use guidelines](https://claude.ai/public/artifacts/b1e35a55-f03f-4120-ba4f-b83a1ee3fc83).
+- **Option A: Explore AI.** Use an AI coding environment to do the work for this
+  class and, time permitting, to push beyond the class, and assess how capable
+  AI is at these tasks.
+- **Option B: Personal project.** Build a project of your own that has a
+  significant security or privacy component.
 
-**Do not use AI to hack any system. You do not have authorization for this.**
+This is an individual project. Start early; don't postpone it to the last week
+of class.
 
-Some examples of activities that are encouraged:
+## AI Use
 
-- Complete assignments from the class.
-- Do CTF challenges from the class, provided you are not pointing the AI at the CTF servers, but instead having it write code on your computer that you then upload to the CTF server.
+For this project only, you are at level 4 of the BYU CS
+[AI use guidelines](https://claude.ai/public/artifacts/b1e35a55-f03f-4120-ba4f-b83a1ee3fc83):
+you may use AI tools for anything and everything, with these limits:
+
+- **Only attack systems on your own computer.** You may use AI to attack
+  things you run yourself, such as the Juice Shop in Docker or the programs
+  from our exploit projects. **Do not use AI to attack any other system**,
+  including pwn.college's servers, BYU systems, or anything on the internet.
+  You do not have authorization for this.
+- **Only redo assignments you have already turned in.** Level 4 applies only
+  to work for this final project. Do not use AI on an assignment you haven't
+  turned in yet, and don't submit any of this project's work for another
+  assignment.
+- **Keep your computer safe.** AI coding tools can run commands on your
+  computer, and here they may be writing exploits. Work in a virtual machine, a
+  container, or a folder used only for this project; don't give the tool your
+  pwn.college login, SSH keys, or other passwords; and read each command before
+  you approve it.
+
+I recommend Claude Pro for a month, but you don't have to pay for anything:
+other AI coding tools, and free tiers, are fine.
+
+## Option A: Explore AI
+
+Use an AI coding environment as your partner. Some examples of activities that
+are encouraged:
+
+- Redo assignments from the class that you have already turned in, and compare
+  the AI's work with yours.
+- Do pwn.college challenges, provided you are not pointing the AI at
+  pwn.college's servers, but instead having it write code on your computer
+  that you then run on pwn.college yourself.
 - Create new assignments for the class, and then complete those assignments.
-- Push into an area we have not covered, such as [Reverse Engineering](https://pwn.college/intro-to-cybersecurity/reverse-engineering/) or [Return Oriented Programming](https://pwn.college/program-security/return-oriented-programming/).
+- Push into an area we have not covered, such as
+  [Reverse Engineering](https://pwn.college/intro-to-cybersecurity/reverse-engineering/)
+  or
+  [Return Oriented Programming](https://pwn.college/program-security/return-oriented-programming/).
+
+## Option B: Personal Project
+
+Build something of your own where security or privacy is a central part of the
+work, not an add-on. Some examples:
+
+- an application that encrypts or protects user data, with a threat model
+  explaining what it defends against
+- a tool for finding or analyzing vulnerabilities, used only on systems you own
+- hardening a server or home network you own, and testing what you did
+- a privacy analysis of an app or device you own, such as what data it sends
+  and to whom
+
+You may use AI tools at level 4 (see above), but you don't have to.
 
 ## Deliverables
 
-Turn in:
+Submit on Canvas:
 
-- A report covering (a) what you have done with AI as a partner, (b) what you have learned, and (c) an overall assessment of AI's capabilities for these tasks. I expect a minimum of 2 pages, but be as long as you want.
+1. **A report** (PDF, at least 2 pages; be as long as you want).
+   - Option A: (a) what you did with AI as a partner, (b) what you learned, and
+     (c) your overall assessment of AI's capabilities for these tasks,
+     including where it was wrong, wrote insecure code, or needed you to check
+     its work, and what that means for security work.
+   - Option B: (a) what you built, (b) its security or privacy design,
+     including the threats it addresses and its limitations, (c) what you
+     learned, and (d) how you used AI, if you did.
+2. **A log of your time**: dates, hours, and what you worked on, totaling 10 to
+   15 hours.
+3. **Evidence**: examples of your work, such as excerpts from AI transcripts,
+   screenshots, or code (a link to a repository is fine).
 
-## Grading
+## Grading Rubric
 
-- This will be graded on how well you engage with this topic and how extensively you are able to use AI. Start early, don't postpone to the last week of class.
+Total (100 points):
+
+| Points | Option A: Explore AI | Option B: Personal project |
+| --- | --- | --- |
+| 15 | **Time log:** 10 to 15 hours, spread over more than the last few days | **Time log:** 10 to 15 hours, spread over more than the last few days |
+| 25 | **Breadth and depth:** a range of tasks, including some that push the AI beyond simple exercises | **Working project:** it does what you set out to do, shown in your evidence |
+| 20 | **Evidence:** concrete examples that support your report | **Security or privacy design:** clear threats, defenses, and limitations |
+| 40 | **Assessment and learning:** a thoughtful, honest assessment of what AI did well and badly, how you checked its work, and what you learned | **Report and learning:** explains the design and testing, and what you learned |
