@@ -144,6 +144,11 @@ Use the real name of the new semester in place of `winter2027` / `w2027`.
   build the site and compare every page's text and links, and check the
   schedule, a notes page, and the phone menu visually.
 
+- **Sync assignments and the syllabus to Canvas** (noted 2026-11-17): a
+  plan to push due dates, points, and links to the website's pages from
+  `schedule.yaml` to Canvas, and to sync the syllabus, is in
+  [canvas-sync-plan.md](canvas-sync-plan.md). Not started.
+
 - **Consider an LLM security challenge in Web Exploit and Patch** (noted
   2026-11-17): Juice Shop now has "Chatbot Prompt Injection" (difficulty 2:
   trick the shop's chatbot into giving a coupon code its policy forbids) and
