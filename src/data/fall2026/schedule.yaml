@@ -308,9 +308,12 @@ units:
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
             sections: 3.4 - 3.5
         project:
-          title: Cracking Password vaults
-          link: /projects/cracking-password-vaults
-          due: Nov 24
+          - title: Cracking Password Vaults
+            link: /projects/cracking-password-vaults
+            due: Nov 24
+          - title: Cracking Password Vaults (updated)
+            link: /projects/cracking-password-vaults-v2
+            due: Nov 24
 
   - title: Web Security
     days:

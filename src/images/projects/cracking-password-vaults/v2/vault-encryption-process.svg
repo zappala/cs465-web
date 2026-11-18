@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 500" width="1120" height="500" font-family="Lato, 'Open Sans', Helvetica, Arial, sans-serif" font-size="20" fill="#333" role="img" aria-labelledby="t d">
+  <title id="t">How a v2 vault is encrypted</title>
+  <desc id="d">PBKDF2 with 600,000 rounds turns the password and salt into a password key. AES GCM encrypts a random vault key with the password key and a key nonce, giving the wrapped vault key. AES GCM encrypts the vault with the vault key and a vault nonce, giving the encrypted vault.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
+    </marker>
+  </defs>
+  <rect width="1120" height="500" fill="#fff"/>
+  <g stroke="#333" stroke-width="1.5" fill="none">
+    <!-- boxes -->
+    <rect x="150" y="120" width="180" height="130" rx="8"/>
+    <rect x="520" y="250" width="160" height="130" rx="8"/>
+    <rect x="900" y="250" width="160" height="130" rx="8"/>
+    <!-- PBKDF2 inputs and output -->
+    <path d="M200,72 V118" marker-end="url(#a)"/>
+    <path d="M280,72 V118" marker-end="url(#a)"/>
+    <path d="M240,252 V288" marker-end="url(#a)"/>
+    <!-- wrap: password key, key nonce, vault key -->
+    <path d="M310,300 H518" marker-end="url(#a)"/>
+    <path d="M465,350 H518" marker-end="url(#a)"/>
+    <path d="M745,180 L615,248" marker-end="url(#a)"/>
+    <path d="M600,382 V428" marker-end="url(#a)"/>
+    <!-- vault: vault key, vault nonce, vault -->
+    <path d="M790,180 L898,280" marker-end="url(#a)"/>
+    <path d="M846,350 H898" marker-end="url(#a)"/>
+    <path d="M980,72 V248" marker-end="url(#a)"/>
+    <path d="M980,382 V428" marker-end="url(#a)"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="200" y="60">password</text>
+    <text x="280" y="60">salt</text>
+    <text x="240" y="170">PBKDF2</text>
+    <text x="240" y="198">600,000</text>
+    <text x="240" y="226">rounds</text>
+    <text x="240" y="310">password key</text>
+
+    <text x="410" y="357">key nonce</text>
+    <text x="767" y="150">vault key</text>
+    <text x="767" y="174" font-size="16">(random)</text>
+    <text x="600" y="310">AES GCM</text>
+    <text x="600" y="338" font-size="16">(wrap the key)</text>
+    <text x="600" y="455">wrapped vault key</text>
+
+    <text x="782" y="357">vault nonce</text>
+    <text x="980" y="60">vault</text>
+    <text x="980" y="320">AES GCM</text>
+    <text x="980" y="455">encrypted vault</text>
+  </g>
+</svg>
