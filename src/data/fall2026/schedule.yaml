@@ -119,7 +119,7 @@ units:
             link: /notes/shellcode-walkthrough
         slides:
           - title: Privilege escalation and shellcode
-            link: /lectures/f2026/Privilege Escalation and shellcode.pdf
+            link: /lectures/f2026/Privilege Escalation and Shellcode.pdf
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
@@ -294,6 +294,11 @@ units:
         lectures:
           - title: Password authentication and account recovery
             link: /notes/password-authentication
+        slides:
+          - title: Password authentication and account recovery
+            link:
+              /lectures/f2026/Password Authentication and Account
+              Recovery.pdf
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
@@ -303,6 +308,9 @@ units:
         lectures:
           - title: Multi-factor authentication
             link: /notes/multi-factor-authentication
+        slides:
+          - title: Multifactor authentication and passkeys
+            link: /lectures/f2026/Multifactor Authentication and Passkeys.pdf
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
@@ -322,6 +330,9 @@ units:
         lectures:
           - title: Web background
             link: /notes/web-background
+        slides:
+          - title: Web background
+            link: /lectures/f2026/Web Background.pdf
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
@@ -331,6 +342,9 @@ units:
         lectures:
           - title: XSS, SQL injection
             link: /notes/xss-and-sql-injection
+        slides:
+          - title: XSS and SQL injection
+            link: /lectures/f2026/XSS and SQL Injection.pdf
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
@@ -344,6 +358,9 @@ units:
         lectures:
           - title: Same-origin policy and CSRF attacks
             link: /notes/same-origin-policy-and-CSRF-attacks
+        slides:
+          - title: Same-origin policy and CSRF
+            link: /lectures/f2026/Same Origin Policy and CSRF.pdf
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
@@ -353,6 +370,9 @@ units:
         lectures:
           - title: Phishing
             link: /notes/phishing
+        slides:
+          - title: Phishing
+            link: /lectures/f2026/Phishing.pdf
         readings:
           - title: Computer Security and the Internet
             link: https://people.scs.carleton.ca/~paulv/toolsjewels.html
