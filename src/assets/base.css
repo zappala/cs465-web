@@ -11,3 +11,24 @@
     @apply text-2xl;
   }
 }
+
+/* Math on the 2018–2023 course pages is native MathML (drawn by the
+   browser). Match the size and spacing KaTeX used: math a little larger
+   than the text, and space above and below each displayed formula. */
+math {
+  font-size: 1.15em;
+}
+
+math[display="block"] {
+  margin: 1em 0;
+}
+
+/* Browsers don't wrap MathML, so each displayed formula is wrapped in
+   <span className="math-display">; one wider than a phone screen scrolls
+   sideways inside it instead of widening the page. (Safari ignores
+   overflow on <math> itself, hence the wrapper.) */
+.math-display {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}

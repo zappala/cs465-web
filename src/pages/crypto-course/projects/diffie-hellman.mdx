@@ -1,5 +1,5 @@
 ---
-layout: ../../../layouts/CryptoCourseMarkdown.astro
+layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
 import UsedIn from "../../../components/UsedIn.jsx";
@@ -23,41 +23,37 @@ import UsedIn from "../../../components/UsedIn.jsx";
 Diffie-Hellman key exchange and RSA public-key encryption both rely on
 functions like this:
 
-$$
-(g^a \bmod p)^b \bmod p
-$$
+<span className="math-display"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>g</mi><mi>a</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi><msup><mo stretchy="false">)</mo><mi>b</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi></mrow><annotation encoding="application/x-tex">(g^a &#92;bmod p)^b &#92;bmod p</annotation></semantics></math></span>
 
 The Diffie-Hellman key-exchange algorithm allows two people, Alice and
 Bob, to agree upon a number (to use as a key for encryption) without
 Eve knowing what it is, even though she sees everything that passes
 between Alice and Bob. It relies on the fact that:
 
-$$
-(g^a)^b = (g^b)^a = g^{ab} = g^{ab}
-$$
+<span className="math-display"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>g</mi><mi>a</mi></msup><msup><mo stretchy="false">)</mo><mi>b</mi></msup><mo>=</mo><mo stretchy="false">(</mo><msup><mi>g</mi><mi>b</mi></msup><msup><mo stretchy="false">)</mo><mi>a</mi></msup><mo>=</mo><msup><mi>g</mi><mrow><mi>a</mi><mi>b</mi></mrow></msup><mo>=</mo><msup><mi>g</mi><mrow><mi>a</mi><mi>b</mi></mrow></msup></mrow><annotation encoding="application/x-tex">(g^a)^b = (g^b)^a = g^&#123;ab&#125; = g^&#123;ab&#125;</annotation></semantics></math></span>
 
 The first equation above has the same property. Here's how the key exchange works:
 
-Alice picks a generator $g$, a prime $p$, and a large random number
-$a$. She sends $g$, $p$, and the resulting value of $g^a \bmod p$ to Bob, but
+Alice picks a generator <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math>, a prime <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math>, and a large random number
+<math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math>. She sends <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math>, and the resulting value of <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mi>a</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi></mrow><annotation encoding="application/x-tex">g^a &#92;bmod p</annotation></semantics></math> to Bob, but
 not a by itself.
 
-Bob picks a large random value $b$, and sends $g^b \bmod p$ back to
-Alice. Eve, watching each exchange, now has $g$, $p$, $g^b \bmod p$
-and $g^a \bmod p$, but she can't get $a$ or $b$ from these. We hope. It
+Bob picks a large random value <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math>, and sends <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mi>b</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi></mrow><annotation encoding="application/x-tex">g^b &#92;bmod p</annotation></semantics></math> back to
+Alice. Eve, watching each exchange, now has <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mi>b</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi></mrow><annotation encoding="application/x-tex">g^b &#92;bmod p</annotation></semantics></math>
+and <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mi>a</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi></mrow><annotation encoding="application/x-tex">g^a &#92;bmod p</annotation></semantics></math>, but she can't get <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math> or <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math> from these. We hope. It
 would require that Eve know how to efficiently compute discrete
 logarithms, and the security of this algorithm (as well as that of RSA
 and most other public key algorithms) depends on nobody figuring out
 how to do that.
 
-Bob takes the $g^a \bmod p$ that Alice sent him and raises it to $b$,
-then takes $\bmod p$, giving him $(g^a \bmod p)^b \bmod p$. Alice does
-the same thing and ends up with $(g^b \bmod p)^a \bmod \%p$ - which is
+Bob takes the <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mi>a</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi></mrow><annotation encoding="application/x-tex">g^a &#92;bmod p</annotation></semantics></math> that Alice sent him and raises it to <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math>,
+then takes <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi></mrow><annotation encoding="application/x-tex">&#92;bmod p</annotation></semantics></math>, giving him <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>g</mi><mi>a</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi><msup><mo stretchy="false">)</mo><mi>b</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi></mrow><annotation encoding="application/x-tex">(g^a &#92;bmod p)^b &#92;bmod p</annotation></semantics></math>. Alice does
+the same thing and ends up with <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>g</mi><mi>b</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi><msup><mo stretchy="false">)</mo><mi>a</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi></mrow><annotation encoding="application/x-tex">(g^b &#92;bmod p)^a &#92;bmod p</annotation></semantics></math> - which is
 the same number. Alice and Bob can now use this number as a password
 for encrypting future communications.
 
-Since $a$, $b$ and $p$ are usually very large numbers (hundreds of
-digits long), we need a fast way to compute $g^a \bmod p$. That's
+Since <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math> are usually very large numbers (hundreds of
+digits long), we need a fast way to compute <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mi>a</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi></mrow><annotation encoding="application/x-tex">g^a &#92;bmod p</annotation></semantics></math>. That's
 where **modular exponentiation** comes in.
 
 You can use the Linux desktop calculator, dc, to do modular
@@ -73,123 +69,103 @@ exponentiation for checking your work. For example:
 
 > %
 
-This computes $2^8 \bmod 255$. You can search for "man dc" for more
+This computes <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mn>8</mn></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mn>255</mn></mrow><annotation encoding="application/x-tex">2^8 &#92;bmod 255</annotation></semantics></math>. You can search for "man dc" for more
 information on dc.
 
 ## Modular Exponentiation
 
 The term modular exponentiation refers to the function:
 
-$$
-g^a \bmod p
-$$
+<span className="math-display"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>g</mi><mi>a</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi></mrow><annotation encoding="application/x-tex">g^a &#92;bmod p</annotation></semantics></math></span>
 
 We need to compute this function efficiently to use public key
 cryptography of the Diffie-Hellman or RSA variety.
 
-If we calculate $g^a$ as:
+If we calculate <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mi>a</mi></msup></mrow><annotation encoding="application/x-tex">g^a</annotation></semantics></math> as:
 
-$$
-g^a = g \times g \times g \times g \times ... \times g
-$$
+<span className="math-display"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>g</mi><mi>a</mi></msup><mo>=</mo><mi>g</mi><mo>×</mo><mi>g</mi><mo>×</mo><mi>g</mi><mo>×</mo><mi>g</mi><mo>×</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo>×</mo><mi>g</mi></mrow><annotation encoding="application/x-tex">g^a = g &#92;times g &#92;times g &#92;times g &#92;times ... &#92;times g</annotation></semantics></math></span>
 
-we'll spend a lot of time multiplying if $a$ is large (which it
+we'll spend a lot of time multiplying if <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math> is large (which it
 usually is; often it's greater than the number of particles in the
 universe!). Here's how to get there faster.
 
 Since we're dealing with computers here, let's assume we have a binary
-representation of $a$. If $a = 42$, we'd write it as
+representation of <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math>. If <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><mn>42</mn></mrow><annotation encoding="application/x-tex">a = 42</annotation></semantics></math>, we'd write it as
 
-$$
-42 = 101010 = 1\times2^5 + 0\times2^4 + 1\times2^3 + 0\times2^2 + 1\times2^1 + 0\times2^0
-$$
+<span className="math-display"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mn>42</mn><mo>=</mo><mn>101010</mn><mo>=</mo><mn>1</mn><mo>×</mo><msup><mn>2</mn><mn>5</mn></msup><mo>+</mo><mn>0</mn><mo>×</mo><msup><mn>2</mn><mn>4</mn></msup><mo>+</mo><mn>1</mn><mo>×</mo><msup><mn>2</mn><mn>3</mn></msup><mo>+</mo><mn>0</mn><mo>×</mo><msup><mn>2</mn><mn>2</mn></msup><mo>+</mo><mn>1</mn><mo>×</mo><msup><mn>2</mn><mn>1</mn></msup><mo>+</mo><mn>0</mn><mo>×</mo><msup><mn>2</mn><mn>0</mn></msup></mrow><annotation encoding="application/x-tex">42 = 101010 = 1&#92;times2^5 + 0&#92;times2^4 + 1&#92;times2^3 + 0&#92;times2^2 + 1&#92;times2^1 + 0&#92;times2^0</annotation></semantics></math></span>
 
-With $a=42$, this means that:
+With <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>=</mo><mn>42</mn></mrow><annotation encoding="application/x-tex">a=42</annotation></semantics></math>, this means that:
 
-$$
-g^a = g^{2^5 + 2^3 + 2^1} = g^{32} * g^{8} * g^{2}
-$$
+<span className="math-display"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>g</mi><mi>a</mi></msup><mo>=</mo><msup><mi>g</mi><mrow><msup><mn>2</mn><mn>5</mn></msup><mo>+</mo><msup><mn>2</mn><mn>3</mn></msup><mo>+</mo><msup><mn>2</mn><mn>1</mn></msup></mrow></msup><mo>=</mo><msup><mi>g</mi><mn>32</mn></msup><mo>∗</mo><msup><mi>g</mi><mn>8</mn></msup><mo>∗</mo><msup><mi>g</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">g^a = g^&#123;2^5 + 2^3 + 2^1&#125; = g^&#123;32&#125; &#42; g^&#123;8&#125; &#42; g^&#123;2&#125;</annotation></semantics></math></span>
 
-Now we just need $g^{32}$, $g^8$ and $g^2$. But check this out:
+Now we just need <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mn>32</mn></msup></mrow><annotation encoding="application/x-tex">g^&#123;32&#125;</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mn>8</mn></msup></mrow><annotation encoding="application/x-tex">g^8</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">g^2</annotation></semantics></math>. But check this out:
 
-$$
-g^2 * g^2 = g^4
-$$
-$$
-g^4 * g^4 = g^8
-$$
-$$
-g^8 * g^8 = g^{16}
-$$
-$$
-g^{16} * g^{16} = g^{32}
-$$
+<span className="math-display"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>g</mi><mn>2</mn></msup><mo>∗</mo><msup><mi>g</mi><mn>2</mn></msup><mo>=</mo><msup><mi>g</mi><mn>4</mn></msup></mrow><annotation encoding="application/x-tex">g^2 &#42; g^2 = g^4</annotation></semantics></math></span>
+<span className="math-display"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>g</mi><mn>4</mn></msup><mo>∗</mo><msup><mi>g</mi><mn>4</mn></msup><mo>=</mo><msup><mi>g</mi><mn>8</mn></msup></mrow><annotation encoding="application/x-tex">g^4 &#42; g^4 = g^8</annotation></semantics></math></span>
+<span className="math-display"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>g</mi><mn>8</mn></msup><mo>∗</mo><msup><mi>g</mi><mn>8</mn></msup><mo>=</mo><msup><mi>g</mi><mn>16</mn></msup></mrow><annotation encoding="application/x-tex">g^8 &#42; g^8 = g^&#123;16&#125;</annotation></semantics></math></span>
+<span className="math-display"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>g</mi><mn>16</mn></msup><mo>∗</mo><msup><mi>g</mi><mn>16</mn></msup><mo>=</mo><msup><mi>g</mi><mn>32</mn></msup></mrow><annotation encoding="application/x-tex">g^&#123;16&#125; &#42; g^&#123;16&#125; = g^&#123;32&#125;</annotation></semantics></math></span>
 
 So by progressively multiplying the products by themselves, we can get
-$g^{2^n}$ with just $n-1$ multiplications. Since there are only about
-$log_2(a)$ bits in $a$, we can find $g^a$ with at most $log_2(a)-1 +
-log_2(a)$ multiplication operations. (The second $log_2(a)$ comes from
-where we multiplied $g^{32} \times g^8 \times g^2$ above).
+<math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><msup><mn>2</mn><mi>n</mi></msup></msup></mrow><annotation encoding="application/x-tex">g^&#123;2^n&#125;</annotation></semantics></math> with just <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n-1</annotation></semantics></math> multiplications. Since there are only about
+<math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">log&#95;2(a)</annotation></semantics></math> bits in <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math>, we can find <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mi>a</mi></msup></mrow><annotation encoding="application/x-tex">g^a</annotation></semantics></math> with at most <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>−</mo><mn>1</mn><mo>+</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">log&#95;2(a)-1 + log&#95;2(a)</annotation></semantics></math> multiplication operations. (The second <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">log&#95;2(a)</annotation></semantics></math> comes from
+where we multiplied <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mn>32</mn></msup><mo>×</mo><msup><mi>g</mi><mn>8</mn></msup><mo>×</mo><msup><mi>g</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">g^&#123;32&#125; &#92;times g^8 &#92;times g^2</annotation></semantics></math> above).
 
 So how does the modulus play into all of this? Well, it turns out that
 you can distribute the operation into the multiplication without
 changing the result, leaving you with smaller numbers to multiply,
 like this:
 
-$$
-((g^{32} \bmod p) \times (g^8 \bmod p) \times (g^2 \bmod p)) \bmod p = g^{42} \bmod p
-$$
+<span className="math-display"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">(</mo><mo stretchy="false">(</mo><msup><mi>g</mi><mn>32</mn></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi><mo stretchy="false">)</mo><mo>×</mo><mo stretchy="false">(</mo><msup><mi>g</mi><mn>8</mn></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi><mo stretchy="false">)</mo><mo>×</mo><mo stretchy="false">(</mo><msup><mi>g</mi><mn>2</mn></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi><mo>=</mo><msup><mi>g</mi><mn>42</mn></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi></mrow><annotation encoding="application/x-tex">((g^&#123;32&#125; &#92;bmod p) &#92;times (g^8 &#92;bmod p) &#92;times (g^2 &#92;bmod p)) &#92;bmod p = g^&#123;42&#125; &#92;bmod p</annotation></semantics></math></span>
 
-You can do the same thing when computing $g^{2^n}$. Why does it work?
+You can do the same thing when computing <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><msup><mn>2</mn><mi>n</mi></msup></msup></mrow><annotation encoding="application/x-tex">g^&#123;2^n&#125;</annotation></semantics></math>. Why does it work?
 
 Here's an example:
 
-> $(3\times4\times5) \bmod 7 =? ( ( (3\times4) \bmod 7 )\times5 )\bmod
-7$
+> <span className="math-display"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">(</mo><mn>3</mn><mo>×</mo><mn>4</mn><mo>×</mo><mn>5</mn><mo stretchy="false">)</mo><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mn>7</mn><mo>=</mo><mo stretchy="false">?</mo><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mn>3</mn><mo>×</mo><mn>4</mn><mo stretchy="false">)</mo><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mn>7</mn><mo stretchy="false">)</mo><mo>×</mo><mn>5</mn><mo stretchy="false">)</mo><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mn>7</mn></mrow><annotation encoding="application/x-tex">(3&#92;times4&#92;times5) &#92;bmod 7 =? ( ( (3&#92;times4) &#92;bmod 7 )&#92;times5 )&#92;bmod 7</annotation></semantics></math></span>
 
 Let's derive it:
 
-> $(3\times4\times5) \bmod 7 = (12\times5)\bmod7$
+> <span className="math-display"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">(</mo><mn>3</mn><mo>×</mo><mn>4</mn><mo>×</mo><mn>5</mn><mo stretchy="false">)</mo><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mn>7</mn><mo>=</mo><mo stretchy="false">(</mo><mn>12</mn><mo>×</mo><mn>5</mn><mo stretchy="false">)</mo><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mn>7</mn></mrow><annotation encoding="application/x-tex">(3&#92;times4&#92;times5) &#92;bmod 7 = (12&#92;times5)&#92;bmod7</annotation></semantics></math></span>
 
-> $(3\times4\times5) \bmod 7 = ( (7+5)\times5 )\bmod7$
+> <span className="math-display"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">(</mo><mn>3</mn><mo>×</mo><mn>4</mn><mo>×</mo><mn>5</mn><mo stretchy="false">)</mo><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mn>7</mn><mo>=</mo><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mn>7</mn><mo>+</mo><mn>5</mn><mo stretchy="false">)</mo><mo>×</mo><mn>5</mn><mo stretchy="false">)</mo><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mn>7</mn></mrow><annotation encoding="application/x-tex">(3&#92;times4&#92;times5) &#92;bmod 7 = ( (7+5)&#92;times5 )&#92;bmod7</annotation></semantics></math></span>
 
-> $(3\times4\times5) \bmod 7 = (7\times5 + 5\times5)\bmod7$
+> <span className="math-display"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">(</mo><mn>3</mn><mo>×</mo><mn>4</mn><mo>×</mo><mn>5</mn><mo stretchy="false">)</mo><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mn>7</mn><mo>=</mo><mo stretchy="false">(</mo><mn>7</mn><mo>×</mo><mn>5</mn><mo>+</mo><mn>5</mn><mo>×</mo><mn>5</mn><mo stretchy="false">)</mo><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mn>7</mn></mrow><annotation encoding="application/x-tex">(3&#92;times4&#92;times5) &#92;bmod 7 = (7&#92;times5 + 5&#92;times5)&#92;bmod7</annotation></semantics></math></span>
 
-> $(3\times4\times5) \bmod 7 = ( 5\times5)\bmod7$
+> <span className="math-display"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">(</mo><mn>3</mn><mo>×</mo><mn>4</mn><mo>×</mo><mn>5</mn><mo stretchy="false">)</mo><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mn>7</mn><mo>=</mo><mo stretchy="false">(</mo><mn>5</mn><mo>×</mo><mn>5</mn><mo stretchy="false">)</mo><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mn>7</mn></mrow><annotation encoding="application/x-tex">(3&#92;times4&#92;times5) &#92;bmod 7 = ( 5&#92;times5)&#92;bmod7</annotation></semantics></math></span>
 
-> $(3\times4\times5) \bmod 7 = ( (12)\bmod7 )\times5 )\bmod7$
+> <span className="math-display"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">(</mo><mn>3</mn><mo>×</mo><mn>4</mn><mo>×</mo><mn>5</mn><mo stretchy="false">)</mo><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mn>7</mn><mo>=</mo><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mn>12</mn><mo stretchy="false">)</mo><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mn>7</mn><mo stretchy="false">)</mo><mo>×</mo><mn>5</mn><mo stretchy="false">)</mo><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mn>7</mn></mrow><annotation encoding="application/x-tex">(3&#92;times4&#92;times5) &#92;bmod 7 = ( (12)&#92;bmod7 )&#92;times5 )&#92;bmod7</annotation></semantics></math></span>
 
-> $(3\times4\times5) \bmod 7 = ( (3\times4)\bmod7 )\times5 )\bmod7$
+> <span className="math-display"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mo stretchy="false">(</mo><mn>3</mn><mo>×</mo><mn>4</mn><mo>×</mo><mn>5</mn><mo stretchy="false">)</mo><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mn>7</mn><mo>=</mo><mo stretchy="false">(</mo><mo stretchy="false">(</mo><mn>3</mn><mo>×</mo><mn>4</mn><mo stretchy="false">)</mo><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mn>7</mn><mo stretchy="false">)</mo><mo>×</mo><mn>5</mn><mo stretchy="false">)</mo><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mn>7</mn></mrow><annotation encoding="application/x-tex">(3&#92;times4&#92;times5) &#92;bmod 7 = ( (3&#92;times4)&#92;bmod7 )&#92;times5 )&#92;bmod7</annotation></semantics></math></span>
 
 ## Requirements
 
 In this lab you will use Diffie-Hellman key exchange to establish a
 secret key to use for communication with a server. Specifically:
 
-1. Select $a$ and $p$. Both must be at least 500 bits long. To be
-cryptographically strong, $p$ must be a randomly generated prime, and
-$(p-1)/2$ should also be prime (although certain other combinations of
-$p$ and the generator are also secure). $a$ should be a
+1. Select <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math>. Both must be at least 500 bits long. To be
+cryptographically strong, <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math> must be a randomly generated prime, and
+<math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">(p-1)/2</annotation></semantics></math> should also be prime (although certain other combinations of
+<math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math> and the generator are also secure). <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math> should be a
 cryptographically safe random number (i.e., not the result of a
 plain-vanilla rand() function). Reading from /dev/urandom on a Linux
-machine should be adequate to produce $a$. Other methods of generating
+machine should be adequate to produce <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math>. Other methods of generating
 random numbers will also be acceptable. Generating primes is a little
 more complicated. You may use a library (such as OpenSSL) to generate
-$p$.
+<math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math>.
 
-1. Write a routine to compute $g^a \bmod p$, for $g = 5$. You may use
+1. Write a routine to compute <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mi>a</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi></mrow><annotation encoding="application/x-tex">g^a &#92;bmod p</annotation></semantics></math>, for <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mo>=</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">g = 5</annotation></semantics></math>. You may use
 a `bignum` library's multiply and modulus functions, but no composite
 functions like modular exponentiation or modular multiplication.
 
 1. Using the website at
  `https://grader.cs465.byu.edu/diffie-hellman` (retired)
- select Debug Mode, and input $p$ and $g^a\bmod p$.
+ select Debug Mode, and input <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mi>a</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi></mrow><annotation encoding="application/x-tex">g^a&#92;bmod p</annotation></semantics></math>.
 
 where both values are expressed in decimal. In Debug mode, you will be
-able to see the server choose a value for $b$ and compute its value of
-$g^b \bmod p$. It will also compute $g^{ab}$. You can hard-code this
-value of $g^b$ and compute $g^{ab}$ to be sure they match. You can also
-hard-code $b$ to be sure you can compute $g^b$ the same as the
+able to see the server choose a value for <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math> and compute its value of
+<math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mi>b</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi></mrow><annotation encoding="application/x-tex">g^b &#92;bmod p</annotation></semantics></math>. It will also compute <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mrow><mi>a</mi><mi>b</mi></mrow></msup></mrow><annotation encoding="application/x-tex">g^&#123;ab&#125;</annotation></semantics></math>. You can hard-code this
+value of <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mi>b</mi></msup></mrow><annotation encoding="application/x-tex">g^b</annotation></semantics></math> and compute <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mrow><mi>a</mi><mi>b</mi></mrow></msup></mrow><annotation encoding="application/x-tex">g^&#123;ab&#125;</annotation></semantics></math> to be sure they match. You can also
+hard-code <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math> to be sure you can compute <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mi>b</mi></msup></mrow><annotation encoding="application/x-tex">g^b</annotation></semantics></math> the same as the
 server.
 
 ## Resources
@@ -211,19 +187,18 @@ OpenSSL can be difficult to install on Windows machines for VC++. Here are some 
 
 ## Passing
 
-1. Using your code, choose a value for $p$ and $a$ and then hard-code  
-these into your code. Compute $g^a\bmod p$.
+1. Using your code, choose a value for <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math> and then hard-code  
+these into your code. Compute <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mi>a</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi></mrow><annotation encoding="application/x-tex">g^a&#92;bmod p</annotation></semantics></math>.
 
 1. Go to the
 the following web site:
 `https://grader.cs465.byu.edu/diffie-hellman` (retired) 
-and enter your values for $p$ and $g^a \bmod p$. Select Passoff Mode
+and enter your values for <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mi>a</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi></mrow><annotation encoding="application/x-tex">g^a &#92;bmod p</annotation></semantics></math>. Select Passoff Mode
 and Submit.
 
-1. On the following screen, you will see a value for the server's $g^b
-\bmod p$ (the server calls it $g^t \bmod p$). Hard code this value
-into your code, and compute $g^{ba}$ using your hard-coded $a$. The
-value of $g^{ab}$ is your computed secret key.
+1. On the following screen, you will see a value for the server's <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mi>b</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi></mrow><annotation encoding="application/x-tex">g^b &#92;bmod p</annotation></semantics></math> (the server calls it <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mi>t</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi></mrow><annotation encoding="application/x-tex">g^t &#92;bmod p</annotation></semantics></math>). Hard code this value
+into your code, and compute <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mrow><mi>b</mi><mi>a</mi></mrow></msup></mrow><annotation encoding="application/x-tex">g^&#123;ba&#125;</annotation></semantics></math> using your hard-coded <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi></mrow><annotation encoding="application/x-tex">a</annotation></semantics></math>. The
+value of <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mrow><mi>a</mi><mi>b</mi></mrow></msup></mrow><annotation encoding="application/x-tex">g^&#123;ab&#125;</annotation></semantics></math> is your computed secret key.
 
 1. Copy the file shown into a file called `foo`. Use the openssl
 command given on the site to decrypt the file and supply your secret
@@ -251,7 +226,7 @@ Submit a zip or gzip file that contains:
   (Winter 2020), `cs465.byu.edu` (Fall 2020), `grader.cs465.byu.edu` (Fall 2021
   on).
 - Up to Fall 2020 the page had a table: "the pass-off server names the
-  values differently": it called $g^b \bmod p$ "$g^t \bmod p$" (line 1 of
-  its output), $b$ "T" (line 2), and $g^{ab}$ "${g^t \bmod p}^s \bmod p$"
+  values differently": it called <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mi>b</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi></mrow><annotation encoding="application/x-tex">g^b &#92;bmod p</annotation></semantics></math> "<math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mi>t</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi></mrow><annotation encoding="application/x-tex">g^t &#92;bmod p</annotation></semantics></math>" (line 1 of
+  its output), <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>b</mi></mrow><annotation encoding="application/x-tex">b</annotation></semantics></math> "T" (line 2), and <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>g</mi><mrow><mi>a</mi><mi>b</mi></mrow></msup></mrow><annotation encoding="application/x-tex">g^&#123;ab&#125;</annotation></semantics></math> "<math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow><msup><mi>g</mi><mi>t</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi></mrow><mi>s</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>p</mi></mrow><annotation encoding="application/x-tex">&#123;g^t &#92;bmod p&#125;^s &#92;bmod p</annotation></semantics></math>"
   (line 3).
-- Fall 2018 to Winter 2020 wrote the identity as $(g^a)^b = (g^b)^a = g^{ab} = g^{ba}$.
+- Fall 2018 to Winter 2020 wrote the identity as <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>g</mi><mi>a</mi></msup><msup><mo stretchy="false">)</mo><mi>b</mi></msup><mo>=</mo><mo stretchy="false">(</mo><msup><mi>g</mi><mi>b</mi></msup><msup><mo stretchy="false">)</mo><mi>a</mi></msup><mo>=</mo><msup><mi>g</mi><mrow><mi>a</mi><mi>b</mi></mrow></msup><mo>=</mo><msup><mi>g</mi><mrow><mi>b</mi><mi>a</mi></mrow></msup></mrow><annotation encoding="application/x-tex">(g^a)^b = (g^b)^a = g^&#123;ab&#125; = g^&#123;ba&#125;</annotation></semantics></math>.

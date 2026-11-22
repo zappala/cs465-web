@@ -84,7 +84,11 @@ Before starting, build `main` and save it as the **baseline**
    notices, the 404 page) at 1280 px and 390 px, before and after, compared
    side by side (and by pixel difference where useful).
 4. On the deploy preview at the end: no horizontal scroll on every page at
-   320/360/390/768 px; menus (dropdown and phone menu) work; no console or
+   320/360/390/768 px, in Chrome **and WebKit** (Safari's engine: found in
+   Step 0 that WebKit doesn't break long URLs in inline code, e.g. the
+   grader URLs on the Diffie-Hellman and RSA pages, so those pages widen
+   on a 320 px iPhone; fix with `overflow-wrap` on inline code if the
+   site-wide check shows more); menus (dropdown and phone menu) work; no console or
    CSP errors; Lighthouse 100 on the same five pages as now.
 
 ## Order of work
