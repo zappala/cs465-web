@@ -17,7 +17,7 @@ module.exports = {
       current: "currentColor",
       default: "#1a202c",
       byu: "#002e5d",
-      lightblue: "#3182ce",
+      lightblue: "#2b6cb0",
       yellow: "#ffcd00",
       bluey: "#182b49",
       red: colors.red,
@@ -56,7 +56,7 @@ module.exports = {
             },
             a: {
               fontWeight: "400",
-              color: "#3182ce",
+              color: "#2b6cb0",
             },
             h3: {
               fontSize: "1.1em",

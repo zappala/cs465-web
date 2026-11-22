@@ -36,11 +36,11 @@ for all four functions. You should be able to identify
 
 For example, if you had a function that looked like this:
 
-  ![](../../../images/crypto-course/func2.png)
+  ![C code: my_func(arg1, arg2) sets a local arg3 = 7 and returns 42; main sets arg1 = 3 and arg2 = 5 and calls my_func(arg1, arg2)](../../../images/crypto-course/func2.png)
 
 Then you might label things like this:
 
-  ![](../../../images/crypto-course/func1.png)
+  ![A gdb memory dump of the stack with words color-coded by role: return address, saved frame pointer (ebp), local variables and function arguments, with the main() and my_func() frames highlighted](../../../images/crypto-course/func1.png)
 
 Use the “info frame” gdb command to compare the information you
 labeled with what the debugger reports is in each stack frame. You may
