@@ -7,7 +7,7 @@
 
 [build.environment]
   # Keep in sync with .nvmrc
-  NODE_VERSION = "22"
+  NODE_VERSION = "24"
 
 # Security headers for every page and file.
 #
