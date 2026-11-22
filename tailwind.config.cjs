@@ -30,10 +30,6 @@ module.exports = {
     },
 
     extend: {
-      fontFamily: {
-        young: ['"Young Serif"', "serif"],
-        playfair: ['"Playfair Display"', "serif"],
-      },
       typography: {
         DEFAULT: {
           css: {
