@@ -1,0 +1,39 @@
+<!doctype html>
+<!--
+  Source for public/og-image.png, the 1200x630 image shown when a link to the
+  site is shared (Slack, Teams, social media). No dates, so it doesn't go stale.
+  Regenerate with src/scripts/make-og-image.sh.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      html, body { margin: 0; width: 1200px; height: 630px; }
+      body {
+        background: #182b49;
+        color: #fff;
+        font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 96px;
+        box-sizing: border-box;
+      }
+      .top { display: flex; align-items: center; gap: 28px; margin-bottom: 48px; }
+      .top img { width: 92px; height: 92px; border-radius: 12px; }
+      .top span { font-size: 34px; color: #c7d2e3; letter-spacing: 0.5px; }
+      h1 { font-size: 132px; margin: 0; line-height: 1; font-weight: 800; }
+      h2 { font-size: 58px; margin: 20px 0 0; font-weight: 500; line-height: 1.15; }
+      .bar { width: 160px; height: 10px; background: #ffcd00; margin-top: 48px; border-radius: 5px; }
+    </style>
+  </head>
+  <body>
+    <div class="top">
+      <img src="../../public/icon.svg" alt="" />
+      <span>Brigham Young University · Computer Science</span>
+    </div>
+    <h1>CS 465</h1>
+    <h2>Introduction to Security and Privacy</h2>
+    <div class="bar"></div>
+  </body>
+</html>

@@ -9,6 +9,7 @@ import rehypeKatex from "rehype-katex";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://cs465.zappala.org",
   integrations: [expressiveCode(), mdx(), tailwind(), react()],
   vite: {
     ssr: {
