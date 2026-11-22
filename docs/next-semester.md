@@ -136,14 +136,6 @@ Use the real name of the new semester in place of `winter2027` / `w2027`.
 
 ## Also worth doing between semesters
 
-- **Major package upgrades** (noted 2026-11-17): the site is on Astro 5.18
-  and Tailwind 3.4 (the latest within those major versions). Astro 7 and
-  Tailwind 4 are current. The remaining `npm audit` advisories need these
-  upgrades. Tailwind 4 replaces `@astrojs/tailwind` with `@tailwindcss/vite`
-  and moves the config into CSS, so plan time for it. Before and after,
-  build the site and compare every page's text and links, and check the
-  schedule, a notes page, and the phone menu visually.
-
 - **Sync assignments and the syllabus to Canvas** (noted 2026-11-17): a
   plan to push due dates, points, and links to the website's pages from
   `schedule.yaml` to Canvas, and to sync the syllabus, is in
@@ -190,8 +182,8 @@ Use the real name of the new semester in place of `winter2027` / `w2027`.
   `src/pages/<semester>/notes/*.mdx`. Between semesters, review the notes
   against the current slides and bring anything out of date into line.
 
-- **Upgrade the site's dependencies** (noted 2026-11-21): planned in
-  [dependency-upgrade-plan.md](dependency-upgrade-plan.md).
+- **Dependency upgrades: done 2026-11-21** (Astro 7, Tailwind 4, React 19,
+  Node 24); see [dependency-upgrade-plan.md](dependency-upgrade-plan.md).
 
 - **Decide whether to move large files to object storage (R2)** (moved here
   from `~/Repos/notes/TODO.md` on 2026-11-21). The repo is about 171 MB,

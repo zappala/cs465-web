@@ -1,8 +1,6 @@
 # Plan: upgrade the site's dependencies (Astro 7, Tailwind 4, React 19)
 
-**Status: PLANNED 2026-11-21** (revised the same day: math to MathML and
-Astro 7's default Markdown processor; Node 24; decisions confirmed).
-Not started. Replaces the "Upgrade the site's
+**Status: DONE 2026-11-21** on branch `upgrade-deps` (see "As built" at the end). Replaces the "Upgrade the site's
 dependencies" item in [next-semester.md](next-semester.md).
 
 ## Goal
@@ -218,3 +216,56 @@ Astro upgrade guides for v6 and v7, Astro's Sätteri and MDX docs, the
 Tailwind v4 upgrade guide and Astro install guide, and the
 `@tailwindcss/typography` README (read 2026-11-21); package versions and
 peer dependencies from npm on the same day.
+
+## As built (2026-11-21)
+
+All six steps done, one commit each on `upgrade-deps`. Final versions:
+Astro 7.4, `@astrojs/mdx` 8.1, `@astrojs/react` 7.1, React 19.3, Tailwind
+4.3 (`@tailwindcss/vite`), expressive-code 0.44, react-icons 5.7,
+js-yaml 5.5, Node 24. Removed: `katex`, `remark-math`, `rehype-katex`,
+`@astrojs/tailwind`, `tailwind.config.cjs`, `CryptoCourseMarkdown.astro`.
+Build time about 4.5 s (was 11 s).
+
+Checked after every step against the previous build: page text, links,
+image sources, heading ids, titles and descriptions on all 446 pages; 32
+screenshots (16 pages at 1280 and 390 px) compared pixel by pixel; desktop
+dropdown, phone menu (open and closed) and console errors.
+
+What came up, step by step:
+
+- **Step 0 (MathML):** 163 formulas converted (counts match KaTeX's).
+  CSS makes math 1.15em with space around displayed formulas. Browsers
+  don't wrap MathML, so displayed formulas sit in `span.math-display`
+  that scrolls sideways (Safari ignores `overflow` on `<math>`), and the
+  Diffie-Hellman "Let's derive it" steps became displayed formulas. Fixed
+  a typo from the 2018 page (`mod %p`). Checked in Chrome, WebKit, Firefox.
+- **Step 1:** js-yaml 5 has no default export (`import { load }`).
+- **Step 2 (Tailwind 4):** the upgrade tool renamed classes but couldn't
+  convert the JS config; converted by hand into `src/assets/base.css`.
+  To look the same as Tailwind 3 it also needed: the v3 palette values, v3
+  font lists, v3 fixed line heights for text sizes (inline code inherits
+  them), v3 prose grays, the first-child margin rule last, the button
+  pointer cursor, and the v3 default border color. Two real breaks found
+  by the screenshots: `lg:transform-none` no longer resets
+  `translate-x-full` (desktop menu was off-screen; now
+  `lg:translate-none`), and `pt-15`, which Tailwind 3 never generated,
+  became 60px of padding in the menu bar (removed).
+- **Step 3 (Astro 6.4):** `@astrojs/mdx` 5 predates Astro 6.4's
+  `markdown.processor`, so GFM tables and autolinks, smart punctuation
+  and expressive-code all silently stopped working; `@astrojs/mdx` 6.0.3
+  fixed it. One heading id gained a trailing hyphen (nothing links to it).
+- **Step 4 (Astro 7, Sätteri):** Sätteri turns `--` into an en dash, not
+  an em dash, with no option to change that, so the content now has real
+  characters: 921 dashes as —, 24 number ranges as – (they had shown an em
+  dash), 4 dot runs as …. Fixed three quote typos in Winter 2024 notes.
+  `compressHTML: true`. Removed `markdown.shikiConfig` (never used) and
+  `vite.ssr.noExternal` (not needed).
+- **Step 5 (built-in CSP):** enabled with style attributes allowed
+  (expressive-code colors code with them). No CSP violations on any of the
+  445 pages; the code copy button works.
+
+Left as is: two moderate `npm audit` advisories in
+`postcss-selector-parser` under `@tailwindcss/typography` (build-time
+only, parses the site's own CSS; npm's suggested fix downgrades the
+plugin). Revisit when the plugin updates. WebKit doesn't break long URLs
+in inline code (see "How each step is checked", item 4).
