@@ -70,35 +70,35 @@ Source of image: Network and Security Essentials, Stallings
 
     - sent after cipher change messages
     - verifies the key exchange and authentication was successful
-    - contains some data to verify the previous exchanges -- HMAC of master
+    - contains some data to verify the previous exchanges — HMAC of master
       secret, a text string, hash of hasndshake messages
     - first message protected with the negotiated algorithms, keys, and secrets
     - after this message, the peers can exchange data
 
   - everything after the key exchange is encrypted and protected with a MAC
-    (unless AES GCM mode used) -- this means an attacker cannot modify
+    (unless AES GCM mode used) — this means an attacker cannot modify
     algorithms chosen
   - can use a _pre-shared key_, meaning a key from a previous session
-  - Diffie-Hellman keys are ephemeral -- erased after use
+  - Diffie-Hellman keys are ephemeral — erased after use
 
 ## TLS Cipher Suites
 
 - defines the algorithms used during the TLS connection
 
-  - key exchange algorithm -- for exchanging/creating a symmetric encryption key
-  - authentication algorithm -- for digital signatures
-  - bulk encryption algorithm -- for encrypting the data
-  - MAC algorithm -- for security
+  - key exchange algorithm — for exchanging/creating a symmetric encryption key
+  - authentication algorithm — for digital signatures
+  - bulk encryption algorithm — for encrypting the data
+  - MAC algorithm — for security
 
 - example: _ECDHE-ECDSA-AES128-GCM-SHA256_
 
   - ECDHE:
     [Elliptic-curve Diffie-Hellman](https://en.wikipedia.org/wiki/Elliptic-curve_Diffie–Hellman)
-  - ECDSA -- Elliptic-curve Digital Signature Algorithm
-  - AES 128 -- AES with 128-bit key
-  - GCM -- Galois/Counter Mode -- block cipher with high performance
+  - ECDSA — Elliptic-curve Digital Signature Algorithm
+  - AES 128 — AES with 128-bit key
+  - GCM — Galois/Counter Mode — block cipher with high performance
     (parallelizable) and patent-free
-  - SHA256 -- MAC algorithm
+  - SHA256 — MAC algorithm
 
 ## Organization and Extended Validation certificates
 
@@ -127,17 +127,17 @@ types of certificates
 
   - see
     [An Evaluation of Extended Validation and Picture-in-Picture Phishing Attacks](https://www.adambarth.com/papers/2007/jackson-simon-tan-barth.pdf)
-    -- study showing Internet Explorer EV certificate interface didn't help
+    — study showing Internet Explorer EV certificate interface didn't help
     users identify phishing attacks
   - can't prove a CA takes these validation steps anyway
 
 ## Attacks on TLS
 
-- rogue certificates -- see
+- rogue certificates — see
   [Hackers spied on 300,000 Iranians using fake Google certificate](https://www.computerworld.com/article/2510951/hackers-spied-on-300-000-iranians-using-fake-google-certificate.html),
   2011
 
-- TLS stripping attacks -- block the signal to upgrade from HTTP to HTTPS
+- TLS stripping attacks — block the signal to upgrade from HTTP to HTTPS
 
   - see website configuration below
   - use browser tools to see the redirect
@@ -147,9 +147,9 @@ types of certificates
 - difficulties with browser trust model
 
   - how do users or browsers decide who is trustworthy and who is not?
-  - poor trust agility -- no system to dynamically add/remove certificates from
+  - poor trust agility — no system to dynamically add/remove certificates from
     the root store, it's up to the OS or browser vendor
-  - intermediate CAs are unaccountable -- can only remove root CAs
+  - intermediate CAs are unaccountable — can only remove root CAs
 
 - certificate transparency helps expose rogue certificates
 

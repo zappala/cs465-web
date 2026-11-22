@@ -12,16 +12,16 @@ layout: ../../../layouts/SemesterMarkdown.astro
 
 ## Relevance
 
-- Both stack and heap overflow attacks are REALLY common -- see
+- Both stack and heap overflow attacks are REALLY common — see
   [CVE list](https://www.cvedetails.com/vulnerability-list/opov-1/overflow.html)
 
 ## Stack-Based Buffer Overflow Attacks
 
-- Understand memory layout of a process -- see
+- Understand memory layout of a process — see
   [Figure 6.3, page 166](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch6-rev1.pdf)
   - A buffer is allocated in BSS using a C declaration such as:
     `static int bufferX[4]`
-- Understand how a process uses the stack -- see
+- Understand how a process uses the stack — see
   [Figure 6.4, page 167](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch6-rev1.pdf)
 - In a stack overflow, the attacker tries to write code to the stack and get the
   OS to execute it
@@ -39,11 +39,11 @@ layout: ../../../layouts/SemesterMarkdown.astro
   [Figure 6.7, page 169](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch6-rev1.pdf)
   for an example of overwriting a function pointer
 - understand the types of state that can be corrupted
-  - jump table -- see below
-  - setjump -- seee
+  - jump table — see below
+  - setjump — seee
     [Wikipedia page on setjump](https://en.wikipedia.org/wiki/Setjmp.h)
 - understand exploit steps
-- understand elements of a heap spraying attack -- see
+- understand elements of a heap spraying attack — see
   [Figure 6.8, page 170](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch6-rev1.pdf)
 
 Jump table:

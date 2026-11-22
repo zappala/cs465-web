@@ -131,10 +131,10 @@ For
 [integer overflow](https://doc.rust-lang.org/book/ch03-02-data-types.html#integer-overflow),
 Rust provides wrappers for:
 
-- `wrapping_` -- wraps
-- `checked_` -- returns None if overflow
-- `overflowing` -- returns the value and True if overflow
-- `saturating` -- caps at max or min value
+- `wrapping_` — wraps
+- `checked_` — returns None if overflow
+- `overflowing` — returns the value and True if overflow
+- `saturating` — caps at max or min value
 
 ### Return values
 
@@ -596,7 +596,7 @@ pub fn eat_at_restaurant() {
 }
 ```
 
-The above is the _idiomatic_ way to bring in a module -- keep the module name
+The above is the _idiomatic_ way to bring in a module — keep the module name
 instead of bringing the function into scope.
 
 Here is the _idiomatic_ way to bring in a struct:

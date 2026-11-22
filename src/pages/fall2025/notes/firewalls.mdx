@@ -64,18 +64,18 @@ sections 10.0 - 10.2.
 
   - Rules 1-2 stop spoofed source IP addresses
   - Rule 3 denies packets from a known spam server
-  - Rules 4-7 are for mail traffic -- allow incoming connections to a mail
+  - Rules 4-7 are for mail traffic — allow incoming connections to a mail
     server (port 25) and responses, outgoing mail connections and responses
   - Rules 8-A allow outbound HTTP onnection requests, inbound responses, but
     reject inbound HTTP connection requests
-  - Rules B-D are for DNS traffic -- outgoing queries, incoming queries and
+  - Rules B-D are for DNS traffic — outgoing queries, incoming queries and
     responsees
   - Rules E-H allow incoming and outgoing pings
   - Rule Z is to deny traffic by default when no other rules match
 
 - limitations of firewalls
 
-  - assumes a true perimeter exists -- now we have personal devices, USB drives,
+  - assumes a true perimeter exists — now we have personal devices, USB drives,
     phones making the network defense more complicated
   - vulnerable to malicious insiders
   - trusted users may make bad connections

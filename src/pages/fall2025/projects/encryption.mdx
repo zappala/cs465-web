@@ -152,14 +152,14 @@ The protocol you will build should do the following:
 - The server response includes its RSA public key, V
 - The client creates a symmetric encryption key K and an HMAC key H
 - The client sends a message that includes:
-  - E<sub>V</sub>(K) -- the key K, encrypted with V
-  - IV -- the AES initialization vector
-  - E<sub>K</sub>(message) -- a message, encrypted with key K
-  - E<sub>V</sub>(H) -- the key H, encrypted with V
-  - HMAC<sub>H</sub>(message) -- the HMAC of the message, using key H
+  - E<sub>V</sub>(K) — the key K, encrypted with V
+  - IV — the AES initialization vector
+  - E<sub>K</sub>(message) — a message, encrypted with key K
+  - E<sub>V</sub>(H) — the key H, encrypted with V
+  - HMAC<sub>H</sub>(message) — the HMAC of the message, using key H
 - The server responds with a message that includes:
-  - message -- not encrypted
-  - E<sub>S</sub>(SHA256(message)) -- a signature of the SHA256 hash of the
+  - message — not encrypted
+  - E<sub>S</sub>(SHA256(message)) — a signature of the SHA256 hash of the
     message, using key S
 
 ### Echo Client

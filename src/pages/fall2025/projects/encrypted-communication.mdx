@@ -189,14 +189,14 @@ See the following for additional documentation:
 
 For the Rust crypto, use:
 
-- [Rsa](https://docs.rs/rsa/latest/rsa/) -- the client will need to convert the
+- [Rsa](https://docs.rs/rsa/latest/rsa/) — the client will need to convert the
   public key from the PEM format it receives, derive the verifying key from the
   public key, verify the `PKCS#1 v1.5` signature on the nonce, and encrypt the
   symmetric key with `Pkcs1v15Encrypt` padding
 - [PKCS #1 v1.5 Signature](https://docs.rs/rsa/latest/rsa/pkcs1v15/struct.Signature.html) -
   the client will need to convert a signature in bytes to a Signature struct,
   see the `try_from()` method
-- [AES GCM](https://docs.rs/aes-gcm/latest/aes_gcm/) -- the client will need to
+- [AES GCM](https://docs.rs/aes-gcm/latest/aes_gcm/) — the client will need to
   generate a symmetric key, generate a nonce, and encrypt plaintext
 
 You can see the
