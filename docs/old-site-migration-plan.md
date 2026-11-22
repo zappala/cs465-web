@@ -1,7 +1,8 @@
 # Plan: move the 2018–2023 course site into cs465-web
 
-**Status: BUILT 2026-11-21 on branch `old-site-migration`** (not merged or
-pushed). See "As built" at the end for what differs from this plan.
+**Status: DONE 2026-11-21.** Merged as PR #3 (squash commit `6a7c72d`) and
+live at https://cs465.zappala.org/crypto-course/. See "As built" at the
+end for what differs from this plan.
 
 Decided 2026-11-21: section URL `/crypto-course/`; shared pages plus small
 semester pages; keep `fortune_static`; staff pages get names and roles only
@@ -256,7 +257,7 @@ with 55 MB of code and 25 MB of lectures in `public/`).
 ## How to convert
 
 One-time scripts in `src/scripts/migrate-old-site/` (deleted after the
-move, or kept in the archived old repo):
+merge; they are in commit `6a7c72d` if ever needed):
 
 1. **Schedules:** import each `views/<term>.py` with a stub `Schedule`
    class that records `week`, `day`, `lecture`, `slide`, `reading`,
@@ -362,6 +363,15 @@ Differences from the plan:
 - Old content quirks kept as written: Winter 2019's "Feb 29" (no
   weekday), Spring 2022's empty Week 4 dropped.
 
-Still to do: push the branch and open a draft PR for a Netlify preview,
-check it, merge; then archive `zappala/cs465`, delete
-`src/scripts/migrate-old-site/`, and delete `~/Repos/cs465/old/`.
+Fixed while reviewing the preview: text the old pages indented under list
+items had become code boxes (AES function list, Finite Field hints,
+Buffer Overflow 2023, Midterm 1 topics); headings written without a space
+(`##Requirements`) or used for emphasis (Ringzer0, Extracting Secrets,
+Hash Attack rubric, study guide notes); a display formula on the
+Diffie-Hellman page that swallowed the rest of the page; doubled `## #`
+headings on the lectures page. The grader history names no individual,
+and one former TA's name is left off the staff pages (by request).
+
+Finished: the five pre-existing broken links were fixed separately
+(PR #2). `zappala/cs465` has a README pointer and is private and archived;
+the migration scripts and `~/Repos/cs465/old/` are deleted.
