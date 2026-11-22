@@ -11,6 +11,13 @@ export default defineConfig({
   // Astro 7's default ('jsx') drops whitespace with a line break between
   // tags, which can run words together in .astro templates; keep Astro 6's.
   compressHTML: true,
+  security: {
+    csp: {
+      styleDirective: {
+        resources: ["'self'", { resource: "'unsafe-inline'", kind: "attribute" }],
+      },
+    },
+  },
   integrations: [expressiveCode(), mdx(), react()],
   vite: {
     plugins: [tailwindcss()],
