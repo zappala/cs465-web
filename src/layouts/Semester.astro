@@ -24,7 +24,11 @@ const semester = menu.semester;
 const items = menu.items;
 ---
 
-<Layout title={title}>
+<Layout
+  title={title}
+  section={semester}
+  description={Astro.props.description ?? Astro.props.frontmatter?.description}
+>
   <NavBar semester={semester} prefix={prefix} items={items} />
   <div class="sm:bg-blue-300 min-h-screen pt-0 lg:pt-5 pb-5">
     <div

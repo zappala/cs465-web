@@ -3,19 +3,56 @@ import "../assets/base.css";
 import { Image } from "astro:assets";
 import BYU_logo from "@/images/BYU-monogram-navy.svg";
 
+const COURSE = "CS 465 Introduction to Security and Privacy";
+
 // `title` is the page's own title, e.g. "Public Key Cryptography"; pages without
-// one (such as the home page) get the full course name.
-const { title } = Astro.props;
-const fullTitle = title
-  ? `${title} · CS 465`
-  : "CS 465 Introduction to Security and Privacy";
+// one (such as the home page) get the full course name. `section` is the
+// semester ("Fall 2024") or "2018–2023 Course", so the same page in different
+// semesters gets a different title. `description` is for search results and
+// link previews; pages can set one in frontmatter, otherwise it is generated.
+const { title, section, description, noindex } = Astro.props;
+const fullTitle = !title
+  ? COURSE
+  : section && title !== section
+    ? `${title} · ${section} · CS 465`
+    : `${title} · CS 465`;
+
+const course =
+  section === "2018–2023 Course"
+    ? "the 2018–2023 cryptography-focused CS 465"
+    : section
+      ? `CS 465 (${section})`
+      : "CS 465";
+const metaDescription =
+  description ??
+  (title
+    ? `${title}, from ${course}, Introduction to Security and Privacy at Brigham Young University.`
+    : "CS 465 Introduction to Security and Privacy at Brigham Young University: a broad introduction to computer security, with each semester's schedule, notes, homework and projects.");
+
+// Canonical URL with a trailing slash, matching how Netlify serves pages.
+let path = Astro.url.pathname;
+if (!path.endsWith("/") && !/\.[a-z0-9]+$/i.test(path)) path += "/";
+const canonical = new URL(path, Astro.site).href;
+const previewImage = new URL("/og-image.png", Astro.site).href;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={metaDescription} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={COURSE} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={previewImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="CS 465 Introduction to Security and Privacy, Brigham Young University" />
+    <meta name="twitter:card" content="summary_large_image" />
     <!-- Site icons: generated from public/icon.svg by src/scripts/make-icons.sh -->
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
