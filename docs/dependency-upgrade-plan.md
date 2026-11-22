@@ -1,7 +1,8 @@
 # Plan: upgrade the site's dependencies (Astro 7, Tailwind 4, React 19)
 
 **Status: PLANNED 2026-11-21** (revised the same day: math to MathML and
-Astro 7's default Markdown processor). Not started. Replaces the "Upgrade the site's
+Astro 7's default Markdown processor; Node 24; decisions confirmed).
+Not started. Replaces the "Upgrade the site's
 dependencies" item in [next-semester.md](next-semester.md).
 
 ## Goal
@@ -12,7 +13,8 @@ against a saved build of today's site.
 
 | Package | Now | Target | Notes |
 | --- | --- | --- | --- |
-| `astro` | 5.18 | 7.4 | through 6; Node 22.23.4 or newer |
+| `astro` | 5.18 | 7.4 | through 6; needs Node 22.23.4 or newer |
+| Node | 22 | 24 | `.nvmrc` and `NODE_VERSION` in `netlify.toml` |
 | `@astrojs/mdx` | 4.3 | 8.1 | |
 | `@astrojs/react` | 4.4 | 7.1 | |
 | `react`, `react-dom` | 18.3 | 19.3 | plus `@types/react-dom` 19 |
@@ -26,7 +28,7 @@ against a saved build of today's site.
 Astro 7's default Markdown processor (Sätteri) is used as is; the old
 remark/rehype pipeline (`@astrojs/markdown-remark`) is not needed.
 
-## Decisions (proposed; confirm before starting)
+## Decisions (confirmed 2026-11-21)
 
 1. **Math as native MathML; Astro 7's default Markdown processor.** The
    only math is on four `/crypto-course/` pages (about 150 inline formulas
@@ -42,13 +44,22 @@ remark/rehype pipeline (`@astrojs/markdown-remark`) is not needed.
    converted).
 2. **Tailwind config:** convert to CSS (`@theme`) in the Tailwind step,
    keeping the same limited palette (`--color-*: initial`, then only the
-   colors in `tailwind.config.cjs`). If that step gets messy, fall back to
-   `@config "../../tailwind.config.cjs"` for this upgrade and convert later.
-3. **Node:** stay on 22 (Astro 7 needs 22.23.4+; Netlify's `22` picks the
-   latest 22.x). Moving to 24 to match FHTW is a separate, one-line change.
-4. **`compressHTML`:** Astro 7 changes the default from `true` to `'jsx'`,
-   which can remove spaces between inline elements. Set `compressHTML:
-   true` to keep today's output, unless the comparison shows no difference.
+   colors in `tailwind.config.cjs`). In Tailwind 4 the CSS file is the
+   standard place for configuration; a JS config still loads through
+   `@config` but is a legacy path. The config is small (7 colors, the kept
+   default palettes, a few typography overrides). If something doesn't
+   translate cleanly, fall back to `@config "../../tailwind.config.cjs"`
+   for this upgrade and convert later.
+3. **Node 24.** Node 22's security support ends 2027-04-30; 24 is
+   supported until 2028-04-30 and is what FHTW and the local machine use
+   (26 runs to 2029 but only became LTS in October 2026). Change `.nvmrc`
+   and `NODE_VERSION` in `netlify.toml` in Step 1.
+4. **`compressHTML: true`.** Astro 7 changes the default from `true`
+   (collapse whitespace to one space) to `'jsx'` (drop whitespace that
+   contains a line break between tags, as React does), which can run words
+   together in `.astro` templates ("Notes Slides" becomes "NotesSlides").
+   The only gain is slightly smaller HTML, so keep today's behavior with
+   `compressHTML: true` in `astro.config.mjs`.
 5. **Browser support:** Tailwind 4 needs Safari 16.4+, Chrome 111+,
    Firefox 128+ (2023 or newer). Fine for students.
 6. **Optional last step:** Astro's built-in CSP (`security.csp`, stable
@@ -102,8 +113,9 @@ preview. Each step must pass the checks before the next starts.
 - Optional while there: the 24 number ranges written `1--5` render as
   "1—5" (em dash); writing them as "1–5" (en dash) is more correct.
 
-### Step 1: small packages (Astro 5 still)
+### Step 1: small packages and Node 24 (Astro 5 still)
 
+- Node 24 in `.nvmrc` and `netlify.toml`.
 - `react` / `react-dom` 19 and `@types/react-dom` 19; `@astrojs/react`
   stays at 4.4 for now (it accepts React 19).
 - `react-icons` 5: check that `FiAlertTriangle`, `FiInfo` and the other
@@ -157,7 +169,7 @@ preview. Each step must pass the checks before the next starts.
 - Rust compiler: unclosed tags are errors and invalid nesting (a `<div>`
   inside a `<p>`) is no longer fixed up; fix any `.astro` files it rejects
   (there are only 8 `.astro` files).
-- `compressHTML` (decision 4).
+- Set `compressHTML: true` (decision 4).
 - Check that layouts still get `Astro.props.frontmatter` and
   `Astro.props.headings` from MDX pages (page titles come from the first
   heading via `src/layouts/title.js`); the comparison of `<title>` catches
@@ -174,7 +186,7 @@ preview. Each step must pass the checks before the next starts.
 
 ### Step 6: finish
 
-- Update `.nvmrc` / `netlify.toml` if the Node version changed, the README
+- Update the README
   (commands, Tailwind config location), and this plan's status with an
   "As built" section.
 - Merge after checking the preview; check production headers and
