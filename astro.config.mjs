@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 import mdx from "@astrojs/mdx";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import react from "@astrojs/react";
 
 import expressiveCode from "astro-expressive-code";
@@ -8,8 +8,9 @@ import expressiveCode from "astro-expressive-code";
 // https://astro.build/config
 export default defineConfig({
   site: "https://cs465.zappala.org",
-  integrations: [expressiveCode(), mdx(), tailwind(), react()],
+  integrations: [expressiveCode(), mdx(), react()],
   vite: {
+    plugins: [tailwindcss()],
     ssr: {
       noExternal: ["react-icons"]
     }

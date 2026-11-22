@@ -11,7 +11,7 @@ export default function Notice({ kind = "note", title = "Note", children }) {
   return (
     <aside
       className={
-        "not-prose my-6 flex gap-4 rounded-lg border p-5 shadow-sm " +
+        "not-prose my-6 flex gap-4 rounded-lg border p-5 shadow-xs " +
         (note
           ? "border-amber-200 bg-amber-50 border-l-4 border-l-amber-500"
           : "border-sky-200 bg-sky-50 border-l-4 border-l-sky-500")

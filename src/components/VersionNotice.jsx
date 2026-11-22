@@ -19,7 +19,7 @@ export default function VersionNotice({ kind = "updated", link, children }) {
   return (
     <aside
       className={
-        "not-prose my-6 flex gap-4 rounded-lg border p-5 shadow-sm " +
+        "not-prose my-6 flex gap-4 rounded-lg border p-5 shadow-xs " +
         (updated
           ? "border-sky-200 bg-sky-50 border-l-4 border-l-sky-500"
           : "border-slate-200 bg-slate-50 border-l-4 border-l-slate-400")
@@ -35,7 +35,7 @@ export default function VersionNotice({ kind = "updated", link, children }) {
         <a
           href={link}
           className={
-            "mt-3 inline-flex items-center gap-1 rounded px-3 py-1.5 text-sm font-semibold " +
+            "mt-3 inline-flex items-center gap-1 rounded-sm px-3 py-1.5 text-sm font-semibold " +
             (updated
               ? "bg-sky-600 text-white hover:bg-sky-700"
               : "border border-slate-300 bg-white text-gray-800 hover:bg-slate-100")
