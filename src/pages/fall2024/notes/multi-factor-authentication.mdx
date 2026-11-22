@@ -57,7 +57,7 @@ sections 3.4, 3.5
 - requires a secret to be shared
 - used as input to a function, along with a challenge
 - if the challenge is the current time, this is a time-based one-time password
-  (TOTP) -- very commonly used as a second factor, e.g. Duo, Google
+  (TOTP) — very commonly used as a second factor, e.g. Duo, Google
   Authenticator
   - be sure your TOTP generator backs up the shared secrets, otherwise if you
     replace your phone, you will have a hard time accessing your accounts!
@@ -81,12 +81,12 @@ sections 3.4, 3.5
 
 <Image alt="types of biometric authentication" src={table_3_2} />
 
-- advantages -- nothing to carry, no cognitive burden, ease of use, scalability
-- disadvantages -- can be compelled or done while sleeping, can't be
+- advantages — nothing to carry, no cognitive burden, ease of use, scalability
+- disadvantages — can be compelled or done while sleeping, can't be
   changed/revoked, can be "stolen", false accepts and rejects
 
 - should never be used for remote login
-  - biometrics are not secret -- can easily be captured by someone
+  - biometrics are not secret — can easily be captured by someone
   - need a trusted input channel or can be easily spoofed
   - if biometric patterns are stored remotely, then they can be stolen
   - biometrics can't be changed if stolen
@@ -123,7 +123,7 @@ sections 3.4, 3.5
 
 ## Passwordless FIDO2
 
-- hardware security keys -- see [Yubico](https://www.yubico.com)
+- hardware security keys — see [Yubico](https://www.yubico.com)
 
   - generate a public/private keypair for each website you use
   - prove ownership of the private key in a challenge

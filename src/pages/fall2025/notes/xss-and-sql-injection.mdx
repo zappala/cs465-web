@@ -130,7 +130,7 @@ SELECT * FROM pswdtab WHERE username=’root’ -- AND···
 
 - note, `--` indicates a comment, so the rest of the SQL statement is ignored
 
-- attacker sends username = ` “’OR 1=1 --”:
+- attacker sends username = ` “’OR 1=1 —”:
 
 ```sql
 SELECT * FROM pswdtab WHERE username=’’ OR 1=1 --

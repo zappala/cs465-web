@@ -16,7 +16,7 @@ export default function GridSchedule(props) {
       <>
         {units.map((unit, unit_index) => (
           <div key={unit_index}>
-            <div className="bg-byu text-white text-center mb-1 p-2 break-words">
+            <div className="bg-byu text-white text-center mb-1 p-2 wrap-break-word">
               {unit.title}
             </div>
             <div>{render_days(props.prefix, unit)}</div>

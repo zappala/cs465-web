@@ -6,11 +6,11 @@ layout: ../../../layouts/SemesterMarkdown.astro
 
 ## Various defenses
 
-- note, attackers may find ways around some of these -- see advanced reading
+- note, attackers may find ways around some of these — see advanced reading
 
 (1) make stack and heap non-executable
 
-- default with `gcc` -- must turn off with `-z execstack`
+- default with `gcc` — must turn off with `-z execstack`
 - [Windows allows you to turn on Data Execution Prevention](https://support.microsoft.com/en-us/topic/what-is-data-execution-prevention-dep-60dabc2b-90db-45fc-9b18-512419135817)
 - [details on how DEP works](https://learn.microsoft.com/en-us/windows/win32/memory/data-execution-prevention)
 
@@ -19,7 +19,7 @@ layout: ../../../layouts/SemesterMarkdown.astro
 - insert a randomly-chosen integer on the stack when a function is called
 - check that the canary is intact before examining the return pointer
 - can also use a heap canary
-- default with `gcc` -- must turn off with `-fno stack-protector`
+- default with `gcc` — must turn off with `-fno stack-protector`
 
 (3) address space layout randomization (ASLR)
 
@@ -30,7 +30,7 @@ layout: ../../../layouts/SemesterMarkdown.astro
 - prevents the attacker from knowing where code is located
 - position-independent execution (PIE) randomizes the code block
 
-- depends on the implementation being properly randomized -- see
+- depends on the implementation being properly randomized — see
   [The Illusion of Randomness: An Empirical Analysis of Address Space Layout Randomization Implementations](https://arxiv.org/abs/2408.15107)
 
 (5) position-independent execution (PIE)
@@ -48,7 +48,7 @@ layout: ../../../layouts/SemesterMarkdown.astro
 
 - compiler bounds checking
 - safe C libraries
-- static analysis tools -- tools that analyze your code and warn you
+- static analysis tools — tools that analyze your code and warn you
 
 ### Adoption Barriers
 

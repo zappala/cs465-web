@@ -27,7 +27,7 @@ layout: ../../../layouts/SemesterMarkdown.astro
 - see [Figure 3.4, page 69](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch3-rev1.pdf)
 - requires a secret to be shared
 - used as input to a function, along with a challenge
-- if the challenge is the current time, this is a time-based one-time password (TOTP) -- very commonly used as a second factor, e.g. Duo, Google Authenticator
+- if the challenge is the current time, this is a time-based one-time password (TOTP) — very commonly used as a second factor, e.g. Duo, Google Authenticator
   - be sure your TOTP generator backs up the shared secrets, otherwise if you replace your phone, you will have a hard time accessing your accounts!
   - see [RFC 6238](https://datatracker.ietf.org/doc/html/rfc6238) for the TOTP spec
 - again, intercepting a password doesn't help the attacker know future passwords
@@ -51,8 +51,8 @@ layout: ../../../layouts/SemesterMarkdown.astro
 
 ## Biometric authentication
 
-- advantages -- nothing to carry, no cognitive burden, ease of use, scalability
-- disadvantages -- can be compelled or done while sleeping, can't be changed/revoked, can be "stolen", false accepts and rejects
+- advantages — nothing to carry, no cognitive burden, ease of use, scalability
+- disadvantages — can be compelled or done while sleeping, can't be changed/revoked, can be "stolen", false accepts and rejects
 - what you are vs how you act
 - not secret! rely on a trusted input channel
 - see [Table 3.2, page 72](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch3-rev1.pdf)
@@ -63,7 +63,7 @@ layout: ../../../layouts/SemesterMarkdown.astro
 
 ## Passwordless FIDO2
 
-- hardware security keys -- see [Yubico](https://www.yubico.com)
+- hardware security keys — see [Yubico](https://www.yubico.com)
 
   - generate a public/private keypair for each website you use
   - prove ownership of the private key in a challenge

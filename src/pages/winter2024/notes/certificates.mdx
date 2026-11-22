@@ -34,7 +34,7 @@ layout: ../../../layouts/SemesterMarkdown.astro
   [page 216](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch8-rev1.pdf)
   for a list of steps that a CA takes before issuing a certificate
 
-- _public key infrastructure_ (PKI) -- infrastructure used for managing public
+- _public key infrastructure_ (PKI) — infrastructure used for managing public
   keys, private keys, and their use
 
   - authenticate entities and establish session keys
@@ -42,8 +42,8 @@ layout: ../../../layouts/SemesterMarkdown.astro
   - see
     [Figure 8.1, page 217](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch8-rev1.pdf)
   - includes a set of standards from the International Telecommunication Union
-    (ITU) -- X.509
-  - long term storage of private keys is challenging -- whether for a website, a
+    (ITU) — X.509
+  - long term storage of private keys is challenging — whether for a website, a
     cryptocurrency wallet, or any other use
 
 ### Certificate chain validation
@@ -57,27 +57,27 @@ layout: ../../../layouts/SemesterMarkdown.astro
 
 - Verifying public keys using an out-of-band channel
 
-  - see the example in the book -- involving a hash of a public key using a
+  - see the example in the book — involving a hash of a public key using a
     numeric or image representation
   - for example, verifying a contact's public key in WhatsApp or Signal
 
 - Terms
-  - _self-sign certificate_ -- signed by yourself instead of a CA
-  - _trusted certificate store_ (or root store) -- trusted certificates to
+  - _self-sign certificate_ — signed by yourself instead of a CA
+  - _trusted certificate store_ (or root store) — trusted certificates to
     bootstrap a chain
-  - _untrusted certificates_ -- see
+  - _untrusted certificates_ — see
     [Figure 8.3, page 219](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch8-rev1.pdf)
-  - _TOFU_ -- trust on first use + _key continuity_ -- see
+  - _TOFU_ — trust on first use + _key continuity_ — see
     [MailPile](https://www.mailpile.is) and
     [autocrypt](https://autocrypt.org/index.html) for TOFU for email (note, does
     not seem to be in active development)
     - TOFU is also often used with SSH!
-  - _revocation_ -- used whena public key has been compromised, e.g. by adding a
+  - _revocation_ — used whena public key has been compromised, e.g. by adding a
     revoked certificate to a list (CRL)
 
 ### CA/PKI architectures
 
-- _trust model_ -- rules and processes to determine which certificates are
+- _trust model_ — rules and processes to determine which certificates are
   trusted
 
   - will vary depending on the application
@@ -110,7 +110,7 @@ layout: ../../../layouts/SemesterMarkdown.astro
 
   - see
     [Figure 8.8, page 227](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch8-rev1.pdf)
-  - may be disconnected -- does not need universal connectivity
+  - may be disconnected — does not need universal connectivity
   - can decide which trust anchors to import to your company
 
 - Model 6: Web of Trust

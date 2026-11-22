@@ -1,5 +1,5 @@
 ---
-layout: ../../../layouts/CryptoCourseMarkdown.astro
+layout: ../../../layouts/SemesterMarkdown.astro
 ---
 
 import UsedIn from "../../../components/UsedIn.jsx";
@@ -23,39 +23,36 @@ function. We'll be using it a lot in this lab.
 ### RSA encryption and signing
 
 Encryption and decryption are just a matter of taking your message or
-ciphertext $m$ (less than $n$) and computing $m^e \bmod n$ or $m^d
-\bmod n$.  $n$ is called the public modulus, $e$ the public exponent
-and $d$ the private exponent. $n$ and $e$ together form the public
-key. $n$ and $d$ together form the private key. $e$ is currently
+ciphertext <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math> (less than <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>) and computing <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>m</mi><mi>e</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>n</mi></mrow><annotation encoding="application/x-tex">m^e &#92;bmod n</annotation></semantics></math> or <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>m</mi><mi>d</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>n</mi></mrow><annotation encoding="application/x-tex">m^d &#92;bmod n</annotation></semantics></math>.  <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> is called the public modulus, <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi></mrow><annotation encoding="application/x-tex">e</annotation></semantics></math> the public exponent
+and <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math> the private exponent. <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi></mrow><annotation encoding="application/x-tex">e</annotation></semantics></math> together form the public
+key. <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math> together form the private key. <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi></mrow><annotation encoding="application/x-tex">e</annotation></semantics></math> is currently
 conventionally set to 65537 because it's cheap to compute as a modular
 exponent.
 
-Encryption and decryption work because $(m^e)^d = m^ed = m (\bmod
-n)$. $e$ and $d$ are chosen so that their product is equal to a
-multple of $\phi(n)$ plus 1, that is to say: $e * d = 1 ( mod \phi(n)
-)$, or $e * d = k * \phi(n) + 1$ for some (unimportant) value of
-$k$. See the slides on RSA for details of why this is.
+Encryption and decryption work because <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>m</mi><mi>e</mi></msup><msup><mo stretchy="false">)</mo><mi>d</mi></msup><mo>=</mo><msup><mi>m</mi><mi>e</mi></msup><mi>d</mi><mo>=</mo><mi>m</mi><mo stretchy="false">(</mo><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(m^e)^d = m^ed = m (&#92;bmod n)</annotation></semantics></math>. <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi></mrow><annotation encoding="application/x-tex">e</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math> are chosen so that their product is equal to a
+multple of <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϕ</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">&#92;phi(n)</annotation></semantics></math> plus 1, that is to say: <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi><mo>∗</mo><mi>d</mi><mo>=</mo><mn>1</mn><mo stretchy="false">(</mo><mi>m</mi><mi>o</mi><mi>d</mi><mi>ϕ</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">e &#42; d = 1 ( mod &#92;phi(n) )</annotation></semantics></math>, or <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi><mo>∗</mo><mi>d</mi><mo>=</mo><mi>k</mi><mo>∗</mo><mi>ϕ</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">e &#42; d = k &#42; &#92;phi(n) + 1</annotation></semantics></math> for some (unimportant) value of
+<math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>k</mi></mrow><annotation encoding="application/x-tex">k</annotation></semantics></math>. See the slides on RSA for details of why this is.
 
-Given $(m^e) \bmod n$, it's hard to compute $m$ unless you know
-$\phi(n)$ (in which case you can calculate $d$). Computing $\phi(n)$
-is hard unless you know the factorization of $n$. To ensure that
-factoring $n$ is hard, we make it the product of 2 large random
+Given <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msup><mi>m</mi><mi>e</mi></msup><mo stretchy="false">)</mo><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>n</mi></mrow><annotation encoding="application/x-tex">(m^e) &#92;bmod n</annotation></semantics></math>, it's hard to compute <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math> unless you know
+<math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϕ</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">&#92;phi(n)</annotation></semantics></math> (in which case you can calculate <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math>). Computing <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϕ</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">&#92;phi(n)</annotation></semantics></math>
+is hard unless you know the factorization of <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>. To ensure that
+factoring <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> is hard, we make it the product of 2 large random
 primes.
 
 Signing is just encryption with the private exponent (what we normally
 consider decryption). The receiver can “decrypt” the signature with
 the public key to and verify that it matches the document. Since only
-the owner of the key knows $d$, only she can sign documents.
+the owner of the key knows <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math>, only she can sign documents.
 
 ### Calculating an RSA keypair
 
-$e$ is conventionally set to 65537 (as long as it is relatively prime
-to $\phi(n)$), so we just need to compute $d$ and $n$. As we
+<math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi></mrow><annotation encoding="application/x-tex">e</annotation></semantics></math> is conventionally set to 65537 (as long as it is relatively prime
+to <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϕ</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">&#92;phi(n)</annotation></semantics></math>), so we just need to compute <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>. As we
 mentioned, n should be selected as the product of two large primes,
-$p$ and $q$. To compute $d$, recall that it must be chosen such that
-$ed = 1 \bmod \phi(n)$. But this just means that $d$ is $e$'s
-multiplicative inverse modulo $\phi(n)$. $\phi(n)$ is just
-$(p-1)(q-1)$ since $n$ only has two factors, $p$ and $q$. We can use
+<math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi></mrow><annotation encoding="application/x-tex">q</annotation></semantics></math>. To compute <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math>, recall that it must be chosen such that
+<math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi><mi>d</mi><mo>=</mo><mn>1</mn><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>ϕ</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">ed = 1 &#92;bmod &#92;phi(n)</annotation></semantics></math>. But this just means that <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math> is <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi></mrow><annotation encoding="application/x-tex">e</annotation></semantics></math>'s
+multiplicative inverse modulo <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϕ</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">&#92;phi(n)</annotation></semantics></math>. <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ϕ</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">&#92;phi(n)</annotation></semantics></math> is just
+<math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>q</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(p-1)(q-1)</annotation></semantics></math> since <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math> only has two factors, <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi></mrow><annotation encoding="application/x-tex">q</annotation></semantics></math>. We can use
 the extended Euclidian algorithm to compute modular inverses.
 
 ### Euclid's Algorithm
@@ -85,8 +82,8 @@ to generate it's primes.
 
 The extended Euclidian algorithm is often used to compute
 multiplicative inverses modulo some number. In this lab you will
-implement it to find $d$. Remember that the method for computing the
-$d$ by hand is somewhat different than what you will want to do on the
+implement it to find <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math>. Remember that the method for computing the
+<math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math> by hand is somewhat different than what you will want to do on the
 computer. The [Wikipedia page on the extended Euclidean
 algorithm](https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm)
 has pseudocode for computing modular inverses that may be useful.
@@ -97,22 +94,22 @@ Restrictions: You may use the language of your choice for this
 lab. You may use a bignum library as in the Diffie-Hellman lab. You
 may not use any built-in modular exponentiation, multiplicative
 inverse, Euclid's algorithm, etc., but you may use code to help you
-generate your prime numbers $p$ and $q$.
+generate your prime numbers <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi></mrow><annotation encoding="application/x-tex">q</annotation></semantics></math>.
 
-* Generate 2 512-bit primes $p$ and $q$. Ensure that their high order bit
-  is set. Verify that $(p-1)(q-1)$ is relatively prime to 65537 (which
-  we will be using for $e$). If it isn't, choose new $p$ and $q$
+* Generate 2 512-bit primes <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi></mrow><annotation encoding="application/x-tex">q</annotation></semantics></math>. Ensure that their high order bit
+  is set. Verify that <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>p</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mi>q</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(p-1)(q-1)</annotation></semantics></math> is relatively prime to 65537 (which
+  we will be using for <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi></mrow><annotation encoding="application/x-tex">e</annotation></semantics></math>). If it isn't, choose new <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>q</mi></mrow><annotation encoding="application/x-tex">q</annotation></semantics></math>
   values.
 
-* Using $n=pq$ and $e=65537$, calculate the secret exponent $d$, such
-    that $ed=1 \bmod \phi(n)$.  Verify that for numbers $m$ less than
-   $n$, $((m^e \bmod n)^d )\bmod n == m$.
+* Using <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mi>p</mi><mi>q</mi></mrow><annotation encoding="application/x-tex">n=pq</annotation></semantics></math> and <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi><mo>=</mo><mn>65537</mn></mrow><annotation encoding="application/x-tex">e=65537</annotation></semantics></math>, calculate the secret exponent <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi></mrow><annotation encoding="application/x-tex">d</annotation></semantics></math>, such
+    that <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>e</mi><mi>d</mi><mo>=</mo><mn>1</mn><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>ϕ</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">ed=1 &#92;bmod &#92;phi(n)</annotation></semantics></math>.  Verify that for numbers <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math> less than
+   <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math>, <math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mo stretchy="false">(</mo><msup><mi>m</mi><mi>e</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>n</mi><msup><mo stretchy="false">)</mo><mi>d</mi></msup><mo stretchy="false">)</mo><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>n</mi><mo>=</mo><mo>=</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">((m^e &#92;bmod n)^d )&#92;bmod n == m</annotation></semantics></math>.
 
 * On the passoff webpage, you will be given a value to encrypt. Use
-  modular exponentation ($m^e \bmod n$) to encrypt the value.
+  modular exponentation (<math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>m</mi><mi>e</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>n</mi></mrow><annotation encoding="application/x-tex">m^e &#92;bmod n</annotation></semantics></math>) to encrypt the value.
 
 * On the passoff webpage, you will be given a value to decrypt. Use
-  modular exponentation ($m^d \bmod n$) to decrypt the value.
+  modular exponentation (<math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>m</mi><mi>d</mi></msup><mtext> </mtext><mo lspace="0.22em" rspace="0.22em"><mrow><mi mathvariant="normal">m</mi><mi mathvariant="normal">o</mi><mi mathvariant="normal">d</mi></mrow></mo><mtext> </mtext><mi>n</mi></mrow><annotation encoding="application/x-tex">m^d &#92;bmod n</annotation></semantics></math>) to decrypt the value.
 
 ## Passoff
 

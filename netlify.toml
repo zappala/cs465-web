@@ -7,14 +7,17 @@
 
 [build.environment]
   # Keep in sync with .nvmrc
-  NODE_VERSION = "22"
+  NODE_VERSION = "24"
 
 # Security headers for every page and file.
 #
 # The Content-Security-Policy allows only this site's own files: every page,
 # image, font, script and stylesheet is served from cs465.zappala.org.
-# 'unsafe-inline' is needed for Astro's inline island scripts (the menus) and
-# for inline <style> tags. If a page ever embeds something from another site
+# 'unsafe-inline' is needed here because this header can't know each build's
+# inline scripts and styles. Astro adds a second, stricter policy to every
+# page (a <meta> tag, security.csp in astro.config.mjs) with hashes of that
+# page's own inline scripts and styles; browsers enforce both, so an inline
+# script that isn't part of the build is still blocked. If a page ever embeds something from another site
 # (a YouTube video, an image hosted elsewhere, a form), add that host here:
 # frame-src for iframes, img-src for images, and so on. See the README.
 [[headers]]

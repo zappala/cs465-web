@@ -1,8 +1,123 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Tailwind configuration (Tailwind 4 keeps it here, in CSS).
+
+   Only these colors exist: the site's own colors and six palettes, with
+   the exact Tailwind 3 values the site was designed with (Tailwind 4's
+   built-in palette is slightly different). Classes for other colors, such
+   as green-500, are not generated. */
+@theme {
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-white: #fff;
+  --color-default: #1a202c;
+  --color-byu: #002e5d;
+  --color-lightblue: #2b6cb0;
+  --color-yellow: #ffcd00;
+  --color-bluey: #182b49;
+
+  /* Tailwind 3's line heights for the text sizes: fixed lengths, which
+     nested smaller text (such as inline code) inherits. Tailwind 4 uses
+     ratios instead, which made those lines slightly shorter. */
+  --text-xs--line-height: 1rem;
+  --text-sm--line-height: 1.25rem;
+  --text-base--line-height: 1.5rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl--line-height: 1.75rem;
+  --text-2xl--line-height: 2rem;
+  --text-3xl--line-height: 2.25rem;
+  --text-4xl--line-height: 2.5rem;
+
+  /* Tailwind 3's font lists (Tailwind 4's default sans list differs) */
+  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  --color-red-50: #fef2f2;
+  --color-red-100: #fee2e2;
+  --color-red-200: #fecaca;
+  --color-red-300: #fca5a5;
+  --color-red-400: #f87171;
+  --color-red-500: #ef4444;
+  --color-red-600: #dc2626;
+  --color-red-700: #b91c1c;
+  --color-red-800: #991b1b;
+  --color-red-900: #7f1d1d;
+  --color-red-950: #450a0a;
+  --color-amber-50: #fffbeb;
+  --color-amber-100: #fef3c7;
+  --color-amber-200: #fde68a;
+  --color-amber-300: #fcd34d;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+  --color-amber-600: #d97706;
+  --color-amber-700: #b45309;
+  --color-amber-800: #92400e;
+  --color-amber-900: #78350f;
+  --color-amber-950: #451a03;
+  --color-blue-50: #eff6ff;
+  --color-blue-100: #dbeafe;
+  --color-blue-200: #bfdbfe;
+  --color-blue-300: #93c5fd;
+  --color-blue-400: #60a5fa;
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #2563eb;
+  --color-blue-700: #1d4ed8;
+  --color-blue-800: #1e40af;
+  --color-blue-900: #1e3a8a;
+  --color-blue-950: #172554;
+  --color-sky-50: #f0f9ff;
+  --color-sky-100: #e0f2fe;
+  --color-sky-200: #bae6fd;
+  --color-sky-300: #7dd3fc;
+  --color-sky-400: #38bdf8;
+  --color-sky-500: #0ea5e9;
+  --color-sky-600: #0284c7;
+  --color-sky-700: #0369a1;
+  --color-sky-800: #075985;
+  --color-sky-900: #0c4a6e;
+  --color-sky-950: #082f49;
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-slate-950: #020617;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  --color-gray-950: #030712;
+}
 
 @layer base {
+  /* Tailwind 4 changed these defaults; keep the Tailwind 3 look. */
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
   h1 {
     @apply text-5xl;
   }
@@ -10,4 +125,87 @@
   h2 {
     @apply text-2xl;
   }
+}
+
+/* Changes to the typography plugin's .prose styles (articles and notes).
+   Same selectors as the plugin, so they skip anything inside .not-prose. */
+@layer utilities {
+  /* The plugin's grays come from Tailwind 4's palette; use the Tailwind 3
+     grays the site was designed with. */
+  .prose {
+    --tw-prose-body: #374151;
+    --tw-prose-headings: #111827;
+    --tw-prose-lead: #4b5563;
+    --tw-prose-links: #111827;
+    --tw-prose-bold: #111827;
+    --tw-prose-counters: #6b7280;
+    --tw-prose-bullets: #d1d5db;
+    --tw-prose-hr: #e5e7eb;
+    --tw-prose-quotes: #111827;
+    --tw-prose-quote-borders: #e5e7eb;
+    --tw-prose-captions: #6b7280;
+    --tw-prose-kbd: #111827;
+    --tw-prose-kbd-shadows: rgb(17 24 39 / 10%);
+    --tw-prose-code: #111827;
+    --tw-prose-pre-code: #e5e7eb;
+    --tw-prose-pre-bg: #1f2937;
+    --tw-prose-th-borders: #d1d5db;
+    --tw-prose-td-borders: #e5e7eb;
+  }
+
+  .prose
+    :where(blockquote p:first-of-type):not(:where([class~="not-prose"], [class~="not-prose"] *))::before,
+  .prose
+    :where(blockquote p:first-of-type):not(:where([class~="not-prose"], [class~="not-prose"] *))::after {
+    content: none;
+  }
+
+  /* inline code: no backticks around it, dark red */
+  .prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::before,
+  .prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::after {
+    content: "";
+  }
+
+  .prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    color: #b22222;
+  }
+
+  .prose :where(h1):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    margin-top: 1.1428571em;
+  }
+
+  .prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    font-weight: 400;
+    color: #2b6cb0;
+  }
+
+  .prose :where(h3):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    font-size: 1.1em;
+  }
+
+  /* last, so it wins over the h1 margin above (as in Tailwind 3) */
+  .prose :where(.prose > :first-child):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    margin-top: 0.5714286em;
+  }
+}
+
+/* Math on the 2018–2023 course pages is native MathML (drawn by the
+   browser). Match the size and spacing KaTeX used: math a little larger
+   than the text, and space above and below each displayed formula. */
+math {
+  font-size: 1.15em;
+}
+
+math[display="block"] {
+  margin: 1em 0;
+}
+
+/* Browsers don't wrap MathML, so each displayed formula is wrapped in
+   <span className="math-display">; one wider than a phone screen scrolls
+   sideways inside it instead of widening the page. (Safari ignores
+   overflow on <math> itself, hence the wrapper.) */
+.math-display {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
 }

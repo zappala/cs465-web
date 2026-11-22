@@ -199,16 +199,16 @@ See the following for additional documentation:
 
 For the Rust crypto, use:
 
-- [rsa](https://docs.rs/rsa/latest/rsa/) -- the client will need to import the
+- [rsa](https://docs.rs/rsa/latest/rsa/) — the client will need to import the
   server's public key from the PEM format it receives, verify the server's
   RSA-PSS signature on the nonce, and encrypt the symmetric key with RSA-OAEP
 - [PSS Signature](https://docs.rs/rsa/latest/rsa/pss/struct.Signature.html) and
-  [PSS VerifyingKey](https://docs.rs/rsa/latest/rsa/pss/struct.VerifyingKey.html) --
+  [PSS VerifyingKey](https://docs.rs/rsa/latest/rsa/pss/struct.VerifyingKey.html) —
   the client will need to convert a signature in bytes to a `Signature`
   (see the `try_from()` method) and verify it
-- [OAEP](https://docs.rs/rsa/latest/rsa/oaep/struct.Oaep.html) -- the padding to
+- [OAEP](https://docs.rs/rsa/latest/rsa/oaep/struct.Oaep.html) — the padding to
   use when encrypting the symmetric key
-- [AES GCM](https://docs.rs/aes-gcm/latest/aes_gcm/) -- the client will need to
+- [AES GCM](https://docs.rs/aes-gcm/latest/aes_gcm/) — the client will need to
   generate a symmetric key, generate a nonce, and encrypt and decrypt
 
 You can see the

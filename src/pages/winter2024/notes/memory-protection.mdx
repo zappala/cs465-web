@@ -18,7 +18,7 @@ layout: ../../../layouts/SemesterMarkdown.astro
 
 ### Isolation
 
-- Two proceses, sharing the same computer system -- need to be sure they can't
+- Two proceses, sharing the same computer system — need to be sure they can't
   access each others' memory! Otherwise, _nothing_ is safe.
 - Started with three components:
   - _descriptor register_: which addresses a process can access
@@ -31,7 +31,7 @@ layout: ../../../layouts/SemesterMarkdown.astro
 
 - divides memory into segments, each one with access permissions for read,
   write, execute, mode (e.g. supervisor or user), fault
-- start of virtual memory -- the same physical address can be mapped to multiple
+- start of virtual memory — the same physical address can be mapped to multiple
   processes, each with different segment identifiers and access permissions
 - see
   [Figure 5.2, page 129](https://people.scs.carleton.ca/~paulv/toolsjewels/TJrev1/ch5-rev1.pdf)
@@ -64,9 +64,9 @@ layout: ../../../layouts/SemesterMarkdown.astro
   - not circumventable
   - verifiable by analysis and tests
 - called a _security kernel_
-- difficult to implement in practice -- see the discussion on dependencies
-- if you focus on subjects and what they can do -- you get _capability lists_
-- if you focus on objects and what is allowed -- you get _access control lists_
+- difficult to implement in practice — see the discussion on dependencies
+- if you focus on subjects and what they can do — you get _capability lists_
+- if you focus on objects and what is allowed — you get _access control lists_
 - _audit trails_ allow you to inspect what happened, after the fact
 
 ### Aside

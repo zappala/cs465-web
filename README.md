@@ -30,7 +30,9 @@ to `cs465.zappala.org`.
   and writes `dist/sitemap.xml`. Fix the link (or the missing file) and
   rebuild; the error names the page.
 - **Content-Security-Policy** (in `netlify.toml`) allows only this site's
-  own files. If a page embeds something from another site (a YouTube video,
+  own files. Astro also puts a stricter policy in each page (`security.csp`
+  in `astro.config.mjs`): inline scripts and styles must match hashes from
+  the build. Style attributes are allowed (code blocks use them). If a page embeds something from another site (a YouTube video,
   an image hosted elsewhere, a form that posts elsewhere), add that host to
   the CSP or the browser will block it. Check the browser console on the
   deploy preview.

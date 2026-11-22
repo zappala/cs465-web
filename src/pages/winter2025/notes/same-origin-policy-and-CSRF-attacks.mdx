@@ -29,7 +29,7 @@ Goals:
 
 - e.g. two divisions of the same company, ads from third parties
 
---
+—
 
 - background info
   - origin = (scheme, host, port)
@@ -62,7 +62,7 @@ See also
 [a good, brief explanation](https://portswigger.net/web-security/cors/same-origin-policy)
 from PortSwigger
 
-- [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) -- Cross-origin
+- [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) — Cross-origin
   Resource Sharing allows a _server_ to set policy for which origins may request
   its content via a fetch
 - the book discusses relaxing the same-origin policy by manipulating
@@ -82,10 +82,10 @@ from PortSwigger
 - cookie theft
 
   - need to avoid sending cookies to malicious sites
-    - `HttpOnly` -- only accessible over HTTP(S) and not via DOM through
+    - `HttpOnly` — only accessible over HTTP(S) and not via DOM through
       JavaScript on the page
   - need to avoid malicious HTTP proxies
-    - `Secure` -- cookie will only be sent over HTTPS
+    - `Secure` — cookie will only be sent over HTTPS
   - other vulnerabilities
     - non-script client-side malware (e.g. keylogger, malicious browser
       extension)
@@ -144,17 +144,17 @@ GET http://mybank.com/fundxfer.php?to=Bob&value=2500 HTTP/1.1
 > includes Alice's session ID for the bank in a `Cookie` header, assuming Alice
 > is still logged in with her bank.
 
-- Attacks can be more subtle -- e.g. a POST request that changes Alice's email
+- Attacks can be more subtle — e.g. a POST request that changes Alice's email
   address, which can then be used for account recovery at Alice's bank.
 
-- CSRF is a form of a _confused deputy_ problem -- an entity that doesn't have
+- CSRF is a form of a _confused deputy_ problem — an entity that doesn't have
   permission to perform an action can coerce a more-privileged entity to perform
   the action
 
 - notes
 
   - can't rely on checking IP addresses, since the request comes from the victim
-  - requires a current session -- hence financial sites regularly log you out
+  - requires a current session — hence financial sites regularly log you out
 
 - CRSF mitigation: CSRF tokens
 
@@ -172,7 +172,7 @@ GET http://mybank.com/fundxfer.php?to=Bob&value=2500 HTTP/1.1
   - generate a signed CSRF token and store it in a cookie
   - also put the CSRF token in a hidden form field on the requested page
   - when the user submits the form and sends a POST request, it includes the
-    cookie in the HTTP header and in the submitted form (in the POST body) --
+    cookie in the HTTP header and in the submitted form (in the POST body) —
     these must match and be signed by the server
   - server does not need to store any state
   - attacker request will have a cookie but not the hidden form field
