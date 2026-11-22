@@ -1,0 +1,24 @@
+---
+layout: ../../layouts/Semester.astro
+title: Schedule
+---
+
+import GridSchedule from "../../components/GridSchedule.jsx";
+import Notice from "../../components/Notice.jsx";
+
+<article
+    class="prose prose-blockquote:not-italic prose-blockquote:font-normal prose-blockquote:text-base prose-blockquote:bg-blue-200 prose-blockquote:border-l-0 prose-blockquote:px-4 prose-blockquote:py-1 prose-blockquote:rounded-lg pb-8 text-lg">
+
+# Schedule
+
+<Notice title="2018–2023 course">
+  This is an archived semester of the cryptography-focused course taught
+  from 2018 to 2023. Projects, homework and slides are shared by several
+  semesters; see the [overview](/crypto-course) for all of them. The
+  course was reorganized in 2024; see the [home page](/) for the current
+  course.
+</Notice>
+
+</article>
+
+<GridSchedule prefix="/fall2018" />

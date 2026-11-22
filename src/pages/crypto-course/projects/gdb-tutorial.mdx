@@ -1,0 +1,108 @@
+---
+layout: ../../../layouts/CryptoCourseMarkdown.astro
+---
+
+import UsedIn from "../../../components/UsedIn.jsx";
+
+# Project: gdb Tutorial
+
+<UsedIn>[Fall 2023](/fall2023) (as an extra page)</UsedIn>
+
+
+GDB is a great debugger to use for analyzing C code, whether you are reverse-engineering or extracting secrets. This tutorial is designed to get you slightly more familiar with GDB and to help you get started on the Extracting Secrets project.
+
+## Getting Started
+
+The very first thing you want to do is to open your binary file with GDB. You can do this by running the following command:
+
+```
+gdb secret_treasure
+```
+
+This will start GDB, allowing you to use any GDB commands while running `secret_treasure`.
+
+The binary we are using requires a command-line argument, `treasures.enc`.  We can include this by running this command:
+
+```
+set args treasures.enc
+```
+
+Whenever you want to run `secret_treasure`, just use the `run` command. However, you probably want to set a few things up first.
+
+## Basic Commands
+
+### Looking at Assembly
+
+You can learn a lot about a binary by looking at the assembly code. Since every C program has a `main` function, a good place to start is with this command:
+
+```
+disassemble main
+```
+
+This will output the assembly code for the `main` function. You can learn a lot from this, such as what other functions get called, what variables are used, and where things are stored.
+
+### Breakpoints
+
+Just like with other debuggers, you can set breakpoints with GDB. Breakpoints are great for analyzing variables/memory at interesting points of your code, such as function calls and variable assignments. To set a breakpoint, use the following syntax:
+
+```
+b <where>
+```
+
+You can see any breakpoints you currently have set with this command:
+
+```
+i b
+```
+
+Each breakpoint will be numbered. If you want to delete breakpoint 1, use this command:
+
+```
+del 1
+```
+
+Replace `<where>` with the location of your breakpoint. This could be a function name, a line number, a memory address, etc. To set a breakpoint in the `main` function, you would use `b main`.
+
+Now, when you run `secret_treasure` with `run`, the runtime will stop in the `main` function. You can use other commands to view interesting details about the current environment.
+
+### Returning From Functions
+
+You can change the behavior of a program by manipulating what value gets returned from a function. Returning a custom value from a function is as easy as setting a breakpoint in the function, then running this command:
+
+```
+return (<data Type>) <value>
+```
+
+You have to specify the data type of the value you want to return. It may ask you to confirm if you really want to return from the function early.
+
+### Gathering Information
+
+The `i` (info) command is very useful. Use it to get information about a variety of things. Here are some examples:
+
+* `i args`: shows you the arguments of the function you are currently in
+* `i locals`: shows you any local variables and their current values
+* `info r`: shows you the values of each register
+
+### Printing Stuff
+
+There are a few ways to go about printing variables. Sometimes, it's as easy as using `print <variable name>`. However, sometimes you have to specify the type and length of the variable as well. For example, if you find a local variable called `myStrings` that points to an array of strings, you would use
+
+```
+print (char*[<size of array>]*myStrings)
+```
+
+This also works with printing from registers. For example, if you wanted to print out an array of strings stored in the `rdi` register (which stores the first argument passed into a function), you would change the command to look like this:
+
+```
+print (char*[<size of array>]*)*$rdi
+```
+
+Whenever you want to print out a register, you need to prepend `$` to it.
+
+### Other
+
+There are lots of resources and documentation on the internet for GDB. Here's a good cheat sheet that will be useful:
+
+[GDB Cheat Sheet](https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf)
+
+This cheat sheet will show you other ways to print from memory, manipulate the program, and gather information.

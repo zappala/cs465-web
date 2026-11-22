@@ -1,0 +1,134 @@
+---
+layout: ../../../layouts/CryptoCourseMarkdown.astro
+---
+
+import UsedIn from "../../../components/UsedIn.jsx";
+
+# Homework: gdb, Stack Frames, and Registers
+
+<UsedIn>[Fall 2023](/fall2023) (as Homework 10)</UsedIn>
+
+
+The purpose of this homework is to introduce you to the `gdb` debugger and to get you started examining stack frames and registers in the x86-64 bit architecture.
+
+The file [examine_stack.c](http://faculty.cs.byu.edu/~seamons/examine_stack.c) makes a series of function calls (`main → freshman → sophomore → junior → senior`). Compile the program and set a breakpoint in the freshman, sophomore, junior, and senior functions. At each breakpoint, examine the registers and stack frame used for storing function arguments and local variables.
+
+The first 6 function arguments are stored in the `rdi`, `rsi`, `rdx`, `rcx`, `r8`, and `r9` respectively. However, this only applies to certain variable types. If you don't see the variable you expect in a certain register, try looking at the stack by examining the `rsp` register.
+
+Function local variables are stored in registers and on the stack.
+
+A quick refresher (or introduction) can be found in the lecture materials page of this website and/or 
+
+* [**gdb tutorial**](/crypto-course/projects/gdb-tutorial)
+* [gdb cheatsheet](https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf)
+&nbsp;
+
+* [x86_64 calling conventions](https://aaronbloomfield.github.io/pdr/book/x86-64bit-ccc-chapter.pdf)
+* [The Stack](https://www.youtube.com/watch?v=uklonOb49DA)
+* [Procedures and Stacks](https://www.youtube.com/watch?v=uS4KO-rpvsU)
+* [Understanding x86-64 registers](https://web.stanford.edu/class/archive/cs/cs107/cs107.1226/guide/x86-64.html)
+
+## Example
+
+Here's how you would examine the registers and local variables of the `freshman` function.
+
+1. Compile examine_stack.c with debugging symbols (so you can step through the program):
+
+```
+    gcc examine_stack.c -o examine_stack -g
+```
+
+2. Run `gdb` with examine_stack as the input:
+
+```
+    gdb examine_stack
+```
+
+3. Set a breakpoint in the main function:
+
+```
+    (gdb) b freshman
+```
+
+4. Run the program
+   
+
+```
+    (gdb) run
+```
+
+5. Examine the registers:
+
+```
+    (gdb) i r
+```
+
+    
+    You should see something like this:
+
+```
+    rax            0xc                 12
+    rbx            0x0                 0
+    rcx            0x19                25
+    rdx            0x7dc               2012
+    rsi            0x19                25
+    rdi            0xc                 12
+```
+
+    In the `main` function, `freshman` was called with 3 arguments: month(12), day(25), and year(2012). When you look at the `rdi`, `rsi`, and `rdx` registers, you can see those arguments.
+
+6. Step through `freshman` until the local variables get placed on the stack:
+   
+
+```
+    (gdb) step
+    28        char housing[30] = "Helaman Halls";
+    (gdb) step
+    29        sophomore (a + b, c);
+```
+
+7. Examine the stack to find the `housing` variable:
+   
+
+```
+    (gdb) x/4gx $rsp
+```
+
+    This will print out 4 sequential 64-bit sections of `rsp` (the stack pointer). You should get output similar to this, although the memory addresses may differ on your machine:
+
+```
+    0x7fffffffe4b0: 0x000007dc55554040      0x0000000c00000019
+    0x7fffffffe4c0: 0x206e616d616c6548      0x000000736c6c6148
+```
+
+    At first glance, it may seem like "Helaman Halls" isn't there. However, you have to remember that everything here is displayed in hexidecimal. "Helaman Halls" in hexidecimal becomes `48 65 6C 61 6D 61 6E 20 48 61 6C 6C 73`, which *is* found in `rsp`, although the endianness is different.
+
+    Another thing you can do is change the command to print each address as a string, like this:
+
+```
+    (gdb) x/10s $rsp
+```
+
+    You'll have to increase the number after `x/` since it treats strings differently. With the previous command, you should get output like this:
+
+```
+    0x7fffffffe4b0: "@@UU\334\a"
+    0x7fffffffe4b7: ""
+    0x7fffffffe4b8: "\031"
+    0x7fffffffe4ba: ""
+    0x7fffffffe4bb: ""
+    0x7fffffffe4bc: "\f"
+    0x7fffffffe4be: ""
+    0x7fffffffe4bf: ""
+    0x7fffffffe4c0: "Helaman Halls"
+    0x7fffffffe4ce: ""
+```
+
+You'll be doing this process for the rest of the functions as well (excluding `main`).  You may need to print out more of the stack to find some values. If a variable is passed in by reference, you may need to print its memory address.
+
+## Submission
+
+Submit a pdf containing the following:
+
+1. Screenshots showing the (labeled) registers/stack frames where each function argument is stored. This should be done for every function other than `main`.
+2. Screenshots showing the (labeled) stack frames where each local variable is stored.  This should be done for each function other than `main`.

@@ -1,0 +1,45 @@
+---
+layout: ../../../layouts/CryptoCourseMarkdown.astro
+---
+
+import UsedIn from "../../../components/UsedIn.jsx";
+
+# Homework: Buffer Overflows in the Wild
+
+<UsedIn>[Fall 2018](/fall2018), [Fall 2019](/fall2019) (as Homework 11); [Winter 2019](/winter2019), [Winter 2020](/winter2020) to [Fall 2021](/fall2021), [Fall 2022](/fall2022) to [Fall 2023](/fall2023) (as an extra page)</UsedIn>
+
+
+Browse [https://cve.mitre.org/cve](https://cve.mitre.org/cve) and/or
+[https://web.nvd.nist.gov](https://web.nvd.nist.gov) and read about
+recent or historic buffer overflows. Note that not all security issues
+listed on these sites will be buffer overflows.
+
+Find one that interests you and research it in detail. If possible,
+look at the source code that caused the issue. Read other people's
+analysis (e.g. search the internet by CVE id or keyword and find
+others discussing it). You should spend at least 30 minutes
+researching the issue.
+
+Prepare a 1 page summary of the issue using your own understanding of
+the bug and discuss what modern buffer-overflow countermeasures would
+have prevented or mitigated the issues.
+
+Don't use this as your own overflow, but as an example, you might find
+CVE-1999-0002 - “Buffer overflow in NFS mountd gives root access to
+remote attackers (mostly linux)”. A list of interesting reading about
+it:
+
+* [https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-1999-0002](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-1999-0002)
+
+* [http://www.securityfocus.com/bid/121/discuss](http://www.securityfocus.com/bid/121/discuss)
+
+* [http://www.securityfocus.com/bid/121/exploit](http://www.securityfocus.com/bid/121/exploit)
+
+* [https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-1999-0002](https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-1999-0002)
+
+Source code wasn't immediately findable for such an old vulnerability,
+but with some effort, it could be tracked down.
+
+## Submission
+
+Submit a PDF via Learning Suite.

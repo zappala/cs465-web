@@ -23,7 +23,7 @@ export default function Notice({ kind = "note", title = "Note", children }) {
       />
       <div className="text-base text-gray-800">
         <p className="font-semibold text-lg text-gray-900">{title}</p>
-        {children && <div className="mt-1">{children}</div>}
+        {children && <div className="mt-1 [&_a]:underline">{children}</div>}
       </div>
     </aside>
   );

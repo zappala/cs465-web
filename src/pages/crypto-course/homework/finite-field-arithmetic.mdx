@@ -1,0 +1,56 @@
+---
+layout: ../../../layouts/CryptoCourseMarkdown.astro
+---
+
+import UsedIn from "../../../components/UsedIn.jsx";
+
+# Homework: Finite Field Arithmetic
+
+<UsedIn>[Fall 2018](/fall2018) to [Fall 2023](/fall2023) (as Homework 2)</UsedIn>
+
+
+## Finite Field Arithmetic
+
+For this homework, please submit two pseudo-code samples to answer
+question 1 and 2 below.
+
+Review sections 4 and 5 in FIPS 197 (see Lab 1) to understand details
+about finite field arithmetic in AES:
+
+* Section 4: Focus on 4.1 and 4.2. 4.3 is less important to study (and
+  more complicated), but it may help you understand section 5.
+
+* Section 5: See the high-level pseudo-code for the Cipher algorithm
+  in 5.1. The `MixColumns` function in 5.1.3 is important to
+  understand. Near the end of that section, it gives you the formulas
+  you need to implement the `MixColumns` function.
+
+## Questions
+
+1. Submit pseudo-code for the `MixColumns` function in 5.1.3. Your
+submission should demonstrate that you understand how to implement the
+ideas in section 4. Study these sections and the lecture slides to be
+able to distinguish between the abstract mathematical ideas (e.g.,
+polynomial representation) and the implementation methodology (i.e.,
+bit shifting, MOD, AND, XOR).﻿
+
+    Hint: Start with a `Mixcolumns(state)` where the state is a 4×4
+    array of bytes. You can reference each byte with a `state(x,y)`
+    reference.
+
+1. Submit psuedo-code for a finite field multiply function that takes two
+bytes as input and produces a byte as output, the result of
+multiplying a * b where * is the finite field multiply described in
+section 4.2. Your code should use an `xtime` function that is described
+in 4.2.1. Include your pseudo-code for `xtime` as part of your finite field multiply submission.
+
+    Hint: Assume a function `uint8_t ffMultiply(uint8_t a, uint8_t b)` where
+    the function returns a * b.
+
+## Submit
+
+Submit a PDF on Learning Suite.
+
+## Earlier versions
+
+- Fall 2018 to Winter 2020 didn't ask for the `xtime` pseudocode.

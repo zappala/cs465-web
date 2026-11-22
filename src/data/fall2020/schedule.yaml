@@ -1,0 +1,404 @@
+units:
+  - title: "Week 1"
+    days:
+      - day: "Tue"
+        date: "Sep 1"
+        lectures:
+          - title: "Cryptography"
+        slides:
+          - title: "Introduction"
+            link: "/lectures/crypto-course/Introduction-fall2020.pdf"
+          - title: "Terminology"
+            link: "/lectures/crypto-course/Terminology-fall2020.pdf"
+        homework:
+          title: "#1: Security News"
+          link: "/crypto-course/homework/news"
+          due: "Sep 1"
+      - day: "Thu"
+        date: "Sep 3"
+        lectures:
+          - title: "Cryptography"
+        slides:
+          - title: "Cryptography"
+            link: "/lectures/crypto-course/Cryptography-fall2020.pdf"
+          - title: "AES"
+            link: "/lectures/crypto-course/AES-winter2019.pdf"
+        homework:
+          title: "#0: About You"
+          link: "/crypto-course/homework/about-you"
+          due: "Sep 3"
+  - title: "Week 2"
+    days:
+      - day: "Tue"
+        date: "Sep 8"
+        lectures:
+          - title: "AES"
+        slides:
+          - title: "AES"
+            link: "/lectures/crypto-course/AES-winter2019.pdf"
+      - day: "Wed"
+        date: "Sep 9"
+        homework:
+          title: "#2: Finite Field Arithmetic"
+          link: "/crypto-course/homework/finite-field-arithmetic"
+          due: "Sep 9"
+      - day: "Thu"
+        date: "Sep 10"
+        lectures:
+          - title: "Block Cipher Modes, Authenticated Encryption Modes, and Padding"
+        slides:
+          - title: "Block Cipher Modes"
+            link: "/lectures/crypto-course/BlockCipherModes.pdf"
+        readings:
+          - title: "How to Choose an Authenticated Encryption Mode (optional)"
+            link: "https://blog.cryptographyengineering.com/2012/05/19/how-to-choose-authenticated-encryption/"
+          - title: "The Galois/Counter Mode of Operation (GCM) (optional)"
+            link: "http://luca-giuzzi.unibs.it/corsi/Support/papers-cryptography/gcm-spec.pdf"
+      - day: "Mon"
+        date: "Sep 14"
+        project:
+          title: "#1: AES"
+          link: "/crypto-course/projects/aes"
+          due: "Sep 14"
+  - title: "Week 3"
+    days:
+      - day: "Tue"
+        date: "Sep 15"
+        lectures:
+          - title: "Cryptographic Hash Functions"
+        slides:
+          - title: "Cryptographic Hash Functions"
+            link: "/lectures/crypto-course/CryptographicHashFunctions.pdf"
+          - title: "Class Slides for Hash Attack Discussion"
+            link: "/lectures/crypto-course/docs/hash-attack-discussion.pdf"
+        readings:
+          - title: "NIST Hash Project (optional)"
+            link: "http://csrc.nist.gov/groups/ST/hash/index.html"
+          - title: "Chinese researchers find first SHA-1 collision 2005"
+            link: "https://www.schneier.com/blog/archives/2005/02/cryptanalysis_o.html"
+          - title: "Google announces practical collision SHA-1, Feb 2017"
+            link: "https://security.googleblog.com/2017/02/announcing-first-sha1-collision.html"
+        homework:
+          title: "#3: Block Cipher Modes"
+          link: "/crypto-course/homework/block-cipher-modes"
+          due: "Sep 15"
+      - day: "Thu"
+        date: "Sep 17"
+        lectures:
+          - title: "Message Authentication Codes - MAC"
+        slides:
+          - title: "MAC"
+            link: "/lectures/crypto-course/MAC-fall2018.pdf"
+        readings:
+          - title: "SHA-1 spec"
+            link: "/lectures/crypto-course/readings/fips180-3_final.pdf"
+          - title: "Why I hate CBC-MAC (Optional)"
+            link: "https://blog.cryptographyengineering.com/2013/02/15/why-i-hate-cbc-mac/"
+      - day: "Fri"
+        date: "Sep 18"
+        project:
+          title: "#2: Hash Attack"
+          link: "/crypto-course/projects/hash-attack"
+          due: "Sep 18"
+  - title: "Week 4"
+    days:
+      - day: "Tue"
+        date: "Sep 22"
+        lectures:
+          - title: "Public-Key Crypto Intro + Math overview  (discuss Hash Attack)"
+        slides:
+          - title: "Class Slides for MAC Attack Discussion"
+            link: "/lectures/crypto-course/docs/mac-attack-discussion.pdf"
+          - title: "Publick-key Intro / Math Intro / Diffie-Hellman"
+            link: "/lectures/crypto-course/Diffie-Hellman-winter2019.pdf"
+        homework:
+          title: "#4: Preparing for the MAC Attack"
+          link: "/crypto-course/homework/mac-attack-prep"
+          due: "Sep 22"
+      - day: "Thu"
+        date: "Sep 24"
+        lectures:
+          - title: "Diffie-Hellman"
+        slides:
+          - title: "Diffie-Hellman"
+            link: "/lectures/crypto-course/Diffie-Hellman-winter2019.pdf"
+      - day: "Fri"
+        date: "Sep 25"
+        project:
+          title: "#3: MAC Attack"
+          link: "/crypto-course/projects/mac-attack"
+          due: "Sep 25"
+  - title: "Week 5"
+    days:
+      - day: "Tue"
+        date: "Sep 29"
+        lectures:
+          - title: "RSA Part 1"
+        slides:
+          - title: "RSA"
+            link: "/lectures/crypto-course/RSA-winter2019.pdf"
+        homework:
+          title: "#5: Diffie-Hellman"
+          link: "/crypto-course/homework/diffie-hellman"
+          due: "Sep 29"
+      - day: "Thu"
+        date: "Oct 1"
+        lectures:
+          - title: "RSA Part 2"
+        slides:
+          - title: "RSA"
+            link: "/lectures/crypto-course/RSA-winter2019.pdf"
+      - day: "Fri"
+        date: "Oct 2"
+        project:
+          title: "#4: Diffie-Hellman"
+          link: "/crypto-course/projects/diffie-hellman"
+          due: "Oct 2"
+  - title: "Week 6"
+    days:
+      - day: "Tue"
+        date: "Oct 6"
+        lectures:
+          - title: "Digital Certificates and Signatures"
+        slides:
+          - title: "PKI"
+            link: "/lectures/crypto-course/PKI.pdf"
+        homework:
+          title: "#6: MAC-then-Encrypt or Encrypt-then-MAC"
+          link: "/crypto-course/homework/mac-then-encrypt"
+          due: "Oct 6"
+      - day: "Thu"
+        date: "Oct 8"
+        lectures:
+          - title: "Public Key Infrastructure "
+        slides:
+          - title: "PKI"
+            link: "/lectures/crypto-course/PKI.pdf"
+      - day: "Fri"
+        date: "Oct 9"
+        project:
+          title: "#5: RSA"
+          link: "/crypto-course/projects/rsa"
+          due: "Oct 9"
+  - title: "Week 7"
+    days:
+      - day: "Tue"
+        date: "Oct 13"
+        lectures:
+          - title: "In Class Review for Midterm Exam 1."
+        slides:
+          - title: "Midterm Exam 1 study guide"
+            link: "/lectures/crypto-course/docs/midterm-1-study-guide-fall2023.pdf"
+      - day: "Thu"
+        date: "Oct 15"
+        lectures:
+          - title: "Test will be live  Oct 15 through Oct 17 on LearningSuite"
+          - title: "No Class. Take your Midterm Exam."
+  - title: "Week 8"
+    days:
+      - day: "Tue"
+        date: "Oct 20"
+        lectures:
+          - title: "TLS Part 1"
+        slides:
+          - title: "TLS"
+            link: "/lectures/crypto-course/TLS-2020.pdf"
+        readings:
+          - title: "The First Few Milliseconds of an HTTPS Connection"
+            link: "http://www.moserware.com/2009/06/first-few-milliseconds-of-https.html"
+          - title: "The Illustrated TLS Connection"
+            link: "https://tls.ulfheim.net/"
+        homework:
+          title: "#7: Generating RSA Keys"
+          link: "/crypto-course/homework/rsa-keys"
+          due: "Oct 20"
+      - day: "Thu"
+        date: "Oct 22"
+        lectures:
+          - title: "TLS part 2"
+        slides:
+          - title: "TLS"
+            link: "/lectures/crypto-course/TLS-2020.pdf"
+        readings:
+          - title: "The First Few Milliseconds of an HTTPS Connection"
+            link: "http://www.moserware.com/2009/06/first-few-milliseconds-of-https.html"
+          - title: "The Illustrated TLS Connection"
+            link: "https://tls.ulfheim.net/"
+      - day: "Fri"
+        date: "Oct 23"
+        project:
+          title: "#6: TLS"
+          link: "/crypto-course/projects/tls"
+          due: "Oct 23"
+  - title: "Week 9"
+    days:
+      - day: "Tue"
+        date: "Oct 27"
+        lectures:
+          - title: "Passwords (+ Midterm Exam #1 handback)"
+        slides:
+          - title: "Passwords"
+            link: "/lectures/crypto-course/Passwords.pdf"
+        readings:
+          - title: "Easy Ways to Build a Better P@$5w0rd (NIST)"
+            link: "https://www.nist.gov/blogs/taking-measure/easy-ways-build-better-p5w0rd"
+          - title: "How to Devise Passwords That Drive Hackers Away"
+            link: "https://www.nytimes.com/2012/11/08/technology/personaltech/how-to-devise-passwords-that-drive-hackers-away.html"
+        homework:
+          title: "#8: Internet Password Research"
+          link: "/crypto-course/homework/password-research"
+          due: "Oct 27"
+      - day: "Thu"
+        date: "Oct 29"
+        lectures:
+          - title: "Passwords Continued/Multi-factor Authentication and Password Managers"
+        slides:
+          - title: "Passwords"
+            link: "/lectures/crypto-course/Passwords.pdf"
+          - title: "Multi-factor authentication and password vaults"
+            link: "/lectures/crypto-course/docs/multifactor-auth-and-password-vaults.pdf"
+      - day: "Fri"
+        date: "Oct 30"
+        project:
+          title: "#7: Password Cracking"
+          link: "/crypto-course/projects/password-cracking"
+          due: "Oct 30"
+  - title: "Week 10"
+    days:
+      - day: "Tue"
+        date: "Nov 3"
+        lectures:
+          - title: "Binary Layout/Exploitation and Buffer Overflows"
+        slides:
+          - title: "Stack Frame Layout Simplified"
+            link: "/lectures/crypto-course/docs/stack-frame-layout.pdf"
+          - title: "Buffer Overflow"
+            link: "/lectures/crypto-course/BufferOverflow.pdf"
+        readings:
+          - title: "Smashing the Stack For Fun and Profit"
+            link: "http://www.phrack.org/issues/49/14.html#article"
+          - title: "Smashing the Stack For Fun and Profit (Today)"
+            link: "https://travisf.net/smashing-the-stack-today"
+          - title: "Smashing the Stack in 2011"
+            link: "https://paulmakowski.wordpress.com/2011/01/25/smashing-the-stack-in-2011/"
+          - title: "Smashing the Modern Stack for Fun and Profit"
+            link: "https://www.ethicalhacker.net/columns/heffner/smashing-the-modern-stack-for-fun-and-profit/"
+        homework:
+          title: "#9: Introduction to gdb"
+          link: "/crypto-course/homework/gdb-intro"
+          due: "Nov 3"
+      - day: "Thu"
+        date: "Nov 5"
+        lectures:
+          - title: "Binary Layout/Exploitation and Buffer Overflows Part 2"
+      - day: "Fri"
+        date: "Nov 6"
+        project:
+          title: "#8: Extracting Secrets"
+          link: "/crypto-course/projects/extracting-secrets"
+          due: "Nov 6"
+  - title: "Week 11"
+    days:
+      - day: "Tue"
+        date: "Nov 10"
+        lectures:
+          - title: "Binary Layout/Exploitation and Buffer Overflows Part 3"
+        slides:
+          - title: "Stack Frame Layout Simplified"
+            link: "/lectures/crypto-course/docs/stack-frame-layout.pdf"
+          - title: "Buffer Overflow"
+            link: "/lectures/crypto-course/BufferOverflow.pdf"
+        homework:
+          title: "#10: Smashing the Stack"
+          link: "/crypto-course/homework/smashing-the-stack"
+          due: "Nov 10"
+      - day: "Thu"
+        date: "Nov 12"
+        lectures:
+          - title: "Mid-Term Exam 2 review, Intro to secure email"
+        slides:
+          - title: "Secure Email"
+            link: "/lectures/crypto-course/SecureEmail.pdf"
+        readings:
+          - title: "Midterm Exam 2 study guide"
+            link: "/lectures/crypto-course/docs/midterm-2-study-guide-fall2023.pdf"
+      - day: "Fri"
+        date: "Nov 13"
+        project:
+          title: "#9: Buffer Overflow"
+          link: "/crypto-course/projects/buffer-overflow"
+          due: "Nov 13"
+  - title: "Week 12"
+    days:
+      - day: "Tue"
+        date: "Nov 17"
+        lectures:
+          - title: "Class Canceled.  Write a letter to a Missionary today."
+      - day: "Thu"
+        date: "Nov 19"
+        lectures:
+          - title: "Midterm Exam 2 Live on LearningSuite Nov 19 through Nov 21"
+          - title: "No Class. Take your Midterm."
+  - title: "Week 13"
+    days:
+      - day: "Tue"
+        date: "Nov 24"
+        lectures:
+          - title: "No Class Tuesday (Friday Instruction)"
+      - day: "Thu"
+        date: "Nov 26"
+        holiday: "No Class Thursday (Holiday)"
+  - title: "Week 14"
+    days:
+      - day: "Tue"
+        date: "Dec 1"
+        lectures:
+          - title: "Secure Email (Midterm Exam 2 handback)"
+        slides:
+          - title: "Secure Email"
+            link: "/lectures/crypto-course/SecureEmail.pdf"
+        homework:
+          title: "#11: Reflections on Trusting Trust"
+          link: "/crypto-course/homework/trusting-trust"
+          due: "Dec 1"
+      - day: "Thu"
+        date: "Dec 3"
+        lectures:
+          - title: "Secure Email part 2"
+        slides:
+          - title: "Secure Email"
+            link: "/lectures/crypto-course/SecureEmail.pdf"
+      - day: "Fri"
+        date: "Dec 4"
+        project:
+          title: "#10: Secure Email"
+          link: "/crypto-course/projects/smime-pgp"
+          due: "Dec 4"
+  - title: "Week 15"
+    days:
+      - day: "Tue"
+        date: "Dec 8"
+        lectures:
+          - title: "Integer Manipulation Vulnerabilities / Social Engineering"
+        slides:
+          - title: "Microsoft Whitepaper"
+            link: "https://bit.ly/2I9nKPW"
+          - title: "Social Engineering"
+            link: "/lectures/crypto-course/social_engineering.pdf"
+      - day: "Wed"
+        date: "Dec 9"
+        homework:
+          title: "#12: Extra Credit"
+          link: "/crypto-course/homework/social-engineering"
+          due: "Dec 9"
+      - day: "Thu"
+        date: "Dec 10"
+        lectures:
+          - title: "Course Review and Final Exam review"
+        slides:
+          - title: "Exam Review"
+            link: "/lectures/crypto-course/docs/midterm-2-study-guide-fall2023.pdf"
+        project:
+          title: "#11: Extra Credit - last day for submission"
+          link: "/crypto-course/projects/ringzer0"
+          due: "Dec 10"

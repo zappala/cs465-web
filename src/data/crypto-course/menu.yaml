@@ -1,0 +1,95 @@
+menu:
+  semester: 2018–2023 Course
+  items:
+    - title: Overview
+      url: /
+    - title: Projects
+      submenu:
+        - title: "AES"
+          url: projects/aes
+        - title: "Hash Attack"
+          url: projects/hash-attack
+        - title: "MAC Attack"
+          url: projects/mac-attack
+        - title: "Diffie-Hellman"
+          url: projects/diffie-hellman
+        - title: "RSA"
+          url: projects/rsa
+        - title: "TLS"
+          url: projects/tls
+        - title: "Password Cracking"
+          url: projects/password-cracking
+        - title: "Password Cracking (VM version)"
+          url: projects/password-cracking-2023
+        - title: "Buffer Overflow"
+          url: projects/buffer-overflow
+        - title: "Buffer Overflow (VM version)"
+          url: projects/buffer-overflow-2023
+        - title: "Extracting Secrets"
+          url: projects/extracting-secrets
+        - title: "Extracting Secrets (VM version)"
+          url: projects/extracting-secrets-2023
+        - title: "S/MIME and PGP"
+          url: projects/smime-pgp
+        - title: "Bomb (Extra Credit)"
+          url: projects/bomb
+        - title: "RingZer0 (Extra Credit)"
+          url: projects/ringzer0
+        - title: "Virtual Machine Setup"
+          url: projects/virtual-machine-setup
+        - title: "gdb Tutorial"
+          url: projects/gdb-tutorial
+        - title: "Cracking Passwords with John the Ripper and hashcat"
+          url: projects/john-hashcat-tutorial
+    - title: Homework
+      submenu:
+        - title: "About You"
+          url: homework/about-you
+        - title: "Security News"
+          url: homework/news
+        - title: "Finite Field Arithmetic"
+          url: homework/finite-field-arithmetic
+        - title: "Block Cipher Modes"
+          url: homework/block-cipher-modes
+        - title: "Preparing for the MAC Attack"
+          url: homework/mac-attack-prep
+        - title: "Diffie-Hellman"
+          url: homework/diffie-hellman
+        - title: "Using an AES Library"
+          url: homework/aes-library
+        - title: "MAC-then-Encrypt or Encrypt-then-MAC"
+          url: homework/mac-then-encrypt
+        - title: "Generating RSA Keys"
+          url: homework/rsa-keys
+        - title: "TLS Introduction"
+          url: homework/tls-intro
+        - title: "TLS Attacks"
+          url: homework/tls-attacks
+        - title: "Internet Password Research"
+          url: homework/password-research
+        - title: "Introduction to gdb"
+          url: homework/gdb-intro
+        - title: "gdb, Stack Frames, and Registers"
+          url: homework/gdb-stack-frames
+        - title: "Buffer Overflows in the Wild"
+          url: homework/buffer-overflow-history
+        - title: "Smashing the Stack"
+          url: homework/smashing-the-stack
+        - title: "Individual Privacy vs. Greater Public Good"
+          url: homework/privacy-vs-public-good
+        - title: "Reflections on Trusting Trust"
+          url: homework/trusting-trust
+        - title: "Social Engineering (Extra Credit)"
+          url: homework/social-engineering
+        - title: "Penetration Testing (Extra Credit)"
+          url: homework/penetration-testing
+    - title: Exams
+      submenu:
+        - title: Midterm 1 (2018-2019)
+          url: study-guides/midterm-1-2018
+        - title: Midterm 1
+          url: study-guides/midterm-1
+        - title: Midterm 2
+          url: study-guides/midterm-2
+    - title: Lectures
+      url: /lectures

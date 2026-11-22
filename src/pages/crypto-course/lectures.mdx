@@ -1,0 +1,182 @@
+---
+layout: ../../layouts/CryptoCourseMarkdown.astro
+---
+
+import UsedIn from "../../components/UsedIn.jsx";
+
+# Lectures and Other Resources
+
+<UsedIn>This is the Fall 2023 page. Earlier semesters had a similar page
+listing their own folder of slides; all versions of the slides are in the
+table at the end.</UsedIn>
+
+
+## Course Introduction
+* [Course Introduction](/lectures/crypto-course/Introduction-fall2020.pdf)
+* [Terminology](/lectures/crypto-course/Terminology-fall2020.pdf)
+
+## Applied Cryptography
+
+### Introduction to Cryptography [Lecture Slides - Cryptography into](/lectures/crypto-course/Cryptography-fall2020.pdf)
+* [History of Cryptography](http://en.wikipedia.org/wiki/History_of_cryptography)
+
+### AES [Lecture Slides](/lectures/crypto-course/AES-winter2019.pdf)
+* [Last semster's Slides for this lecture](/lectures/crypto-course/AES-fall2018.pdf)
+* [FIPS197](/lectures/crypto-course/readings/fips-197.pdf)
+* [AES on Wikipedia](http://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
+* [AES Flash Demo](http://students.cs.byu.edu/~cs465ta/lectures/rijndael_ingles2004.swf)  (Try watching in Firefox... Chrome hates flash)
+* [AES youtube Demo](https://www.youtube.com/watch?v=mlzxpkdXP58) 
+* [Stick Figure Guide to AES](http://www.moserware.com/2009/09/stick-figure-guide-to-advanced.html) and [PDF version](http://www.moserware.com/assets/stick-figure-guide-to-advanced/A%20Stick%20Figure%20Guide%20to%20the%20Advanced%20Encryption%20Standard%20%28AES%29.pdf)
+* [Finite Field Multiply Examples](/lectures/crypto-course/docs/finite-field-multiply-examples.pdf)
+
+### Block Cipher Modes [Lecture Slides](/lectures/crypto-course/BlockCipherModes.pdf)
+* [Wikipedia on Block Cipher Modes](https://en.wikipedia.org/wiki/Block_cipher_mode_of_operation)
+* [Padding](http://www.di-mgt.com.au/cryptopad.html)
+* [How to Choose an Authenticated Encryption Mode](https://blog.cryptographyengineering.com/2012/05/19/how-to-choose-authenticated-encryption/)
+* [The Galois/Counter Mode of Operation (GCM)](http://luca-giuzzi.unibs.it/corsi/Support/papers-cryptography/gcm-spec.pdf)
+
+### Cryptographic Hash Functions [Lecture Slides](/lectures/crypto-course/CryptographicHashFunctions.pdf)
+* Wikipedia on [Cryptographic Hash Functions](http://en.wikipedia.org/wiki/Cryptographic_hash_function)
+* [Birthday Attack](http://en.wikipedia.org/wiki/Birthday_attack)
+* [SHA-1](/lectures/crypto-course/readings/fips180-3_final.pdf)
+* [SHA-3](http://en.wikipedia.org/wiki/NIST_hash_function_competition)
+* [Chinese researchers find first SHA-1 collision 2005](https://www.schneier.com/blog/archives/2005/02/cryptanalysis_o.html)
+* [Google announces practical collision on SHA-1 Feb 2017](https://security.googleblog.com/2017/02/announcing-first-sha1-collision.html)
+* [Class Slides for Hash Attack Discussion](/lectures/crypto-course/docs/hash-attack-discussion.pdf)
+* [Hash Collision Probabilities](https://preshing.com/20110504/hash-collision-probabilities/)
+
+## Message Authentication Codes (MAC)  [Lecture Slides](/lectures/crypto-course/MAC-fall2018.pdf)
+* [HMAC](http://en.wikipedia.org/wiki/HMAC)
+* [Length Extension Atacks](http://en.wikipedia.org/wiki/Length_extension_attack)
+* [Hash Length Extension Attacks](https://www.whitehatsec.com/blog/hash-length-extension-attacks/)
+* [Flickr api length extension attack](http://netifera.com/research/flickr_api_signature_forgery.pdf)
+* [Moxy Marlinspike's Crytographic Doom](http://www.thoughtcrime.org/blog/the-cryptographic-doom-principle/)
+* [Vaudenay's MAC attack](https://www.iacr.org/cryptodb/archive/2002/EUROCRYPT/2850/2850.pdf)
+* [Class Slides for MAC Attack Discussion](/lectures/crypto-course/docs/mac-attack-discussion.pdf)
+
+## Public Key Crypto 
+ 
+* Diffie-Hellman [Lecture Slides](/lectures/crypto-course/Diffie-Hellman-winter2019.pdf)
+* Wikipedia on [Diffie-Hellman](http://en.wikipedia.org/wiki/Diffie-Hellman_key_exchange)
+* Math explanation on [Diffie-Hellman](http://mathworld.wolfram.com/Diffie-HellmanProtocol.html)
+* [Sample toy DH parameter generation python code](/code/crypto-course/diffie-hellman/dh.zip)
+
+* RSA [Lecture Slides](/lectures/crypto-course/RSA-winter2019.pdf)
+* Wikipedia on [RSA](http://en.wikipedia.org/wiki/RSA_(algorithm)) 
+* Extended Euclidean Calculation [Example #1](https://www.youtube.com/watch?v=6KmhCKxFWOs)
+* Extended Euclidean Calculation [Example #2](https://www.youtube.com/watch?v=kYasb426Yjk)
+
+## Certificates
+* [Lecture Slides on PKI](/lectures/crypto-course/PKI.pdf)
+* [Trusted 3rd Party](https://en.wikipedia.org/wiki/Trusted_third_party)
+* [Verisign issues](https://en.wikipedia.org/wiki/Verisign#Controversies)
+* [DigiNotar](https://en.wikipedia.org/wiki/DigiNotar)
+* [Certificate Hierarchies](https://www.globalsign.com/en/blog/what-is-an-intermediate-or-subordinate-certificate-authority/)
+* [Certificate Revocation Broken in Practice](https://www.globalsign.com/en/blog/what-is-an-intermediate-or-subordinate-certificate-authority/)
+
+## Midterm #1
+* [Study Guide](/lectures/crypto-course/docs/midterm-1-study-guide-fall2023.pdf)
+
+## TLS   - [Lecture Slides](/lectures/crypto-course/TLS-2020.pdf)
+* [First few seconds of an HTTPS connection](http://www.moserware.com/2009/06/first-few-milliseconds-of-https.html)
+* [The Illustrated TLS Connection](https://tls.ulfheim.net/)
+
+  
+## Virtual Machine Setup
+* [Project 7,8,9 Virtual Machine setup instructions](/crypto-course/projects/virtual-machine-setup)
+* [Video of Basic VM setup](https://youtu.be/h2PAhhFUquY)
+
+## Passwords and Authentication Processes [ Lecture Slides ](/lectures/crypto-course/Passwords.pdf)
+* [Beyond simple Authentication - Multifactor Auth and Password Vaults](/lectures/crypto-course/docs/multifactor-auth-and-password-vaults.pdf)
+* [An administrators Guide to Internet Password Research](https://www.microsoft.com/en-us/research/publication/an-administrators-guide-to-internet-password-research/)
+* [Easy Ways to Build a Better P@\$5w0rd (NIST)](https://www.nist.gov/blogs/taking-measure/easy-ways-build-better-p5w0rd)
+* [How to Devise Passwords That Drive Hackers Away](https://www.nytimes.com/2012/11/08/technology/personaltech/how-to-devise-passwords-that-drive-hackers-away.html)
+* [Mickens - This World of Ours - and Gigantic Martian Insect Party](https://www.usenix.org/system/files/1401_08-12_mickens.pdf)
+* [Josh Esplin's JTR/Hashcat tutorial for Project 7](/crypto-course/projects/john-hashcat-tutorial)
+
+## Buffer Overflow Attacks [Lecture Slides](/lectures/crypto-course/BufferOverflow.pdf)
+* [Stack Frame Layout simplified](/lectures/crypto-course/docs/stack-frame-layout.pdf)
+* [Stack Frame Layout simplified 64 bit](/lectures/crypto-course/docs/stack-frame-layout-64bit.pdf)
+* [Smashing the Stack for Fun and Profit](http://www.cs.wright.edu/people/faculty/tkprasad/courses/cs781/alephOne.html)
+* [Smashing the Stack for Fun and Profit (Today)](https://travisf.net/smashing-the-stack-today)
+* [Smashing the Modern Stack for Fun and Profit](https://www.ethicalhacker.net/columns/heffner/smashing-the-modern-stack-for-fun-and-profit/)
+
+## Secure Email [LectureSlides](/lectures/crypto-course/SecureEmail.pdf)
+* [Sources for S/MIME certificates](http://kb.mozillazine.org/Getting_an_SMIME_certificate)
+* [Why Johnny Can't Encrypt](https://people.eecs.berkeley.edu/~tygar/papers/Why_Johnny_Cant_Encrypt/USENIX.pdf)
+* [Why Johnny Still Can't Encrypt](https://arxiv.org/pdf/1510.08555.pdf)
+* [System Usability Scale](https://usabilitygeek.com/how-to-use-the-system-usability-scale-sus-to-evaluate-the-usability-of-your-website/)
+* [Filippo Valsorda's Why I'm giving up on PGP](https://blog.filippo.io/giving-up-on-long-term-pgp/)
+* [Phishing article from Class](http://people.cs.vt.edu/danfeng/papers/Phishing-IMC-2018.pdf)
+* [DKIM](https://en.wikipedia.org/wiki/DomainKeys_Identified_Mail)
+* [SPF for email](https://en.wikipedia.org/wiki/Sender_Policy_Framework)
+* [Overview of DMARC](https://dmarc.org/overview/)
+* [Authenticated Received Chain ARC](https://en.wikipedia.org/wiki/Authenticated_Received_Chain)
+
+## Integer Manipulation Vulnerabilties
+* [Microsoft's Doc](https://bit.ly/2I9nKPW)
+
+## Social Engineering
+* [social engeering class slides](/lectures/crypto-course/social_engineering.pdf)
+
+## Midterm #2
+* [Study Guide](/lectures/crypto-course/docs/midterm-2-study-guide-fall2023.pdf)
+
+## Final
+
+Review the Midterm 1 and 2 study guides, and everything above after social engineering.
+
+## Earlier versions
+
+Winter 2019 to Fall 2023 had this page (Fall 2018 and Fall 2019 didn't);
+each linked its own semester's slide folder. Otherwise:
+
+- Winter 2019 and Winter 2020 linked the older [TLS slides](/lectures/crypto-course/TLS.pdf)
+  instead of [TLS-2020](/lectures/crypto-course/TLS-2020.pdf).
+- Winter 2022 and Spring 2022 also linked Wikipedia's
+  [RSA](https://en.wikipedia.org/wiki/RSA_(cryptosystem)) article and
+  [Please Stop Encrypting with RSA Directly](https://soatok.blog/2021/01/20/please-stop-encrypting-with-rsa-directly/),
+  and their own study guides
+  ([Midterm 1](/lectures/crypto-course/docs/midterm-1-study-guide-winter2022.pdf),
+  [Midterm 2](/lectures/crypto-course/docs/midterm-2-study-guide-winter2022.pdf)).
+
+## All slide decks
+
+Every slide deck from Fall 2018 to Fall 2023, once each. Where a deck
+changed, the file name ends with the first semester that used that
+version. The second column lists the old site's slide folders that had a
+copy: `v1` (Fall 2018 and Fall 2019), `v2` (Fall 2019), then `w19`,
+`w20`, `f20`, `f21`, `f22`, `f23` for each semester. Winter 2022 and
+Spring 2022 used the `f21` folder.
+
+| Slides | Old folders |
+| --- | --- |
+| [AES-fall2018.pdf](/lectures/crypto-course/AES-fall2018.pdf) | v1, w19, w20, f20, f21, f22, f23 |
+| [AES-winter2019.pdf](/lectures/crypto-course/AES-winter2019.pdf) | w19, w20, f20, f21, f22, f23 |
+| [BlockCipherModes.pdf](/lectures/crypto-course/BlockCipherModes.pdf) | v1, w19, w20, f20, f21, f22, f23 |
+| [BufferOverflow.pdf](/lectures/crypto-course/BufferOverflow.pdf) | v1, w19, w20, f20, f21, f22, f23 |
+| [CryptographicHashFunctions.pdf](/lectures/crypto-course/CryptographicHashFunctions.pdf) | v1, w19, w20, f20, f21, f22, f23 |
+| [Cryptography-fall2018.pdf](/lectures/crypto-course/Cryptography-fall2018.pdf) | v1 |
+| [Cryptography-fall2020.pdf](/lectures/crypto-course/Cryptography-fall2020.pdf) | f20, f21, f22, f23 |
+| [Cryptography-winter2019.pdf](/lectures/crypto-course/Cryptography-winter2019.pdf) | w19, w20 |
+| [Diffie-Hellman-fall2018.pdf](/lectures/crypto-course/Diffie-Hellman-fall2018.pdf) | v1 |
+| [Diffie-Hellman-winter2019.pdf](/lectures/crypto-course/Diffie-Hellman-winter2019.pdf) | w19, w20, f20, f21, f22, f23 |
+| [Introduction-fall2018.pdf](/lectures/crypto-course/Introduction-fall2018.pdf) | v1 |
+| [Introduction-fall2020.pdf](/lectures/crypto-course/Introduction-fall2020.pdf) | f20, f21, f22, f23 |
+| [Introduction-winter2019.pdf](/lectures/crypto-course/Introduction-winter2019.pdf) | w19, w20 |
+| [MAC-fall2018.pdf](/lectures/crypto-course/MAC-fall2018.pdf) | v1, w19, w20, f20, f21, f22, f23 |
+| [MAC-fall2019.pdf](/lectures/crypto-course/MAC-fall2019.pdf) | v2 |
+| [PKI.pdf](/lectures/crypto-course/PKI.pdf) | v1, w19, w20, f20, f21, f22, f23 |
+| [Passwords.pdf](/lectures/crypto-course/Passwords.pdf) | v1, w19, w20, f20, f21, f22, f23 |
+| [PasswordsAdministrators.pdf](/lectures/crypto-course/PasswordsAdministrators.pdf) | v1, w19, w20, f20, f21, f22, f23 |
+| [RSA-fall2018.pdf](/lectures/crypto-course/RSA-fall2018.pdf) | v1 |
+| [RSA-winter2019.pdf](/lectures/crypto-course/RSA-winter2019.pdf) | w19, w20, f20, f21, f22, f23 |
+| [SecureEmail.pdf](/lectures/crypto-course/SecureEmail.pdf) | v1, w19, w20, f20, f21, f22, f23 |
+| [Signal.pdf](/lectures/crypto-course/Signal.pdf) | v1, w19, w20, f20, f21, f22, f23 |
+| [TLS-2020.pdf](/lectures/crypto-course/TLS-2020.pdf) | f20, f21, f22, f23 |
+| [TLS.pdf](/lectures/crypto-course/TLS.pdf) | v1, w19, w20, f20, f21, f22, f23 |
+| [TLSResearch.pdf](/lectures/crypto-course/TLSResearch.pdf) | v1, w19, w20, f20, f21, f22, f23 |
+| [Terminology-fall2018.pdf](/lectures/crypto-course/Terminology-fall2018.pdf) | v1 |
+| [Terminology-fall2020.pdf](/lectures/crypto-course/Terminology-fall2020.pdf) | f20, f21, f22, f23 |
+| [Terminology-winter2019.pdf](/lectures/crypto-course/Terminology-winter2019.pdf) | w19, w20 |
+| [social_engineering.pdf](/lectures/crypto-course/social_engineering.pdf) | w19, w20, f20, f21, f22, f23 |
