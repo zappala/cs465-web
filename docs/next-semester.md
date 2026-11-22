@@ -182,6 +182,14 @@ Use the real name of the new semester in place of `winter2027` / `w2027`.
   `src/pages/<semester>/notes/*.mdx`. Between semesters, review the notes
   against the current slides and bring anything out of date into line.
 
+- **Design review** (noted 2026-11-21): run the `/design-review` skill on
+  this site. Start with part 1 ("find the look"): a gallery of reference
+  sites to react to, turned into `docs/design-intent.md`. Then the usability
+  review (top tasks for students: what's due this week, find an assignment,
+  get the slides; on a phone and a laptop) and the visual review against the
+  intent, including the `ai-design-audit` check for a generic or templated
+  look. Report first; pick fixes afterwards.
+
 - **Dependency upgrades: done 2026-11-21** (Astro 7, Tailwind 4, React 19,
   Node 24); see [dependency-upgrade-plan.md](dependency-upgrade-plan.md).
 
