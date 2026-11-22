@@ -190,6 +190,23 @@ Use the real name of the new semester in place of `winter2027` / `w2027`.
   intent, including the `ai-design-audit` check for a generic or templated
   look. Report first; pick fixes afterwards.
 
+- **Phone layout for the schedule** (noted 2026-11-21): keep the grid on
+  desktop and tablet (it shows how the course is laid out), but on phones
+  have `src/components/GridSchedule.jsx` draw each class day as a stacked
+  card: date, then Topics, Slides, Reading and Assignments as labeled
+  lines with the due-date pills, empty fields left out, unit headers as
+  dividers. Same `schedule.yaml` data, so no content changes; check every
+  semester's schedule, including the old ones (empty weeks, lists of
+  homework). Optional: on phones, open at the current week and fold past
+  weeks behind a "show earlier weeks" button (needs a small script that
+  reads today's date).
+
+- **Header and background from the design preview** (noted 2026-11-21): the
+  local branch `preview-quick-wins` has a neutral page background and one
+  navy header (white BYU logo, course title, semester, menu) instead of
+  three stripes. Input for the design review; check the white logo on navy
+  against BYU's brand guidelines before adopting it.
+
 - **Dependency upgrades: done 2026-11-21** (Astro 7, Tailwind 4, React 19,
   Node 24); see [dependency-upgrade-plan.md](dependency-upgrade-plan.md).
 
