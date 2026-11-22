@@ -1,0 +1,227 @@
+---
+layout: ../../../layouts/CryptoCourseMarkdown.astro
+---
+
+import UsedIn from "../../../components/UsedIn.jsx";
+
+# Project: Cracking Passwords with John the Ripper and hashcat
+
+<UsedIn>[Fall 2023](/fall2023) (as an extra page)</UsedIn>
+
+
+## Overview
+
+`John the Ripper` and `Hashcat` are both popular password-cracking tools. They are highly customizable, allowing you to use your own wordlists, custom rules, and a variety of flags. This tutorial is meant to help you get started designing custom wordlist rules.
+
+## John the Ripper
+
+Cracking a hash file with John the Ripper is as simple as running the following command:
+
+```
+john <hash file>
+```
+
+However, the default settings may not be tailored to the hashes/passwords you are trying to crack.  Because of this, you may need to add some flags to customize John the Ripper's behavior.
+
+Often, sites and companies will require their users to include capital letters, numbers, and/or special characters in their passwords.  With a regular dictionary, it may be difficult to include every variation of each word. However, with John the Ripper, you can add *rules* to change each word in your dictionary in a predictable manner.
+
+Let's start simple. There are 2 ways to make your own rules:
+1. Edit the configuration file for John the Ripper, located at `/etc/john/john.conf`.
+2. Create your own configuration file
+
+I find it easier to just create your own configuration file. I made a file called `my_config.conf` containing the following rule:
+
+```
+[List.Rules:Custom]
+:
+c
+```
+
+The `:` makes it so John the Ripper includes the original, "not capitalized" version of each word. The `c`, included on its own line, capitalizes the first letter of each word in our word list.
+
+For this example, I will be using a custom wordlist with the following text:
+
+```
+brad
+steve
+password
+```
+
+You can test out this rule by running the following command:
+
+```
+john -config=<path/to/config/file> -rules=Custom -wordlist=myList.txt -stdout
+```
+
+A few notes about this command:
+
+* I added `-config=<path to config file>` to specify that we are using a custom configuration file (instead of the default one)
+* I included `-rules=Custom` to specify which of the rules in my config file I wanted to use
+* I included `-wordlist=myList.txt` to specify which wordlist I was using
+* I included `-stdout` so I could see the results of my rule
+
+You'll notice that we didn't include any password hashes to try to crack. That's because this command is used to see what your custom rule is actually doing to your word list. You should see the following output:
+
+```
+brad
+steve
+password
+Brad
+Steve
+Password
+```
+
+You can add more to your custom rules to add more complex mangling of your word list. I have included some resources at the bottom of the page that I found helpful for creating custom rules.
+
+What if you want to capitalize *AND* add a number to the end? Whenever you want to do multiple things to each word, just include both rules in the same line.  To capitalize and include a number at the end, change your rule to look like this:
+
+```
+[List.Rules:Custom]
+:
+c Az"[0-9]"
+```
+
+The `Az` command appends a string to the end of each word. Surrounding `0-9` with square brackets lets John the Ripper know that you want to append 0 through 9 to each word, thus making 10 copies of each word. If you run John the Ripper with your new Custom rule, you should get the following output:
+
+```
+brad
+steve
+password
+Brad0
+Steve0
+Password0
+Brad1
+Steve1
+Password1
+Brad2
+Steve2
+Password2
+Brad3
+Steve3
+Password3
+Brad4
+Steve4
+Password4
+Brad5
+Steve5
+Password
+Brad6
+Steve6
+Password6
+Brad7
+Steve7
+Password7
+Brad8
+Steve8
+Password8
+Brad9
+Steve9
+Password9
+```
+
+Let's include a couple different variations in our rule. Make sure your rule looks like this:
+
+```
+[List.Rules:Custom]
+:
+c
+Az"[0-9]"
+c Az"[0-9]"
+```
+
+Generate a new wordlist and pipe stdout to a new file called `newList.txt` with the following command:
+
+```
+john -config=<path/to/config/file> -rules=Custom -wordlist=myList.txt -stdout > newList.txt
+```
+
+Let's try cracking some example hashes using our new wordlist. Here is an example hash file that you can use to run some tests:
+
+```
+sally:5F4DCC3B5AA765D61D8327DEB882CF99
+brigham:E7A3C8C90A380589DDAD950C0C74F989
+rasputin:F62EC6320B06414D5F7DE4B653C09219
+spicyman:EF9053124C2F8C2B8C92A67017733E91
+```
+
+Save this to a file (i.e. `hash.txt`) and run the following command to test out our wordlist:
+
+```
+john -format=Raw-MD5 -wordlist=newList.txt hash.txt
+```
+
+This command should output any username/password combinations it finds. If you want to see the results afterward in a more clear format, run this command:
+
+```
+john -format=Raw-MD5 -show hash.txt
+```
+
+There are lots of other things you can add to your custom rules. Do some research to add more complex rules to John the Ripper.
+
+## Hashcat
+
+When using Hashcat, you need to specify the type of hash algorithm used to create your hashes. You do this with the `-m` flag. For MD5, you would do `-m 0`.
+
+*Check out the **man page** for Hashcat to figure out what flag to use for other hash types*
+
+After you have figured out what hashing algorithm was used, you just need a dictionary/wordlist containing all the passwords you want to try.  For this example, let's assume you have a wordlist called `wordlist.txt`.
+
+To use the `wordlist.txt` with your hash file, you would run the following command: 
+
+```
+hashcat -a 0 -m 0 <hash file> <path to wordlist> --username
+```
+
+The `-a 0` flag just specifies that you only want to use a wordlist (instead of also trying to brute force).
+
+The `--username` flag lets hashcat know that your hash file includes usernames.
+
+To use custom rules with hashcat, you just need to create a separate file to store your rules in. While there are a few differences, you can use most rules in both hashcat and John the Ripper. To take your custom rule from John the Ripper and use it in hashcat, just make a file called `custom.rule` (or whatever you want to call it) and paste the rule in. To create the same rule that we did with John the Ripper, we need a rule file containing the following:
+
+```
+:
+c
+$0
+$1
+$2
+$3
+$4
+$5
+$6
+$7
+$8
+$9
+c$0    
+c$1      
+c$2
+c$3
+c$4
+c$5
+c$6
+c$7
+c$8
+c$9
+```
+
+You can now run hashcat like before, but specifying the rule file:
+
+```
+hashcat -a 0 -m 0 <hashfile> <path/to/wordlist> -r custom.rule
+```
+
+You could also just use the same wordlist you created in John the Ripper and run the following command:
+
+```
+hashcat -a 0 -m 0 <hashfile> <path/to/john/wordlist>
+```
+
+If you want to see the results in a better format, add the `-o` flag and specify a destination file, like so:
+
+```
+hashcat -a 0 -m 0 <hashfile> <path/to/john/wordlist> -o results.txt
+```
+
+## Helpful Resources
+
+[John the Ripper Rules Cheat Sheet](https://countuponsecurity.files.wordpress.com/2016/09/jtr-cheat-sheet.pdf)  
+[Hashcat -m Flag Reference](https://hashcat.net/wiki/doku.php?id=example_hashes)

@@ -1,0 +1,67 @@
+menu:
+  semester: Winter 2023
+  items:
+    - title: Home
+      url: /
+    - title: Syllabus
+      url: /syllabus
+    - title: Staff
+      url: /staff
+    - title: Projects
+      submenu:
+        - title: "Project #1: AES"
+          url: /crypto-course/projects/aes
+        - title: "Project #2: Hash Attack"
+          url: /crypto-course/projects/hash-attack
+        - title: "Project #3: MAC Attack"
+          url: /crypto-course/projects/mac-attack
+        - title: "Project #4: Diffie-Hellman"
+          url: /crypto-course/projects/diffie-hellman
+        - title: "Project #5: RSA"
+          url: /crypto-course/projects/rsa
+        - title: "Project #6: TLS"
+          url: /crypto-course/projects/tls
+        - title: "Project #7: Password Cracking"
+          url: /crypto-course/projects/password-cracking
+        - title: "Project #8: Extracting Secrets"
+          url: /crypto-course/projects/extracting-secrets
+        - title: "Project #9: Buffer Overflow"
+          url: /crypto-course/projects/buffer-overflow
+        - title: "Project #10: S/MIME and PGP"
+          url: /crypto-course/projects/smime-pgp
+        - title: "Project #11: CTF Extra Credit"
+          url: /crypto-course/projects/ringzer0
+    - title: Homework
+      submenu:
+        - title: "Homework #1: Security News"
+          url: /crypto-course/homework/news
+        - title: "Homework #2: Finite Field Arithmetic"
+          url: /crypto-course/homework/finite-field-arithmetic
+        - title: "Homework #3: Block Cipher Modes"
+          url: /crypto-course/homework/block-cipher-modes
+        - title: "Homework #4: Preparing for the MAC Attack"
+          url: /crypto-course/homework/mac-attack-prep
+        - title: "Homework #5: Diffie-Hellman"
+          url: /crypto-course/homework/diffie-hellman
+        - title: "Homework #6: MAC-then-Encrypt or Encrypt-then-MAC"
+          url: /crypto-course/homework/mac-then-encrypt
+        - title: "Homework #7: Generating RSA Keys"
+          url: /crypto-course/homework/rsa-keys
+        - title: "Homework #8: TLS Introduction"
+          url: /crypto-course/homework/tls-intro
+        - title: "Homework #9: Internet Password Research"
+          url: /crypto-course/homework/password-research
+        - title: "Homework #10: Introduction to gdb"
+          url: /crypto-course/homework/gdb-intro
+        - title: "Homework #11: Smashing the Stack"
+          url: /crypto-course/homework/smashing-the-stack
+        - title: "Homework #11.5: Individual Privacy vs. Greater Public Good"
+          url: /crypto-course/homework/privacy-vs-public-good
+        - title: "Homework #12: Reflections on Trusting Trust"
+          url: /crypto-course/homework/trusting-trust
+        - title: "Homework #13: Penetration Testing (Extra Credit)"
+          url: /crypto-course/homework/penetration-testing
+    - title: Lectures
+      url: /crypto-course/lectures
+    - title: Overview
+      url: /crypto-course

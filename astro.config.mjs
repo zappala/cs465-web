@@ -4,6 +4,8 @@ import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
 
 import expressiveCode from "astro-expressive-code";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,6 +16,10 @@ export default defineConfig({
     }
   },
   markdown: {
+    // Math ($...$ and $$...$$) for the 2018-2023 course pages; the KaTeX CSS
+    // is loaded by layouts/CryptoCourseMarkdown.astro.
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex],
     shikiConfig: {
       // Choose from Shiki's built-in themes (or add your own)
       // https://shiki.style/themes

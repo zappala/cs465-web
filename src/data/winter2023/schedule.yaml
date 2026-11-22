@@ -1,0 +1,388 @@
+units:
+  - title: "Week 1"
+    days:
+      - day: "Mon"
+        date: "Jan 9"
+        lectures:
+          - title: "Cryptography"
+        slides:
+          - title: "Introduction"
+            link: "/lectures/crypto-course/Introduction-fall2018.pdf"
+          - title: "Terminology"
+            link: "/lectures/crypto-course/Terminology-fall2018.pdf"
+        homework:
+          title: "#1: Security News"
+          link: "/crypto-course/homework/news"
+          due: "Jan 9"
+      - day: "Wed"
+        date: "Jan 11"
+        lectures:
+          - title: "Cryptography"
+        slides:
+          - title: "Cryptography"
+            link: "/lectures/crypto-course/Cryptography-fall2018.pdf"
+      - day: "Fri"
+        date: "Jan 13"
+        lectures:
+          - title: "AES"
+        slides:
+          - title: "AES"
+            link: "/lectures/crypto-course/AES-fall2018.pdf"
+  - title: "Week 2"
+    days:
+      - day: "Mon"
+        date: "Jan 16"
+        holiday: "HOLIDAY -- MLK Jr Day"
+      - day: "Tue"
+        date: "Jan 17"
+        homework:
+          title: "#2: Finite Field Arithmetic"
+          link: "/crypto-course/homework/finite-field-arithmetic"
+          due: "Jan 17"
+      - day: "Wed"
+        date: "Jan 18"
+        lectures:
+          - title: "AES"
+        slides:
+          - title: "AES"
+            link: "/lectures/crypto-course/AES-fall2018.pdf"
+      - day: "Fri"
+        date: "Jan 20"
+        lectures:
+          - title: "Block Cipher Modes, Authenticated Encryption Modes, and Padding"
+        slides:
+          - title: "Block Cipher Modes"
+            link: "/lectures/crypto-course/BlockCipherModes.pdf"
+        readings:
+          - title: "How to Choose an Authenticated Encryption Mode (optional)"
+            link: "https://blog.cryptographyengineering.com/2012/05/19/how-to-choose-authenticated-encryption/"
+          - title: "The Galois/Counter Mode of Operation (GCM) (optional)"
+            link: "http://luca-giuzzi.unibs.it/corsi/Support/papers-cryptography/gcm-spec.pdf"
+        project:
+          title: "#1: AES"
+          link: "/crypto-course/projects/aes"
+          due: "Jan 20"
+  - title: "Week 3"
+    days:
+      - day: "Mon"
+        date: "Jan 23"
+        lectures:
+          - title: "Cryptographic Hash Functions"
+        slides:
+          - title: "Cryptographic Hash Functions"
+            link: "/lectures/crypto-course/CryptographicHashFunctions.pdf"
+        readings:
+          - title: "NIST Hash Project (optional)"
+            link: "http://csrc.nist.gov/groups/ST/hash/index.html"
+          - title: "Chinese researchers find first SHA-1 collision 2005"
+            link: "https://www.schneier.com/blog/archives/2005/02/cryptanalysis_o.html"
+          - title: "Google announces practical collision SHA-1, Feb 2017"
+            link: "https://security.googleblog.com/2017/02/announcing-first-sha1-collision.html"
+        homework:
+          title: "#3: Block Cipher Modes"
+          link: "/crypto-course/homework/block-cipher-modes"
+          due: "Jan 23"
+      - day: "Wed"
+        date: "Jan 25"
+        lectures:
+          - title: "Hash Attack"
+      - day: "Fri"
+        date: "Jan 27"
+        lectures:
+          - title: "MAC"
+        slides:
+          - title: "MAC"
+            link: "/lectures/crypto-course/MAC-fall2019.pdf"
+        readings:
+          - title: "SHA-1 spec"
+            link: "/lectures/crypto-course/readings/fips180-3_final.pdf"
+          - title: "Why I hate CBC-MAC"
+            link: "https://blog.cryptographyengineering.com/2013/02/15/why-i-hate-cbc-mac/"
+        project:
+          title: "#2: Hash Attack"
+          link: "/crypto-course/projects/hash-attack"
+          due: "Jan 27"
+  - title: "Week 4"
+    days:
+      - day: "Mon"
+        date: "Jan 30"
+        lectures:
+          - title: "Diffie-Hellman"
+        slides:
+          - title: "Diffie-Hellman"
+            link: "/lectures/crypto-course/Diffie-Hellman-fall2018.pdf"
+        homework:
+          title: "#4: Preparing for the MAC Attack"
+          link: "/crypto-course/homework/mac-attack-prep"
+          due: "Jan 30"
+      - day: "Wed"
+        date: "Feb 1"
+        lectures:
+          - title: "Diffie-Hellman"
+      - day: "Fri"
+        date: "Feb 3"
+        lectures:
+          - title: "Project discussion"
+        project:
+          title: "#3: MAC Attack"
+          link: "/crypto-course/projects/mac-attack"
+          due: "Feb 3"
+  - title: "Week 5"
+    days:
+      - day: "Mon"
+        date: "Feb 6"
+        lectures:
+          - title: "RSA"
+        slides:
+          - title: "RSA"
+            link: "/lectures/crypto-course/RSA-fall2018.pdf"
+        homework:
+          title: "#5: Diffie-Hellman"
+          link: "/crypto-course/homework/diffie-hellman"
+          due: "Feb 6"
+      - day: "Wed"
+        date: "Feb 8"
+        lectures:
+          - title: "RSA"
+      - day: "Fri"
+        date: "Feb 10"
+        lectures:
+          - title: "Project discussion"
+        project:
+          title: "#4: Diffie-Hellman"
+          link: "/crypto-course/projects/diffie-hellman"
+          due: "Feb 10"
+  - title: "Week 6"
+    days:
+      - day: "Mon"
+        date: "Feb 13"
+        lectures:
+          - title: "Public Key Infrastructure and Certificates"
+        slides:
+          - title: "PKI"
+            link: "/lectures/crypto-course/PKI.pdf"
+        homework:
+          title: "#6: MAC-then-Encrypt or Encrypt-then-MAC"
+          link: "/crypto-course/homework/mac-then-encrypt"
+          due: "Feb 13"
+      - day: "Wed"
+        date: "Feb 15"
+        lectures:
+          - title: "Public Key Infrastructure and Certificates"
+      - day: "Fri"
+        date: "Feb 17"
+        lectures:
+          - title: "Project discussion"
+        project:
+          title: "#5: RSA"
+          link: "/crypto-course/projects/rsa"
+          due: "Feb 17"
+  - title: "Week 7"
+    days:
+      - day: "Mon"
+        date: "Feb 20"
+        holiday: "HOLIDAY -- Presidents Day"
+      - day: "Tue"
+        date: "Feb 21"
+        lectures:
+          - title: "No Class"
+      - day: "Wed"
+        date: "Feb 22"
+        lectures:
+          - title: "Midterm Review"
+        readings:
+          - title: "Midterm 1 Study Guide"
+        homework:
+          title: "#7: Generating RSA Keys"
+          link: "/crypto-course/homework/rsa-keys"
+          due: "Feb 22"
+      - day: "Fri"
+        date: "Feb 24"
+        lectures:
+          - title: "No class -- take the midterm"
+          - title: "Midterm will be live February 23 and February 24 on Learning Suite"
+  - title: "Week 8"
+    days:
+      - day: "Mon"
+        date: "Feb 27"
+        lectures:
+          - title: "TLS"
+        slides:
+          - title: "TLS"
+            link: "/lectures/crypto-course/TLS.pdf"
+        readings:
+          - title: "The First Few Milliseconds of an HTTPS Connection"
+            link: "http://www.moserware.com/2009/06/first-few-milliseconds-of-https.html"
+          - title: "The Illustrated TLS Connection"
+            link: "https://tls.ulfheim.net/"
+      - day: "Wed"
+        date: "Mar 1"
+        lectures:
+          - title: "TLS"
+      - day: "Fri"
+        date: "Mar 3"
+        lectures:
+          - title: "Project discussion"
+        project:
+          title: "#6: TLS"
+          link: "/crypto-course/projects/tls"
+          due: "Mar 3"
+  - title: "Week 9"
+    days:
+      - day: "Mon"
+        date: "Mar 6"
+        lectures:
+          - title: "Passwords"
+        slides:
+          - title: "Passwords"
+            link: "/lectures/crypto-course/Passwords.pdf"
+        readings:
+          - title: "Easy Ways to Build a Better P@$5w0rd (NIST)"
+            link: "https://www.nist.gov/blogs/taking-measure/easy-ways-build-better-p5w0rd"
+          - title: "How to Devise Passwords That Drive Hackers Away"
+            link: "https://www.nytimes.com/2012/11/08/technology/personaltech/how-to-devise-passwords-that-drive-hackers-away.html"
+        homework:
+          title: "#9: Internet Password Research"
+          link: "/crypto-course/homework/password-research"
+          due: "Mar 6"
+      - day: "Wed"
+        date: "Mar 8"
+        lectures:
+          - title: "Passwords"
+        readings:
+          - title: "An Administrator's Guide to Password Research"
+            link: "https://www.microsoft.com/en-us/research/publication/an-administrators-guide-to-internet-password-research/"
+      - day: "Fri"
+        date: "Mar 10"
+        lectures:
+          - title: "Passwords"
+        readings:
+          - title: "The Quest to Replace Passwords: A Framework for Comparative Evaluation of Web Authentication Schemes"
+            link: "https://ieeexplore.ieee.org/document/6234436"
+        project:
+          title: "#7: Password Cracking"
+          link: "/crypto-course/projects/password-cracking"
+          due: "Mar 10"
+  - title: "Week 10"
+    days:
+      - day: "Mon"
+        date: "Mar 13"
+        lectures:
+          - title: "Buffer Overflow"
+        slides:
+          - title: "Buffer Overflow"
+            link: "/lectures/crypto-course/BufferOverflow.pdf"
+        readings:
+          - title: "Smashing the Stack For Fun and Profit"
+            link: "http://www.phrack.org/issues/49/14.html#article"
+          - title: "Smashing the Stack For Fun and Profit (Today)"
+            link: "https://travisf.net/smashing-the-stack-today"
+          - title: "Smashing the Stack in 2011"
+            link: "https://paulmakowski.wordpress.com/2011/01/25/smashing-the-stack-in-2011/"
+          - title: "Smashing the Modern Stack for Fun and Profit"
+            link: "https://www.ethicalhacker.net/columns/heffner/smashing-the-modern-stack-for-fun-and-profit/"
+      - day: "Wed"
+        date: "Mar 15"
+        lectures:
+          - title: "Buffer Overflow"
+        homework:
+          title: "#10: Introduction to gdb"
+          link: "/crypto-course/homework/gdb-intro"
+          due: "Mar 15"
+      - day: "Fri"
+        date: "Mar 17"
+        lectures:
+          - title: "Spring Break -- No class"
+  - title: "Week 11"
+    days:
+      - day: "Mon"
+        date: "Mar 20"
+        lectures:
+          - title: "Signal"
+        slides:
+          - title: "Signal"
+            link: "/lectures/crypto-course/Signal.pdf"
+        homework:
+          title: "#11: Smashing the Stack"
+          link: "/crypto-course/homework/smashing-the-stack"
+          due: "Mar 20"
+      - day: "Wed"
+        date: "Mar 22"
+        lectures:
+          - title: "Signal"
+      - day: "Fri"
+        date: "Mar 24"
+        lectures:
+          - title: "Encryption Backdoor Debate -- Read in advance and come to class with 3 to 5 points in favor or against government surveillance of encrypted traffic that you found compelling"
+        readings:
+          - title: "Paper: Keys under doormats: Mandating insecurity by requiring government access to all data and communications"
+            link: "https://academic.oup.com/cybersecurity/article/1/1/69/2367066"
+          - title: "Perspectives on Encryption and Surveillance"
+            link: "https://www.lawfareblog.com/perspectives-encryption-and-surveillance"
+  - title: "Week 12"
+    days:
+      - day: "Mon"
+        date: "Mar 27"
+        lectures:
+          - title: "Secure Email"
+        slides:
+          - title: "Secure Email"
+            link: "/lectures/crypto-course/SecureEmail.pdf"
+      - day: "Wed"
+        date: "Mar 29"
+        lectures:
+          - title: "TBD"
+      - day: "Fri"
+        date: "Mar 31"
+        lectures:
+          - title: "TBD"
+        project:
+          title: "#10: PGP and S/MIME"
+          link: "/crypto-course/projects/smime-pgp"
+          due: "Mar 31"
+  - title: "Week 13"
+    days:
+      - day: "Mon"
+        date: "Apr 3"
+        lectures:
+          - title: "TBD"
+      - day: "Wed"
+        date: "Apr 5"
+        lectures:
+          - title: "TBD"
+      - day: "Fri"
+        date: "Apr 7"
+        lectures:
+          - title: "TBD"
+        homework:
+          title: "#12: Reflections on Trusting Trust"
+          link: "/crypto-course/homework/trusting-trust"
+          due: "Apr 7"
+  - title: "Week 14"
+    days:
+      - day: "Mon"
+        date: "Apr 10"
+        lectures:
+          - title: "Trust"
+      - day: "Wed"
+        date: "Apr 12"
+        lectures:
+          - title: "TBD"
+      - day: "Fri"
+        date: "Apr 14"
+        lectures:
+          - title: "TBD"
+        project:
+          title: "#11: Extra Credit"
+          link: "/crypto-course/projects/ringzer0"
+          due: "Apr 14"
+  - title: "Week 15"
+    days:
+      - day: "Mon"
+        date: "Apr 17"
+        lectures:
+          - title: "TBD"
+      - day: "Wed"
+        date: "Apr 19"
+        lectures:
+          - title: "TBD"

@@ -1,6 +1,7 @@
 # Plan: move the 2018–2023 course site into cs465-web
 
-**Status: PLANNED 2026-11-21.** Nothing built yet.
+**Status: BUILT 2026-11-21 on branch `old-site-migration`** (not merged or
+pushed). See "As built" at the end for what differs from this plan.
 
 Decided 2026-11-21: section URL `/crypto-course/`; shared pages plus small
 semester pages; keep `fortune_static`; staff pages get names and roles only
@@ -329,3 +330,38 @@ Link rewriting:
 5. Staff pages: names and roles only; no photos, no office hour times.
 6. Large files: keep in git for this migration. Whether to move
    `cs465-web` files to R2 is a separate to-do in `~/Repos/notes/TODO.md`.
+
+## As built (2026-11-21)
+
+Steps 1 to 5 are done on the branch, one commit each, plus fixes.
+Verified: the build passes (446 pages); all 370 existing pages have
+identical text and links except the front page; every internal link
+added resolves (5 broken links remain, all in current-semester pages and
+there before: `fall2025` and `winter2026` learning-rust notes,
+`fall2026/notes/linux`, `winter2026/syllabus/TBD`, an OSTEP link in the
+access-control notes); no horizontal scroll at 320/360/390/768 px on 16
+sample pages; every one of the 395 old page files is accounted for
+(`src/scripts/migrate-old-site/accounting.py`).
+
+Differences from the plan:
+
+- **Syllabi are per semester** (`src/pages/<term>/syllabus.mdx`), not three
+  shared versions: ten of the eleven differ in points and policies.
+- **Google Docs and Slides** the old pages linked (11: discussion slides,
+  stack frame diagrams, study guide documents) were exported as PDFs to
+  `public/lectures/crypto-course/docs/` and links point there.
+- **Menu labels** for old semesters: Home, Syllabus, Staff, Projects,
+  Homework, Exams, Lectures, Overview (longer labels wrapped at 1280 px).
+- **Due dates:** semesters whose old schedule page labeled assignments
+  "Due:" (Fall 2019 on) show them as due dates; Fall 2018, Winter 2019 and
+  Winter 2020 just list them.
+- `Introduction-winter2019.pdf` was shrunk by downsampling its one photo
+  with pikepdf (Ghostscript garbled the text layer).
+- Code: `GridSchedule` also accepts a list of homework; `Notice`
+  underlines its links.
+- Old content quirks kept as written: Winter 2019's "Feb 29" (no
+  weekday), Spring 2022's empty Week 4 dropped.
+
+Still to do: push the branch and open a draft PR for a Netlify preview,
+check it, merge; then archive `zappala/cs465`, delete
+`src/scripts/migrate-old-site/`, and delete `~/Repos/cs465/old/`.

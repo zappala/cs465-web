@@ -1,3 +1,4 @@
+import { resolveLink } from "./links.js";
 import { Label, Badge } from "./helpers.jsx";
 
 import { load_yaml } from "./YamlLoader.js";
@@ -129,7 +130,7 @@ export default function GridSchedule(props) {
       >
         <a
           className="underline decoration-lightblue"
-          href={prefix + lecture.link}
+          href={resolveLink(prefix, lecture.link)}
           target={target}
         >
           <Badge name={lecture.instructor} />
@@ -239,6 +240,10 @@ export default function GridSchedule(props) {
   // render a homework
   const render_homework = (prefix, homework) => {
     if (!homework) return <></>;
+    if (Array.isArray(homework))
+      return homework.map((one, index) => (
+        <div key={index}>{render_homework(prefix, one)}</div>
+      ));
     let result = [];
     result.push("Homework: ");
     if (!homework.link) result.push(homework.title);
@@ -247,7 +252,7 @@ export default function GridSchedule(props) {
         <a
           key="homework"
           className="underline decoration-lightblue"
-          href={prefix + homework.link}
+          href={resolveLink(prefix, homework.link)}
         >
           {homework.title}
         </a>,
@@ -273,7 +278,7 @@ export default function GridSchedule(props) {
         <a
           key="service"
           className="underline decoration-lightblue"
-          href={prefix + service.link}
+          href={resolveLink(prefix, service.link)}
         >
           {service.title}
         </a>,
@@ -299,7 +304,7 @@ export default function GridSchedule(props) {
         <a
           key="ethics"
           className="underline decoration-lightblue"
-          href={prefix + ethics.link}
+          href={resolveLink(prefix, ethics.link)}
         >
           {ethics.title}
         </a>,
@@ -331,7 +336,7 @@ export default function GridSchedule(props) {
         <a
           key="project"
           className="underline decoration-lightblue"
-          href={prefix + project.link}
+          href={resolveLink(prefix, project.link)}
         >
           {project.title}
         </a>,

@@ -1,0 +1,40 @@
+---
+layout: ../../../layouts/CryptoCourseMarkdown.astro
+---
+
+import UsedIn from "../../../components/UsedIn.jsx";
+
+# Midterm 1 Study Guide (Fall 2018 and Fall 2019)
+
+<UsedIn>[Fall 2018](/fall2018), [Fall 2019](/fall2019)</UsedIn>
+
+
+* **terminology and cryptography slides**
+
+* **AES**: how it works, finite field multiplication
+
+* **block cipher modes**: differences between them, what an IV is for
+
+* **cryptographic hash functions**: their properties and applications, how
+  SHA1 works
+
+* **MAC**: their properties, why a CBC is vulnerable to a bit-flipping
+  attack, different ways to implement a MAC, what an HMAC is, how the
+  MAC attack lab works, how the HMAC works (what does Alice send Bob,
+  how does Bob check it)
+
+* **Diffie-Hellman**: what it means for two numbers to be relatively
+  prime, what GCD is, modular arithmetic, additive and multiplicative
+  inverses, modular exponentiation, how Diffie-Hellman works (what
+  Alice sends Bob, what Bob sends Alice, how they get the resulting
+  key), why DH is secure, how you could attack DH
+
+* **RSA**: textbook description of RSA, why RSA is secure, how to choose
+  and/or calculate RSA parameters, how you use RSA, how to calculate
+  the *d* parameter using the Extended Euclidean Algorith, by hand
+
+* **PKI**: what a digital certificate is, how signing a certificate
+  works, steps needed to verify a certificate, how the CA system for
+  the web works, what Let's Encrypt does, weaknesses of the CA system,
+  how Certificate Transparency works and what problem it solves,
+  tradeoffs of various revocation methods

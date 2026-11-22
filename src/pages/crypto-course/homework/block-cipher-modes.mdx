@@ -1,0 +1,84 @@
+---
+layout: ../../../layouts/CryptoCourseMarkdown.astro
+---
+
+import UsedIn from "../../../components/UsedIn.jsx";
+
+# Homework: Block Cipher Modes
+
+<UsedIn>[Fall 2018](/fall2018) to [Fall 2023](/fall2023) (as Homework 3)</UsedIn>
+
+
+You may study the modes together, but please work out these answers on
+your own. Summative Grading Assignment.
+
+Complete each question described below. When comparing blocks of
+ciphertext or plaintext, if corresponding blocks differ then mention
+which specific blocks differ. If they differ by only 1 bit, mention
+that fact specifically. If they differ by more than 1 bit, simply
+state the specific blocks that differ completely. If all blocks differ
+in the full ciphertext, simply state that there is no relationship. Be
+as precise as you can in your comparisons to illustrate that you
+understand the various modes.
+
+1. Suppose two plaintext samples P and Q are encrypted using a block
+cipher with the same secret key K and the same initialization vector
+IV (or nonce) for those modes that require it. Suppose each plaintext
+sample is divided into 100 blocks (including padding). If all the
+plaintext blocks of P and Q are the same, except for block 10, in
+which they differ by 1 bit, compare the corresponding ciphertext for
+each block cipher mode
+
+    * ECB
+    * CBC
+    * CTR
+    * CFB
+    * OFB
+
+1. Same as #1, except assume P and Q are encrypted with a different IV
+(nonce) as recommended by cryptographers.
+
+    * ECB
+    * CBC
+    * CTR
+    * CFB
+    * OFB
+
+1. Suppose two ciphertext samples P and Q are decrypted using key K
+and the same IV (or nonce) when required. Suppose each ciphertext
+sample of 100 blocks differs by 1 bit in block 25 only. Compare the
+corresponding plaintext blocks following decryption of P and Q for
+each block cipher mode.
+
+    * ECB
+    * CBC
+    * CTR
+    * CFB
+    * OFB
+
+1. Assume each ciphertext block is stored on a separate disk block
+that can be accessed independently. Suppose only block 50 of an
+encrypted file of 100 blocks needs to be accessed. Which specific
+blocks of ciphertext must be accessed to obtain the plaintext for
+block 50 for the following modes?
+
+    * ECB
+    * CBC
+    * CTR
+    * CFB
+    * OFB
+
+1. Which modes permit parallel encryption?
+
+1. Which modes permit parallel decryption?
+
+1. Which modes permit pre-computation of the key stream?
+
+## Submit
+
+Submit a pdf with your answers to learningsuite.
+
+## Earlier versions
+
+- Fall 2018: hand in a printout in class. Fall 2019: a PDF in Learning
+  Suite.

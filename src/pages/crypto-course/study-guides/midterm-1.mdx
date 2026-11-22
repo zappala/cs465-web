@@ -1,0 +1,101 @@
+---
+layout: ../../../layouts/CryptoCourseMarkdown.astro
+---
+
+import UsedIn from "../../../components/UsedIn.jsx";
+
+# Midterm 1 Study Guide
+
+<UsedIn>[Winter 2019](/winter2019) to [Fall 2023](/fall2023), except Fall 2019 and Winter 2023</UsedIn>
+
+From Winter 2019 on this page mostly held exam logistics; the topics
+moved to a separate document. Saved copies:
+[Winter 2022](/lectures/crypto-course/docs/midterm-1-study-guide-winter2022.pdf),
+[Fall 2023](/lectures/crypto-course/docs/midterm-1-study-guide-fall2023.pdf). Exam dates and
+places differed each semester; this is the Fall 2023 page.
+
+## Exam 1
+
+*(See the 'Lecture Materials' page for a link to the study guide - this stuff is out of date.)*
+
+Start: TBD
+
+Ends: TBD
+
+Late fee of \$5 starting on Monday at 8AM .
+
+Check Testing Center info for late fees, hours, etc. You are responsible to be sure to take the test.
+
+Location: Testing Center
+
+Closed book, No notes. No Calculator.
+
+Study the lecture slides available on the website, and other readings
+
+**Symmetric Encryption**
+
+- AES – how to implement the finite field add/multiply
+- Be able to multiply two numbers using Finite Field multiply - class example was to multiply 0x21 * 0x0C
+- Modes of execution – how they work, why we have them, pros and cons
+  - I will give you pictures of how the modes work - don't memorize them
+- Padding – when and why
+
+**One-way hash function**
+
+- 6 security properties
+- Pre-image attack vs. collision attack
+- I will give you SHA-1 diagram, understand how it works from the diagram
+
+**Message authentication code**
+
+- Definition - abstract idea of a MAC, 3 ways to implement
+- Terminology and various meanings - MAC, HMAC
+- How the message extension attack works
+- Design of HMAC specification to thwart extension attack
+
+**Public key cryptography**
+
+- Encryption vs. digital signatures
+- Diffie Hellman and RSA
+- Generating RSA parameters using the extended Euclidean algorithm
+- Why DH and RSA are secure
+- What is the public key and private key in RSA?
+- How do we use RSA to encrypt and sign application data?
+
+**Digital certificates**
+
+- Five steps a relying party uses to verify a certificate
+- Certificate chains
+- How to repair a certificate hierarchy when a key is compromised
+
+## Topic summary
+
+* **terminology and cryptography slides**
+
+* **AES**: how it works, finite field multiplication
+
+* **block cipher modes**: differences between them, what an IV is for
+
+* **cryptographic hash functions**: their properties and applications, how
+  SHA1 works
+
+* **MAC**: their properties, why a CBC is vulnerable to a bit-flipping
+  attack, different ways to implement a MAC, what an HMAC is, how the
+  MAC attack lab works, how the HMAC works (what does Alice send Bob,
+  how does Bob check it)
+
+* **Diffie-Hellman**: what it means for two numbers to be relatively
+  prime, what GCD is, modular arithmetic, additive and multiplicative
+  inverses, modular exponentiation, how Diffie-Hellman works (what
+  Alice sends Bob, what Bob sends Alice, how they get the resulting
+  key), why DH is secure, how you could attack DH
+
+* **RSA**: textbook description of RSA, why RSA is secure, how to choose
+  and/or calculate RSA parameters, how you use RSA, how to calculate
+  the *d* parameter using the Extended Euclidean Algorith, by hand
+
+* **PKI**: what a digital certificate is, how signing a certificate
+  works, steps needed to verify a certificate, how the CA system for
+  the web works, what Let's Encrypt does, weaknesses of the CA system,
+  how Certificate Transparency works and what problem it solves,
+  tradeoffs of various revocation methods

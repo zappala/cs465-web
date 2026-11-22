@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Dropdown from "./Dropdown";
+import { resolveLink } from "../components/links.js";
 import { FaCaretRight, FaCaretDown } from "react-icons/fa";
 
 const Menu = ({ prefix, items }) => {
@@ -30,7 +31,7 @@ const Menu = ({ prefix, items }) => {
       ) : (
         <a
           className="text-white mt-4 text-xl lg:text-default lg:px-5 lg:mt-0 hover:underline"
-          href={prefix + items.url}
+          href={resolveLink(prefix, items.url)}
         >
           {items.title}
         </a>

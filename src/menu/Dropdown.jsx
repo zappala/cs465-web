@@ -1,3 +1,5 @@
+import { resolveLink } from "../components/links.js";
+
 const Dropdown = ({ prefix, submenus, dropdown }) => {
   let base = "hidden";
   if (dropdown) base = "";
@@ -8,7 +10,7 @@ const Dropdown = ({ prefix, submenus, dropdown }) => {
           <li key={index} className="py-2 px-1">
             <a
               className="text-white hover:underline"
-              href={prefix + "/" + submenu.url}
+              href={resolveLink(prefix, submenu.url)}
             >
               {submenu.title}
             </a>
