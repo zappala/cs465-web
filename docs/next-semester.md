@@ -190,20 +190,8 @@ Use the real name of the new semester in place of `winter2027` / `w2027`.
   `src/pages/<semester>/notes/*.mdx`. Between semesters, review the notes
   against the current slides and bring anything out of date into line.
 
-- **Upgrade the site's dependencies** (noted 2026-11-21, from a
-  `/site-checklist` audit). The site is on Astro 5.18, Tailwind 3.4,
-  React 18, `@astrojs/mdx` 4, `@astrojs/react` 4, `astro-expressive-code`
-  0.38 and `react-icons` 4; current are Astro 7, Tailwind 4, React 19,
-  MDX 8, React integration 7. Do it as its own branch, like the FHTW
-  refresh: build once on `main` and save `dist/` as a baseline, upgrade one
-  tool at a time following each migration guide, then compare every page's
-  text and links against the baseline and screenshot desktop and phone.
-  Known traps: Tailwind 4 moves `tailwind.config.cjs` into CSS `@theme`
-  (the custom colors `lightblue`, `byu`, `bluey` and the typography
-  settings must come across) and `@astrojs/tailwind` is replaced by the
-  Vite plugin; Astro 7 turns `--` into an en dash in Markdown. Check the
-  KaTeX math on the `/crypto-course/` pages and the menus afterwards. The
-  build's link check (`src/scripts/postbuild.mjs`) must still pass.
+- **Upgrade the site's dependencies** (noted 2026-11-21): planned in
+  [dependency-upgrade-plan.md](dependency-upgrade-plan.md).
 
 - **Decide whether to move large files to object storage (R2)** (moved here
   from `~/Repos/notes/TODO.md` on 2026-11-21). The repo is about 171 MB,
