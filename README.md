@@ -9,13 +9,48 @@ run from the root of the project, from a terminal:
 | :------------------------ | :----------------------------------------------- |
 | `npm install`             | Installs dependencies                            |
 | `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
+| `npm run build`           | Build to `./dist/`, then check links and write the sitemap |
+| `npm run check`           | Only the link check and sitemap (after a build)  |
 | `npm run preview`         | Preview your build locally, before deploying     |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
 Commits to the main branch will be automatically built at netlify and deployed
 to `cs465.zappala.org`.
+
+## Deployment and site settings
+
+- **Netlify** builds every push to `main` and every pull request (a deploy
+  preview linked from the PR). Settings are in `netlify.toml`: build
+  command, Node version (keep in sync with `.nvmrc`), security headers and
+  caching. Settings in that file override the Netlify dashboard (project
+  `symphonious-mooncake-68ffc6`).
+- **The build fails on a broken internal link.** `src/scripts/postbuild.mjs`
+  runs after `astro build`, checks every internal link and file reference,
+  and writes `dist/sitemap.xml`. Fix the link (or the missing file) and
+  rebuild; the error names the page.
+- **Content-Security-Policy** (in `netlify.toml`) allows only this site's
+  own files. If a page embeds something from another site (a YouTube video,
+  an image hosted elsewhere, a form that posts elsewhere), add that host to
+  the CSP or the browser will block it. Check the browser console on the
+  deploy preview.
+- **Search and link previews:** page titles are "Page · Semester · CS 465"
+  (`src/layouts/Front.astro`). A page can set `description:` in its
+  frontmatter for search results; otherwise one is generated. The preview
+  image is `public/og-image.png`, made from `src/scripts/og-image.html` by
+  `src/scripts/make-og-image.sh`.
+- **robots.txt** (`public/robots.txt`) allows search engines and blocks AI
+  training crawlers. Add new training crawlers there as they appear.
+- **Large files:** PDFs, slides and handouts are in git (`public/lectures`,
+  `public/code`). Keep single files under about 25 MB and don't add video;
+  moving files to object storage is a possible later step.
+
+### Each semester
+
+- Add the semester (see "Starting a new semester" below) and update the
+  front page and the 404 page's link to the current semester.
+- Check the deploy preview: the build passes (no broken links), new pages
+  look right on a phone, and the browser console shows no CSP errors.
 
 ## Website Structure
 
