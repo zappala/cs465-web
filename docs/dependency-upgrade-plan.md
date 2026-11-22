@@ -1,6 +1,7 @@
 # Plan: upgrade the site's dependencies (Astro 7, Tailwind 4, React 19)
 
-**Status: PLANNED 2026-11-21.** Not started. Replaces the "Upgrade the site's
+**Status: PLANNED 2026-11-21** (revised the same day: math to MathML and
+Astro 7's default Markdown processor). Not started. Replaces the "Upgrade the site's
 dependencies" item in [next-semester.md](next-semester.md).
 
 ## Goal
@@ -20,18 +21,25 @@ against a saved build of today's site.
 | `astro-expressive-code` | 0.38 | 0.44 | supports Astro 7 |
 | `react-icons` | 4.12 | 5.7 | 4 imports (`fi`, `fa`) |
 | `js-yaml` | 4.3 | 5.5 | one use, `src/components/YamlLoader.js` |
-| `@astrojs/markdown-remark` | (built in) | 7.3 | new: keeps remark/rehype plugins working in Astro 7 |
-| `katex`, `rehype-katex`, `remark-math` | 0.16 / 7 / 6 | **stay** | `rehype-katex` 7 renders with KaTeX 0.16; the CSS must match, so don't move `katex` to 0.19 |
+| `katex`, `rehype-katex`, `remark-math` | 0.16 / 7 / 6 | **removed** | the math becomes MathML in Step 0 |
+
+Astro 7's default Markdown processor (Sätteri) is used as is; the old
+remark/rehype pipeline (`@astrojs/markdown-remark`) is not needed.
 
 ## Decisions (proposed; confirm before starting)
 
-1. **Keep the remark/rehype Markdown pipeline** in Astro 7
-   (`markdown: { processor: unified() }` from `@astrojs/markdown-remark`)
-   rather than Astro 7's new default, Sätteri. The site depends on
-   `remark-math` + `rehype-katex` (the `/crypto-course/` math) and
-   expressive-code, and the unified pipeline keeps today's typography
-   (smartypants). Sätteri would turn `--` into an em dash and needs the
-   math plugins ported. Revisit Sätteri later if there's a reason.
+1. **Math as native MathML; Astro 7's default Markdown processor.** The
+   only math is on four `/crypto-course/` pages (about 150 inline formulas
+   and 11 displayed ones, all simple: exponents, mod, ×, φ). Convert it
+   once to MathML, which browsers draw themselves (compared 2026-11-21:
+   in Chrome it looks nearly identical to KaTeX), and drop `katex`,
+   `remark-math`, `rehype-katex`, the KaTeX CSS and fonts, and
+   `CryptoCourseMarkdown.astro`. Then nothing needs the old remark/rehype
+   pipeline, so Astro 7 uses its default processor, Sätteri:
+   expressive-code 0.44 supports it, and its smart punctuation turns `--`
+   into an em dash as the site already does today (921 sentence dashes;
+   command options like `--release` are all in code, which is never
+   converted).
 2. **Tailwind config:** convert to CSS (`@theme`) in the Tailwind step,
    keeping the same limited palette (`--color-*: initial`, then only the
    colors in `tailwind.config.cjs`). If that step gets messy, fall back to
@@ -73,6 +81,26 @@ Before starting, build `main` and save it as the **baseline**
 One branch (`upgrade-deps`), one commit per step, a draft PR for a Netlify
 preview. Each step must pass the checks before the next starts.
 `@astrojs/tailwind` only supports Astro up to 5, so Tailwind moves first.
+
+### Step 0: math to MathML (Astro 5 still)
+
+- One-time script (kept out of the repo): for each `$...$` and `$$...$$`
+  in the four pages (`crypto-course/projects/diffie-hellman.mdx`,
+  `projects/rsa.mdx`, `homework/diffie-hellman.mdx`,
+  `homework/rsa-keys.mdx`), write KaTeX's MathML-only output
+  (`output: "mathml"`, `displayMode` for `$$`) into the page. KaTeX keeps
+  each formula's TeX in an `<annotation>`, so it can be regenerated later.
+  In MDX, braces in that TeX must be escaped (`&#123;` / `&#125;`) so they
+  aren't read as JSX expressions.
+- Remove `remark-math` and `rehype-katex` from `astro.config.mjs`, the
+  three packages, and `CryptoCourseMarkdown.astro` (those pages go back to
+  `SemesterMarkdown.astro`).
+- Check: the four pages' text matches the baseline apart from the math
+  markup; no `$` delimiters or TeX left showing; screenshots of the math
+  in **Chrome, Safari and Firefox** (each uses its own math font). If one
+  of them looks poor, stop and decide before going on.
+- Optional while there: the 24 number ranges written `1--5` render as
+  "1—5" (em dash); writing them as "1–5" (en dash) is more correct.
 
 ### Step 1: small packages (Astro 5 still)
 
@@ -117,10 +145,15 @@ preview. Each step must pass the checks before the next starts.
 
 ### Step 4: Astro 7
 
-- `npx @astrojs/upgrade` again; install `@astrojs/markdown-remark` and set
-  `markdown: { processor: unified({...}) }`, moving `remarkPlugins`,
-  `rehypePlugins` and `shikiConfig` into it (check the exact option names
-  in Astro's unified processor reference first). Confirm MDX inherits it.
+- `npx @astrojs/upgrade` again. Astro 7 switches Markdown and MDX to
+  Sätteri. Remove the now-unused `markdown.remarkPlugins` /
+  `rehypePlugins` settings; check what replaces `markdown.shikiConfig`
+  (themes, `wrap`) under Sätteri, though code blocks are rendered by
+  expressive-code, which has its own Sätteri plugin.
+- Compare dashes, quotes and ellipses against the baseline: Sätteri's
+  smart punctuation should match today's output (`--` to an em dash); any
+  difference shows up in the text comparison. Heading IDs may also
+  change; the comparison and the link check catch that.
 - Rust compiler: unclosed tags are errors and invalid nesting (a `<div>`
   inside a `<p>`) is no longer fixed up; fix any `.astro` files it rejects
   (there are only 8 `.astro` files).
@@ -129,8 +162,8 @@ preview. Each step must pass the checks before the next starts.
   `Astro.props.headings` from MDX pages (page titles come from the first
   heading via `src/layouts/title.js`); the comparison of `<title>` catches
   this.
-- Math: every `/crypto-course/` page with math renders as before and no
-  KaTeX errors appear (search the build for `katex-error`).
+- Math: the MathML from Step 0 is unchanged (it's raw HTML in the page,
+  so the processor doesn't touch it).
 
 ### Step 5 (optional): built-in CSP
 
@@ -149,11 +182,15 @@ preview. Each step must pass the checks before the next starts.
 
 ## Risks and unknowns to check first
 
-- How remark/rehype plugins and `shikiConfig` are passed to `unified()` in
-  Astro 7 (read the unified processor reference before Step 4).
+- How MathML looks in Safari and Firefox (Step 0 checks; Chrome is fine).
+- Whether MDX passes raw `<math>` markup through unchanged in both Astro 5
+  and Astro 7 (Step 0 and Step 4 comparisons).
+- What replaces `markdown.shikiConfig` under Sätteri, and whether
+  expressive-code's Sätteri plugin produces the same code blocks.
 - Whether `Astro.props.headings` still reaches the layout for MDX pages in
   Astro 7.
-- Whether expressive-code 0.44 changes how code blocks look.
+- Whether expressive-code 0.44 changes how code blocks look (it has
+  explicit Sätteri support, checked in its 0.44.4 source).
 - The Tailwind palette and typography port: most likely source of small
   visual differences.
 - If any step goes badly, stop there: each step is its own commit, and the
