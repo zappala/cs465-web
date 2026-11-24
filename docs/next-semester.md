@@ -218,6 +218,13 @@ Use the real name of the new semester in place of `winter2027` / `w2027`.
   bucket, a redirect, a manifest, scripts and a backup (the FHTW setup).
   Revisit if the repo nears 1 GB or video/audio is added. The R2 free tier
   (10 GB) is per Cloudflare account, shared with `fhtw-conf`.
+  Co-instructors are the strongest reason to stay in git: today another
+  instructor just pushes and Netlify deploys. With R2 each would need their
+  own bucket-scoped Cloudflare token, the upload scripts and manifest steps,
+  and the separate backup. Committing files so a GitHub Action uploads them
+  to R2 doesn't help: they'd still be in git history. If video is ever
+  added, put only those files in R2 (managed by me) and keep everything a
+  co-instructor adds in git.
   Small step any time: `public/lectures/w2026/social_engineering.pdf` and
   `public/lectures/crypto-course/social_engineering.pdf` are the same 4.6 MB
   file; point `src/data/winter2026/schedule.yaml` at the crypto-course copy
