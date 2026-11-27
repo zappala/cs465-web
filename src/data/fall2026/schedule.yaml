@@ -399,8 +399,10 @@ units:
       - day: Tue
         date: Dec 1
         lectures:
-          - title: "Academic and Industry Talks: Usable Security and Privacy"
-            link: /notes/academic-and-industry-talks
+          - title: Web privacy
+        slides:
+          - title: Web privacy
+            link: /lectures/f2026/Web Privacy.pdf
       - day: Thu
         date: Dec 4
         lectures:
